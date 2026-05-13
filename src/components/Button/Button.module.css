@@ -6,6 +6,7 @@
   overflow: hidden; /* Truncation bounding box */
   position: relative;
   transition: all 0.2s ease;
+  width: fit-content; /* Prevent stretching in flex columns */
 
   /* Shared Defaults */
   font-family: var(
@@ -37,7 +38,6 @@
 /* Internal Mantine reset & layout logic for Truncation */
 .root > * {
   min-width: 0;
-  width: 100%;
   position: relative;
   z-index: 1;
 }
@@ -52,7 +52,6 @@
 .labelText {
   display: block;
   min-width: 0;
-  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -75,6 +74,11 @@
     var(
       --recursica_ui-kit_components_button_variants_sizes_default_properties_horizontal-padding
     );
+}
+.root[data-size="default"] .labelText {
+  max-width: var(
+    --recursica_ui-kit_components_button_variants_sizes_default_properties_max-label-width
+  );
 }
 .root[data-size="small"] {
   border-radius: var(
@@ -109,6 +113,11 @@
     var(
       --recursica_ui-kit_components_button_variants_sizes_default_properties_text_font-weight
     )
+  );
+}
+.root[data-size="small"] .labelText {
+  max-width: var(
+    --recursica_ui-kit_components_button_variants_sizes_small_properties_max-label-width
   );
 }
 
@@ -167,8 +176,16 @@
 }
 
 /* Disabled */
-.root:disabled {
-  opacity: var(--recursica_brand_states_disabled);
+.root[data-size="default"]:disabled {
+  opacity: var(
+    --recursica_ui-kit_components_button_variants_sizes_default_properties_disabled-opacity
+  );
+  cursor: not-allowed;
+}
+.root[data-size="small"]:disabled {
+  opacity: var(
+    --recursica_ui-kit_components_button_variants_sizes_small_properties_disabled-opacity
+  );
   cursor: not-allowed;
 }
 
