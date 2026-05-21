@@ -1,7 +1,8 @@
 import React, { forwardRef } from "react";
 import {
-  Textarea as MantineTextarea,
-  type TextareaProps as MantineTextareaProps,
+  Autocomplete as MantineAutocomplete,
+  type AutocompleteProps as MantineAutocompleteProps,
+  type InputWrapperProps,
 } from "@mantine/core";
 import { type ReadOnlyControlProps } from "@recursica/adapter-common";
 import {
@@ -10,37 +11,27 @@ import {
 } from "../../utils/filterStylingProps";
 import { type RecursicaFormControlWrapperProps } from "../FormControlWrapper/FormControlWrapper";
 import { WithReadOnlyWrapper } from "../ReadOnlyField/WithReadOnlyWrapper";
-import styles from "./TextArea.module.css";
+import styles from "./AutoComplete.module.css";
 
-export interface RecursicaTextAreaProps
+export interface RecursicaAutoCompleteProps
   extends Omit<
-      MantineTextareaProps,
+      MantineAutocompleteProps,
       "size" | "variant" | "radius" | "wrapperProps"
     >,
     Pick<
-      RecursicaFormControlWrapperProps,
-      | "assistiveText"
-      | "assistiveWithIcon"
-      | "formLayout"
-      | "labelSize"
-      | "labelAlignment"
-      | "labelOptionalText"
-      | "labelWithEditIcon"
-      | "onLabelEditClick"
+      InputWrapperProps,
+      "label" | "error" | "required" | "withAsterisk" | "id"
     >,
-    ReadOnlyControlProps {
-  /** Maximum rows for autosize textarea to grow */
-  maxRows?: number;
-  /** Minimum rows of autosize textarea */
-  minRows?: number;
-  /** If set, enables textarea height growing with its content */
-  autosize?: boolean;
-}
+    Omit<
+      RecursicaFormControlWrapperProps,
+      "controlMaxWidth" | "controlMinWidth"
+    >,
+    ReadOnlyControlProps {}
 
-export type TextAreaProps = RecursicaOverStyled<RecursicaTextAreaProps>;
+export type AutoCompleteProps = RecursicaOverStyled<RecursicaAutoCompleteProps>;
 
-export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  function TextArea(props, ref) {
+export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
+  function AutoComplete(props, ref) {
     const {
       overStyled = false,
       formLayout = "stacked",
@@ -81,6 +72,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const mergedClassNames: Partial<Record<string, string>> = {
       wrapper: styles.root, // The nested Input internal relative wrapper bounding box
       input: styles.input,
+      section: styles.section,
+      dropdown: styles.dropdown,
+      option: styles.option,
     };
 
     const classNamesProp = restRecord.classNames;
@@ -96,6 +90,15 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       mergedClassNames.input = o.input
         ? `${styles.input} ${o.input}`
         : styles.input;
+      mergedClassNames.section = o.section
+        ? `${styles.section} ${o.section}`
+        : styles.section;
+      mergedClassNames.dropdown = o.dropdown
+        ? `${styles.dropdown} ${o.dropdown}`
+        : styles.dropdown;
+      mergedClassNames.option = o.option
+        ? `${styles.option} ${o.option}`
+        : styles.option;
     }
 
     const wrapperClass = className
@@ -106,8 +109,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       <WithReadOnlyWrapper
         className={wrapperClass}
         style={style as React.CSSProperties}
-        controlMaxWidth="var(--recursica_ui-kit_components_textarea_properties_max-width)"
-        controlMinWidth="var(--recursica_ui-kit_components_textarea_properties_min-width)"
+        controlMaxWidth="var(--recursica_ui-kit_components_autocomplete_properties_max-width)"
+        controlMinWidth="var(--recursica_ui-kit_components_autocomplete_properties_min-width)"
         overStyled={overStyled as true}
         formLayout={formLayout}
         labelSize={labelSize}
@@ -130,22 +133,17 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         readOnlyNativeProps={props}
         activeComponent={
           /* Naked Input execution safely decoupled from Mantine's macro Input.Wrapper DOM hooks */
-          <MantineTextarea
+          <MantineAutocomplete
             ref={ref}
             classNames={mergedClassNames}
             disabled={disabled}
             value={value}
             defaultValue={defaultValue}
-            label={undefined}
-            description={undefined}
-            error={undefined}
-            required={undefined}
-            withAsterisk={undefined}
             wrapperProps={{
               "data-disabled": disabled ? "true" : undefined,
               "data-error": error ? "true" : undefined,
             }}
-            {...(sanitizedProps as unknown as MantineTextareaProps)}
+            {...(sanitizedProps as unknown as MantineAutocompleteProps)}
           />
         }
       />
@@ -153,4 +151,4 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   },
 );
 
-TextArea.displayName = "TextArea";
+AutoComplete.displayName = "AutoComplete";
