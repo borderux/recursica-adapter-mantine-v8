@@ -21,7 +21,6 @@ export default defineConfig(({ mode }) => {
               insertTypesEntry: true,
               exclude: ["**/*.stories.*", ".storybook/**"],
               rollupTypes: true,
-              bundledPackages: ["@recursica/adapter-common"],
             }),
           ]
         : []),

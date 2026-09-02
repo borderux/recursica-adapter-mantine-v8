@@ -91,25 +91,27 @@ export const Removable: Story = {
   render: (args: ChipStoryProps) => <Chip {...args} />,
 };
 
+const leadingIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="12" cy="12" r="10"></circle>
+    <path d="M12 8v4"></path>
+    <path d="M12 16h.01"></path>
+  </svg>
+);
+
 export const WithLeadingIcon: Story = {
   args: {
     children: "Leading Icon",
     checked: false,
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="12" cy="12" r="10"></circle>
-        <path d="M12 8v4"></path>
-        <path d="M12 16h.01"></path>
-      </svg>
-    ),
+    icon: leadingIcon,
   },
   render: (args: ChipStoryProps) => <Chip {...args} />,
 };
@@ -118,9 +120,9 @@ export const WithLeadingIcon: Story = {
 // matches MUI's native behavior of the check icon overlaying the leading icon.
 export const WithLeadingIconSelected: Story = {
   args: {
-    ...WithLeadingIcon.args,
     children: "Leading Icon Selected",
     checked: true,
+    icon: leadingIcon,
   },
   render: (args: ChipStoryProps) => <Chip {...args} onChange={() => {}} />,
 };
