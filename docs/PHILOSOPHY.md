@@ -2,7 +2,7 @@
 
 Recursica's component architecture isn't just a wrapper; it's a strict enforcing layer over Mantine's massive API surface. Our primary goal is to ensure consistency, eliminate "design system rot," and provide clear boundaries for application developers using the UI Kit.
 
-This document serves as the governing framework for why the `mantine-adapter` components are built the way they are.
+This document serves as the governing framework for why the `adapter-mantine-v8` components are built the way they are.
 
 ## 1. Strict Separation of Props (The Unified Recursica Prop Layer)
 

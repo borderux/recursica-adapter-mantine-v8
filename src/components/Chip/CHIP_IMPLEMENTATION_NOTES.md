@@ -103,7 +103,7 @@ icon (via its native `iconWrapper`/`checkIcon` slot, always shown whenever `chec
 `icon` prop — a different, unrelated slot — is left `undefined`) came first in the DOM, immediately
 followed by this adapter's own `.leadingIcon` span, which we always rendered regardless of checked
 state. mui-adapter's `Chip` never had this problem, since its `icon={checked ? checkIcon : icon}`
-was already a straight swap. Fixed mantine-adapter to match: the custom `.leadingIcon` span now
+was already a straight swap. Fixed adapter-mantine-v8 to match: the custom `.leadingIcon` span now
 only renders when `!checked`, so Mantine's native checkmark overlays/replaces it instead of sitting
 to its left. Required destructuring `checked` explicitly (previously left in `...rest` and passed
 through opaquely) so the render condition and the explicit `checked` prop on `<MantineChip>` stay

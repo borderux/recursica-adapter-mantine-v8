@@ -1,13 +1,13 @@
 # FileUpload - Usage Guide
 
-This document describes how to integrate and use the `FileUpload` component in your projects using `@recursica/mantine-adapter`.
+This document describes how to integrate and use the `FileUpload` component in your projects using `@recursica/adapter-mantine-v8`.
 
 ---
 
 ## 1. Import Reference
 
 ```tsx
-import { FileUpload } from "@recursica/mantine-adapter";
+import { FileUpload } from "@recursica/adapter-mantine-v8";
 ```
 
 ---
@@ -18,7 +18,7 @@ import { FileUpload } from "@recursica/mantine-adapter";
 
 ```tsx
 import React, { useState } from "react";
-import { FileUpload } from "@recursica/mantine-adapter";
+import { FileUpload } from "@recursica/adapter-mantine-v8";
 import { type RecursicaFileUploadItem } from "@recursica/adapter-common";
 
 export default function Demo() {
@@ -190,7 +190,7 @@ in `readOnly` mode, which has no remove icons to navigate to.)
 
 ## 9. Design System Integration
 
-All Recursica components in the `@recursica/mantine-adapter` package adhere strictly to design system spacing, scaling, and behavior patterns.
+All Recursica components in the `@recursica/adapter-mantine-v8` package adhere strictly to design system spacing, scaling, and behavior patterns.
 
 > [!IMPORTANT]
 >

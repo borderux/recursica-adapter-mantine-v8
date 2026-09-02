@@ -1,13 +1,13 @@
 # Popover - Usage Guide
 
-This document describes how to integrate and use the `Popover` component in your projects using `@recursica/mantine-adapter`.
+This document describes how to integrate and use the `Popover` component in your projects using `@recursica/adapter-mantine-v8`.
 
 ---
 
 ## 1. Import Reference
 
 ```tsx
-import { Popover } from "@recursica/mantine-adapter";
+import { Popover } from "@recursica/adapter-mantine-v8";
 ```
 
 ---
@@ -16,7 +16,7 @@ import { Popover } from "@recursica/mantine-adapter";
 
 ```tsx
 import React from "react";
-import { Popover } from "@recursica/mantine-adapter";
+import { Popover } from "@recursica/adapter-mantine-v8";
 
 export default function Demo() {
   return (
@@ -36,7 +36,7 @@ export default function Demo() {
 
 ## 3. Design System Integration
 
-All Recursica components in the `@recursica/mantine-adapter` package adhere strictly to design system spacing, scaling, and behavior patterns.
+All Recursica components in the `@recursica/adapter-mantine-v8` package adhere strictly to design system spacing, scaling, and behavior patterns.
 
 > [!IMPORTANT]
 >

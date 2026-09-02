@@ -1,13 +1,13 @@
 # Table - Usage Guide
 
-This document describes how to integrate and use the `Table` component in your projects using `@recursica/mantine-adapter`.
+This document describes how to integrate and use the `Table` component in your projects using `@recursica/adapter-mantine-v8`.
 
 ---
 
 ## 1. Import Reference
 
 ```tsx
-import { Table } from "@recursica/mantine-adapter";
+import { Table } from "@recursica/adapter-mantine-v8";
 ```
 
 ---
@@ -16,7 +16,7 @@ import { Table } from "@recursica/mantine-adapter";
 
 ```tsx
 import React from 'react';
-import { Table } from "@recursica/mantine-adapter";
+import { Table } from "@recursica/adapter-mantine-v8";
 
 export default function Demo() {
   return (

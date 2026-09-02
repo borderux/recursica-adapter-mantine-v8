@@ -1,15 +1,15 @@
-# @recursica/mantine-adapter
+# @recursica/adapter-mantine-v8
 
 A modern React component library built with TypeScript and **Mantine 8**. This package serves as the core UI kit for Recursica applications, providing reusable UI components, centralized theme configurations, and a comprehensive Storybook environment for development.
 
 ## Installation
 
 ```bash
-npm install @recursica/mantine-adapter
+npm install @recursica/adapter-mantine-v8
 # or
-yarn add @recursica/mantine-adapter
+yarn add @recursica/adapter-mantine-v8
 # or
-pnpm add @recursica/mantine-adapter
+pnpm add @recursica/adapter-mantine-v8
 ```
 
 ## Peer Dependencies
@@ -30,8 +30,8 @@ Please read [PHILOSOPHY.md](./docs/PHILOSOPHY.md) to understand the core princip
 
 This repository provides dedicated routing documents for both human developers and AI Agents to ensure strict adherence to our design system constraints. These are contributor-facing docs that live in the [recursica monorepo](https://github.com/borderux/recursica) rather than in this published package, so they're linked here as GitHub URLs rather than relative paths.
 
-- **For Human Developers:** This `README.md` acts as your primary routing document. If you are integrating this library into an application, please read [USAGE.md](./USAGE.md) (published alongside this README). If you are building or modifying components inside this library, please read [CONTRIBUTING.md](https://github.com/borderux/recursica/blob/main/packages/mantine-adapter/CONTRIBUTING.md).
-- **For AI Agents:** All AI Agents operating in the monorepo must start by reading [AGENT.md](https://github.com/borderux/recursica/blob/main/packages/mantine-adapter/AGENT.md), which serves as the primary routing document for AI workflows.
+- **For Human Developers:** This `README.md` acts as your primary routing document. If you are integrating this library into an application, please read [USAGE.md](./USAGE.md) (published alongside this README). If you are building or modifying components inside this library, please read [CONTRIBUTING.md](https://github.com/borderux/recursica/blob/main/packages/adapter-mantine-v8/CONTRIBUTING.md).
+- **For AI Agents:** All AI Agents operating in the monorepo must start by reading [AGENT.md](https://github.com/borderux/recursica/blob/main/packages/adapter-mantine-v8/AGENT.md), which serves as the primary routing document for AI workflows.
 
 ## Development and Architecture
 

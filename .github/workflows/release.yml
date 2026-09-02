@@ -1,6 +1,6 @@
 # Release Workflow
 #
-# Standalone-package version of the release workflow used by @recursica/mantine-adapter
+# Standalone-package version of the release workflow used by @recursica/adapter-mantine-v8
 # in the recursica monorepo. This repo is a single npm package (no Turborepo, no
 # figma-plugin zip/upload steps) so the workflow is simpler: build, then let
 # Changesets version and publish.

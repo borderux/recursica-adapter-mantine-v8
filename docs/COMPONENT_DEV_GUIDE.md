@@ -11,13 +11,13 @@ If you are an AI agent building components:
 
 # Component Development Guide — Mantine Adapter
 
-This document covers what's specific to building components in `mantine-adapter`. The full shared rulebook (styling rules, prop layer, folder structure, tokens, testing, checklist) lives in the canonical [`packages/adapter-common/docs/COMPONENT_DEV_GUIDE.md`](../../adapter-common/docs/COMPONENT_DEV_GUIDE.md) — read that first. This document only covers what's different for Mantine.
+This document covers what's specific to building components in `adapter-mantine-v8`. The full shared rulebook (styling rules, prop layer, folder structure, tokens, testing, checklist) lives in the canonical [`packages/adapter-common/docs/COMPONENT_DEV_GUIDE.md`](../../adapter-common/docs/COMPONENT_DEV_GUIDE.md) — read that first. This document only covers what's different for Mantine.
 
 For the core architectural philosophy, read [`docs/PHILOSOPHY.md`](./PHILOSOPHY.md) (which itself links to the canonical philosophy doc).
 
 ## Adapter note
 
-Because this package (`@recursica/mantine-adapter`) is explicitly built for Mantine, we do not need a generic adapter abstraction. The component itself serves as both the public API and the Mantine implementation.
+Because this package (`@recursica/adapter-mantine-v8`) is explicitly built for Mantine, we do not need a generic adapter abstraction. The component itself serves as both the public API and the Mantine implementation.
 
 ## Mantine-specific styling notes
 

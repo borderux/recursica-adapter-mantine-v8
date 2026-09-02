@@ -1,4 +1,4 @@
-# @recursica/mantine-adapter
+# @recursica/adapter-mantine-v8
 
 > Reusable UI components for Recursica applications based on Mantine 8+.
 
