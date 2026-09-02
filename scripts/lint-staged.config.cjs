@@ -12,7 +12,7 @@
 // lint-staged, which then fails the Husky pre-commit hook outright.
 //
 // No "npm run test" step here — this repo has no "test" script, matching the
-// genesis adapter (mantine-adapter), which also doesn't define one despite having
+// genesis adapter (adapter-mantine-v8), which also doesn't define one despite having
 // the same vitest/addon-vitest/Playwright devDependencies present. See
 // docs/CREATING_AN_ADAPTER.md's decisions log.
 module.exports = {

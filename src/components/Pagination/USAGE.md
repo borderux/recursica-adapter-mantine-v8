@@ -1,13 +1,13 @@
 # Pagination - Usage Guide
 
-This document describes how to integrate and use the `Pagination` component in your projects using `@recursica/mantine-adapter`.
+This document describes how to integrate and use the `Pagination` component in your projects using `@recursica/adapter-mantine-v8`.
 
 ---
 
 ## 1. Import Reference
 
 ```tsx
-import { Pagination } from "@recursica/mantine-adapter";
+import { Pagination } from "@recursica/adapter-mantine-v8";
 ```
 
 ---
@@ -16,7 +16,7 @@ import { Pagination } from "@recursica/mantine-adapter";
 
 ```tsx
 import React from "react";
-import { Pagination } from "@recursica/mantine-adapter";
+import { Pagination } from "@recursica/adapter-mantine-v8";
 
 export default function Demo() {
   return <Pagination total={10} value={activePage} onChange={setPage} />;
@@ -27,7 +27,7 @@ export default function Demo() {
 
 ## 3. Design System Integration
 
-All Recursica components in the `@recursica/mantine-adapter` package adhere strictly to design system spacing, scaling, and behavior patterns.
+All Recursica components in the `@recursica/adapter-mantine-v8` package adhere strictly to design system spacing, scaling, and behavior patterns.
 
 > [!IMPORTANT]
 >

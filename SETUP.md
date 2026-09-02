@@ -1,4 +1,4 @@
-# Installing `@recursica/mantine-adapter`
+# Installing `@recursica/adapter-mantine-v8`
 
 Follow these instructions to install and configure the Mantine Adapter in your host project.
 
@@ -7,7 +7,7 @@ Follow these instructions to install and configure the Mantine Adapter in your h
 First, install the Recursica Mantine Adapter package:
 
 ```bash
-npm install @recursica/mantine-adapter
+npm install @recursica/adapter-mantine-v8
 ```
 
 ### Peer Dependencies
@@ -24,12 +24,12 @@ npm install @mantine/core@>=8.0.0 @mantine/dates@>=8.0.0 @mantine/hooks@>=8.0.0 
 
 Before consuming Recursica components, integrate the CSS and design tokens into your application:
 
-1. **Integrate CSS**: Import `recursica_variables_scoped.css` and the Mantine adapter CSS `mantine-adapter.css` into your application entrypoint (e.g., `main.tsx` or `App.tsx`). **It must be loaded after the Mantine CSS imports.**
+1. **Integrate CSS**: Import `recursica_variables_scoped.css` and the Mantine adapter CSS `adapter-mantine-v8.css` into your application entrypoint (e.g., `main.tsx` or `App.tsx`). **It must be loaded after the Mantine CSS imports.**
 
    ```tsx
    import "@mantine/core/styles.css"; // Mantine core styles
    import "./path/to/recursica_variables_scoped.css"; // Recursica theme variables
-   import "@recursica/mantine-adapter/style.css"; // Mantine adapter styles
+   import "@recursica/adapter-mantine-v8/style.css"; // Mantine adapter styles
    ```
 
 2. **Integrate Google Fonts**: Integrating custom fonts depends on how you load fonts in your project and which fonts are specified in your `recursica_variables_scoped.css` (since it is project-dependent). We suggest loading them via Google Fonts, as shown in this example:
@@ -42,7 +42,7 @@ Before consuming Recursica components, integrate the CSS and design tokens into 
 
    ```tsx
    import { MantineProvider } from "@mantine/core";
-   import { RecursicaThemeProvider } from "@recursica/mantine-adapter";
+   import { RecursicaThemeProvider } from "@recursica/adapter-mantine-v8";
 
    function App() {
      return (

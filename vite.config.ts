@@ -51,7 +51,7 @@ export default defineConfig(({ mode }) => {
               name: "RecursicaMantineAdapter",
               formats: ["es", "cjs"],
               fileName: (format) =>
-                `mantine-adapter.${format === "es" ? "js" : "cjs"}`,
+                `adapter-mantine-v8.${format === "es" ? "js" : "cjs"}`,
             },
             rollupOptions: {
               external: [

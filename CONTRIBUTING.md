@@ -14,7 +14,7 @@ First off, thank you for considering contributing to Recursica! It's people like
 
 ## 🤖 Instructions for AI Agents & Developers Building Components
 
-If you are tasked with building, modifying, or reviewing components **inside** the `mantine-adapter`, you must strictly adhere to our architectural philosophy and design constraints.
+If you are tasked with building, modifying, or reviewing components **inside** the `adapter-mantine-v8`, you must strictly adhere to our architectural philosophy and design constraints.
 
 **DO NOT** begin writing or modifying component code until you have read and understood the following core documents:
 

@@ -1,13 +1,13 @@
 # TimePicker - Usage Guide
 
-This document describes how to integrate and use the `TimePicker` component in your projects using `@recursica/mantine-adapter`.
+This document describes how to integrate and use the `TimePicker` component in your projects using `@recursica/adapter-mantine-v8`.
 
 ---
 
 ## 1. Import Reference
 
 ```tsx
-import { TimePicker } from "@recursica/mantine-adapter";
+import { TimePicker } from "@recursica/adapter-mantine-v8";
 ```
 
 ---
@@ -16,7 +16,7 @@ import { TimePicker } from "@recursica/mantine-adapter";
 
 ```tsx
 import React from "react";
-import { TimePicker } from "@recursica/mantine-adapter";
+import { TimePicker } from "@recursica/adapter-mantine-v8";
 
 export default function Demo() {
   return <TimePicker label="Select Time" />;
@@ -42,7 +42,7 @@ The AM/PM control visually matches Recursica's `Dropdown` component exactly, rat
 
 ## 3. Design System Integration
 
-All Recursica components in the `@recursica/mantine-adapter` package adhere strictly to design system spacing, scaling, and behavior patterns.
+All Recursica components in the `@recursica/adapter-mantine-v8` package adhere strictly to design system spacing, scaling, and behavior patterns.
 
 > [!IMPORTANT]
 >

@@ -12,21 +12,21 @@
     "type": "git",
     "url": "git+https://github.com/borderux/recursica-adapter-mantine-v8.git"
   },
-  "version": "0.55.2",
+  "version": "1.0.0",
   "publishConfig": {
     "access": "public"
   },
   "type": "module",
-  "main": "./dist/mantine-adapter.cjs",
-  "module": "./dist/mantine-adapter.js",
+  "main": "./dist/adapter-mantine-v8.cjs",
+  "module": "./dist/adapter-mantine-v8.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/mantine-adapter.js",
-      "require": "./dist/mantine-adapter.cjs"
+      "import": "./dist/adapter-mantine-v8.js",
+      "require": "./dist/adapter-mantine-v8.cjs"
     },
-    "./style.css": "./dist/mantine-adapter.css"
+    "./style.css": "./dist/adapter-mantine-v8.css"
   },
   "files": [
     "dist",

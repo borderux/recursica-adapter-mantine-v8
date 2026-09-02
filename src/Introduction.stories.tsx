@@ -72,7 +72,7 @@ function IntroductionContent() {
           }}
         >
           <code>
-            npm install @recursica/mantine-adapter @mantine/core @mantine/hooks
+            npm install @recursica/adapter-mantine-v8 @mantine/core @mantine/hooks
           </code>
         </Stack>
       </Stack>

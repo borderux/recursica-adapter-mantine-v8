@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the high-level architecture and philosophy of the `@recursica/mantine-adapter` package.
+This document describes the high-level architecture and philosophy of the `@recursica/adapter-mantine-v8` package.
 
 ## Dependencies
 

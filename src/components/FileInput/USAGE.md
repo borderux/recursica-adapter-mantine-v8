@@ -1,13 +1,13 @@
 # FileInput - Usage Guide
 
-This document describes how to integrate and use the `FileInput` component in your projects using `@recursica/mantine-adapter`.
+This document describes how to integrate and use the `FileInput` component in your projects using `@recursica/adapter-mantine-v8`.
 
 ---
 
 ## 1. Import Reference
 
 ```tsx
-import { FileInput } from "@recursica/mantine-adapter";
+import { FileInput } from "@recursica/adapter-mantine-v8";
 ```
 
 ---
@@ -20,7 +20,7 @@ It shares `FileUpload`'s selection/validation interface, but is presented as a s
 
 ```tsx
 import React, { useState } from "react";
-import { FileInput } from "@recursica/mantine-adapter";
+import { FileInput } from "@recursica/adapter-mantine-v8";
 import { type RecursicaFileUploadItem } from "@recursica/adapter-common";
 
 export default function Demo() {
@@ -136,7 +136,7 @@ focusable or clickable.
 
 ## 7. Design System Integration
 
-All Recursica components in the `@recursica/mantine-adapter` package adhere strictly to design system spacing, scaling, and behavior patterns.
+All Recursica components in the `@recursica/adapter-mantine-v8` package adhere strictly to design system spacing, scaling, and behavior patterns.
 
 > [!IMPORTANT]
 >

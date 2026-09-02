@@ -1,13 +1,13 @@
 # SegmentedControl - Usage Guide
 
-This document describes how to integrate and use the `SegmentedControl` component in your projects using `@recursica/mantine-adapter`.
+This document describes how to integrate and use the `SegmentedControl` component in your projects using `@recursica/adapter-mantine-v8`.
 
 ---
 
 ## 1. Import Reference
 
 ```tsx
-import { SegmentedControl } from "@recursica/mantine-adapter";
+import { SegmentedControl } from "@recursica/adapter-mantine-v8";
 ```
 
 ---
@@ -16,7 +16,7 @@ import { SegmentedControl } from "@recursica/mantine-adapter";
 
 ```tsx
 import React from "react";
-import { SegmentedControl } from "@recursica/mantine-adapter";
+import { SegmentedControl } from "@recursica/adapter-mantine-v8";
 
 export default function Demo() {
   return <SegmentedControl data={["Preview", "Code", "Edit"]} />;
@@ -38,7 +38,7 @@ Each `data` item may also be an object with an optional `icon`, rendered ahead o
 
 ## 3. Design System Integration
 
-All Recursica components in the `@recursica/mantine-adapter` package adhere strictly to design system spacing, scaling, and behavior patterns.
+All Recursica components in the `@recursica/adapter-mantine-v8` package adhere strictly to design system spacing, scaling, and behavior patterns.
 
 > [!IMPORTANT]
 >

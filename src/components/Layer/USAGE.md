@@ -1,6 +1,6 @@
 # Layer - Usage Guide
 
-This document describes how to integrate and use the `Layer` component in your projects using `@recursica/mantine-adapter`.
+This document describes how to integrate and use the `Layer` component in your projects using `@recursica/adapter-mantine-v8`.
 
 > [!NOTE] > `Layer` is defined once in `@recursica/adapter-common` and re-exported here so it shares the exact same behavior across every Recursica adapter.
 
@@ -9,7 +9,7 @@ This document describes how to integrate and use the `Layer` component in your p
 ## 1. Import Reference
 
 ```tsx
-import { Layer } from "@recursica/mantine-adapter";
+import { Layer } from "@recursica/adapter-mantine-v8";
 ```
 
 ---
@@ -23,7 +23,7 @@ import {
   RecursicaThemeProvider,
   Layer,
   Card,
-} from "@recursica/mantine-adapter";
+} from "@recursica/adapter-mantine-v8";
 
 function App() {
   return (
