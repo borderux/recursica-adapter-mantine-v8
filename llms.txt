@@ -16,6 +16,7 @@ This adapter converts Recursica design tokens into Mantine-specific themes and c
 - [SETUP](SETUP.md): Installation and integration steps.
 - [ARCHITECTURE](ARCHITECTURE.md): Package architecture and dependencies.
 - [README](README.md)
+- [ADAPTER_USAGE](ADAPTER_USAGE.md)
 
 ## Components
 
