@@ -72,8 +72,9 @@
     "adapter-tester:automated": "adapter-tester",
     "adapter-tester:update-golden": "adapter-tester --update-golden",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css,scss}\"",
+    "validate-adapter-status": "node scripts/validate-adapter-status.mjs",
     "prepare": "node .husky/install.mjs",
-    "precommit": "npm run check-types && npm run lint && npm run format",
+    "precommit": "npm run check-types && npm run lint && npm run format && npm run validate-adapter-status",
     "version": "changeset version",
     "release": "changeset publish"
   },
