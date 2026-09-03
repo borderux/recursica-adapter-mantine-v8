@@ -120,11 +120,7 @@ is called out explicitly wherever it's the source package instead of `@mantine/c
 \* **NumberInput, Slider, TextArea, TextField, TimePicker, AutoComplete, DatePicker** all render
 the real Mantine field primitive "naked" — i.e. with Mantine's own `label`/`description`/`error`/
 `wrapperProps` deliberately left unset — and get their label/assistive-text/error chrome from
-Recursica's own `FormControlWrapper` instead of Mantine's `Input.Wrapper`. This is a explicit,
-repeated architectural choice: nearly every one of these files carries a comment to the effect of
-_"Naked \[Input/Select/NumberInput/...\] execution safely decoupled from Mantine's macro
-`Input.Wrapper` DOM hooks."_ See `FormControlWrapper` in §2 for why `Input.Wrapper` itself was
-rejected as the wrapping mechanism.
+Recursica's own `FormControlWrapper` instead of Mantine's `Input.Wrapper`.
 
 \* **Slider** is a single Recursica component that switches between rendering Mantine's `Slider`
 (single value) and `RangeSlider` (two-value tuple) depending on whether the incoming `value`/
@@ -176,9 +172,7 @@ see `package.json`), but neither Recursica component actually renders them. See 
 
 | Mantine component                                                                                                             | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Box` (`@mantine/core`)                                                                                                       | Powers the plain-text rendering shell inside `ReadOnlyTextField`, `ReadOnlyBooleanField`, and `ReadOnlySwitchField` (`<Box component="p">` / `<Box component="span">`), styled via those components' own token-driven CSS Modules rather than Box's own style props. Never exposed as a standalone Recursica `Box`.                                                                                                                         |
 | `CheckIcon`, `CloseIcon` (small icon-glyph exports from `Checkbox`/`CloseButton`'s own folders, re-exported at the top level) | Rendered inside `Switch`'s thumb to draw the on/off glyphs, styled via `Switch`'s own token-driven CSS Module. Not exposed as Recursica icon components.                                                                                                                                                                                                                                                                                    |
-| `CloseButton` (indirectly, via `Modal.CloseButton` / `Drawer.CloseButtonProps`)                                               | Mantine's `Modal`/`Drawer` compose their own `CloseButton` internally for the `Modal.CloseButton`/`Drawer.CloseButton` parts that Recursica's `Modal`/`Panel` re-wrap and style via those components' own CSS Modules. Recursica never imports or exposes `CloseButton` as its own component.                                                                                                                                               |
 | `Select` (again, beyond the public `Dropdown` mapping in §1)                                                                  | Reused a second time via an internal, unexported `BareDropdown` (`Dropdown/BareDropdown.tsx`) to render `TimePicker`'s AM/PM segment — styled identically to the public `Dropdown` (same `Select`-based CSS Module) but without `FormControlWrapper`/label/error, since `TimePicker` already owns its own wrapper. Used inside `TimePicker` (AM/PM segment); explicitly documented as "internal use only" in the file's own header comment. |
 
 <!-- /recursica:table -->
