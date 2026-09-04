@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/borderux/recursica-adapter-mantine-v8.git"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publishConfig": {
     "access": "public"
   },
