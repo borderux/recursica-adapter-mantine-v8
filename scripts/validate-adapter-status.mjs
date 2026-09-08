@@ -12,7 +12,12 @@ import { dirname, join } from "node:path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const FILE_PATH = join(__dirname, "..", "ADAPTER_STATUS.md");
-const REQUIRED_TABLE_IDS = ["direct-mappings", "hand-built", "internal-only", "unsupported"];
+const REQUIRED_TABLE_IDS = [
+  "direct-mappings",
+  "hand-built",
+  "internal-only",
+  "unsupported",
+];
 
 function fail(message) {
   console.error(`ADAPTER_STATUS.md validation failed: ${message}`);
@@ -46,7 +51,9 @@ const lines = withoutFences.split("\n").map((line) => line.trim());
 const openTags = lines
   .map((line) => line.match(/^<!--\s*recursica:table\s+id="([a-z-]+)"\s*-->$/))
   .filter(Boolean);
-const closeCount = lines.filter((line) => /^<!--\s*\/recursica:table\s*-->$/.test(line)).length;
+const closeCount = lines.filter((line) =>
+  /^<!--\s*\/recursica:table\s*-->$/.test(line),
+).length;
 
 if (openTags.length !== closeCount) {
   fail(
@@ -58,7 +65,8 @@ const foundIds = openTags.map((m) => m[1]);
 for (const id of REQUIRED_TABLE_IDS) {
   const count = foundIds.filter((f) => f === id).length;
   if (count === 0) fail(`missing required table id="${id}"`);
-  if (count > 1) fail(`table id="${id}" appears ${count} times, expected exactly once`);
+  if (count > 1)
+    fail(`table id="${id}" appears ${count} times, expected exactly once`);
 }
 const unexpected = foundIds.filter((id) => !REQUIRED_TABLE_IDS.includes(id));
 if (unexpected.length > 0) {
@@ -100,4 +108,6 @@ for (const id of REQUIRED_TABLE_IDS) {
   }
 }
 
-console.log("ADAPTER_STATUS.md: all 4 required tables present and well-formed.");
+console.log(
+  "ADAPTER_STATUS.md: all 4 required tables present and well-formed.",
+);
