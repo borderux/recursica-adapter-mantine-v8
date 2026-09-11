@@ -1,4 +1,16 @@
-export * from "@recursica/adapter-common";
+// Only export what outside consumers actually need: the components themselves and their
+// composed, adapter-specific prop types. Internal building blocks — adapter-common's raw
+// `RecursicaXxxProps` slices, foundational types (`RecursicaOverStyled`, `WithRecursicaSpacing`,
+// etc.), and helper functions (`mergeClassNames`, `wrapComponent`, etc.) — stay unexported here
+// even though components use them internally; re-export one explicitly, from the file that uses
+// it, only if there's a real reason an outside consumer needs it (see `markCurrentPageItem`
+// in Breadcrumb for an example).
+
+// Pass-through components that have no mantine-specific implementation — each is
+// redeclared in its own components/ folder and re-exported from adapter-common there.
+export * from "./Layer";
+export * from "./EmptyValueRenderer";
+export * from "./RecursicaThemeProvider";
 
 export * from "./Accordion";
 export * from "./AssistiveElement/AssistiveElement";
@@ -10,17 +22,12 @@ export * from "./Button";
 export * from "./Card/Card";
 export * from "./Checkbox/Checkbox";
 export * from "./Checkbox/CheckboxGroup";
-export type { RecursicaCheckboxGroupProps } from "./Checkbox/CheckboxGroup";
 export * from "./Chip/Chip";
 export * from "./Container/Container";
 export * from "./DatePicker/DatePicker";
-export type { RecursicaDatePickerProps } from "./DatePicker/DatePicker";
 export * from "./Dropdown/Dropdown";
-export type { RecursicaDropdownProps } from "./Dropdown/Dropdown";
 export * from "./FileInput/FileInput";
-export type { RecursicaFileInputProps } from "./FileInput/FileInput";
 export * from "./FileUpload/FileUpload";
-export type { RecursicaFileUploadProps } from "./FileUpload/FileUpload";
 export * from "./Flex/Flex";
 export * from "./FormControlLayout/FormControlLayout";
 export * from "./Grid/Grid";
@@ -33,38 +40,27 @@ export * from "./Label";
 export * from "./Menu/Menu";
 export * from "./Modal/Modal";
 export * from "./NumberInput/NumberInput";
-export type { RecursicaNumberInputProps } from "./NumberInput/NumberInput";
 export * from "./Pagination/Pagination";
 export * from "./Panel/Panel";
-export type { RecursicaPanelProps } from "./Panel/Panel";
 export * from "./Popover";
 export * from "./Radio/Radio";
 export * from "./Radio/RadioGroup";
-export type { RecursicaRadioGroupProps } from "./Radio/RadioGroup";
 export * from "./ReadOnlyField";
-export type { RecursicaReadOnlyFieldProps } from "./ReadOnlyField/ReadOnlyField";
-export type { RecursicaReadOnlyTextFieldProps } from "./ReadOnlyField/ReadOnlyTextField";
 export * from "./SegmentedControl/SegmentedControl";
 export * from "./Slider/Slider";
-export type { RecursicaSliderProps } from "./Slider/Slider";
 export * from "./Stack/Stack";
 export * from "./Stepper/Stepper";
 export * from "./Switch/Switch";
 export * from "./Switch/SwitchGroup";
-export type { RecursicaSwitchGroupProps } from "./Switch/SwitchGroup";
 export * from "./Table/Table";
 export * from "./Tabs/Tabs";
 export * from "./Text/Text";
 export * from "./TextArea/TextArea";
-export type { RecursicaTextAreaProps } from "./TextArea/TextArea";
 export * from "./TextField/TextField";
-export type { RecursicaTextFieldProps } from "./TextField/TextField";
 export * from "./TimePicker/TimePicker";
-export type { RecursicaTimePickerProps } from "./TimePicker/TimePicker";
 export * from "./Timeline/Timeline";
 export * from "./Timeline/TimelineItem";
 export * from "./Toast";
 export * from "./Tooltip/Tooltip";
 export * from "./TransferList/TransferList";
-export type { RecursicaTransferListProps } from "./TransferList/TransferList";
 export * from "./Tree";

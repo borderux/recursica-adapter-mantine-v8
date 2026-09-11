@@ -17,6 +17,12 @@ import {
   type RecursicaBreadcrumbProps,
 } from "@recursica/adapter-common";
 
+// Re-exported here (not from a top-level barrel) since this is the file that actually uses it —
+// consumers building a custom crumb list can reuse the same "mark last child as current page"
+// behavior Breadcrumb applies internally.
+// eslint-disable-next-line react-refresh/only-export-components
+export { markCurrentPageItem };
+
 export type BreadcrumbProps = RecursicaOverStyled<
   Omit<MantineBreadcrumbsProps, "variant" | "size"> & RecursicaBreadcrumbProps
 >;
