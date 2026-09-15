@@ -13,11 +13,18 @@ import { type RecursicaTextProps } from "@recursica/adapter-common";
 import styles from "./Text.module.css";
 
 export type TextProps = RecursicaOverStyled<
-  Omit<MantineTextProps, "variant"> & RecursicaTextProps
+  Omit<MantineTextProps, "variant" | "color"> & RecursicaTextProps,
+  "color"
 >;
 
 const _Text = forwardRef<HTMLDivElement, TextProps>(function Text(
-  { overStyled = false, variant = "body", ...rest },
+  {
+    overStyled = false,
+    variant = "body",
+    emphasis = "high",
+    color = "default",
+    ...rest
+  },
   ref,
 ) {
   const sanitizedProps = filterStylingProps(rest, overStyled);
@@ -29,10 +36,15 @@ const _Text = forwardRef<HTMLDivElement, TextProps>(function Text(
     .filter(Boolean)
     .join(" ");
 
+  // `color` and `emphasis` are Recursica semantic tokens, not Mantine's native `color`. They're
+  // surfaced as data attributes so the CSS module can bind them to layer/opacity design tokens
+  // (see Text.module.css) instead of leaking through to Mantine's inline-style color handling.
   return (
     <MantineText
       ref={ref}
       {...(sanitizedProps as unknown as MantineTextProps)}
+      data-color={color}
+      data-emphasis={emphasis}
       className={mergedClassName}
     />
   );

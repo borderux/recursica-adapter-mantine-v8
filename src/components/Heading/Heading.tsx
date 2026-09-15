@@ -13,14 +13,24 @@ import { type RecursicaHeadingProps } from "@recursica/adapter-common";
 import styles from "./Heading.module.css";
 
 export type HeadingProps = RecursicaOverStyled<
-  Omit<MantineTitleProps, "size"> & RecursicaHeadingProps
+  Omit<MantineTitleProps, "size" | "color"> & RecursicaHeadingProps,
+  "color"
 >;
 
 /**
  * Enforces highly accessible structural markup utilizing semantic `<h1>` through `<h6>` tags securely bound directly to Recursica typographic scales.
  */
 export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
-  function Heading({ overStyled = false, order = 1, ...rest }, ref) {
+  function Heading(
+    {
+      overStyled = false,
+      order = 1,
+      emphasis = "high",
+      color = "default",
+      ...rest
+    },
+    ref,
+  ) {
     // Props this component intentionally doesn't support — deleted at runtime so they can't leak
     // through even if a caller forces them via plain JavaScript, bypassing the `Omit<>` above.
     const UNSUPPORTED_PROPS = [
@@ -39,11 +49,15 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
       .filter(Boolean)
       .join(" ");
 
+    // `color` and `emphasis` are Recursica semantic tokens surfaced as data attributes so the CSS
+    // module can bind them to layer/opacity design tokens (see Heading.module.css) — mirrors Text.
     return (
       <MantineTitle
         ref={ref}
         {...(sanitizedProps as unknown as MantineTitleProps)}
         order={order}
+        data-color={color}
+        data-emphasis={emphasis}
         className={mergedClassName}
       />
     );

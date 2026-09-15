@@ -25,7 +25,25 @@ export default function Demo() {
 
 ---
 
-## 3. Design System Integration
+## 3. Semantic `color` and `emphasis`
+
+`Heading` exposes two Recursica-native, token-bound props (not Mantine's freeform `color`):
+
+- **`color`** — semantic text color: `"default"` (the active layer's base text color), `"warning"`, `"alert"`, or `"success"`. Applied as a `data-color` attribute mapped to the layer's text-element tokens.
+- **`emphasis`** — `"high"` (default, solid) or `"low"` (dimmed for secondary content). Applied as a `data-emphasis` attribute mapped to the theme's text-emphasis opacity tokens.
+
+```tsx
+<Heading order={2} color="alert" emphasis="high">
+  Something went wrong.
+</Heading>
+<Heading order={3} color="default" emphasis="low">
+  Secondary section header.
+</Heading>
+```
+
+---
+
+## 4. Design System Integration
 
 All Recursica components in the `@recursica/adapter-mantine-v8` package adhere strictly to design system spacing, scaling, and behavior patterns.
 

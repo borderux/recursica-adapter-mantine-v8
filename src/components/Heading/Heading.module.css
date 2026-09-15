@@ -1,3 +1,14 @@
+/* Brand-layer exemptions (recursica-allow-brand) — see recursica-token-analyzer README.md.
+ * Semantic text color and emphasis are layer/theme-level concerns with no per-component UI-kit
+ * token; Heading binds the brand layer text-element + text-emphasis tokens directly, by design.
+ *   recursica-allow-brand: --recursica_brand_layer_elements_text_color
+ *   recursica-allow-brand: --recursica_brand_layer_elements_text_warning
+ *   recursica-allow-brand: --recursica_brand_layer_elements_text_alert
+ *   recursica-allow-brand: --recursica_brand_layer_elements_text_success
+ *   recursica-allow-brand: --recursica_brand_text-emphasis_high
+ *   recursica-allow-brand: --recursica_brand_text-emphasis_low
+ */
+
 /*
  * HARDCODED VALUES
  * - `.root` `text-wrap: balance` — not a design token; a layout algorithm choice requested by
@@ -10,4 +21,32 @@
      fall back to normal wrapping past that point — no fallback needed, unsupported browsers
      just ignore the declaration. */
   text-wrap: balance;
+}
+
+.root[data-color="default"] {
+  color: var(--recursica_brand_layer_elements_text_color);
+}
+
+.root[data-color="warning"] {
+  color: var(--recursica_brand_layer_elements_text_warning);
+}
+
+.root[data-color="alert"] {
+  color: var(--recursica_brand_layer_elements_text_alert);
+}
+
+.root[data-color="success"] {
+  color: var(--recursica_brand_layer_elements_text_success);
+}
+
+/*
+ * Emphasis — bound to the theme's text-emphasis opacity tokens via the `data-emphasis` attribute.
+ * `high` (the default) resolves to solid opacity, so only `low` needs to dim the text.
+ */
+.root[data-emphasis="high"] {
+  opacity: var(--recursica_brand_text-emphasis_high);
+}
+
+.root[data-emphasis="low"] {
+  opacity: var(--recursica_brand_text-emphasis_low);
 }
