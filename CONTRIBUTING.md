@@ -27,15 +27,15 @@ If you are tasked with building, modifying, or reviewing components **inside** t
 
 ## Visual Regression Testing
 
-This adapter runs `@recursica/adapter-tester` as `isSourceOfTruthAdapter` — its committed `test/golden/` images are the baseline every other adapter diverges against. See [`packages/adapter-tester/README.md`](../adapter-tester/README.md) and [`packages/adapter-tester/AGENT.md`](../adapter-tester/AGENT.md) for the full workflow, thresholds, and exemption rules; don't duplicate them here.
+This adapter runs `@recursica/adapter-tester` as `isSourceOfTruthAdapter` — its committed `test/golden/` images are the baseline every other adapter diverges against. See [`packages/adapter-tester/README.md`](https://github.com/borderux/recursica/blob/main/packages/adapter-tester/README.md) and [`packages/adapter-tester/AGENT.md`](https://github.com/borderux/recursica/blob/main/packages/adapter-tester/AGENT.md) for the full workflow, thresholds, and exemption rules; don't duplicate them here.
 
 ## Keeping Shared Docs in Sync
 
-This adapter's `docs/COMPONENT_DEV_GUIDE.md` and `docs/COMPONENT_STORYBOOK_GUIDE.md` are **thin, Mantine-specific deltas** — the full canonical rule set lives in [`packages/adapter-common/docs/`](../adapter-common/docs/). If you're changing a rule that applies to every adapter (not just this one), edit the canonical doc in `adapter-common/docs/`, not this adapter's delta — and check whether `mui-adapter`'s delta doc needs a corresponding update. Only edit this adapter's own `docs/COMPONENT_DEV_GUIDE.md`/`docs/COMPONENT_STORYBOOK_GUIDE.md` for something genuinely specific to Mantine.
+This adapter's `docs/COMPONENT_DEV_GUIDE.md` and `docs/COMPONENT_STORYBOOK_GUIDE.md` are **thin, Mantine-specific deltas** — the full canonical rule set lives in [`packages/adapter-common/docs/`](https://github.com/borderux/recursica/tree/main/packages/adapter-common/docs/). If you're changing a rule that applies to every adapter (not just this one), edit the canonical doc in `adapter-common/docs/`, not this adapter's delta — and check whether `mui-adapter`'s delta doc needs a corresponding update. Only edit this adapter's own `docs/COMPONENT_DEV_GUIDE.md`/`docs/COMPONENT_STORYBOOK_GUIDE.md` for something genuinely specific to Mantine.
 
 `docs/PHILOSOPHY.md` is different: it's a **full, self-contained, published** document (it's in this package's `"files"` array, unlike the two docs above), because it explains consumer-relevant behavior, not just contributor process. It does **not** link to a canonical doc anywhere. If you change something in it that reflects a philosophy shared by every adapter — not something genuinely specific to Mantine — go check whether `mui-adapter/docs/PHILOSOPHY.md` needs the equivalent change too. There's no automated or structural check for this; it's a manual discipline documented in `docs/DOCUMENTATION_STRATEGY.md` §4.
 
-See [`packages/adapter-common/docs/PIPELINE.md`](../adapter-common/docs/PIPELINE.md) for how doc and code changes flow across `adapter-common` → this adapter → `storybook-template` → `recursica-storybook`.
+See [`packages/adapter-common/docs/PIPELINE.md`](https://github.com/borderux/recursica/blob/main/packages/adapter-common/docs/PIPELINE.md) for how doc and code changes flow across `adapter-common` → this adapter → `storybook-template` → `recursica-storybook`.
 
 ## How Can I Contribute?
 
