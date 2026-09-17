@@ -120,7 +120,7 @@
     "vitest": "^3.2.4"
   },
   "dependencies": {
-    "@recursica/adapter-common": "^0.29.0"
+    "@recursica/adapter-common": "^0.30.0"
   },
   "peerDependencies": {
     "@mantine/core": "^8.0.0",
