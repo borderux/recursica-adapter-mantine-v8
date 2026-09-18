@@ -1,5 +1,11 @@
 # @recursica/adapter-mantine-v8
 
+## 1.0.5
+
+### Patch Changes
+
+- 7a0bee6: Updated internal versions
+
 ## 1.0.4
 
 ### Patch Changes
