@@ -1,5 +1,17 @@
 # @recursica/adapter-mantine-v8
 
+## 1.1.0
+
+### Minor Changes
+
+- 00f3154: `Grid.Col`'s type now intersects with `RecursicaGridColProps` from `adapter-common`, laying the groundwork for a formal cross-adapter contract. No behavior or prop changes yet — `span`, `order`, `visibleFrom`, and `hiddenFrom` all stay on Mantine's own native typing for now; the shared contract only carries `children` until `adapter-common` picks those back up (deferred to get this merged, not blocked on an open decision — `span` naming is already settled at `span`, just not wired).
+- 00f3154: `Grid` now wires the design system's `layout-grids` tokens: defaults to 6 columns with column-gutter/row-gutter/margin values applied automatically (previously an unstyled pass-through of Mantine's own 12-column default). **Breaking:** Mantine's `gutter` prop is no longer accepted — column-gutter/row-gutter/margin are design-system-managed, not integrator-configurable. `columns` remains the one Recursica-contract override, matching `Container.size`.
+
+### Patch Changes
+
+- 00f3154: Added `docs/migration/2026-09-21-forge-token-export.md`, documenting the findings from this Forge export update (cosmetic renames, layer-collapse pattern, exemption false positives, and the still-open grid/palette questions) so mui-v7 and beam can apply the same export without re-discovering them. Internal docs only, not part of the published package.
+- 00f3154: Bumped `@recursica/token-analyzer` to 1.8.0, which recognizes the `_modes_` naming used by newer Forge token exports (previously only `_themes_`) so legitimate mode/layer backing variables stop being flagged as unused.
+
 ## 1.0.5
 
 ### Patch Changes
