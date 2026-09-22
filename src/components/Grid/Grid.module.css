@@ -1,11 +1,41 @@
 /* HARDCODED VALUES:
- * None. This is a generic grid layout wrapper.
+ * None.
  */
 
-.root {
-  /* Mantine handles the grid geometry (columns, gutter, spans) natively. No intrinsic design-system styles required for pure layout wrappers. */
+/* Brand-layer exemptions (recursica-allow-brand) — layout-grid tokens have no ui-kit-layer
+ * representation in Forge's model (a grid is a page-layout primitive, not a "component"), so
+ * Grid is the one component that reads brand_layout-grids_* directly. See
+ * GRID_IMPLEMENTATION_NOTES.md.
+ *   recursica-allow-brand: --recursica_brand_layout-grids_default_column-gutter
+ *   recursica-allow-brand: --recursica_brand_layout-grids_default_row-gutter
+ *   recursica-allow-brand: --recursica_brand_layout-grids_default_margin
+ */
+
+.root.root {
+  /* Mantine handles column geometry (span, gutter width/margin-inline math) natively — the
+     column-gutter design token is applied via Grid.tsx's `gutter` prop, not here. `margin` has no
+     Mantine equivalent at all, so it's applied directly on the root element, always from the
+     design token — margin is design-system-managed, not an integrator-facing override. Doubled
+     selector beats Mantine's own single-class specificity regardless of stylesheet load order
+     (same idiom as Chip/other components). */
+  margin: var(--recursica_brand_layout-grids_default_margin);
 }
 
-.col {
-  /* Mantine handles column sizing (span, offset, order, visibleFrom/hiddenFrom) natively. */
+.inner.inner {
+  /* Mantine's own `.inner` margin is uniform on both axes, computed from `gutter`. Overriding just
+     the block (vertical) component here lets row spacing differ from column spacing without
+     touching Mantine's horizontal width/margin-inline math, which stays driven by `gutter`. Always
+     the design token — row-gutter is design-system-managed, not an integrator-facing override. */
+  margin-block: calc(
+    var(--recursica_brand_layout-grids_default_row-gutter) / -2
+  );
+}
+
+.col.col {
+  /* Mantine handles column sizing (span, offset, order, visibleFrom/hiddenFrom) and inline padding
+     (from `gutter`) natively. Overriding just the block (vertical) padding here applies the
+     row-gutter design token independently of column-gutter, always from the design token. */
+  padding-block: calc(
+    var(--recursica_brand_layout-grids_default_row-gutter) / 2
+  );
 }
