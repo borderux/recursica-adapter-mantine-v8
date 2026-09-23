@@ -14,32 +14,18 @@ const meta: Meta<GridStoryProps> = {
     docs: {
       description: {
         component:
-          "Grid is a 12-column (by default) responsive grid layout that maps directly to Mantine's Grid/Grid.Col, providing column spans, offsets, ordering, and breakpoint-based visibility.",
+          "Grid is a responsive grid layout mapped to Mantine's Grid/Grid.Col, providing column spans, offsets, ordering, and breakpoint-based visibility. Defaults to the design system's own layout-grid tokens: 6 columns, with design-system-managed column-gutter/row-gutter/margin values applied automatically (not integrator-configurable).",
       },
     },
   },
   args: {
-    gutter: "rec-default",
-    columns: 12,
     grow: false,
   },
   argTypes: {
-    gutter: {
-      control: "select",
-      options: [
-        "rec-none",
-        "rec-sm",
-        "rec-default",
-        "rec-md",
-        "rec-lg",
-        "rec-xl",
-        "rec-2xl",
-      ],
-      description: "Gutter between columns",
-    },
     columns: {
       control: "number",
-      description: "Number of columns in each row",
+      description:
+        "Number of columns in each row. Defaults to the design system's default column count (6).",
     },
     grow: {
       control: "boolean",
@@ -76,24 +62,30 @@ const Swatch = ({ children }: { children: React.ReactNode }) => (
   </Card>
 );
 
+// Uses the design system default (6 columns) with no explicit `columns` override.
 export const Default: Story = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   render: ({ withLayer, layer, ...args }: any) => (
     <Grid {...args}>
-      <Grid.Col span={4}>
-        <Swatch>span 4</Swatch>
+      <Grid.Col span={2}>
+        <Swatch>span 2 of 6 (default)</Swatch>
       </Grid.Col>
-      <Grid.Col span={4}>
-        <Swatch>span 4</Swatch>
+      <Grid.Col span={2}>
+        <Swatch>span 2 of 6 (default)</Swatch>
       </Grid.Col>
-      <Grid.Col span={4}>
-        <Swatch>span 4</Swatch>
+      <Grid.Col span={2}>
+        <Swatch>span 2 of 6 (default)</Swatch>
       </Grid.Col>
     </Grid>
   ),
 };
 
+// Explicitly overrides `columns` to 12 — this story exercises Mantine's own breakpoint/span
+// system at standard 12-column proportions, independent of the design system's 6-column default.
 export const ResponsiveSpans: Story = {
+  args: {
+    columns: 12,
+  },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   render: ({ withLayer, layer, ...args }: any) => (
     <Grid {...args}>
@@ -116,8 +108,12 @@ export const ResponsiveSpans: Story = {
 // Mirrors mui-adapter's `ResponsiveSizes` story (same breakpoints/content) under mantine's own
 // prop name — Mantine's Grid.Col has no `size` prop, only `span`, which is what `ResponsiveSpans`
 // above already exercises. This one exists purely so mui-adapter's `responsive-sizes` story id
-// has a source-of-truth counterpart to diff against (see Grid's IMPLEMENTATION_NOTES.md).
+// has a source-of-truth counterpart to diff against (see GRID_IMPLEMENTATION_NOTES.md). Same
+// explicit 12-column override as `ResponsiveSpans`, for the same reason.
 export const ResponsiveSizes: Story = {
+  args: {
+    columns: 12,
+  },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   render: ({ withLayer, layer, ...args }: any) => (
     <Grid {...args}>
@@ -141,11 +137,11 @@ export const Offset: Story = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   render: ({ withLayer, layer, ...args }: any) => (
     <Grid {...args}>
-      <Grid.Col span={4} offset={4}>
-        <Swatch>span 4, offset 4</Swatch>
+      <Grid.Col span={2} offset={2}>
+        <Swatch>span 2, offset 2 (of 6)</Swatch>
       </Grid.Col>
-      <Grid.Col span={4}>
-        <Swatch>span 4</Swatch>
+      <Grid.Col span={2}>
+        <Swatch>span 2 (of 6)</Swatch>
       </Grid.Col>
     </Grid>
   ),
@@ -159,10 +155,10 @@ export const Grow: Story = {
   render: ({ withLayer, layer, ...args }: any) => (
     <Grid {...args}>
       <Grid.Col span={3}>
-        <Swatch>span 3</Swatch>
+        <Swatch>span 3 (of 6)</Swatch>
       </Grid.Col>
       <Grid.Col span={3}>
-        <Swatch>span 3</Swatch>
+        <Swatch>span 3 (of 6)</Swatch>
       </Grid.Col>
       <Grid.Col span={3}>
         <Swatch>span 3 (grows to fill row)</Swatch>
@@ -171,21 +167,19 @@ export const Grow: Story = {
   ),
 };
 
+// Overrides the design system's default column count (6) to demonstrate a genuinely custom value.
 export const CustomColumnCount: Story = {
   args: {
-    columns: 6,
+    columns: 4,
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   render: ({ withLayer, layer, ...args }: any) => (
     <Grid {...args}>
       <Grid.Col span={2}>
-        <Swatch>span 2 of 6</Swatch>
+        <Swatch>span 2 of 4</Swatch>
       </Grid.Col>
       <Grid.Col span={2}>
-        <Swatch>span 2 of 6</Swatch>
-      </Grid.Col>
-      <Grid.Col span={2}>
-        <Swatch>span 2 of 6</Swatch>
+        <Swatch>span 2 of 4</Swatch>
       </Grid.Col>
     </Grid>
   ),
@@ -195,10 +189,10 @@ export const VisibleHiddenFrom: Story = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   render: ({ withLayer, layer, ...args }: any) => (
     <Grid {...args}>
-      <Grid.Col span={6} hiddenFrom="sm">
+      <Grid.Col span={3} hiddenFrom="sm">
         <Swatch>hidden from sm and up</Swatch>
       </Grid.Col>
-      <Grid.Col span={6} visibleFrom="sm">
+      <Grid.Col span={3} visibleFrom="sm">
         <Swatch>visible from sm and up</Swatch>
       </Grid.Col>
     </Grid>

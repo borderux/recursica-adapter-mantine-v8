@@ -9,6 +9,10 @@ import {
   mapLayoutProps,
   type WithRecursicaSpacing,
 } from "../../utils/filterStylingProps";
+import {
+  type RecursicaGridColProps,
+  type RecursicaGridProps,
+} from "@recursica/adapter-common";
 import styles from "./Grid.module.css";
 
 /**
@@ -18,18 +22,24 @@ import styles from "./Grid.module.css";
  * DO NOT use the `RecursicaOverStyled` gatekeeper. Developers must be able to freely pass
  * width, height, padding, margins, and flexbox alignment props to construct structural layouts.
  *
- * No formal Recursica prop contract here: this simply passes through Mantine's own
- * `GridProps` (gutter/grow/columns/justify/align are all native to Mantine), layered only
- * with rec- spacing token support via `WithRecursicaSpacing`.
+ * Recursica's `layout-grids` tokens (column-gutter, row-gutter, margin) are design-system-managed
+ * values, not integrator-facing settings — Grid applies them itself via CSS variables. Mantine's
+ * own `gutter` prop is not accepted; only `columns` (from `RecursicaGridProps` in
+ * `adapter-common`) is exposed as an override, matching how `Container.size` overrides its own
+ * token-backed default. See `GRID_IMPLEMENTATION_NOTES.md`.
  */
-export type GridProps = WithRecursicaSpacing<MantineGridProps>;
+export type GridProps = WithRecursicaSpacing<
+  Omit<MantineGridProps, "gutter" | "columns"> & RecursicaGridProps
+>;
 
 const _Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
-  { children, gutter = "rec-default", ...rest },
+  { children, columns, ...rest },
   ref,
 ) {
   const mergedClassNames: Partial<Record<string, string>> = {
     root: styles.root,
+    inner: styles.inner,
+    col: styles.col,
   };
 
   const classNamesProp = rest.classNames;
@@ -40,6 +50,10 @@ const _Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
   ) {
     const o = classNamesProp as Partial<Record<string, string>>;
     mergedClassNames.root = o.root ? `${styles.root} ${o.root}` : styles.root;
+    mergedClassNames.inner = o.inner
+      ? `${styles.inner} ${o.inner}`
+      : styles.inner;
+    mergedClassNames.col = o.col ? `${styles.col} ${o.col}` : styles.col;
   }
 
   const classNameProp = rest.className as string | undefined;
@@ -47,18 +61,35 @@ const _Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
     ? `${styles.root} ${classNameProp}`
     : styles.root;
 
-  const { gutter: mappedGutter, ...mappedRest } = mapLayoutProps({
-    gutter,
-    ...rest,
-  } as Record<string, unknown>);
+  // `gutter` is no longer a supported prop — column-gutter is design-system-managed (see below),
+  // dropped defensively here so a caller still passing the old prop name at runtime can't shadow
+  // the token-driven value passed to Mantine below via the `{...mappedRest}` spread.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { gutter: _legacyGutter, ...restWithoutGutter } = rest as Record<
+    string,
+    unknown
+  >;
+
+  const mappedRest = mapLayoutProps(
+    restWithoutGutter as Record<string, unknown>,
+  );
+
+  // `columns` has no CSS-variable equivalent in Mantine — it computes each column's flex-basis
+  // from a plain number, so the design system default is baked in here as a JS default rather
+  // than wired live through CSS. Sourced from --recursica_brand_layout-grids_default_columns.
+  const resolvedColumns = columns ?? 6;
 
   return (
     <MantineGrid
       ref={ref}
-      gutter={mappedGutter as MantineGridProps["gutter"]}
+      columns={resolvedColumns}
+      gutter="var(--recursica_brand_layout-grids_default_column-gutter)"
       className={finalClass}
       classNames={mergedClassNames}
-      {...(mappedRest as unknown as Omit<MantineGridProps, "gutter">)}
+      {...(mappedRest as unknown as Omit<
+        MantineGridProps,
+        "gutter" | "columns"
+      >)}
     >
       {children}
     </MantineGrid>
@@ -72,9 +103,9 @@ _Grid.displayName = "Grid";
  * Supports polymorphism via the `component` prop for custom element rendering.
  * @example
  * ```tsx
- * <Grid gap="rec-default">
- *   <Grid.Col span={6}>Half width</Grid.Col>
- *   <Grid.Col span={6}>Half width</Grid.Col>
+ * <Grid>
+ *   <Grid.Col span={3}>Quarter width (defaults to 6 columns)</Grid.Col>
+ *   <Grid.Col span={3}>Quarter width</Grid.Col>
  * </Grid>
  * ```
  */
@@ -84,7 +115,15 @@ const GridBase = createPolymorphicComponent<"div", GridProps>(_Grid);
 // GRID.COL
 // ============================================================
 
-export type GridColProps = WithRecursicaSpacing<MantineGridColProps>;
+// TODO(grid-col-contract): `RecursicaGridColProps` currently only contributes `children` here —
+// `span`, `order`, `visibleFrom`, and `hiddenFrom` are all drafted in that type (adapter-common)
+// but commented out for now (2026-09-22, Matt — paused to get Grid merged). Until they're
+// restored there, this stays a plain pass-through of Mantine's own `GridColProps`; no Omit needed
+// since nothing here is contract-backed yet. Re-add the intersection/Omit once
+// `RecursicaGridColProps` picks these back up. See `GRID_IMPLEMENTATION_NOTES.md`.
+export type GridColProps = WithRecursicaSpacing<
+  MantineGridColProps & RecursicaGridColProps
+>;
 
 const _GridCol = forwardRef<HTMLDivElement, GridColProps>(function GridCol(
   { children, ...rest },

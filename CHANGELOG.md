@@ -1,5 +1,36 @@
 # @recursica/adapter-mantine-v8
 
+## 1.1.0
+
+### Minor Changes
+
+- 00f3154: `Grid.Col`'s type now intersects with `RecursicaGridColProps` from `adapter-common`, laying the groundwork for a formal cross-adapter contract. No behavior or prop changes yet — `span`, `order`, `visibleFrom`, and `hiddenFrom` all stay on Mantine's own native typing for now; the shared contract only carries `children` until `adapter-common` picks those back up (deferred to get this merged, not blocked on an open decision — `span` naming is already settled at `span`, just not wired).
+- 00f3154: `Grid` now wires the design system's `layout-grids` tokens: defaults to 6 columns with column-gutter/row-gutter/margin values applied automatically (previously an unstyled pass-through of Mantine's own 12-column default). **Breaking:** Mantine's `gutter` prop is no longer accepted — column-gutter/row-gutter/margin are design-system-managed, not integrator-configurable. `columns` remains the one Recursica-contract override, matching `Container.size`.
+
+### Patch Changes
+
+- 00f3154: Added `docs/migration/2026-09-21-forge-token-export.md`, documenting the findings from this Forge export update (cosmetic renames, layer-collapse pattern, exemption false positives, and the still-open grid/palette questions) so mui-v7 and beam can apply the same export without re-discovering them. Internal docs only, not part of the published package.
+- 00f3154: Bumped `@recursica/token-analyzer` to 1.8.0, which recognizes the `_modes_` naming used by newer Forge token exports (previously only `_themes_`) so legitimate mode/layer backing variables stop being flagged as unused.
+
+## 1.0.5
+
+### Patch Changes
+
+- 7a0bee6: Updated internal versions
+
+## 1.0.4
+
+### Patch Changes
+
+- 249efc5: Removed `.storybook/preview-head.html`'s hardcoded Google Fonts `@import`s, which had drifted out of sync with `recursica_tokens.json`'s actual typefaces (still referencing Inter/Roboto, missing Quattrocento/Dongle/Nunito Sans). Fonts are already loaded dynamically from the JSON via `preview.tsx`'s `withRecursicaFonts` decorator, so the static file was redundant and wrong.
+- 249efc5: Removed old font styles
+
+## 1.0.3
+
+### Patch Changes
+
+- 704bc5e: Fixed the pre-commit lint-staged config running `prettier --write .` and `eslint --fix .` against the whole repo instead of just staged files, so a commit could silently reformat/relint files you never touched. Also removed the unused `precommit` npm script — the Husky hook runs lint-staged directly and never called it.
+
 ## 1.0.2
 
 ### Patch Changes
