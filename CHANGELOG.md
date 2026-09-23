@@ -1,5 +1,12 @@
 # @recursica/adapter-mantine-v8
 
+## 1.2.0
+
+### Minor Changes
+
+- c72f6c2: Updated broken stories and fixed side-by-side layout
+- 9ded742: Text and Heading now support `emphasis` and `color` props, backed by new CSS variations in their `.module.css` and demonstrated in their Storybook stories. USAGE docs updated for both components.
+
 ## 1.1.0
 
 ### Minor Changes
