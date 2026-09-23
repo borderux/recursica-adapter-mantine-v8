@@ -1,839 +1,848 @@
 {
   "ui-kit-accordion--default": {
-    "createdAt": "2026-09-21T23:01:11.437Z"
+    "createdAt": "2026-09-23T17:32:56.963Z"
   },
   "ui-kit-accordion--disabled": {
-    "createdAt": "2026-09-21T23:01:13.460Z"
+    "createdAt": "2026-09-23T17:32:58.949Z"
   },
   "ui-kit-accordion--long-title-truncation": {
-    "createdAt": "2026-09-21T23:01:15.281Z"
+    "createdAt": "2026-09-23T17:33:00.750Z"
   },
   "ui-kit-accordion--with-icons": {
-    "createdAt": "2026-09-21T23:01:17.189Z"
+    "createdAt": "2026-09-23T17:33:02.771Z"
   },
   "ui-kit-assistiveelement--default-help": {
-    "createdAt": "2026-09-21T23:01:19.319Z"
+    "createdAt": "2026-09-23T17:33:05.266Z"
   },
   "ui-kit-assistiveelement--error-state": {
-    "createdAt": "2026-09-21T23:01:21.231Z"
+    "createdAt": "2026-09-23T17:33:07.434Z"
   },
   "ui-kit-assistiveelement--no-icon-help": {
-    "createdAt": "2026-09-21T23:01:23.343Z"
+    "createdAt": "2026-09-23T17:33:09.614Z"
   },
   "ui-kit-autocomplete--default": {
-    "createdAt": "2026-09-21T23:01:25.535Z"
+    "createdAt": "2026-09-23T17:33:12.307Z"
   },
   "ui-kit-autocomplete--disabled": {
-    "createdAt": "2026-09-21T23:01:27.357Z"
+    "createdAt": "2026-09-23T17:33:14.685Z"
   },
   "ui-kit-autocomplete--editable-read-only": {
-    "createdAt": "2026-09-21T23:01:29.205Z"
+    "createdAt": "2026-09-23T17:33:16.878Z"
   },
   "ui-kit-autocomplete--error-state": {
-    "createdAt": "2026-09-21T23:01:31.228Z"
+    "createdAt": "2026-09-23T17:33:19.257Z"
   },
   "ui-kit-autocomplete--forms-side-by-side": {
-    "createdAt": "2026-09-21T23:01:33.114Z"
+    "createdAt": "2026-09-23T17:33:21.607Z"
   },
   "ui-kit-autocomplete--rich-option-row-preview": {
-    "createdAt": "2026-09-21T23:01:34.988Z"
+    "createdAt": "2026-09-23T17:33:24.403Z"
   },
   "ui-kit-autocomplete--rich-option-row-preview-wrapped": {
-    "createdAt": "2026-09-21T23:01:37.109Z"
+    "createdAt": "2026-09-23T17:33:26.312Z"
   },
   "ui-kit-autocomplete--static-read-only": {
-    "createdAt": "2026-09-21T23:01:38.930Z"
+    "createdAt": "2026-09-23T17:33:28.141Z"
   },
   "ui-kit-autocomplete--with-leading-icon": {
-    "createdAt": "2026-09-21T23:01:40.779Z"
+    "createdAt": "2026-09-23T17:33:30.160Z"
   },
   "ui-kit-autocomplete--with-rich-options": {
-    "createdAt": "2026-09-21T23:01:42.795Z"
+    "createdAt": "2026-09-23T17:33:32.609Z"
   },
   "ui-kit-autocomplete--with-rich-options-wrapped": {
-    "createdAt": "2026-09-21T23:01:44.930Z"
+    "createdAt": "2026-09-23T17:33:34.594Z"
   },
   "ui-kit-autocomplete--with-trailing-icon": {
-    "createdAt": "2026-09-21T23:01:47.197Z"
+    "createdAt": "2026-09-23T17:33:36.534Z"
   },
   "ui-kit-avatar--default": {
-    "createdAt": "2026-09-21T23:01:49.295Z"
+    "createdAt": "2026-09-23T17:33:38.382Z"
   },
   "ui-kit-avatar--icon-small-ghost": {
-    "createdAt": "2026-09-21T23:01:51.246Z"
+    "createdAt": "2026-09-23T17:33:40.098Z"
   },
   "ui-kit-avatar--image-large": {
-    "createdAt": "2026-09-21T23:01:53.254Z"
+    "createdAt": "2026-09-23T17:33:42.165Z"
   },
   "ui-kit-avatar--text-solid-default": {
-    "createdAt": "2026-09-21T23:01:55.840Z"
+    "createdAt": "2026-09-23T17:33:44.061Z"
   },
   "ui-kit-badge--default": {
-    "createdAt": "2026-09-21T23:01:58.029Z"
+    "createdAt": "2026-09-23T17:33:45.967Z"
   },
   "ui-kit-badge--layer-one-alert": {
-    "createdAt": "2026-09-21T23:02:00.097Z"
+    "createdAt": "2026-09-23T17:33:47.711Z"
   },
   "ui-kit-badge--static-alert": {
-    "createdAt": "2026-09-21T23:02:01.818Z"
+    "createdAt": "2026-09-23T17:33:49.628Z"
   },
   "ui-kit-badge--static-primary": {
-    "createdAt": "2026-09-21T23:02:03.544Z"
+    "createdAt": "2026-09-23T17:33:51.703Z"
   },
   "ui-kit-badge--static-success": {
-    "createdAt": "2026-09-21T23:02:05.916Z"
+    "createdAt": "2026-09-23T17:33:53.795Z"
   },
   "ui-kit-badge--static-warning": {
-    "createdAt": "2026-09-21T23:02:07.760Z"
+    "createdAt": "2026-09-23T17:33:55.917Z"
   },
   "ui-kit-breadcrumb--custom-separator": {
-    "createdAt": "2026-09-21T23:02:09.827Z"
+    "createdAt": "2026-09-23T17:33:58.232Z"
   },
   "ui-kit-breadcrumb--default": {
-    "createdAt": "2026-09-21T23:02:11.734Z"
+    "createdAt": "2026-09-23T17:34:00.072Z"
   },
   "ui-kit-breadcrumb--last-item-as-link": {
-    "createdAt": "2026-09-21T23:02:13.438Z"
+    "createdAt": "2026-09-23T17:34:02.148Z"
   },
   "ui-kit-button--default": {
-    "createdAt": "2026-09-21T23:02:15.593Z"
+    "createdAt": "2026-09-23T17:34:04.395Z"
   },
   "ui-kit-button--disabled-solid": {
-    "createdAt": "2026-09-21T23:02:17.556Z"
+    "createdAt": "2026-09-23T17:34:06.589Z"
   },
   "ui-kit-button--icon-only": {
-    "createdAt": "2026-09-21T23:02:19.524Z"
+    "createdAt": "2026-09-23T17:34:08.509Z"
   },
   "ui-kit-button--layer-one-solid": {
-    "createdAt": "2026-09-21T23:02:21.342Z"
+    "createdAt": "2026-09-23T17:34:10.631Z"
   },
   "ui-kit-button--loading": {
-    "createdAt": "2026-09-21T23:02:23.171Z"
+    "createdAt": "2026-09-23T17:34:12.940Z"
   },
   "ui-kit-button--outline-small": {
-    "createdAt": "2026-09-21T23:02:25.335Z"
+    "createdAt": "2026-09-23T17:34:15.314Z"
   },
   "ui-kit-button--polymorphic-as-link": {
-    "createdAt": "2026-09-21T23:02:27.308Z"
+    "createdAt": "2026-09-23T17:34:17.867Z"
   },
   "ui-kit-button--solid-default": {
-    "createdAt": "2026-09-21T23:02:29.112Z"
+    "createdAt": "2026-09-23T17:34:20.580Z"
   },
   "ui-kit-button--text-with-icon": {
-    "createdAt": "2026-09-21T23:02:30.998Z"
+    "createdAt": "2026-09-23T17:34:22.577Z"
   },
   "ui-kit-button--truncated-label": {
-    "createdAt": "2026-09-21T23:02:32.766Z"
+    "createdAt": "2026-09-23T17:34:24.605Z"
   },
   "ui-kit-card--default": {
-    "createdAt": "2026-09-21T23:02:35.187Z"
+    "createdAt": "2026-09-23T17:34:27.129Z"
   },
   "ui-kit-card--headerless-and-footerless": {
-    "createdAt": "2026-09-21T23:02:37.056Z"
-  },
-  "ui-kit-card--layer-demonstration": {
-    "createdAt": "2026-09-21T23:02:38.968Z"
+    "createdAt": "2026-09-23T17:34:29.743Z"
   },
   "ui-kit-checkbox--default": {
-    "createdAt": "2026-09-21T23:02:41.246Z"
+    "createdAt": "2026-09-23T17:34:32.187Z"
   },
   "ui-kit-checkbox--long-label-wrap": {
-    "createdAt": "2026-09-21T23:02:43.117Z"
+    "createdAt": "2026-09-23T17:34:34.454Z"
   },
   "ui-kit-checkbox--read-only": {
-    "createdAt": "2026-09-21T23:02:45.356Z"
+    "createdAt": "2026-09-23T17:34:36.764Z"
   },
   "ui-kit-checkbox--side-by-side-layout": {
-    "createdAt": "2026-09-21T23:02:47.500Z"
+    "createdAt": "2026-09-23T17:34:38.839Z"
   },
   "ui-kit-checkbox--static-variations": {
-    "createdAt": "2026-09-21T23:02:49.958Z"
+    "createdAt": "2026-09-23T17:34:40.875Z"
   },
   "ui-kit-checkboxgroup--default": {
-    "createdAt": "2026-09-21T23:02:52.029Z"
+    "createdAt": "2026-09-23T17:34:42.768Z"
   },
   "ui-kit-checkboxgroup--read-only": {
-    "createdAt": "2026-09-21T23:02:54.047Z"
+    "createdAt": "2026-09-23T17:34:44.997Z"
   },
   "ui-kit-checkboxgroup--side-by-side-layout": {
-    "createdAt": "2026-09-21T23:02:56.318Z"
+    "createdAt": "2026-09-23T17:34:47.181Z"
   },
   "ui-kit-checkboxgroup--stacked-layout": {
-    "createdAt": "2026-09-21T23:02:58.321Z"
+    "createdAt": "2026-09-23T17:34:49.058Z"
   },
   "ui-kit-chip--default": {
-    "createdAt": "2026-09-21T23:03:00.433Z"
+    "createdAt": "2026-09-23T17:34:51.220Z"
   },
   "ui-kit-chip--error-selected": {
-    "createdAt": "2026-09-21T23:03:02.519Z"
+    "createdAt": "2026-09-23T17:34:53.124Z"
   },
   "ui-kit-chip--error-state": {
-    "createdAt": "2026-09-21T23:03:04.624Z"
+    "createdAt": "2026-09-23T17:34:55.319Z"
   },
   "ui-kit-chip--removable": {
-    "createdAt": "2026-09-21T23:03:06.848Z"
+    "createdAt": "2026-09-23T17:34:57.284Z"
   },
   "ui-kit-chip--selected": {
-    "createdAt": "2026-09-21T23:03:08.859Z"
+    "createdAt": "2026-09-23T17:34:59.081Z"
   },
   "ui-kit-chip--unselected": {
-    "createdAt": "2026-09-21T23:03:10.594Z"
+    "createdAt": "2026-09-23T17:35:01.122Z"
   },
   "ui-kit-chip--with-leading-icon": {
-    "createdAt": "2026-09-21T23:03:12.517Z"
+    "createdAt": "2026-09-23T17:35:02.947Z"
   },
   "ui-kit-chip--with-leading-icon-selected": {
-    "createdAt": "2026-09-21T23:03:14.363Z"
+    "createdAt": "2026-09-23T17:35:04.977Z"
   },
   "ui-kit-container--default": {
-    "createdAt": "2026-09-21T23:03:16.364Z"
+    "createdAt": "2026-09-23T17:35:06.970Z"
   },
   "ui-kit-container--fluid-container": {
-    "createdAt": "2026-09-21T23:03:18.248Z"
+    "createdAt": "2026-09-23T17:35:08.831Z"
   },
   "ui-kit-container--small-container": {
-    "createdAt": "2026-09-21T23:03:20.256Z"
+    "createdAt": "2026-09-23T17:35:10.822Z"
   },
   "ui-kit-datepicker--default": {
-    "createdAt": "2026-09-21T23:03:22.539Z"
+    "createdAt": "2026-09-23T17:35:13.439Z"
   },
   "ui-kit-datepicker--disabled": {
-    "createdAt": "2026-09-21T23:03:24.445Z"
+    "createdAt": "2026-09-23T17:35:16.197Z"
   },
   "ui-kit-datepicker--editable-read-only": {
-    "createdAt": "2026-09-21T23:03:26.201Z"
+    "createdAt": "2026-09-23T17:35:18.378Z"
   },
   "ui-kit-datepicker--error-state": {
-    "createdAt": "2026-09-21T23:03:28.211Z"
+    "createdAt": "2026-09-23T17:35:20.601Z"
   },
   "ui-kit-datepicker--forms-side-by-side": {
-    "createdAt": "2026-09-21T23:03:30.306Z"
+    "createdAt": "2026-09-23T17:35:22.916Z"
   },
   "ui-kit-datepicker--opened-calendar": {
-    "createdAt": "2026-09-21T23:03:32.315Z"
+    "createdAt": "2026-09-23T17:35:24.986Z"
   },
   "ui-kit-datepicker--static-read-only": {
-    "createdAt": "2026-09-21T23:03:34.136Z"
+    "createdAt": "2026-09-23T17:35:27.435Z"
   },
   "ui-kit-datepicker--with-leading-icon": {
-    "createdAt": "2026-09-21T23:03:36.120Z"
+    "createdAt": "2026-09-23T17:35:29.565Z"
   },
   "ui-kit-dropdown--clearable": {
-    "createdAt": "2026-09-21T23:03:38.097Z"
+    "createdAt": "2026-09-23T17:35:31.783Z"
   },
   "ui-kit-dropdown--default": {
-    "createdAt": "2026-09-21T23:03:40.074Z"
+    "createdAt": "2026-09-23T17:35:34.019Z"
   },
   "ui-kit-dropdown--rich-option-row-preview": {
-    "createdAt": "2026-09-21T23:03:42.152Z"
+    "createdAt": "2026-09-23T17:35:36.363Z"
   },
   "ui-kit-dropdown--rich-option-row-preview-wrapped": {
-    "createdAt": "2026-09-21T23:03:44.181Z"
+    "createdAt": "2026-09-23T17:35:39.052Z"
   },
   "ui-kit-dropdown--static-disabled": {
-    "createdAt": "2026-09-21T23:03:46.241Z"
+    "createdAt": "2026-09-23T17:35:41.188Z"
   },
   "ui-kit-dropdown--static-error": {
-    "createdAt": "2026-09-21T23:03:48.640Z"
+    "createdAt": "2026-09-23T17:35:43.861Z"
   },
   "ui-kit-dropdown--static-read-only": {
-    "createdAt": "2026-09-21T23:03:51.017Z"
+    "createdAt": "2026-09-23T17:35:45.821Z"
   },
   "ui-kit-dropdown--with-leading-icon": {
-    "createdAt": "2026-09-21T23:03:53.175Z"
+    "createdAt": "2026-09-23T17:35:48.056Z"
   },
   "ui-kit-dropdown--with-rich-options": {
-    "createdAt": "2026-09-21T23:03:55.156Z"
+    "createdAt": "2026-09-23T17:35:50.238Z"
   },
   "ui-kit-dropdown--with-rich-options-wrapped": {
-    "createdAt": "2026-09-21T23:03:57.254Z"
+    "createdAt": "2026-09-23T17:35:52.110Z"
   },
   "ui-kit-fileinput--accept-restriction": {
-    "createdAt": "2026-09-21T23:03:59.672Z"
+    "createdAt": "2026-09-23T17:35:54.170Z"
   },
   "ui-kit-fileinput--default": {
-    "createdAt": "2026-09-21T23:04:02.013Z"
+    "createdAt": "2026-09-23T17:35:56.313Z"
   },
   "ui-kit-fileinput--disabled": {
-    "createdAt": "2026-09-21T23:04:04.431Z"
+    "createdAt": "2026-09-23T17:35:58.271Z"
   },
   "ui-kit-fileinput--error-state": {
-    "createdAt": "2026-09-21T23:04:06.484Z"
+    "createdAt": "2026-09-23T17:36:00.362Z"
   },
   "ui-kit-fileinput--max-files-restriction": {
-    "createdAt": "2026-09-21T23:04:08.628Z"
+    "createdAt": "2026-09-23T17:36:02.489Z"
   },
   "ui-kit-fileinput--multiple-files": {
-    "createdAt": "2026-09-21T23:04:10.681Z"
+    "createdAt": "2026-09-23T17:36:04.566Z"
   },
   "ui-kit-fileinput--read-only": {
-    "createdAt": "2026-09-21T23:04:12.871Z"
+    "createdAt": "2026-09-23T17:36:06.794Z"
   },
   "ui-kit-fileinput--side-by-side": {
-    "createdAt": "2026-09-21T23:04:14.883Z"
+    "createdAt": "2026-09-23T17:36:08.824Z"
   },
   "ui-kit-fileinput--with-file": {
-    "createdAt": "2026-09-21T23:04:17.074Z"
+    "createdAt": "2026-09-23T17:36:10.946Z"
   },
   "ui-kit-fileupload--accept-restriction": {
-    "createdAt": "2026-09-21T23:04:19.518Z"
+    "createdAt": "2026-09-23T17:36:13.240Z"
   },
   "ui-kit-fileupload--custom-icon": {
-    "createdAt": "2026-09-21T23:04:21.456Z"
+    "createdAt": "2026-09-23T17:36:15.452Z"
   },
   "ui-kit-fileupload--default": {
-    "createdAt": "2026-09-21T23:04:23.448Z"
+    "createdAt": "2026-09-23T17:36:17.986Z"
   },
   "ui-kit-fileupload--disabled": {
-    "createdAt": "2026-09-21T23:04:25.367Z"
+    "createdAt": "2026-09-23T17:36:20.444Z"
   },
   "ui-kit-fileupload--empty-state": {
-    "createdAt": "2026-09-21T23:04:27.359Z"
+    "createdAt": "2026-09-23T17:36:22.621Z"
   },
   "ui-kit-fileupload--error-state": {
-    "createdAt": "2026-09-21T23:04:29.351Z"
+    "createdAt": "2026-09-23T17:36:24.998Z"
   },
   "ui-kit-fileupload--long-filenames": {
-    "createdAt": "2026-09-21T23:04:31.272Z"
+    "createdAt": "2026-09-23T17:36:27.200Z"
   },
   "ui-kit-fileupload--max-files-restriction": {
-    "createdAt": "2026-09-21T23:04:33.326Z"
+    "createdAt": "2026-09-23T17:36:29.777Z"
   },
   "ui-kit-fileupload--read-only": {
-    "createdAt": "2026-09-21T23:04:35.821Z"
+    "createdAt": "2026-09-23T17:36:31.968Z"
   },
   "ui-kit-fileupload--with-files": {
-    "createdAt": "2026-09-21T23:04:37.972Z"
+    "createdAt": "2026-09-23T17:36:34.793Z"
   },
   "ui-kit-flex--default": {
-    "createdAt": "2026-09-21T23:04:40.078Z"
+    "createdAt": "2026-09-23T17:36:37.300Z"
   },
   "ui-kit-flex--static-gap-large-row": {
-    "createdAt": "2026-09-21T23:04:42.167Z"
+    "createdAt": "2026-09-23T17:36:39.527Z"
   },
   "ui-kit-flex--static-gap-small-column": {
-    "createdAt": "2026-09-21T23:04:44.358Z"
+    "createdAt": "2026-09-23T17:36:42.327Z"
   },
   "ui-kit-formcontrollayout--default": {
-    "createdAt": "2026-09-21T23:04:46.819Z"
+    "createdAt": "2026-09-23T17:36:45.334Z"
   },
   "ui-kit-formcontrollayout--side-by-side-layout": {
-    "createdAt": "2026-09-21T23:04:49.455Z"
+    "createdAt": "2026-09-23T17:36:48.327Z"
   },
   "ui-kit-formcontrollayout--stacked-layout": {
-    "createdAt": "2026-09-21T23:04:51.780Z"
+    "createdAt": "2026-09-23T17:36:51.012Z"
   },
   "ui-kit-formcontrollayout--stacked-layout-with-label-default": {
-    "createdAt": "2026-09-21T23:04:54.858Z"
+    "createdAt": "2026-09-23T17:36:53.326Z"
   },
   "ui-kit-formcontrollayout--stacked-layout-with-label-small": {
-    "createdAt": "2026-09-21T23:04:57.247Z"
+    "createdAt": "2026-09-23T17:36:56.267Z"
   },
   "ui-kit-formcontrolwrapper--default": {
-    "createdAt": "2026-09-21T23:04:59.477Z"
+    "createdAt": "2026-09-23T17:36:58.660Z"
   },
   "ui-kit-formcontrolwrapper--native-children-directly": {
-    "createdAt": "2026-09-21T23:05:01.810Z"
+    "createdAt": "2026-09-23T17:37:01.058Z"
   },
   "ui-kit-formcontrolwrapper--required-architecture": {
-    "createdAt": "2026-09-21T23:05:04.304Z"
+    "createdAt": "2026-09-23T17:37:03.631Z"
   },
   "ui-kit-formcontrolwrapper--visual-error-state": {
-    "createdAt": "2026-09-21T23:05:07.313Z"
+    "createdAt": "2026-09-23T17:37:06.544Z"
   },
   "ui-kit-formcontrolwrapper--without-assistive-icons": {
-    "createdAt": "2026-09-21T23:05:09.468Z"
+    "createdAt": "2026-09-23T17:37:09.069Z"
   },
   "ui-kit-grid--custom-column-count": {
-    "createdAt": "2026-09-21T23:05:11.852Z"
+    "createdAt": "2026-09-23T17:37:11.269Z"
   },
   "ui-kit-grid--default": {
-    "createdAt": "2026-09-21T23:05:14.040Z"
+    "createdAt": "2026-09-23T17:37:13.578Z"
   },
   "ui-kit-grid--grow": {
-    "createdAt": "2026-09-21T23:05:16.751Z"
+    "createdAt": "2026-09-23T17:37:15.715Z"
   },
   "ui-kit-grid--offset": {
-    "createdAt": "2026-09-21T23:05:19.631Z"
+    "createdAt": "2026-09-23T17:37:18.046Z"
   },
   "ui-kit-grid--responsive-sizes": {
-    "createdAt": "2026-09-21T23:05:21.664Z"
+    "createdAt": "2026-09-23T17:37:21.966Z"
   },
   "ui-kit-grid--responsive-spans": {
-    "createdAt": "2026-09-21T23:05:23.698Z"
+    "createdAt": "2026-09-23T17:37:24.431Z"
   },
   "ui-kit-grid--visible-hidden-from": {
-    "createdAt": "2026-09-21T23:05:25.640Z"
+    "createdAt": "2026-09-23T17:37:27.188Z"
   },
   "ui-kit-group--default": {
-    "createdAt": "2026-09-21T23:05:27.786Z"
+    "createdAt": "2026-09-23T17:37:29.759Z"
   },
   "ui-kit-group--static-gap-large": {
-    "createdAt": "2026-09-21T23:05:29.774Z"
+    "createdAt": "2026-09-23T17:37:32.208Z"
   },
   "ui-kit-group--static-gap-small": {
-    "createdAt": "2026-09-21T23:05:31.612Z"
+    "createdAt": "2026-09-23T17:37:36.809Z"
+  },
+  "ui-kit-heading--colors": {
+    "createdAt": "2026-09-23T17:37:39.423Z"
   },
   "ui-kit-heading--default": {
-    "createdAt": "2026-09-21T23:05:33.747Z"
+    "createdAt": "2026-09-23T17:37:41.726Z"
+  },
+  "ui-kit-heading--emphasis": {
+    "createdAt": "2026-09-23T17:37:44.431Z"
   },
   "ui-kit-heading--static-variations": {
-    "createdAt": "2026-09-21T23:05:35.729Z"
+    "createdAt": "2026-09-23T17:37:46.875Z"
   },
   "ui-kit-hovercard--default": {
-    "createdAt": "2026-09-21T23:05:37.844Z"
+    "createdAt": "2026-09-23T17:37:51.668Z"
   },
   "ui-kit-hovercard--rich-content": {
-    "createdAt": "2026-09-21T23:05:39.852Z"
+    "createdAt": "2026-09-23T17:37:54.146Z"
   },
   "ui-kit-hovercard--without-beak": {
-    "createdAt": "2026-09-21T23:05:41.831Z"
+    "createdAt": "2026-09-23T17:37:56.472Z"
   },
   "ui-kit-label--boolean-optional-text": {
-    "createdAt": "2026-09-21T23:05:43.730Z"
+    "createdAt": "2026-09-23T17:37:58.878Z"
   },
   "ui-kit-label--default": {
-    "createdAt": "2026-09-21T23:05:45.777Z"
+    "createdAt": "2026-09-23T17:38:01.104Z"
   },
   "ui-kit-label--required": {
-    "createdAt": "2026-09-21T23:05:48.123Z"
+    "createdAt": "2026-09-23T17:38:03.656Z"
   },
   "ui-kit-label--required-suppresses-optional-text": {
-    "createdAt": "2026-09-21T23:05:50.616Z"
+    "createdAt": "2026-09-23T17:38:06.486Z"
   },
   "ui-kit-label--required-with-edit-icon": {
-    "createdAt": "2026-09-21T23:05:52.929Z"
+    "createdAt": "2026-09-23T17:38:08.805Z"
   },
   "ui-kit-label--right-aligned": {
-    "createdAt": "2026-09-21T23:05:55.115Z"
+    "createdAt": "2026-09-23T17:38:11.035Z"
   },
   "ui-kit-label--with-action-area": {
-    "createdAt": "2026-09-21T23:05:57.343Z"
+    "createdAt": "2026-09-23T17:38:13.276Z"
   },
   "ui-kit-label--with-edit-icon": {
-    "createdAt": "2026-09-21T23:05:59.868Z"
+    "createdAt": "2026-09-23T17:38:15.863Z"
   },
   "ui-kit-label--with-optional-text": {
-    "createdAt": "2026-09-21T23:06:02.132Z"
+    "createdAt": "2026-09-23T17:38:18.146Z"
   },
   "ui-kit-layer--contents-only": {
-    "createdAt": "2026-09-21T23:06:05.237Z"
+    "createdAt": "2026-09-23T17:38:20.875Z"
   },
   "ui-kit-layer--default": {
-    "createdAt": "2026-09-21T23:06:08.148Z"
+    "createdAt": "2026-09-23T17:38:23.075Z"
   },
   "ui-kit-layer--nested-layers": {
-    "createdAt": "2026-09-21T23:06:10.306Z"
+    "createdAt": "2026-09-23T17:38:25.688Z"
   },
   "ui-kit-link--default": {
-    "createdAt": "2026-09-21T23:06:13.391Z"
+    "createdAt": "2026-09-23T17:38:28.079Z"
   },
   "ui-kit-link--inline-text": {
-    "createdAt": "2026-09-21T23:06:16.004Z"
+    "createdAt": "2026-09-23T17:38:30.479Z"
   },
   "ui-kit-link--polymorphic": {
-    "createdAt": "2026-09-21T23:06:18.438Z"
+    "createdAt": "2026-09-23T17:38:32.543Z"
   },
   "ui-kit-link--with-icon": {
-    "createdAt": "2026-09-21T23:06:21.223Z"
+    "createdAt": "2026-09-23T17:38:34.967Z"
   },
   "ui-kit-loader--static-bars-large": {
-    "createdAt": "2026-09-21T23:06:23.550Z"
+    "createdAt": "2026-09-23T17:38:37.463Z"
   },
   "ui-kit-loader--static-dots-small": {
-    "createdAt": "2026-09-21T23:06:26.198Z"
+    "createdAt": "2026-09-23T17:38:39.767Z"
   },
   "ui-kit-loader--static-oval-default": {
-    "createdAt": "2026-09-21T23:06:28.373Z"
+    "createdAt": "2026-09-23T17:38:42.145Z"
   },
   "ui-kit-menu--default": {
-    "createdAt": "2026-09-21T23:06:30.694Z"
+    "createdAt": "2026-09-23T17:38:44.819Z"
   },
   "ui-kit-menu--hover-trigger": {
-    "createdAt": "2026-09-21T23:06:32.768Z"
+    "createdAt": "2026-09-23T17:38:47.464Z"
   },
   "ui-kit-menu--with-disabled-items": {
-    "createdAt": "2026-09-21T23:06:35.045Z"
+    "createdAt": "2026-09-23T17:38:53.232Z"
   },
   "ui-kit-menu--with-max-height": {
-    "createdAt": "2026-09-21T23:06:37.502Z"
+    "createdAt": "2026-09-23T17:39:01.464Z"
   },
   "ui-kit-menu--with-submenus": {
-    "createdAt": "2026-09-21T23:06:39.816Z"
+    "createdAt": "2026-09-23T17:39:04.950Z"
   },
   "ui-kit-modal--default": {
-    "createdAt": "2026-09-21T23:06:42.665Z"
+    "createdAt": "2026-09-23T17:39:09.500Z"
   },
   "ui-kit-modal--long-title": {
-    "createdAt": "2026-09-21T23:06:44.962Z"
+    "createdAt": "2026-09-23T17:39:12.374Z"
   },
   "ui-kit-modal--scrolling-content": {
-    "createdAt": "2026-09-21T23:06:47.039Z"
+    "createdAt": "2026-09-23T17:39:15.662Z"
   },
   "ui-kit-numberinput--default": {
-    "createdAt": "2026-09-21T23:06:50.002Z"
+    "createdAt": "2026-09-23T17:39:18.601Z"
   },
   "ui-kit-numberinput--hidden-controls": {
-    "createdAt": "2026-09-21T23:06:52.276Z"
+    "createdAt": "2026-09-23T17:39:23.127Z"
   },
   "ui-kit-numberinput--side-by-side-layout": {
-    "createdAt": "2026-09-21T23:06:54.488Z"
+    "createdAt": "2026-09-23T17:39:26.173Z"
   },
   "ui-kit-numberinput--states": {
-    "createdAt": "2026-09-21T23:06:56.871Z"
+    "createdAt": "2026-09-23T17:39:30.366Z"
   },
   "ui-kit-numberinput--with-left-icon": {
-    "createdAt": "2026-09-21T23:06:59.614Z"
+    "createdAt": "2026-09-23T17:39:39.984Z"
   },
   "ui-kit-numberinput--with-right-icon": {
-    "createdAt": "2026-09-21T23:07:02.900Z"
+    "createdAt": "2026-09-23T17:39:52.289Z"
   },
   "ui-kit-pagination--default": {
-    "createdAt": "2026-09-21T23:07:06.323Z"
+    "createdAt": "2026-09-23T17:39:59.337Z"
   },
   "ui-kit-pagination--with-edges": {
-    "createdAt": "2026-09-21T23:07:08.492Z"
+    "createdAt": "2026-09-23T17:40:02.409Z"
   },
   "ui-kit-pagination--with-text-labels": {
-    "createdAt": "2026-09-21T23:07:10.658Z"
+    "createdAt": "2026-09-23T17:40:05.526Z"
   },
   "ui-kit-panel--default": {
-    "createdAt": "2026-09-21T23:07:14.745Z"
+    "createdAt": "2026-09-23T17:40:10.690Z"
   },
   "ui-kit-panel--left-placement": {
-    "createdAt": "2026-09-21T23:07:17.258Z"
+    "createdAt": "2026-09-23T17:40:15.853Z"
   },
   "ui-kit-panel--long-title": {
-    "createdAt": "2026-09-21T23:07:20.270Z"
+    "createdAt": "2026-09-23T17:40:19.247Z"
   },
   "ui-kit-panel--scrollable-content": {
-    "createdAt": "2026-09-21T23:07:22.586Z"
+    "createdAt": "2026-09-23T17:40:22.930Z"
   },
   "ui-kit-popover--default": {
-    "createdAt": "2026-09-21T23:07:25.277Z"
+    "createdAt": "2026-09-23T17:40:27.550Z"
   },
   "ui-kit-popover--solid-default": {
-    "createdAt": "2026-09-21T23:07:28.878Z"
+    "createdAt": "2026-09-23T17:40:32.412Z"
   },
   "ui-kit-popover--without-beak": {
-    "createdAt": "2026-09-21T23:07:31.247Z"
+    "createdAt": "2026-09-23T17:40:41.912Z"
   },
   "ui-kit-radio--checked-state": {
-    "createdAt": "2026-09-21T23:07:34.014Z"
+    "createdAt": "2026-09-23T17:40:46.164Z"
   },
   "ui-kit-radio--default": {
-    "createdAt": "2026-09-21T23:07:36.462Z"
+    "createdAt": "2026-09-23T17:40:48.909Z"
   },
   "ui-kit-radio--disabled-checked": {
-    "createdAt": "2026-09-21T23:07:38.619Z"
+    "createdAt": "2026-09-23T17:40:52.793Z"
   },
   "ui-kit-radio--disabled-unchecked": {
-    "createdAt": "2026-09-21T23:07:43.348Z"
+    "createdAt": "2026-09-23T17:40:58.175Z"
   },
   "ui-kit-radio--read-only": {
-    "createdAt": "2026-09-21T23:07:46.112Z"
+    "createdAt": "2026-09-23T17:41:03.929Z"
   },
   "ui-kit-radio--side-by-side-layout": {
     "createdAt": "2026-09-21T23:07:48.867Z"
   },
   "ui-kit-radiogroup--default": {
-    "createdAt": "2026-09-21T23:07:51.626Z"
+    "createdAt": "2026-09-23T17:42:15.785Z"
   },
   "ui-kit-radiogroup--read-only": {
-    "createdAt": "2026-09-21T23:07:53.778Z"
+    "createdAt": "2026-09-23T17:42:18.022Z"
   },
   "ui-kit-radiogroup--side-by-side-layout": {
-    "createdAt": "2026-09-21T23:07:56.198Z"
+    "createdAt": "2026-09-23T17:42:21.874Z"
   },
   "ui-kit-radiogroup--stacked-layout": {
-    "createdAt": "2026-09-21T23:07:59.450Z"
+    "createdAt": "2026-09-23T17:42:24.833Z"
   },
   "ui-kit-readonlyfield--custom-empty-renderer": {
-    "createdAt": "2026-09-21T23:08:02.886Z"
+    "createdAt": "2026-09-23T17:42:27.621Z"
   },
   "ui-kit-readonlyfield--custom-empty-text": {
-    "createdAt": "2026-09-21T23:08:08.343Z"
+    "createdAt": "2026-09-23T17:42:30.113Z"
   },
   "ui-kit-readonlyfield--data-types": {
-    "createdAt": "2026-09-21T23:08:11.316Z"
+    "createdAt": "2026-09-23T17:42:32.830Z"
   },
   "ui-kit-readonlyfield--default": {
-    "createdAt": "2026-09-21T23:08:13.546Z"
+    "createdAt": "2026-09-23T17:42:36.635Z"
   },
   "ui-kit-readonlyfield--empty-value": {
-    "createdAt": "2026-09-21T23:08:15.796Z"
+    "createdAt": "2026-09-23T17:42:40.277Z"
   },
   "ui-kit-readonlyfield--side-by-side": {
-    "createdAt": "2026-09-21T23:08:19.110Z"
+    "createdAt": "2026-09-23T17:42:42.934Z"
   },
   "ui-kit-readonlyfield--stacked-default": {
-    "createdAt": "2026-09-21T23:08:23.292Z"
+    "createdAt": "2026-09-23T17:42:45.437Z"
   },
   "ui-kit-readonlyfield--with-edit-icon": {
-    "createdAt": "2026-09-21T23:08:26.060Z"
+    "createdAt": "2026-09-23T17:42:48.003Z"
   },
   "ui-kit-segmentedcontrol--default": {
-    "createdAt": "2026-09-21T23:08:30.227Z"
+    "createdAt": "2026-09-23T17:42:51.218Z"
   },
   "ui-kit-segmentedcontrol--disabled": {
-    "createdAt": "2026-09-21T23:08:32.857Z"
+    "createdAt": "2026-09-23T17:42:53.636Z"
   },
   "ui-kit-segmentedcontrol--full-width": {
-    "createdAt": "2026-09-21T23:08:36.627Z"
+    "createdAt": "2026-09-23T17:42:55.922Z"
   },
   "ui-kit-segmentedcontrol--vertical": {
-    "createdAt": "2026-09-21T23:08:39.119Z"
+    "createdAt": "2026-09-23T17:42:58.416Z"
   },
   "ui-kit-segmentedcontrol--with-icons": {
-    "createdAt": "2026-09-21T23:08:41.854Z"
+    "createdAt": "2026-09-23T17:43:00.678Z"
   },
   "ui-kit-slider--default": {
-    "createdAt": "2026-09-21T23:08:44.586Z"
+    "createdAt": "2026-09-23T17:43:04.162Z"
   },
   "ui-kit-slider--disabled": {
-    "createdAt": "2026-09-21T23:08:46.884Z"
+    "createdAt": "2026-09-23T17:43:06.306Z"
   },
   "ui-kit-slider--editable-read-only": {
-    "createdAt": "2026-09-21T23:08:52.513Z"
+    "createdAt": "2026-09-23T17:43:08.631Z"
   },
   "ui-kit-slider--error-state": {
-    "createdAt": "2026-09-21T23:08:55.374Z"
+    "createdAt": "2026-09-23T17:43:11.193Z"
   },
   "ui-kit-slider--form-layouts": {
-    "createdAt": "2026-09-21T23:08:58.011Z"
+    "createdAt": "2026-09-23T17:43:13.558Z"
   },
   "ui-kit-slider--range-mode": {
-    "createdAt": "2026-09-21T23:09:00.412Z"
+    "createdAt": "2026-09-23T17:43:16.145Z"
   },
   "ui-kit-slider--range-mode-with-icons-and-inputs": {
-    "createdAt": "2026-09-21T23:09:02.953Z"
+    "createdAt": "2026-09-23T17:43:18.535Z"
   },
   "ui-kit-slider--range-mode-with-inputs": {
-    "createdAt": "2026-09-21T23:09:06.694Z"
+    "createdAt": "2026-09-23T17:43:21.300Z"
   },
   "ui-kit-slider--side-by-side-layout": {
-    "createdAt": "2026-09-21T23:09:09.060Z"
+    "createdAt": "2026-09-23T17:43:23.695Z"
   },
   "ui-kit-slider--static-read-only": {
-    "createdAt": "2026-09-21T23:09:11.680Z"
+    "createdAt": "2026-09-23T17:43:26.182Z"
   },
   "ui-kit-slider--with-icons-and-labels": {
-    "createdAt": "2026-09-21T23:09:13.863Z"
+    "createdAt": "2026-09-23T17:43:29.070Z"
   },
   "ui-kit-slider--with-input-field": {
-    "createdAt": "2026-09-21T23:09:16.033Z"
+    "createdAt": "2026-09-23T17:43:32.061Z"
   },
   "ui-kit-slider--with-marks": {
-    "createdAt": "2026-09-21T23:09:19.780Z"
+    "createdAt": "2026-09-23T17:43:35.146Z"
   },
   "ui-kit-stack--default": {
-    "createdAt": "2026-09-21T23:09:22.647Z"
+    "createdAt": "2026-09-23T17:43:38.403Z"
   },
   "ui-kit-stack--static-gap-large": {
-    "createdAt": "2026-09-21T23:09:25.158Z"
+    "createdAt": "2026-09-23T17:43:41.544Z"
   },
   "ui-kit-stack--static-gap-small": {
-    "createdAt": "2026-09-21T23:09:27.359Z"
+    "createdAt": "2026-09-23T17:43:44.703Z"
   },
   "ui-kit-stepper--default": {
-    "createdAt": "2026-09-21T23:09:30.372Z"
+    "createdAt": "2026-09-23T17:43:49.038Z"
   },
   "ui-kit-stepper--layout-stress-test": {
-    "createdAt": "2026-09-21T23:09:35.919Z"
+    "createdAt": "2026-09-23T17:43:54.148Z"
   },
   "ui-kit-stepper--small": {
-    "createdAt": "2026-09-03T22:56:56.764Z"
+    "createdAt": "2026-09-23T17:43:57.767Z"
   },
   "ui-kit-stepper--vertical": {
-    "createdAt": "2026-09-21T23:10:27.135Z"
+    "createdAt": "2026-09-23T17:44:00.268Z"
   },
   "ui-kit-switch--custom-read-only": {
-    "createdAt": "2026-09-21T23:10:29.224Z"
+    "createdAt": "2026-09-23T17:44:04.214Z"
   },
   "ui-kit-switch--default": {
-    "createdAt": "2026-09-21T23:10:31.498Z"
+    "createdAt": "2026-09-23T17:44:06.509Z"
   },
   "ui-kit-switch--read-only": {
-    "createdAt": "2026-09-21T23:10:33.899Z"
+    "createdAt": "2026-09-23T17:44:11.024Z"
   },
   "ui-kit-switch--side-by-side-layout": {
-    "createdAt": "2026-09-21T23:10:36.524Z"
+    "createdAt": "2026-09-23T17:44:16.775Z"
   },
   "ui-kit-switch--static-variations": {
-    "createdAt": "2026-09-21T23:10:39.171Z"
+    "createdAt": "2026-09-23T17:44:20.183Z"
   },
   "ui-kit-switchgroup--default": {
-    "createdAt": "2026-09-21T23:10:41.916Z"
+    "createdAt": "2026-09-23T17:44:23.863Z"
   },
   "ui-kit-switchgroup--read-only": {
-    "createdAt": "2026-09-21T23:10:44.465Z"
+    "createdAt": "2026-09-23T17:44:28.185Z"
   },
   "ui-kit-switchgroup--side-by-side-layout": {
-    "createdAt": "2026-09-21T23:10:46.976Z"
+    "createdAt": "2026-09-23T17:44:32.534Z"
   },
   "ui-kit-switchgroup--solitary-form-control": {
-    "createdAt": "2026-09-21T23:10:49.093Z"
+    "createdAt": "2026-09-23T17:44:36.664Z"
   },
   "ui-kit-switchgroup--stacked-layout": {
-    "createdAt": "2026-09-21T23:10:51.671Z"
+    "createdAt": "2026-09-23T17:44:40.278Z"
   },
   "ui-kit-table--currency-column-with-footer": {
-    "createdAt": "2026-09-21T23:10:54.552Z"
+    "createdAt": "2026-09-23T17:44:47.944Z"
   },
   "ui-kit-table--default": {
-    "createdAt": "2026-09-21T23:10:56.754Z"
+    "createdAt": "2026-09-23T17:44:51.638Z"
   },
   "ui-kit-table--selected-and-disabled-rows": {
-    "createdAt": "2026-09-21T23:10:59.005Z"
+    "createdAt": "2026-09-23T17:45:02.417Z"
   },
   "ui-kit-table--sorted-column": {
     "createdAt": "2026-09-21T23:11:01.376Z"
   },
   "ui-kit-tabs--default": {
-    "createdAt": "2026-09-21T23:11:03.472Z"
+    "createdAt": "2026-09-23T17:45:43.498Z"
   },
   "ui-kit-tabs--inverted": {
-    "createdAt": "2026-09-21T23:11:05.612Z"
+    "createdAt": "2026-09-23T17:45:46.207Z"
   },
   "ui-kit-tabs--outline": {
-    "createdAt": "2026-09-21T23:11:07.804Z"
+    "createdAt": "2026-09-23T17:45:49.398Z"
   },
   "ui-kit-tabs--pills": {
-    "createdAt": "2026-09-21T23:11:11.775Z"
+    "createdAt": "2026-09-23T17:45:51.945Z"
   },
   "ui-kit-tabs--vertical": {
-    "createdAt": "2026-09-21T23:11:14.325Z"
+    "createdAt": "2026-09-23T17:45:54.319Z"
+  },
+  "ui-kit-text--colors": {
+    "createdAt": "2026-09-23T17:45:56.534Z"
   },
   "ui-kit-text--default": {
-    "createdAt": "2026-09-21T23:11:16.472Z"
+    "createdAt": "2026-09-23T17:45:58.810Z"
+  },
+  "ui-kit-text--emphasis": {
+    "createdAt": "2026-09-23T17:46:01.587Z"
   },
   "ui-kit-text--static-variations": {
-    "createdAt": "2026-09-21T23:11:18.638Z"
+    "createdAt": "2026-09-23T17:46:03.472Z"
   },
   "ui-kit-textarea--autosize": {
-    "createdAt": "2026-09-21T23:11:21.790Z"
+    "createdAt": "2026-09-23T17:46:05.560Z"
   },
   "ui-kit-textarea--default": {
-    "createdAt": "2026-09-21T23:11:24.348Z"
+    "createdAt": "2026-09-23T17:46:07.782Z"
   },
   "ui-kit-textarea--static-disabled": {
-    "createdAt": "2026-09-21T23:11:26.518Z"
+    "createdAt": "2026-09-23T17:46:09.894Z"
   },
   "ui-kit-textarea--static-error": {
-    "createdAt": "2026-09-21T23:11:28.614Z"
+    "createdAt": "2026-09-23T17:46:12.359Z"
   },
   "ui-kit-textarea--static-read-only": {
-    "createdAt": "2026-09-21T23:11:30.834Z"
+    "createdAt": "2026-09-23T17:46:14.325Z"
   },
   "ui-kit-textfield--default": {
-    "createdAt": "2026-09-21T23:11:32.921Z"
+    "createdAt": "2026-09-23T17:46:16.159Z"
   },
   "ui-kit-textfield--disabled": {
-    "createdAt": "2026-09-21T23:11:34.860Z"
+    "createdAt": "2026-09-23T17:46:18.011Z"
   },
   "ui-kit-textfield--editable-read-only": {
-    "createdAt": "2026-09-21T23:11:36.995Z"
+    "createdAt": "2026-09-23T17:46:19.984Z"
   },
   "ui-kit-textfield--error-state": {
-    "createdAt": "2026-09-21T23:11:39.371Z"
+    "createdAt": "2026-09-23T17:46:22.191Z"
   },
   "ui-kit-textfield--forms-side-by-side": {
-    "createdAt": "2026-09-21T23:11:41.305Z"
+    "createdAt": "2026-09-23T17:46:24.118Z"
   },
   "ui-kit-textfield--static-read-only": {
-    "createdAt": "2026-09-21T23:11:43.323Z"
+    "createdAt": "2026-09-23T17:46:26.171Z"
   },
   "ui-kit-textfield--with-leading-icon": {
-    "createdAt": "2026-09-21T23:11:45.329Z"
+    "createdAt": "2026-09-23T17:46:28.214Z"
   },
   "ui-kit-textfield--with-trailing-icon": {
-    "createdAt": "2026-09-21T23:11:47.271Z"
+    "createdAt": "2026-09-23T17:46:30.198Z"
   },
   "ui-kit-timeline--bullet-variants": {
-    "createdAt": "2026-09-21T23:11:49.675Z"
+    "createdAt": "2026-09-23T17:46:31.974Z"
   },
   "ui-kit-timeline--default": {
-    "createdAt": "2026-09-21T23:11:51.694Z"
+    "createdAt": "2026-09-23T17:46:33.796Z"
   },
   "ui-kit-timepicker--default": {
-    "createdAt": "2026-09-21T23:11:54.222Z"
+    "createdAt": "2026-09-23T17:46:35.812Z"
   },
   "ui-kit-timepicker--disabled": {
-    "createdAt": "2026-09-21T23:11:56.238Z"
+    "createdAt": "2026-09-23T17:46:37.746Z"
   },
   "ui-kit-timepicker--editable-read-only": {
-    "createdAt": "2026-09-21T23:11:58.097Z"
+    "createdAt": "2026-09-23T17:46:40.242Z"
   },
   "ui-kit-timepicker--error-state": {
-    "createdAt": "2026-09-21T23:12:00.402Z"
+    "createdAt": "2026-09-23T17:46:42.295Z"
   },
   "ui-kit-timepicker--forms-side-by-side": {
-    "createdAt": "2026-09-21T23:12:02.530Z"
+    "createdAt": "2026-09-23T17:46:44.188Z"
   },
   "ui-kit-timepicker--static-read-only": {
-    "createdAt": "2026-09-21T23:12:04.657Z"
+    "createdAt": "2026-09-23T17:46:46.392Z"
   },
   "ui-kit-timepicker--with-leading-icon": {
-    "createdAt": "2026-09-21T23:12:06.979Z"
+    "createdAt": "2026-09-23T17:46:48.783Z"
   },
   "ui-kit-timepicker--with-seconds": {
-    "createdAt": "2026-09-21T23:12:09.468Z"
+    "createdAt": "2026-09-23T17:46:51.078Z"
   },
   "ui-kit-toast--default": {
-    "createdAt": "2026-09-21T23:12:11.753Z"
+    "createdAt": "2026-09-23T17:46:53.127Z"
   },
   "ui-kit-toast--with-icon": {
-    "createdAt": "2026-09-21T23:12:14.240Z"
+    "createdAt": "2026-09-23T17:46:54.937Z"
   },
   "ui-kit-tooltip--default": {
-    "createdAt": "2026-09-21T23:12:16.484Z"
+    "createdAt": "2026-09-23T17:46:57.023Z"
   },
   "ui-kit-tooltip--long-content": {
-    "createdAt": "2026-09-21T23:12:18.846Z"
+    "createdAt": "2026-09-23T17:46:58.766Z"
   },
   "ui-kit-tooltip--without-beak": {
-    "createdAt": "2026-09-21T23:12:21.482Z"
+    "createdAt": "2026-09-23T17:47:00.570Z"
   },
   "ui-kit-transferlist--default": {
-    "createdAt": "2026-09-21T23:12:23.782Z"
+    "createdAt": "2026-09-23T17:47:02.437Z"
   },
   "ui-kit-transferlist--empty": {
-    "createdAt": "2026-09-21T23:12:26.132Z"
+    "createdAt": "2026-09-23T17:47:04.233Z"
   },
   "ui-kit-transferlist--grouped": {
-    "createdAt": "2026-09-21T23:12:28.308Z"
+    "createdAt": "2026-09-23T17:47:06.065Z"
   },
   "ui-kit-transferlist--no-search": {
-    "createdAt": "2026-09-21T23:12:30.494Z"
+    "createdAt": "2026-09-23T17:47:07.895Z"
   },
   "ui-kit-transferlist--read-only": {
-    "createdAt": "2026-09-21T23:12:33.732Z"
+    "createdAt": "2026-09-23T17:47:09.697Z"
   },
   "ui-kit-transferlist--side-by-side": {
-    "createdAt": "2026-09-21T23:12:36.243Z"
+    "createdAt": "2026-09-23T17:47:11.577Z"
   },
   "ui-kit-transferlist--static-disabled": {
-    "createdAt": "2026-09-21T23:12:38.180Z"
+    "createdAt": "2026-09-23T17:47:13.577Z"
   },
   "ui-kit-transferlist--static-error": {
-    "createdAt": "2026-09-21T23:12:40.199Z"
+    "createdAt": "2026-09-23T17:47:15.342Z"
   },
   "ui-kit-tree--all-expanded": {
-    "createdAt": "2026-09-21T23:12:42.604Z"
+    "createdAt": "2026-09-23T17:47:17.107Z"
   },
   "ui-kit-tree--default": {
-    "createdAt": "2026-09-21T23:12:44.635Z"
+    "createdAt": "2026-09-23T17:47:18.891Z"
   },
   "ui-kit-tree--disabled": {
-    "createdAt": "2026-09-21T23:12:46.568Z"
+    "createdAt": "2026-09-23T17:47:20.566Z"
   },
   "ui-kit-tree--layer-one": {
-    "createdAt": "2026-09-21T23:12:48.428Z"
+    "createdAt": "2026-09-23T17:47:22.590Z"
   },
   "ui-kit-tree--multiple-selection": {
-    "createdAt": "2026-09-21T23:12:50.811Z"
+    "createdAt": "2026-09-23T17:47:24.390Z"
   },
   "ui-kit-tree--pre-selected": {
-    "createdAt": "2026-09-21T23:12:53.278Z"
+    "createdAt": "2026-09-23T17:47:26.526Z"
   }
 }

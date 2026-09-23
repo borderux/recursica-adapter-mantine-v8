@@ -171,11 +171,7 @@ export const TruncatedLabel: Story = {
     variant: "solid",
     size: "default",
   },
-  render: (args: ButtonStoryProps) => (
-    <div style={{ maxWidth: "250px" }}>
-      <Button {...args} />
-    </div>
-  ),
+  render: (args: ButtonStoryProps) => <Button {...args} />,
 };
 
 export const Loading: Story = {
