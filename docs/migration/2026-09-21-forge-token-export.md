@@ -169,6 +169,37 @@ have a documented reason not to:
 - `brand_text-emphasis_high` / `brand_text-emphasis_low` (2)
 - `tokens_font_line-heights_taller` (1)
 
+## 8. Story cleanup + a real layout bug found along the way (2026-09-23)
+
+Matt manually cleaned up two stories that were carrying ad-hoc inline styling instead of relying
+on the design system's own layout:
+
+- `Button.stories.tsx` (`TruncatedLabel`): removed a wrapper `<div style={{ maxWidth: "250px" }}>`
+  around the `Button` — the truncation the story is meant to demonstrate should come from the
+  component/token system, not a hand-picked pixel value in the story itself.
+- `Card.stories.tsx` (`Default`, `HeaderlessAndFooterless`): removed wrapper `<div style={{
+padding, backgroundColor }}>` + `<Layer>` scaffolding around each card. Also dropped the
+  `LayerDemonstration` story entirely (it existed solely to show the removed scaffolding).
+
+While regenerating goldens for these, Matt separately flagged that `CheckboxGroup`'s
+`side-by-side` layout story had its **entire control (label + items) artificially squeezed by a
+max-width** — visually indistinguishable from a story-level styling mistake, but the cause was a
+real bug in `FormControlLayout.module.css`: `max-width`/`min-width` (driven by the
+`controlMaxWidth`/`controlMinWidth` props) were applied to `.root`, which wraps **both**
+`.leftSection` (the label) and `.rightSection` (the actual control). That constrains the label too,
+not just the control, most visibly in `side-by-side` layout where they sit in a row.
+
+Fixed by moving `max-width`/`min-width` off `.root` onto `.rightSection` only. This is not
+CheckboxGroup-specific — `controlMaxWidth`/`controlMinWidth` is threaded through
+`FormControlWrapper` → `FormControlLayout` and set by `Dropdown`, `AutoComplete`, `TextField`,
+`TextArea`, `NumberInput`, `FileInput`, and `RadioGroup` too, so all of them had the same latent
+bug in `side-by-side` layout (and, less visibly, in `stacked` layout, where it constrained the
+label's column above the control instead of a row beside it).
+
+**Needs to fan out to mui-v7 and beam**: if either adapter has an equivalent shared
+label+control layout primitive with a similar max-width knob, check it for the same "constrains
+the whole row instead of just the control" mistake before assuming this was mantine-specific.
+
 ## Recommended order of operations for another adapter repo applying this same export
 
 1. Bump `@recursica/token-analyzer` to 1.8.0+ first (§0) — verify `node_modules`, not just the

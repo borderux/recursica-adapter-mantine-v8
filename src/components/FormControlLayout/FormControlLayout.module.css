@@ -8,8 +8,6 @@
     var(--recursica_ui-kit_globals_form_properties_vertical-item-gap, 0)
   );
   padding: 0; /* Hardcoded structural reset */
-  max-width: var(--form-control-max-width, 100%);
-  min-width: var(--form-control-min-width, auto);
 }
 
 /* Base Structural Stacked Layout */
@@ -86,5 +84,10 @@
   display: flex; /* Groups internal field alongside subsequent errors/descriptions */
   flex-direction: column;
   flex: 1; /* Consumes the remaining x-axis in grid columns natively */
-  min-width: 0; /* Break boundary preventing internal flex explosion */
+  /* Constrains only the control itself, never the label in .leftSection. */
+  max-width: var(--form-control-max-width, 100%);
+  min-width: var(
+    --form-control-min-width,
+    0
+  ); /* Break boundary preventing internal flex explosion */
 }
