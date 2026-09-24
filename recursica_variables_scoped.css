@@ -1,8 +1,8 @@
 /*
  * Recursica CSS Variables - Scoped
  * Transform version: 1.3.3
- * Source JSON version: 0.28.1
- * Generated: Mon, 21 Sep 2026 18:25:46 GMT
+ * Source JSON version: 0.28.2
+ * Generated: Wed, 23 Sep 2026 16:11:12 GMT
  *
  * --- How to integrate this file ---
  *
@@ -1024,7 +1024,6 @@
   --recursica_ui-kit_components_chip_properties_text_line-height: var(--recursica_tokens_font_line-heights_default);
   --recursica_ui-kit_components_chip_properties_text_text-decoration: var(--recursica_tokens_font_decorations_none);
   --recursica_ui-kit_components_chip_properties_text_text-transform: var(--recursica_tokens_font_cases_original);
-  --recursica_ui-kit_components_chip_properties_text-size: var(--recursica_brand_dimensions_text-size_default);
   --recursica_ui-kit_components_chip_properties_vertical-padding: var(--recursica_brand_dimensions_general_sm);
   --recursica_ui-kit_components_date-picker_properties_border-radius: var(--recursica_ui-kit_globals_form_field_size_border-radius);
   --recursica_ui-kit_components_date-picker_properties_border-size: var(--recursica_ui-kit_globals_form_field_size_border-size-default);
@@ -1929,7 +1928,6 @@
   --recursica_ui-kit_globals_form_properties_label-field-gap-horizontal: var(--recursica_brand_dimensions_gutters_horizontal);
   --recursica_ui-kit_globals_form_properties_label-field-gap-vertical: var(--recursica_brand_dimensions_general_default);
   --recursica_ui-kit_globals_form_properties_vertical-item-gap: var(--recursica_brand_dimensions_general_default);
-  --recursica_ui-kit_globals_icon_style: outline;
   --recursica_ui-kit_globals_states_disabled: var(--recursica_brand_modes_light_states_disabled);
   --recursica_ui-kit_globals_table_cell_padding-horizontal: var(--recursica_brand_dimensions_general_default);
   --recursica_ui-kit_globals_table_cell_padding-vertical: var(--recursica_brand_dimensions_general_lg);

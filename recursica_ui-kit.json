@@ -1,12 +1,6 @@
 {
   "ui-kit": {
     "globals": {
-      "icon": {
-        "style": {
-          "$type": "string",
-          "$value": "outline"
-        }
-      },
       "form": {
         "properties": {
           "label-field-gap-horizontal": {
@@ -1294,10 +1288,6 @@
               "value": 48,
               "unit": "px"
             }
-          },
-          "text-size": {
-            "$type": "dimension",
-            "$value": "{brand.dimensions.text-size.default}"
           },
           "elevation": {
             "$value": "{brand.elevations.elevation-0}",
@@ -9052,8 +9042,8 @@
   },
   "$extensions": {
     "recursica.metadata": {
-      "exportedAt": "2026-09-21T18:25:46.041Z",
-      "version": "0.28.1"
+      "exportedAt": "2026-09-23T16:11:12.142Z",
+      "version": "0.28.2"
     }
   }
 }
