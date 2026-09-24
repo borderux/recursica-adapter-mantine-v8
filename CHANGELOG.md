@@ -1,5 +1,11 @@
 # @recursica/adapter-mantine-v8
 
+## 1.2.1
+
+### Patch Changes
+
+- 63cbd2c: Minor fixes to CSS and Recursica JSON
+
 ## 1.2.0
 
 ### Minor Changes
