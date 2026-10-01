@@ -41,6 +41,7 @@ To publish a new package for the first time:
    mv .npmrc.bak .npmrc
    ```
 5. Go to the npm registry website to configure Provenance/OIDC for the new package and add it to the CI's Granular Access Token scope.
+6. Make sure to alow `npm publish` (which is less safe) as part of the OIDC publishing process
 
 ## Dependencies
 
