@@ -126,7 +126,7 @@
             },
             "vertical-padding": {
               "$type": "dimension",
-              "$value": "{brand.dimensions.general.md}"
+              "$value": "{brand.dimensions.general.sm}"
             },
             "vertical-gutter": {
               "$type": "dimension",
@@ -169,7 +169,7 @@
                       },
                       "text-color": {
                         "$type": "color",
-                        "$value": "{brand.palettes.core-colors.interactive.on-tone}"
+                        "$value": "{brand.palettes.core-colors.high-contrast.tone}"
                       },
                       "icon-color": {
                         "$type": "color",
@@ -178,6 +178,24 @@
                       "border-color": {
                         "$type": "color",
                         "$value": null
+                      }
+                    },
+                    "layer-1": {
+                      "text-color": {
+                        "$type": "color",
+                        "$value": "{brand.palettes.core-colors.interactive.on-tone}"
+                      }
+                    },
+                    "layer-2": {
+                      "text-color": {
+                        "$type": "color",
+                        "$value": "{brand.palettes.core-colors.interactive.on-tone}"
+                      }
+                    },
+                    "layer-3": {
+                      "text-color": {
+                        "$type": "color",
+                        "$value": "{brand.palettes.core-colors.interactive.on-tone}"
                       }
                     }
                   }
@@ -226,18 +244,46 @@
                       },
                       "text-color": {
                         "$type": "color",
-                        "$value": "{brand.layers.layer-0.elements.interactive.color}"
+                        "$value": "{brand.palettes.core-colors.high-contrast.tone}"
                       },
                       "icon-color": {
                         "$type": "color",
-                        "$value": "{brand.layers.layer-0.elements.interactive.color}"
+                        "$value": "{brand.palettes.core-colors.high-contrast.tone}"
                       },
                       "border-color": {
                         "$type": "color",
                         "$value": null
                       }
                     },
+                    "layer-1": {
+                      "text-color": {
+                        "$type": "color",
+                        "$value": "{brand.layers.layer-1.elements.interactive.color}"
+                      },
+                      "icon-color": {
+                        "$type": "color",
+                        "$value": "{brand.layers.layer-1.elements.interactive.color}"
+                      }
+                    },
+                    "layer-2": {
+                      "text-color": {
+                        "$type": "color",
+                        "$value": "{brand.layers.layer-2.elements.interactive.color}"
+                      },
+                      "icon-color": {
+                        "$type": "color",
+                        "$value": "{brand.layers.layer-2.elements.interactive.color}"
+                      }
+                    },
                     "layer-3": {
+                      "text-color": {
+                        "$type": "color",
+                        "$value": "{brand.layers.layer-3.elements.interactive.color}"
+                      },
+                      "icon-color": {
+                        "$type": "color",
+                        "$value": "{brand.layers.layer-3.elements.interactive.color}"
+                      },
                       "border-color": {
                         "$type": "color",
                         "$value": "{brand.layers.layer-3.properties.border-color}"
@@ -289,15 +335,45 @@
                       },
                       "text-color": {
                         "$type": "color",
-                        "$value": "{brand.layers.layer-0.elements.interactive.color}"
+                        "$value": "{brand.palettes.core-colors.high-contrast.tone}"
                       },
                       "icon-color": {
                         "$type": "color",
-                        "$value": "{brand.layers.layer-0.elements.interactive.color}"
+                        "$value": "{brand.palettes.core-colors.high-contrast.tone}"
                       },
                       "border-color": {
                         "$type": "color",
                         "$value": "{brand.palettes.core-colors.interactive.tone}"
+                      }
+                    },
+                    "layer-1": {
+                      "text-color": {
+                        "$type": "color",
+                        "$value": "{brand.layers.layer-1.elements.interactive.color}"
+                      },
+                      "icon-color": {
+                        "$type": "color",
+                        "$value": "{brand.layers.layer-1.elements.interactive.color}"
+                      }
+                    },
+                    "layer-2": {
+                      "text-color": {
+                        "$type": "color",
+                        "$value": "{brand.layers.layer-2.elements.interactive.color}"
+                      },
+                      "icon-color": {
+                        "$type": "color",
+                        "$value": "{brand.layers.layer-2.elements.interactive.color}"
+                      }
+                    },
+                    "layer-3": {
+                      "text-color": {
+                        "$type": "color",
+                        "$value": "{brand.layers.layer-3.elements.interactive.color}"
+                      },
+                      "icon-color": {
+                        "$type": "color",
+                        "$value": "{brand.layers.layer-3.elements.interactive.color}"
                       }
                     }
                   }
@@ -346,7 +422,7 @@
                 "height": {
                   "$type": "dimension",
                   "$value": {
-                    "value": 48,
+                    "value": 30,
                     "unit": "px"
                   }
                 },
@@ -363,7 +439,7 @@
                 },
                 "icon-text-gap": {
                   "$type": "dimension",
-                  "$value": "{brand.dimensions.general.default}"
+                  "$value": "{brand.dimensions.general.md}"
                 },
                 "text": {
                   "font-family": {
@@ -402,7 +478,7 @@
                 "max-label-width": {
                   "$type": "dimension",
                   "$value": {
-                    "value": 500,
+                    "value": 160,
                     "unit": "px"
                   }
                 }
@@ -492,12 +568,12 @@
                       },
                       "border-radius": {
                         "$type": "dimension",
-                        "$value": "{brand.dimensions.border-radii.xl}"
+                        "$value": "{brand.dimensions.border-radii.default}"
                       },
                       "min-width": {
                         "$type": "dimension",
                         "$value": {
-                          "value": 120,
+                          "value": 40,
                           "unit": "px"
                         }
                       }
@@ -9042,7 +9118,7 @@
   },
   "$extensions": {
     "recursica.metadata": {
-      "exportedAt": "2026-09-23T16:11:12.142Z",
+      "exportedAt": "2026-10-01T16:32:45.666Z",
       "version": "0.28.2"
     }
   }
