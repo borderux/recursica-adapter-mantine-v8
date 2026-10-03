@@ -1,5 +1,16 @@
 # @recursica/adapter-mantine-v8
 
+## 2.0.0
+
+### Major Changes
+
+- 31bb5be: `Pagination` now renders Recursica Buttons whose style and size come from the Forge manifest, so `RecursicaThemeProvider` needs the `manifest` prop or Pagination throws; its compound parts are rebuilt on `usePagination` and Mantine's `Pagination` props are no longer passed through.
+- 31bb5be: `Grid` is now `LayoutGrid` (`LayoutGrid.Col`) and follows Forge's breakpoint-aware layout grids (columns, gutters, margin, including breakpoint-map spans); it no longer accepts the `columns` prop. Use Mantine's Grid directly for a fixed N-column grid.
+
+### Minor Changes
+
+- 31bb5be: New opt-in `breakpointsFromRecManifest` builds a Mantine `theme.breakpoints` object from the Forge manifest's layout grids.
+
 ## 1.2.2
 
 ### Patch Changes
