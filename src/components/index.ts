@@ -23,7 +23,7 @@ export * from "./FileUpload/FileUpload";
 export type { RecursicaFileUploadProps } from "./FileUpload/FileUpload";
 export * from "./Flex/Flex";
 export * from "./FormControlLayout/FormControlLayout";
-export * from "./Grid/Grid";
+export * from "./LayoutGrid/LayoutGrid";
 export * from "./Group/Group";
 export * from "./Heading/Heading";
 export * from "./HoverCard/HoverCard";

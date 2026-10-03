@@ -88,12 +88,15 @@ anywhere:
 - `--recursica_brand_layout-grids_default_row-gutter`
 
 **Resolved 2026-09-21 (Matt):** wire them for real, as a proper implementation, not an exemption.
+
+> Note (2026-10-02): `Grid` was later renamed `LayoutGrid`, and `RecursicaGridProps`/`RecursicaGridColProps` became `RecursicaLayoutGridProps`/`RecursicaLayoutGridColProps`. The text below keeps the original names.
+
 `Grid`'s old policy ("generic layout wrapper... no intrinsic design-system styles required",
 passing Mantine's native 12-column default straight through) was a real historical gap, not a
 deliberate cross-cutting rule for primitive layout components — `Container` (also a primitive
 layout component) already had a formal `RecursicaContainerProps` contract in `adapter-common`;
 `Grid` just never got one. Added `RecursicaGridProps` to `adapter-common` and rebuilt `Grid.tsx`/
-`Grid.module.css` around it — see `src/components/Grid/GRID_IMPLEMENTATION_NOTES.md` in this repo
+`Grid.module.css` around it — see `src/components/LayoutGrid/LAYOUT_GRID_IMPLEMENTATION_NOTES.md` in this repo
 for the full implementation.
 
 Column-gutter/row-gutter/margin are design-system-managed values, not integrator settings — an
@@ -116,7 +119,7 @@ Recursica-specific breakpoint naming convention that doesn't exist yet (their `x
 
 **Paused 2026-09-22 (Matt):** rather than resolve everything before merging, all four fields
 (`span`, `order`, `visibleFrom`, `hiddenFrom`) are drafted in
-`adapter-common/src/components/Grid/RecursicaGridColProps.ts`, commented out, with a TODO.
+`adapter-common/src/components/LayoutGrid/RecursicaLayoutGridColProps.ts`, commented out, with a TODO.
 `RecursicaGridColProps` currently only contributes `children`; mantine-v8's `Grid.Col` still types
 all four straight off Mantine's own `GridColProps`, identical behavior to before this work started.
 **mui-v7 is not touched at all.** When this gets picked back up: `span`/`order` just need

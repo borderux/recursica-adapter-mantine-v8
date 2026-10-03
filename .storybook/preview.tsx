@@ -19,7 +19,8 @@ const basePreview = createPreviewConfig({
 
 import recursicaTheme from "./RecursicaTheme";
 import { BLOCKED_STYLING_KEYS } from "../src/utils/filterStylingProps";
-import { Layer } from "@recursica/adapter-common";
+import { Layer, RecursicaManifestContext } from "@recursica/adapter-common";
+import recursicaManifest from "../recursica_manifest.json";
 
 // Dynamically map table disable directives globally for all blocked CSS props
 const globalArgTypes = [
@@ -95,15 +96,20 @@ const preview: Preview = {
 
       return (
         <MantineProvider defaultColorScheme="light">
-          <ColorSchemeWrapper>
-            {withLayer ? (
-              <Layer layer={layer as 0 | 1 | 2 | 3} style={{ padding: "48px" }}>
-                {content}
-              </Layer>
-            ) : (
-              content
-            )}
-          </ColorSchemeWrapper>
+          <RecursicaManifestContext.Provider value={recursicaManifest}>
+            <ColorSchemeWrapper>
+              {withLayer ? (
+                <Layer
+                  layer={layer as 0 | 1 | 2 | 3}
+                  style={{ padding: "48px" }}
+                >
+                  {content}
+                </Layer>
+              ) : (
+                content
+              )}
+            </ColorSchemeWrapper>
+          </RecursicaManifestContext.Provider>
         </MantineProvider>
       );
     },

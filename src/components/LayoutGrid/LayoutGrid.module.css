@@ -1,0 +1,48 @@
+/* HARDCODED VALUES:
+ * None. (--rec-col-basis / --rec-col-offset are internal hooks set by LayoutGrid.Col, not tokens.)
+ */
+
+/* Brand-layer exemptions (recursica-allow-brand) — layout-grid tokens have no ui-kit-layer
+ * representation in Forge's model (a grid is a page-layout primitive, not a "component"), so
+ * LayoutGrid is the one component that reads brand_layout-grids_* directly (the responsive alias, which Forge
+ * redefines per breakpoint inside @media). See
+ * LAYOUT_GRID_IMPLEMENTATION_NOTES.md.
+ *   recursica-allow-brand: --recursica_brand_layout-grids_column-gutter
+ *   recursica-allow-brand: --recursica_brand_layout-grids_row-gutter
+ *   recursica-allow-brand: --recursica_brand_layout-grids_columns
+ *   recursica-allow-brand: --recursica_brand_layout-grids_margin
+ */
+
+.root.root {
+  /* Mantine handles column geometry (span, gutter width/margin-inline math) natively — the
+     column-gutter design token is applied via LayoutGrid.tsx's `gutter` prop, not here. `margin` has no
+     Mantine equivalent at all, so it's applied directly on the root element, always from the
+     design token — margin is design-system-managed, not an integrator-facing override. Doubled
+     selector beats Mantine's own single-class specificity regardless of stylesheet load order
+     (same idiom as Chip/other components). */
+  margin: var(--recursica_brand_layout-grids_margin);
+}
+
+.inner.inner {
+  /* Mantine's own `.inner` margin is uniform on both axes, computed from `gutter`. Overriding just
+     the block (vertical) component here lets row spacing differ from column spacing without
+     touching Mantine's horizontal width/margin-inline math, which stays driven by `gutter`. Always
+     the design token — row-gutter is design-system-managed, not an integrator-facing override. */
+  margin-block: calc(var(--recursica_brand_layout-grids_row-gutter) / -2);
+}
+
+.col.col {
+  /* Column width/offset for numeric `span`/`offset`, from Forge's breakpoint-aware column count
+     (set by LayoutGrid.Col as --rec-col-basis / --rec-col-offset). LayoutGrid.Col sets the hooks at
+     every breakpoint a span/offset is given; "auto"/"content" point them back at Mantine's own
+     values. */
+  flex-basis: var(--rec-col-basis, var(--col-flex-basis));
+  max-width: var(--rec-col-max-width, var(--col-max-width));
+  margin-inline-start: var(--rec-col-offset, var(--col-offset));
+  /* Row-gutter design token, independent of column-gutter; padding-inline stays Mantine's own. */
+  padding-block: calc(var(--recursica_brand_layout-grids_row-gutter) / 2);
+}
+
+.root[data-recursica-grow] .col.col {
+  max-width: 100%;
+}

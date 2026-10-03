@@ -1,16 +1,37 @@
 # Pagination Implementation Notes
 
-## Architecture Decision: CSS Inheritance vs. Composition
+## Architecture: Recursica Buttons driven by the manifest
 
-The Figma design tokens for the `Pagination` component dictate that pagination pages perfectly mimic `Button` variants (e.g. `active-pages_style: "solid"`, `inactive-pages_style: "outline"`, `navigation-controls_style: "text"`).
+Forge's `ui-kit.components.pagination` defines its page and navigation controls as `Button`
+variants (`active-pages`, `inactive-pages`, `navigation-controls`, each with a `selected-variants`
+style and size). Pagination therefore renders Recursica `Button`s with those props and does no
+button styling of its own: radius, padding, colors, hover and disabled all come from `Button`.
 
-As of the `1.2.0` scoped CSS update, the Figma exporter automatically handles these variants. It flattens and aliases the referenced Button properties directly into the `Pagination` component's variable namespace.
+- `Pagination` reads the selected `style` and `size` per role from the manifest with
+  `useRecursicaManifest()` (`adapter-common`), provided by `RecursicaThemeProvider`'s `manifest`
+  prop. It throws if there is no manifest or if a role has no `selected-variants`. The values are
+  passed to `Button` as is, with no validation and no fallbacks.
+- `content` (`label`, `icon-label`, `icon-only`) is not read: `Button` derives it from its own
+  children and icon, so page numbers are `label` and the navigation buttons are `icon-only`
+  (`icon-label` with `withLabels`).
 
-We opted to use Mantine's native `PaginationControl` components to ensure all DOM structure, focus management, and accessibility attributes are preserved natively without us needing to carefully rebuild `Pagination.Items` mappings.
+## Why not Mantine's `Pagination.Control`
 
-To honor the Figma design intents while using Mantine's raw `<button>` elements:
+Mantine's `Pagination.Control` is not polymorphic, so it can't render our `Button`. The component is
+built on `usePagination` from `@mantine/hooks` instead (page state, ranges, siblings/boundaries),
+with its own context shared by `Pagination.Root`, `Items`, `Control`, `Dots`, `Next`, `Previous`,
+`First` and `Last`. Page buttons set `aria-current="page"` on the active page, and the navigation
+buttons have fixed `aria-label`s.
 
-1. We inherit and map all natively scoped `Pagination` variant styles (small typography, outline/solid/text colors, and hover overlays) directly into `.control` and `.control[data-active]` within `Pagination.module.css`. We do not need to manually reference `Button` variables cross-component.
-2. We inject `data-variant="text"` via `getControlProps` onto the navigation buttons so that they inherit the explicitly aliased text style variables (`navigation-controls`) defined by the UI Kit for pagination.
+## Labels
 
-This achieves exact optical alignment with the tokens while maintaining Mantine's robust internal event handling for pagination.
+`withLabels` adds a text label to each navigation button. `Previous`/`First` put the icon first
+(`Button`'s `icon`); `Next`/`Last` put it after the label (`rightSection`, sized to the Button's
+icon token via `[data-size]` in `Pagination.module.css`).
+
+## Styling
+
+`Pagination.module.css` only lays out the row (`item-gap`) and styles the dots (`dots-color`).
+
+- The root is a `<nav aria-label="Pagination">` landmark, and each page button has `aria-label="Page N"`
+  (`Previous page`, `Next page`, etc. for the navigation buttons). Both can be overridden by props.
