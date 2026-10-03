@@ -67,53 +67,53 @@ is called out explicitly wherever it's the source package instead of `@mantine/c
 
 <!-- recursica:table id="direct-mappings" -->
 
-| Recursica component | Mantine equivalent                                                                                  |
-| ------------------- | --------------------------------------------------------------------------------------------------- |
-| Accordion           | `Accordion` (+ `Accordion.Item`/`Accordion.Control`/`Accordion.Panel`)                              |
-| AutoComplete        | `Autocomplete`                                                                                      |
-| Avatar              | `Avatar`                                                                                            |
-| Badge               | `Badge`                                                                                             |
-| Breadcrumb          | `Breadcrumbs`                                                                                       |
-| Button              | `Button`                                                                                            |
-| Card                | `Card` (+ `Card.Section`) — see note below                                                          |
-| Checkbox            | `Checkbox`                                                                                          |
-| CheckboxGroup       | `Checkbox.Group`                                                                                    |
-| Chip                | `Chip`                                                                                              |
-| Container           | `Container`                                                                                         |
-| DatePicker          | `DatePickerInput` (`@mantine/dates`)                                                                |
-| Dropdown            | `Select`                                                                                            |
-| Flex                | `Flex`                                                                                              |
-| Grid (+ GridCol)    | `Grid` (+ `Grid.Col`)                                                                               |
-| Group               | `Group`                                                                                             |
-| Heading             | `Title`                                                                                             |
-| HoverCard           | `HoverCard`                                                                                         |
-| Label               | `Input.Label`                                                                                       |
-| Link                | `Anchor`                                                                                            |
-| Loader              | `Loader`                                                                                            |
-| Menu                | `Menu` (+ `Menu.Target`/`Menu.Dropdown`/`Menu.Item`/`Menu.Divider`/`Menu.Label`/`Menu.Sub*`)        |
-| Modal               | `Modal` (+ `Modal.Root`/`Overlay`/`Content`/`Header`/`Title`/`CloseButton`/`Body`) — see note below |
-| NumberInput         | `NumberInput` \*                                                                                    |
-| Pagination          | `Pagination` (+ `Pagination.Root`/`Control`/`Dots`)                                                 |
-| Panel               | `Drawer` (renamed; + `Drawer.Root`/`Overlay`/`Content`/`Header`/`Title`/`CloseButton`/`Body`)       |
-| Popover             | `Popover` (+ `Popover.Target`/`Popover.Dropdown`)                                                   |
-| Radio               | `Radio`                                                                                             |
-| RadioGroup          | `Radio.Group`                                                                                       |
-| SegmentedControl    | `SegmentedControl`                                                                                  |
-| Slider              | `Slider` / `RangeSlider` \*                                                                         |
-| Stack               | `Stack`                                                                                             |
-| Stepper             | `Stepper` (+ `Stepper.Step`)                                                                        |
-| Switch              | `Switch`                                                                                            |
-| SwitchGroup         | `Switch.Group`                                                                                      |
-| Table               | `Table` (+ `Table.Thead`/`Tbody`/`Tr`/`Th`/`Td`/`Tfoot`/`Caption`/`ScrollContainer`)                |
-| Tabs                | `Tabs` (+ `Tabs.List`/`Tab`/`Panel`)                                                                |
-| Text                | `Text`                                                                                              |
-| TextArea            | `Textarea` \*                                                                                       |
-| TextField           | `Input` \* (Mantine's low-level `Input` primitive — **not** `TextInput`)                            |
-| TimePicker          | `TimePicker` (`@mantine/dates`) \*                                                                  |
-| Timeline            | `Timeline` (+ `Timeline.Item`)                                                                      |
-| Toast               | `Notification`                                                                                      |
-| Tooltip             | `Tooltip`                                                                                           |
-| Tree                | `Tree` (+ `useTree`/`getTreeExpandedState` hooks)                                                   |
+| Recursica component          | Mantine equivalent                                                                                  |
+| ---------------------------- | --------------------------------------------------------------------------------------------------- |
+| Accordion                    | `Accordion` (+ `Accordion.Item`/`Accordion.Control`/`Accordion.Panel`)                              |
+| AutoComplete                 | `Autocomplete`                                                                                      |
+| Avatar                       | `Avatar`                                                                                            |
+| Badge                        | `Badge`                                                                                             |
+| Breadcrumb                   | `Breadcrumbs`                                                                                       |
+| Button                       | `Button`                                                                                            |
+| Card                         | `Card` (+ `Card.Section`) — see note below                                                          |
+| Checkbox                     | `Checkbox`                                                                                          |
+| CheckboxGroup                | `Checkbox.Group`                                                                                    |
+| Chip                         | `Chip`                                                                                              |
+| Container                    | `Container`                                                                                         |
+| DatePicker                   | `DatePickerInput` (`@mantine/dates`)                                                                |
+| Dropdown                     | `Select`                                                                                            |
+| Flex                         | `Flex`                                                                                              |
+| LayoutGrid (+ LayoutGridCol) | `LayoutGrid` (+ `LayoutGrid.Col`)                                                                   |
+| Group                        | `Group`                                                                                             |
+| Heading                      | `Title`                                                                                             |
+| HoverCard                    | `HoverCard`                                                                                         |
+| Label                        | `Input.Label`                                                                                       |
+| Link                         | `Anchor`                                                                                            |
+| Loader                       | `Loader`                                                                                            |
+| Menu                         | `Menu` (+ `Menu.Target`/`Menu.Dropdown`/`Menu.Item`/`Menu.Divider`/`Menu.Label`/`Menu.Sub*`)        |
+| Modal                        | `Modal` (+ `Modal.Root`/`Overlay`/`Content`/`Header`/`Title`/`CloseButton`/`Body`) — see note below |
+| NumberInput                  | `NumberInput` \*                                                                                    |
+| Pagination                   | `Pagination` (+ `Pagination.Root`/`Control`/`Dots`)                                                 |
+| Panel                        | `Drawer` (renamed; + `Drawer.Root`/`Overlay`/`Content`/`Header`/`Title`/`CloseButton`/`Body`)       |
+| Popover                      | `Popover` (+ `Popover.Target`/`Popover.Dropdown`)                                                   |
+| Radio                        | `Radio`                                                                                             |
+| RadioGroup                   | `Radio.Group`                                                                                       |
+| SegmentedControl             | `SegmentedControl`                                                                                  |
+| Slider                       | `Slider` / `RangeSlider` \*                                                                         |
+| Stack                        | `Stack`                                                                                             |
+| Stepper                      | `Stepper` (+ `Stepper.Step`)                                                                        |
+| Switch                       | `Switch`                                                                                            |
+| SwitchGroup                  | `Switch.Group`                                                                                      |
+| Table                        | `Table` (+ `Table.Thead`/`Tbody`/`Tr`/`Th`/`Td`/`Tfoot`/`Caption`/`ScrollContainer`)                |
+| Tabs                         | `Tabs` (+ `Tabs.List`/`Tab`/`Panel`)                                                                |
+| Text                         | `Text`                                                                                              |
+| TextArea                     | `Textarea` \*                                                                                       |
+| TextField                    | `Input` \* (Mantine's low-level `Input` primitive — **not** `TextInput`)                            |
+| TimePicker                   | `TimePicker` (`@mantine/dates`) \*                                                                  |
+| Timeline                     | `Timeline` (+ `Timeline.Item`)                                                                      |
+| Toast                        | `Notification`                                                                                      |
+| Tooltip                      | `Tooltip`                                                                                           |
+| Tree                         | `Tree` (+ `useTree`/`getTreeExpandedState` hooks)                                                   |
 
 <!-- /recursica:table -->
 
@@ -242,7 +242,7 @@ directories) that nothing in Recursica's component set wraps or maps to at all:
 | RingProgress              | Not part of Recursica's design system.                                                                                                                                                                                                                        |
 | ScrollArea                | No custom-scrollbar primitive in Recursica; native browser scrolling is used everywhere (including `Modal.Body`'s own scroll tracking, built on plain `<div>` + native scroll events, not `ScrollArea`).                                                      |
 | SemiCircleProgress        | Not part of Recursica's design system.                                                                                                                                                                                                                        |
-| SimpleGrid                | Redundant with `Grid`; Recursica only wraps Mantine's full `Grid`/`Grid.Col` system.                                                                                                                                                                          |
+| SimpleGrid                | Redundant with `LayoutGrid`; Recursica only wraps Mantine's full `Grid`/`Grid.Col` system.                                                                                                                                                                    |
 | Skeleton                  | Not part of Recursica's design system; no loading-placeholder/shimmer component defined.                                                                                                                                                                      |
 | Space                     | Purely a Mantine layout-spacer utility; Recursica leaves spacing to `Stack`/`Group`/`Flex` gap props.                                                                                                                                                         |
 | Spoiler                   | Not part of Recursica's design system.                                                                                                                                                                                                                        |

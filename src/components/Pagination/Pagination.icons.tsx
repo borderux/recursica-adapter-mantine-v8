@@ -32,35 +32,3 @@ export const PaginationIcon = ({
     <path d={paths[type as PaginationIconType]} fill="currentColor" />
   </svg>
 );
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const NextWithLabel = (props: any) => (
-  <div className={styles.iconWithLabel}>
-    <span>Next</span>
-    <PaginationIcon type="next" {...props} />
-  </div>
-);
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const PrevWithLabel = (props: any) => (
-  <div className={styles.iconWithLabel}>
-    <PaginationIcon type="prev" {...props} />
-    <span>Prev</span>
-  </div>
-);
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const FirstWithLabel = (props: any) => (
-  <div className={styles.iconWithLabel}>
-    <PaginationIcon type="first" {...props} />
-    <span>First</span>
-  </div>
-);
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const LastWithLabel = (props: any) => (
-  <div className={styles.iconWithLabel}>
-    <span>Last</span>
-    <PaginationIcon type="last" {...props} />
-  </div>
-);

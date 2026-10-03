@@ -43,11 +43,12 @@ Before consuming Recursica components, integrate the CSS and design tokens into 
    ```tsx
    import { MantineProvider } from "@mantine/core";
    import { RecursicaThemeProvider } from "@recursica/adapter-mantine-v8";
+   import manifest from "./path/to/recursica_manifest.json";
 
    function App() {
      return (
        <MantineProvider>
-         <RecursicaThemeProvider theme="light">
+         <RecursicaThemeProvider theme="light" manifest={manifest}>
            {/* Your App Components */}
          </RecursicaThemeProvider>
        </MantineProvider>
@@ -55,7 +56,37 @@ Before consuming Recursica components, integrate the CSS and design tokens into 
    }
    ```
 
-4. **Configure PostCSS Plugin (Optional but Recommended)**: It is highly recommended (but optional) to install the `@recursica/recursica-postcss-vars` plugin to verify that Recursica CSS variables are properly connected in case they change.
+   Pass the parsed `recursica_manifest.json` from your Forge export as `manifest`. Components that are configured by it (currently `Pagination`, for its Button variants) read it from here and throw if it's missing.
+
+4. **Align Mantine's breakpoints with Forge's (Optional but Recommended)**: Forge defines your layout grids (columns, gutters, margin) per breakpoint, and they switch via plain CSS `@media`. Mantine's responsive props (`span={{ base: 12, md: 6 }}`, `visibleFrom`, and Flex/Stack/Group props) switch at `theme.breakpoints` instead, which Forge never edits. If the two differ, a page changes layout at two different widths. `breakpointsFromRecManifest` builds a `theme.breakpoints` object from the `recursica_manifest.json` in your Forge export, so both switch at the same widths:
+
+   ```tsx
+   import { MantineProvider, createTheme } from "@mantine/core";
+   import {
+     RecursicaThemeProvider,
+     breakpointsFromRecManifest,
+   } from "@recursica/adapter-mantine-v8";
+   import manifest from "./path/to/recursica_manifest.json";
+
+   // e.g. { mobile: "0px", tablet: "481px", default: "781px" } when Forge defines extra grids
+   const theme = createTheme({
+     breakpoints: breakpointsFromRecManifest(manifest),
+   });
+
+   function App() {
+     return (
+       <MantineProvider theme={theme}>
+         <RecursicaThemeProvider theme="light" manifest={manifest}>
+           {/* Your App Components */}
+         </RecursicaThemeProvider>
+       </MantineProvider>
+     );
+   }
+   ```
+
+   Each non-default grid starts at its `min-width` (a grid with only a `max-width` starts at `0px`), and the `default` grid is named `default` and starts one pixel past the widest `max-width`. If your manifest only defines the `default` grid (the stock export), it returns `{}` and your theme is unchanged. Mantine merges these with its defaults, so `xs`–`xl` still exist at Mantine's widths; use Forge's names (`mobile`, `tablet`, ...) in responsive props to switch where Forge does. The result is a plain object you can edit, and nothing applies it automatically. See the [LayoutGrid usage guide](src/components/LayoutGrid/USAGE.md).
+
+5. **Configure PostCSS Plugin (Optional but Recommended)**: It is highly recommended (but optional) to install the `@recursica/recursica-postcss-vars` plugin to verify that Recursica CSS variables are properly connected in case they change.
 
    Install the plugin as a dev dependency:
 
@@ -76,7 +107,7 @@ Before consuming Recursica components, integrate the CSS and design tokens into 
    };
    ```
 
-5. **Configure ESLint Plugin (Optional but Recommended)**: It is highly recommended (but optional) to install `@recursica/eslint-plugin`, which flags use of the `overStyled` escape-hatch prop so it stays easy to audit.
+6. **Configure ESLint Plugin (Optional but Recommended)**: It is highly recommended (but optional) to install `@recursica/eslint-plugin`, which flags use of the `overStyled` escape-hatch prop so it stays easy to audit.
 
    Install the plugin as a dev dependency:
 
