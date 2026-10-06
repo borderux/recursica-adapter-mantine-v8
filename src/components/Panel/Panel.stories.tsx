@@ -86,7 +86,7 @@ export const Default: Story = {
   },
   render: ({ wrapHeaderText, ...args }: PanelStoryArgs) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [opened, setOpened] = useState(false);
+    const [opened, setOpened] = useState(true);
 
     return (
       <>
@@ -129,7 +129,7 @@ export const LeftPlacement: Story = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   render: ({ withLayer, layer, ...args }: PanelStoryArgs) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [opened, setOpened] = useState(false);
+    const [opened, setOpened] = useState(true);
 
     return (
       <>
@@ -162,7 +162,7 @@ export const ScrollableContent: Story = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   render: ({ withLayer, layer, ...args }: PanelStoryArgs) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [opened, setOpened] = useState(false);
+    const [opened, setOpened] = useState(true);
 
     return (
       <>
@@ -204,7 +204,7 @@ export const LongTitle: Story = {
   },
   render: ({ ...args }: PanelStoryArgs) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [opened, setOpened] = useState(false);
+    const [opened, setOpened] = useState(true);
 
     return (
       <>

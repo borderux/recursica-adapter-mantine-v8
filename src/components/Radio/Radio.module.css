@@ -24,8 +24,8 @@
 
 /* SideBySide Variant */
 .groupRoot[data-layout="side-by-side"] {
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-wrap: nowrap;
   gap: var(
     --recursica_ui-kit_components_radio-button-group_variants_layouts_side-by-side_properties_gutter
   );

@@ -1,6 +1,16 @@
 /* HARDCODED VALUES:
    - border-style: solid: Structural rendering rule for the panel border.
-   - .inner { left: 0 }: Prevents the fixed Drawer portal from being pushed off-screen in centered flex environments (like Storybook Canvas).
+   - .contentTop {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.contentBottom {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.inner { left: 0 }: Prevents the fixed Drawer portal from being pushed off-screen in centered flex environments (like Storybook Canvas).
    - flexbox layout on .content & .body: Required to create a vertical flex context that pushes the footer to the bottom.
    - position: sticky & negative margins on .footer: A CSS technique used to break the footer out of the .body padding constraints so it stretches edge-to-edge, while remaining fixed at the bottom of the scroll container.
    - z-index: 10 on .footer: Ensures the footer covers the body content as it scrolls underneath.
@@ -24,11 +34,26 @@
   );
   box-shadow: var(--recursica_ui-kit_components_panel_properties_elevation);
   min-width: var(--recursica_ui-kit_components_panel_properties_min-width);
-  max-width: var(--recursica_ui-kit_components_panel_properties_max-width);
+  max-width: min(
+    var(--recursica_ui-kit_components_panel_properties_max-width),
+    100vw
+  );
 
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+/* Round only the edge facing the page: a panel sliding in from the right rounds
+   its left corners; from the left, its right corners. */
+.contentRight {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.contentLeft {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .inner {

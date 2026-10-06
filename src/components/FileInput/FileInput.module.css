@@ -58,6 +58,14 @@
   min-height: var(
     --recursica_ui-kit_components_file-input_properties_min-height
   );
+  /* Fixed height (icon + padding + border) so the nested clear Button overflows the row instead of growing the control. */
+  height: calc(
+    var(--recursica_ui-kit_components_file-input_properties_icon-size) + 2 *
+      var(
+        --recursica_ui-kit_components_file-input_properties_vertical-padding
+      ) +
+      2 * var(--recursica_ui-kit_components_file-input_properties_border-size)
+  );
   gap: var(--recursica_ui-kit_components_file-input_properties_icon-text-gap);
   padding-top: var(
     --recursica_ui-kit_components_file-input_properties_vertical-padding
