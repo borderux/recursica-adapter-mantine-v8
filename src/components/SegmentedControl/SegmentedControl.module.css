@@ -133,6 +133,32 @@
   );
 }
 
+/* Vertical: Mantine's separator is a horizontal line across the item, so the divider token
+   sets its height; and the container radius is capped to stay concentric with the pill items. */
+.root[data-orientation="vertical"] .control::before {
+  width: auto;
+  height: var(
+    --recursica_ui-kit_components_segmented-control_properties_divider-size
+  );
+}
+
+.root[data-orientation="vertical"] {
+  border-radius: min(
+    var(
+      --recursica_ui-kit_components_segmented-control_properties_border-radius
+    ),
+    calc(
+      var(
+          --recursica_ui-kit_components_segmented-control-item_properties_item_height
+        ) /
+        2 +
+        var(
+          --recursica_ui-kit_components_segmented-control_properties_padding-vertical
+        )
+    )
+  );
+}
+
 /* Indicator (the moving selected block) */
 .root .indicator {
   background-color: var(

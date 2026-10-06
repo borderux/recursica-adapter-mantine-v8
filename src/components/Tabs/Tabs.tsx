@@ -37,6 +37,7 @@ const _Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(props, ref) {
     {
       list: styles.list,
       tab: styles.tab,
+      tabSection: styles.tabSection,
       panel: styles.panel,
     },
     restRecord.classNames as Partial<Record<string, string>> | undefined,

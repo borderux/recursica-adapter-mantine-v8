@@ -114,3 +114,11 @@ clips descenders (e.g. the "g" in a long title) whenever `text_line-height` is t
 font's natural ascent+descent. Switched to `overflow: clip; overflow-clip-margin: 0.35em;` — same
 truncation, but ink can bleed slightly past the line box before it's actually clipped.
 Project-wide fix; see Chip's `CHIP_IMPLEMENTATION_NOTES.md` for the original discovery.
+
+---
+
+## 9. Placement-aware border radius (Matt Massey, 2026-10-05)
+
+**Decision:** The `border-radius` token is applied only to the corners on the edge that faces the page, not all four.
+
+**Implementation:** A panel with `placement="right"` (the default) rounds its upper-left and lower-left corners only; its right corners are square against the screen edge. A panel with `placement="left"` rounds its upper-right and lower-right corners only. `Panel.tsx` adds `.contentRight` / `.contentLeft` to the `content` class, and those zero the two outer corners. `top` and `bottom` placements are unchanged (all four corners rounded).

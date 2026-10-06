@@ -35,6 +35,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: var(--recursica_ui-kit_globals_form_field_size_max-width);
   gap: var(--recursica_ui-kit_components_file-upload_properties_list-spacing);
 }
 

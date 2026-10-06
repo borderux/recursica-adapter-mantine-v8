@@ -185,6 +185,11 @@
   cursor: inherit;
 }
 
+/* Mantine's InlineInput adds label-offset padding on top of the label-gap token. */
+.root .label {
+  padding-inline: 0;
+}
+
 .root:has(input:disabled) .label {
   color: var(
     --recursica_ui-kit_components_switch-item_properties_colors_disabled-text

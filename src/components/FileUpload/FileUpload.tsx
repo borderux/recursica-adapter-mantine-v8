@@ -265,6 +265,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
         required={required}
         withAsterisk={withAsterisk}
         id={id}
+        controlMaxWidth="var(--recursica_ui-kit_globals_form_field_size_max-width)"
       >
         <div
           ref={ref}

@@ -267,7 +267,6 @@ export const WithDisabledItems: Story = {
 export const WithSubmenus: Story = {
   args: {
     position: "bottom-start",
-    width: 200,
     // Rendered open by default so this story is diffable against the MUI adapter
     // without an interaction step.
     opened: true,

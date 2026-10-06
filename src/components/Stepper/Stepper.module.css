@@ -84,6 +84,21 @@
   ); /* Move gap inside the step so the separator line can stretch through it */
 }
 
+/* Mantine core adds a min-height, step-body inline margin and description margins on top of the
+   step-gap / indicator-label-gap tokens; zero them so spacing comes only from Recursica tokens. */
+.root.vertical .step {
+  min-height: 0;
+}
+
+.root.vertical .stepBody {
+  margin-inline: 0;
+}
+
+.root.vertical .stepDescription {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .root.vertical .step:last-of-type {
   padding-bottom: 0;
 }

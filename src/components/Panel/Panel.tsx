@@ -75,7 +75,15 @@ const PanelBase = function Panel({
   // Bind CSS module classes to Mantine's internal classNames API
   const mergedClassNames = mergeClassNames(
     {
-      content: styles.content,
+      content: `${styles.content} ${
+        placement === "right"
+          ? styles.contentRight
+          : placement === "left"
+            ? styles.contentLeft
+            : placement === "top"
+              ? styles.contentTop
+              : styles.contentBottom
+      }`,
       header: styles.header,
       title: wrapHeaderText ? styles.titleTruncate : styles.title,
       body: styles.body,
@@ -87,6 +95,7 @@ const PanelBase = function Panel({
   return (
     <MantineDrawer
       {...(sanitizedProps as unknown as MantineDrawerProps)}
+      size="var(--recursica_ui-kit_components_panel_properties_max-width)"
       position={placement} /* Recursica default: right; Mantine default: left */
       keepMounted={keepMounted}
       closeOnClickOutside={withCallerOverride(

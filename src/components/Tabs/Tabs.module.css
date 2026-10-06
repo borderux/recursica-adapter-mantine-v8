@@ -265,6 +265,11 @@
 }
 
 /* Icon support */
+/* Mantine core adds an xs margin between the section and label on top of the element-gap token. */
+.root .tabSection {
+  margin-inline: 0;
+}
+
 .root .tab svg {
   width: var(--tabs-icon-size);
   height: var(--tabs-icon-size);
