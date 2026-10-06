@@ -1,5 +1,17 @@
 # @recursica/adapter-mantine-v8
 
+## 1.3.1
+
+### Patch Changes
+
+- 4e1ecc2: Updated @recursica/adapter-common, adapter-tester and storybook-template to their latest releases.
+- 4e1ecc2: FileUpload is now capped at the global form-field max-width instead of filling its whole container.
+- 4e1ecc2: FileInput keeps a fixed height when a file is added, FileUpload width is also enforced at the layout level, and vertical Stepper, Tabs and Switch no longer add Mantine spacing on top of the Recursica gap tokens.
+- 4e1ecc2: Menu WithSubmenus story no longer forces a 200px width, so it uses the Recursica menu min-width token.
+- 4e1ecc2: Panel rounds only the corners facing the page, and RadioGroup/CheckboxGroup `side-by-side` layouts now stack vertically instead of wrapping in a row.
+- 4e1ecc2: Panel width now follows the Forge `max-width` token (capped at the viewport width) instead of Mantine's 440px default.
+- 4e1ecc2: Vertical SegmentedControl now uses a container radius concentric with its items and a correct horizontal divider between items.
+
 ## 1.3.0
 
 ### Major Changes
