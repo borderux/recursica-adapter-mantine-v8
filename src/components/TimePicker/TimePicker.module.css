@@ -58,10 +58,7 @@
   gap: var(--recursica_ui-kit_components_time-picker_properties_icon-text-gap);
   position: relative;
   box-sizing: border-box;
-  /* min-width, not width: the `width` token was authored for a single plain input (confirmed against
-     text-field's identical token shape); this is now only the time-entry half of the composite. */
-  min-width: var(--recursica_ui-kit_components_time-picker_properties_width);
-  width: fit-content;
+  width: var(--recursica_ui-kit_components_time-picker_properties_width);
   /* time-picker has no dedicated min-height token (unlike text-field/date-picker); this global is
      the one text-field's own min-height token resolves to, so both controls land on the same 48px
      height without binding to another component's own namespace. See
@@ -209,27 +206,14 @@
    this only controls its size/alignment within the flex row. */
 .amPmSelect {
   flex: 0 0 auto;
-  width: auto;
-  min-width: 5.5rem;
+  width: var(--recursica_ui-kit_components_time-picker_properties_width);
 }
 
-/* Dropdown.module.css's own .input sets width: 100% (correct for a standalone Dropdown filling
-   its own column) — resetting that to `auto` still isn't enough here: a native <input>'s intrinsic
-   ("auto"/"fit-content") width is a fixed UA default (~20 characters wide), not based on its actual
-   value text, so it doesn't naturally shrink to "AM"/"PM" either way. Give it an explicit small
-   width sized for a couple of characters instead — the wrapper (.amPmSelect, whose own rendered
-   width just follows this input, since Dropdown.module.css's .section icon is positioned
-   absolutely and doesn't add to flex flow) ends up hugging the content as a result. Target
-   Mantine's own stable global class (not the Dropdown.module.css hash, which this module can't
-   reference directly). See TIMEPICKER_IMPLEMENTATION_NOTES.md.
-   Width math (box-sizing: border-box, so padding eats into this number): Dropdown's own
-   horizontal-padding (16px) on the left + the chevron's reserved right-section padding
-   (horizontal-padding + icon-size + icon-text-gap = 16+24+8 = 48px) on the right leaves very
-   little room for the "AM"/"PM" text itself — 2.5rem (40px) put the padding in a negative content
-   box, which is why the value was invisible and the chevron looked jammed against the border. 6rem
-   leaves a real ~32px content area. */
+/* Fill .amPmSelect, which carries the time-picker width token (Dropdown's own .input is
+   otherwise a native input with a fixed UA-default intrinsic width). Target Mantine's stable
+   global class; this module can't reference Dropdown.module.css's hashed class. */
 .amPmSelect :global(.mantine-Select-input) {
-  width: 6rem;
+  width: 100%;
 }
 
 /* -------------------------------------

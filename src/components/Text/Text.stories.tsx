@@ -1,5 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Text } from "./Text";
+import brand from "../../../recursica_brand.json";
+
+const BUILT_IN_VARIANTS = ["body", "caption", "overline"];
+
+// Custom styles defined under `brand.typography` (beyond h1-h6 and the built-ins above); each has
+// an exported `recursica_brand_typography_<name>` class, so `Text` renders it by name.
+// Sorted so the render order is stable across exports (the visual diff depends on it).
+const customVariants = Object.keys(brand.brand.typography)
+  .filter((name) => !/^h[1-6]$/.test(name) && !BUILT_IN_VARIANTS.includes(name))
+  .sort();
 
 const meta: Meta<typeof Text> = {
   title: "UI-Kit/Text",
@@ -16,14 +26,7 @@ const meta: Meta<typeof Text> = {
   argTypes: {
     variant: {
       control: "select",
-      options: [
-        "body",
-        "body-small",
-        "caption",
-        "overline",
-        "subtitle",
-        "subtitle-small",
-      ],
+      options: [...BUILT_IN_VARIANTS, ...customVariants],
       description:
         "Controls the standard logical boundary definitions natively extracted from Figma.",
     },
@@ -62,21 +65,17 @@ export const StaticVariations: Story = {
       <Text variant="body">
         Body (Base paragraph and generic information flow)
       </Text>
-      <Text variant="body-small">
-        Body Small (Compacted list items and helper blocks)
-      </Text>
       <Text variant="caption">
         Caption (Data table descriptions or micro-labels)
       </Text>
       <Text variant="overline">
         Overline (Card contextual pre-headers and categorical tags)
       </Text>
-      <Text variant="subtitle">
-        Subtitle (Minor sub-headers avoiding heavy display weights)
-      </Text>
-      <Text variant="subtitle-small">
-        Subtitle Small (Section anchors deep in hierarchy)
-      </Text>
+      {customVariants.map((name) => (
+        <Text key={name} variant={name}>
+          {name} (Custom style from brand.typography)
+        </Text>
+      ))}
     </div>
   ),
 };
