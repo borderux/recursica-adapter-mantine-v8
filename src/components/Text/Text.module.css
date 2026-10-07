@@ -50,3 +50,9 @@
 .root[data-emphasis="low"] {
   opacity: var(--recursica_brand_text-emphasis_low);
 }
+
+/* Dev only (the attribute is never set in production): hides text whose typography variant has no
+   exported style, so a typo is obvious instead of rendering with the UI kit's defaults. */
+.root[data-typography-missing] {
+  visibility: hidden;
+}

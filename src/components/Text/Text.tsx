@@ -10,6 +10,7 @@ import {
 } from "../../utils/filterStylingProps";
 
 import { type RecursicaTextProps } from "@recursica/adapter-common";
+import { isTypographyStyleDefined } from "../../utils/typographyClass";
 import styles from "./Text.module.css";
 
 export type TextProps = RecursicaOverStyled<
@@ -31,6 +32,13 @@ const _Text = forwardRef<HTMLDivElement, TextProps>(function Text(
   const classNameProp = (sanitizedProps as Record<string, unknown>)
     .className as string | undefined;
 
+  // Dev only: an unknown variant hides the text (and logs) instead of silently rendering with the
+  // UI kit's default styling.
+  const typographyMissing =
+    process.env.NODE_ENV !== "production" &&
+    typeof document !== "undefined" &&
+    !isTypographyStyleDefined(variant);
+
   const typographyClass = `recursica_brand_typography_${variant}`;
   const mergedClassName = [typographyClass, styles.root, classNameProp]
     .filter(Boolean)
@@ -45,6 +53,7 @@ const _Text = forwardRef<HTMLDivElement, TextProps>(function Text(
       {...(sanitizedProps as unknown as MantineTextProps)}
       data-color={color}
       data-emphasis={emphasis}
+      data-typography-missing={typographyMissing || undefined}
       className={mergedClassName}
     />
   );

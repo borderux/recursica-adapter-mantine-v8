@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Card } from "./Card";
 import { Button } from "../Button/Button";
 import { Group } from "../Group/Group";
+import { Heading } from "../Heading/Heading";
 import { Text } from "../Text/Text";
 
 const meta: Meta<typeof Card> = {
@@ -61,7 +62,7 @@ export const HeaderlessAndFooterless: Story = {
     return (
       <Card {...args}>
         <Card.Content>
-          <Text variant="subtitle">Notice</Text>
+          <Heading order={6}>Notice</Heading>
           <Text>
             This is a completely generic card payload dropping the Header and
             Footer specific elements, simply acting as a padded elevation
