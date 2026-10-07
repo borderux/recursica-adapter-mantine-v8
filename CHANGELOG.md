@@ -1,5 +1,19 @@
 # @recursica/adapter-mantine-v8
 
+## 1.3.2
+
+### Patch Changes
+
+- ad34dd3: Updated @recursica/adapter-common, adapter-tester and storybook-template to their latest releases.
+- ad34dd3: FileUpload is now capped at the global form-field max-width instead of filling its whole container.
+- ad34dd3: FileInput keeps a fixed height when a file is added, FileUpload width is also enforced at the layout level, and vertical Stepper, Tabs and Switch no longer add Mantine spacing on top of the Recursica gap tokens.
+- ad34dd3: Menu WithSubmenus story no longer forces a 200px width, so it uses the Recursica menu min-width token.
+- ad34dd3: Panel rounds only the corners facing the page, and RadioGroup/CheckboxGroup `side-by-side` layouts now stack vertically instead of wrapping in a row.
+- ad34dd3: Panel width now follows the Forge `max-width` token (capped at the viewport width) instead of Mantine's 440px default.
+- ad34dd3: Removed the `body-small`, `subtitle` and `subtitle-small` Text variants, which Forge never defined. In development, a Text variant with no exported style now logs an error and hides its text.
+- ad34dd3: Vertical SegmentedControl now uses a container radius concentric with its items and a correct horizontal divider between items.
+- ad34dd3: TimePicker time box and AM/PM select now both use the time-picker width token, so "AM"/"PM" is no longer clipped and the box no longer grows past the token.
+
 ## 1.3.1
 
 ### Patch Changes
