@@ -18,6 +18,8 @@ export type TextProps = RecursicaOverStyled<
   "color"
 >;
 
+const HEADING_ELEMENTS = ["h1", "h2", "h3", "h4", "h5", "h6"];
+
 const _Text = forwardRef<HTMLDivElement, TextProps>(function Text(
   {
     overStyled = false,
@@ -28,6 +30,13 @@ const _Text = forwardRef<HTMLDivElement, TextProps>(function Text(
   },
   ref,
 ) {
+  const component = (rest as { component?: unknown }).component;
+  if (typeof component === "string" && HEADING_ELEMENTS.includes(component)) {
+    throw new Error(
+      `Text cannot render <${component}>. Use <Heading> for semantic h1-h6.`,
+    );
+  }
+
   const sanitizedProps = filterStylingProps(rest, overStyled);
   const classNameProp = (sanitizedProps as Record<string, unknown>)
     .className as string | undefined;

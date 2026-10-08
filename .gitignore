@@ -36,3 +36,6 @@ test-results/
 # state is committed so the repo has a reviewable, versioned copy of the design
 # tokens it's building against, and so a fresh clone doesn't need a fresh
 # `npm install` to have them present. Do NOT add them here.
+
+# Vitest browser mode failure screenshots
+__screenshots__/
