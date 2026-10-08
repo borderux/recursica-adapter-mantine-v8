@@ -16,3 +16,12 @@ line — headings are the primary intended use case for this property. Not a des
 layout algorithm choice, so it's hardcoded rather than pulled from `recursica_variables_scoped.css`.
 Chromium/Firefox only balance up to ~6 lines, which comfortably covers heading text. No fallback
 needed — browsers that don't support the value just ignore the declaration.
+
+## Heading owns semantic `h1`-`h6` (Matt Massey, 2026-10-08)
+
+**Decision:** `Heading` is the only component that renders semantic `<h1>`-`<h6>` elements. Each
+`order` maps to a heading level that Recursica and Forge define and style
+(`recursica_brand_typography_h{order}`).
+
+**Implementation:** Heading's styles are fixed by the Recursica JSON/CSS. Do not add variants to
+Heading. Any other kind of text belongs in `Text`.

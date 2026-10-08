@@ -122,3 +122,11 @@ Project-wide fix; see Chip's `CHIP_IMPLEMENTATION_NOTES.md` for the original dis
 **Decision:** The `border-radius` token is applied only to the corners on the edge that faces the page, not all four.
 
 **Implementation:** A panel with `placement="right"` (the default) rounds its upper-left and lower-left corners only; its right corners are square against the screen edge. A panel with `placement="left"` rounds its upper-right and lower-right corners only. `Panel.tsx` adds `.contentRight` / `.contentLeft` to the `content` class, and those zero the two outer corners. `top` and `bottom` placements are unchanged (all four corners rounded).
+
+---
+
+## 10. Always non-modal (Matt Massey, 2026-10-08)
+
+**Decision:** Panel is never modal, and there are no props to change that.
+
+**Implementation:** The house rule is that the page behind a panel stays usable. `Panel.tsx` always passes `withOverlay={false}`, `trapFocus={false}`, `lockScroll={false}`, `returnFocus`, `closeOnEscape` and `closeOnClickOutside={false}` to Mantine's Drawer, after the caller's props, and omits those keys from `RecursicaPanelProps`. Escape is independent of outside clicks and always closes the panel; clicking the page behind never does. Every adapter must match: no overlay, no focus trap, no scroll lock, no `aria-modal`, no `aria-hidden` on the rest of the page.

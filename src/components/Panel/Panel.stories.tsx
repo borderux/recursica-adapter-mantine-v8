@@ -21,10 +21,6 @@ const meta: Meta = {
       control: "text",
       description: "Panel title displayed in the header.",
     },
-    withOverlay: {
-      control: "boolean",
-      description: "Whether to display a background overlay.",
-    },
     withCloseButton: {
       control: "boolean",
       description: "Whether to display the close button in the header.",
@@ -80,7 +76,6 @@ export const Default: Story = {
   args: {
     placement: "right",
     title: "Panel Title",
-    withOverlay: true,
     withCloseButton: true,
     wrapHeaderText: false,
   },
@@ -122,7 +117,6 @@ export const LeftPlacement: Story = {
   args: {
     placement: "left",
     title: "Navigation",
-    withOverlay: true,
     withCloseButton: true,
     wrapHeaderText: false,
   },
@@ -155,7 +149,6 @@ export const ScrollableContent: Story = {
   args: {
     placement: "right",
     title: "Scrollable Panel",
-    withOverlay: true,
     withCloseButton: true,
     wrapHeaderText: false,
   },
@@ -198,7 +191,6 @@ export const LongTitle: Story = {
     placement: "right",
     title:
       "This is a ridiculously long panel title designed to test how the header CSS handles text overflow and whether it truncates correctly or breaks the layout",
-    withOverlay: true,
     withCloseButton: true,
     wrapHeaderText: true,
   },

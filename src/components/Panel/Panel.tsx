@@ -13,7 +13,6 @@ import {
 import {
   filterStylingProps,
   mergeClassNames,
-  withCallerOverride,
   type RecursicaOverStyled,
 } from "../../utils/filterStylingProps";
 import styles from "./Panel.module.css";
@@ -30,7 +29,18 @@ import { type RecursicaPanelProps as BaseRecursicaPanelProps } from "@recursica/
 export interface RecursicaPanelProps
   extends Omit<
       MantineDrawerProps,
-      "size" | "styles" | "classNames" | "style" | "position" | "opened"
+      | "size"
+      | "styles"
+      | "classNames"
+      | "style"
+      | "position"
+      | "opened"
+      | "withOverlay"
+      | "trapFocus"
+      | "lockScroll"
+      | "returnFocus"
+      | "closeOnEscape"
+      | "closeOnClickOutside"
     >,
     BaseRecursicaPanelProps {}
 
@@ -51,6 +61,10 @@ export type PanelProps = RecursicaOverStyled<RecursicaPanelProps>;
  *   </Panel.Body>
  * </Panel>
  * ```
+ *
+ * Always non-modal, with no props to change it: the page behind stays usable
+ * (no overlay, focus trap or scroll lock), focus returns to the opener on close,
+ * Escape always closes, and outside clicks never do.
  *
  * Mantine Drawer sub-components available via dot-notation:
  * - `Panel.Header` — Top section with title and close button
@@ -98,10 +112,13 @@ const PanelBase = function Panel({
       size="var(--recursica_ui-kit_components_panel_properties_max-width)"
       position={placement} /* Recursica default: right; Mantine default: left */
       keepMounted={keepMounted}
-      closeOnClickOutside={withCallerOverride(
-        Boolean(rest.opened),
-        rest.closeOnClickOutside,
-      )}
+      /* Always non-modal: the page behind stays usable, Escape always closes */
+      withOverlay={false}
+      trapFocus={false}
+      lockScroll={false}
+      returnFocus
+      closeOnEscape
+      closeOnClickOutside={false}
       classNames={mergedClassNames}
     />
   );

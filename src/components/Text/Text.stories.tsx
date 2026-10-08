@@ -121,3 +121,28 @@ export const Emphasis: Story = {
     </div>
   ),
 };
+
+export const AsElement: Story = {
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`component` renders Text as an inline `span`, a `label` or a `div`. `h1` to `h6` throw; use `<Heading>`.",
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <Text>Default is a block paragraph.</Text>
+      <div>
+        Inline text:{" "}
+        <Text component="span" emphasis="low">
+          a span inside a line
+        </Text>
+        .
+      </div>
+      <Text component="label">A label</Text>
+    </div>
+  ),
+};
