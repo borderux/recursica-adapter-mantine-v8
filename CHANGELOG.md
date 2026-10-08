@@ -1,5 +1,12 @@
 # @recursica/adapter-mantine-v8
 
+## 1.3.3
+
+### Patch Changes
+
+- 9ba963e: Panel is now always non-modal: the page behind stays usable, focus and scroll aren't trapped, and Escape always closes it. The overlay, focus, scroll and close-on-outside-click props were removed.
+- 9ba963e: Text now throws if `component` is `h1`-`h6`; use Heading for semantic headings. Added an `AsElement` Text story.
+
 ## 1.3.2
 
 ### Patch Changes
