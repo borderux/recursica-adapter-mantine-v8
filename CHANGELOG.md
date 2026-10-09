@@ -1,5 +1,13 @@
 # @recursica/adapter-mantine-v8
 
+## 1.3.4
+
+### Patch Changes
+
+- f5b4ab0: Updated `@recursica/storybook-template` to 0.7.16. The Adapters page now lists the Angular Material adapter.
+- f5b4ab0: Stop publishing Storybook story files and `.storybook/commonArgTypes.ts` in the npm package.
+- f5b4ab0: Add a "Why an Adapter?" section to PHILOSOPHY.md.
+
 ## 1.3.3
 
 ### Patch Changes
