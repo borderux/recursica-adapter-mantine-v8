@@ -31,18 +31,14 @@
   "files": [
     "dist",
     "src",
+    "!src/**/*.stories.tsx",
     "CHANGELOG.md",
-    ".storybook/commonArgTypes.ts",
     "llms.txt",
     "USAGE.md",
     "ARCHITECTURE.md",
     "SETUP.md",
     "OVERSTYLING.md",
-    "docs/PHILOSOPHY.md",
-    "recursica_variables_scoped.css",
-    "recursica_brand.json",
-    "recursica_tokens.json",
-    "recursica_ui-kit.json"
+    "docs/PHILOSOPHY.md"
   ],
   "keywords": [
     "react",
@@ -86,7 +82,7 @@
     "@playwright/test": "^1.62.1",
     "@recursica/adapter-tester": "^5.3.1",
     "@recursica/recursica-postcss-vars": "^1.5.0",
-    "@recursica/storybook-template": "^0.7.15",
+    "@recursica/storybook-template": "^0.7.16",
     "@recursica/token-analyzer": "^1.8.0",
     "@storybook/addon-a11y": "^10.3.3",
     "@storybook/addon-docs": "^10.3.3",
