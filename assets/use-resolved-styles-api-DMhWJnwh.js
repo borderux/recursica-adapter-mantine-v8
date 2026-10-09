@@ -1,0 +1,1 @@
+import{u as r}from"./iframe-m0ch2tPl.js";import{r as a,b as m}from"./factory-C_Z1aFS9.js";function n({classNames:t,styles:l,props:e,stylesCtx:s}){const o=r();return{resolvedClassNames:m({theme:o,classNames:t,props:e,stylesCtx:s||void 0}),resolvedStyles:a({theme:o,styles:l,props:e,stylesCtx:s||void 0})}}export{n as u};
