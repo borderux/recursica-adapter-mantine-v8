@@ -1,5 +1,11 @@
 # @recursica/adapter-mantine-v8
 
+## 1.3.5
+
+### Patch Changes
+
+- 712f86a: Publish the component stories and `.storybook/commonArgTypes.ts` again. adapter-tester boots the source-of-truth Storybook from the published package's stories, so without them it only showed the storybook-template stories.
+
 ## 1.3.4
 
 ### Patch Changes
