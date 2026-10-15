@@ -1,5 +1,11 @@
 # @recursica/adapter-mantine-v8
 
+## 1.3.6
+
+### Patch Changes
+
+- f21301b: Added tests and notes confirming Checkbox, Radio and Switch put their accessible name on the native input. No behavior change.
+
 ## 1.3.5
 
 ### Patch Changes
