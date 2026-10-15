@@ -62,3 +62,7 @@ mui-only bug: same code pattern, same result, here. Fixed by not capping the gro
 width at all — each switch's own label already wraps at 200px via `.labelWrapper`, so no
 group-level cap is needed. Verified live in both adapters: side-by-side now shows the label
 column at left with the switches beside it; stacked layout unaffected.
+
+### Accessible name lands on the native `<input>` (verified 2026-10-15)
+
+`RequireAccessibleLabel` enforces a name at compile time (`label`, `aria-label` or `aria-labelledby`). Mantine forwards `aria-*` to the native `<input>` and auto-generates the `id` that links `<label for>`, so no adapter code is needed. This is the behavior the other adapters must match. Covered by `src/components/NativeInputA11y.dom.test.tsx`, which asserts it for Checkbox, Radio and Switch.

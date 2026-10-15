@@ -23,3 +23,7 @@ This calculation ensures that the optical center of the `.inner` checkmark vecto
 ### Checkbox.Group Overrides
 
 To decouple `<CheckboxGroup>` away from `<Input.Wrapper>`, we explicitly extract the raw array execution mapped correctly against our identical `RecursicaFormControlWrapperProps` schema structurally!
+
+### Accessible name lands on the native `<input>` (verified 2026-10-15)
+
+`RequireAccessibleLabel` enforces a name at compile time (`label`, `aria-label` or `aria-labelledby`). Mantine forwards `aria-*` to the native `<input>` and auto-generates the `id` that links `<label for>`, so no adapter code is needed. This is the behavior the other adapters must match. Covered by `src/components/NativeInputA11y.dom.test.tsx`, which asserts it for Checkbox, Radio and Switch.
