@@ -43,6 +43,12 @@ All Recursica components in the `@recursica/adapter-mantine-v8` package adhere s
 
 ## 4. Key Integration Features & Constraints
 
+### Header: required title and Close button
+
+`title` and `onClose` are required. The header always renders the title and an icon-only Recursica Close button with `aria-label="Close"`; pass `closeButtonAriaLabel` to translate it. `withCloseButton` has been removed: there is no way to hide the Close button.
+
+The `header` prop replaces the whole default header. Avoid it: a custom header must supply its own title and Close button, and the adapter can no longer guarantee either.
+
 ## Architecture
 
 `Modal` wraps Mantine's `<Modal>` component. Native Mantine styling props (`size`, `radius`, `shadow`) are not used — appearance and sizing are fully controlled by the design system tokens instead.

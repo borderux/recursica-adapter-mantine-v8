@@ -26,7 +26,17 @@ import { type RecursicaModalProps } from "@recursica/adapter-common";
  * because they directly conflict with the non-negotiable pixel boundaries defined in the Recursica UI Kit.
  */
 export type ModalProps = RecursicaOverStyled<
-  Omit<MantineModalProps, "size" | "radius" | "shadow"> & RecursicaModalProps
+  Omit<
+    MantineModalProps,
+    | "size"
+    | "radius"
+    | "shadow"
+    | "title"
+    | "onClose"
+    | "withCloseButton"
+    | "closeButtonProps"
+  > &
+    RecursicaModalProps
 >;
 
 /**
@@ -36,6 +46,11 @@ export type ModalProps = RecursicaOverStyled<
  * This component acts as a strict structural wrapper around Mantine's `<Modal>`.
  * It automatically enforces Figma UI Kit geometries (`max-width: 960px`, `min-width: 304px`)
  * and handles internal body scrolling explicitly via CSS module overrides.
+ *
+ * The header is required and always rendered: `title` is required, and an icon-only Recursica
+ * Close button (`aria-label` "Close", overridable via `closeButtonAriaLabel`) calls the required
+ * `onClose`. The footer is optional. Passing `header` replaces the whole default header; avoid it,
+ * because then nothing guarantees the title or the Close button.
  *
  * @example
  * ```tsx
@@ -49,10 +64,11 @@ const ModalInner = React.forwardRef<HTMLDivElement, ModalProps>(function Modal(
     overStyled = false,
     children,
     title,
-    withCloseButton = true,
+    onClose,
+    closeButtonAriaLabel = "Close",
+    header,
     overlayProps,
     withOverlay = true,
-    closeButtonProps,
     ...rest
   },
   ref,
@@ -90,16 +106,15 @@ const ModalInner = React.forwardRef<HTMLDivElement, ModalProps>(function Modal(
         MantineModalProps,
         "size" | "radius" | "shadow"
       >)}
+      onClose={onClose}
       classNames={mergedClassNames}
     >
       {withOverlay && <MantineModal.Overlay {...overlayProps} />}
       <MantineModal.Content>
-        {(title || withCloseButton) && (
+        {header ?? (
           <MantineModal.Header>
-            {title && <MantineModal.Title>{title}</MantineModal.Title>}
-            {withCloseButton && (
-              <MantineModal.CloseButton {...closeButtonProps} />
-            )}
+            <MantineModal.Title>{title}</MantineModal.Title>
+            <MantineModal.CloseButton aria-label={closeButtonAriaLabel} />
           </MantineModal.Header>
         )}
         <ModalBody>{children}</ModalBody>

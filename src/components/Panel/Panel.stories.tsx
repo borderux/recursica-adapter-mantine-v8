@@ -21,10 +21,6 @@ const meta: Meta = {
       control: "text",
       description: "Panel title displayed in the header.",
     },
-    withCloseButton: {
-      control: "boolean",
-      description: "Whether to display the close button in the header.",
-    },
     wrapHeaderText: {
       control: "boolean",
       description:
@@ -76,7 +72,6 @@ export const Default: Story = {
   args: {
     placement: "right",
     title: "Panel Title",
-    withCloseButton: true,
     wrapHeaderText: false,
   },
   render: ({ wrapHeaderText, ...args }: PanelStoryArgs) => {
@@ -117,7 +112,6 @@ export const LeftPlacement: Story = {
   args: {
     placement: "left",
     title: "Navigation",
-    withCloseButton: true,
     wrapHeaderText: false,
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -149,7 +143,6 @@ export const ScrollableContent: Story = {
   args: {
     placement: "right",
     title: "Scrollable Panel",
-    withCloseButton: true,
     wrapHeaderText: false,
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -191,7 +184,6 @@ export const LongTitle: Story = {
     placement: "right",
     title:
       "This is a ridiculously long panel title designed to test how the header CSS handles text overflow and whether it truncates correctly or breaks the layout",
-    withCloseButton: true,
     wrapHeaderText: true,
   },
   render: ({ ...args }: PanelStoryArgs) => {

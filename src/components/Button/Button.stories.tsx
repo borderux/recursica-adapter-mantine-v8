@@ -1,6 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
+import { Loader } from "../Loader/Loader";
 import { Layer } from "@recursica/adapter-common";
 
 type ButtonStoryProps = React.ComponentProps<typeof Button>;
@@ -180,6 +181,17 @@ export const Loading: Story = {
     variant: "solid",
     size: "default",
     loading: true,
+    // Frozen spinner so the visual-regression snapshot is deterministic.
+    loaderProps: {
+      children: (
+        <Loader
+          size="default"
+          overStyled
+          color="var(--button-color)"
+          animate={false}
+        />
+      ),
+    },
   },
   parameters: {
     docs: {
