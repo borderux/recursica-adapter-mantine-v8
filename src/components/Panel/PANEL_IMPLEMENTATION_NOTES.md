@@ -129,4 +129,12 @@ Project-wide fix; see Chip's `CHIP_IMPLEMENTATION_NOTES.md` for the original dis
 
 **Decision:** Panel is never modal, and there are no props to change that.
 
-**Implementation:** The house rule is that the page behind a panel stays usable. `Panel.tsx` always passes `withOverlay={false}`, `trapFocus={false}`, `lockScroll={false}`, `returnFocus`, `closeOnEscape` and `closeOnClickOutside={false}` to Mantine's Drawer, after the caller's props, and omits those keys from `RecursicaPanelProps`. Escape is independent of outside clicks and always closes the panel; clicking the page behind never does. Every adapter must match: no overlay, no focus trap, no scroll lock, no `aria-modal`, no `aria-hidden` on the rest of the page.
+**Implementation:** The house rule is that the page behind a panel stays usable. `Panel.tsx` composes `Drawer.Root` without a `Drawer.Overlay` and always passes `trapFocus={false}`, `lockScroll={false}`, `returnFocus`, `closeOnEscape` and `closeOnClickOutside={false}` to Mantine's Drawer, after the caller's props, and omits those keys from `RecursicaPanelProps`. Escape is independent of outside clicks and always closes the panel; clicking the page behind never does. Every adapter must match: no overlay, no focus trap, no scroll lock, no `aria-modal`, no `aria-hidden` on the rest of the page.
+
+---
+
+## 11. Required header with an always-present Close button (Matt Massey, 2026-10-16)
+
+**Decision:** Every Panel has a header with a required `title` and a Close button wired to a required `onClose`. The footer is optional.
+
+**Implementation:** The contract lives in `RecursicaPanelProps` in `@recursica/adapter-common`. `Panel.tsx` composes `Drawer.Root` > `Drawer.Content` > (`Drawer.Header` > `Drawer.Title` + `Drawer.CloseButton`) + `Drawer.Body`, so the header cannot be omitted. The Close button gets `aria-label="Close"` unless `closeButtonAriaLabel` is passed. `title`, `withCloseButton` and `closeButtonProps` are omitted from the Mantine props type. The `.close` class matches Button's text-variant, icon-only, small-size treatment (same as Modal), so the Close button looks like a Recursica icon-only Button. A `header` prop replaces the whole default header; it is discouraged in its JSDoc because nothing then guarantees a title or Close button.

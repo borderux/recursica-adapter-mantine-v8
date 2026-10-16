@@ -35,6 +35,9 @@ export interface RecursicaPanelProps
       | "style"
       | "position"
       | "opened"
+      | "title"
+      | "withCloseButton"
+      | "closeButtonProps"
       | "withOverlay"
       | "trapFocus"
       | "lockScroll"
@@ -56,11 +59,15 @@ export type PanelProps = RecursicaOverStyled<RecursicaPanelProps>;
  *
  * ```tsx
  * <Panel opened={opened} onClose={close} title="Panel Title" placement="right">
- *   <Panel.Body>
- *     Content goes here
- *   </Panel.Body>
+ *   Content goes here
+ *   <Panel.Footer>...</Panel.Footer>
  * </Panel>
  * ```
+ *
+ * The header is required and always rendered: `title` is required, and an icon-only Recursica
+ * Close button (`aria-label` "Close", overridable via `closeButtonAriaLabel`) calls the required
+ * `onClose`. The footer is optional. Passing `header` replaces the whole default header; avoid it,
+ * because then nothing guarantees the title or the Close button.
  *
  * Always non-modal, with no props to change it: the page behind stays usable
  * (no overlay, focus trap or scroll lock), focus returns to the opener on close,
@@ -81,6 +88,11 @@ const PanelBase = function Panel({
   placement = "right",
   keepMounted = true,
   wrapHeaderText = true,
+  title,
+  onClose,
+  closeButtonAriaLabel = "Close",
+  header,
+  children,
   ...rest
 }: PanelProps) {
   const sanitizedProps = filterStylingProps(rest, overStyled);
@@ -100,6 +112,7 @@ const PanelBase = function Panel({
       }`,
       header: styles.header,
       title: wrapHeaderText ? styles.titleTruncate : styles.title,
+      close: styles.close,
       body: styles.body,
       inner: styles.inner,
     },
@@ -107,20 +120,30 @@ const PanelBase = function Panel({
   );
 
   return (
-    <MantineDrawer
-      {...(sanitizedProps as unknown as MantineDrawerProps)}
+    <MantineDrawer.Root
+      {...(sanitizedProps as unknown as MantineDrawerRootProps)}
+      onClose={onClose}
       size="var(--recursica_ui-kit_components_panel_properties_max-width)"
       position={placement} /* Recursica default: right; Mantine default: left */
       keepMounted={keepMounted}
-      /* Always non-modal: the page behind stays usable, Escape always closes */
-      withOverlay={false}
+      /* Always non-modal and overlay-less: the page behind stays usable, Escape always closes */
       trapFocus={false}
       lockScroll={false}
       returnFocus
       closeOnEscape
       closeOnClickOutside={false}
       classNames={mergedClassNames}
-    />
+    >
+      <MantineDrawer.Content>
+        {header ?? (
+          <MantineDrawer.Header>
+            <MantineDrawer.Title>{title}</MantineDrawer.Title>
+            <MantineDrawer.CloseButton aria-label={closeButtonAriaLabel} />
+          </MantineDrawer.Header>
+        )}
+        <MantineDrawer.Body>{children}</MantineDrawer.Body>
+      </MantineDrawer.Content>
+    </MantineDrawer.Root>
   );
 };
 PanelBase.displayName = "Panel";

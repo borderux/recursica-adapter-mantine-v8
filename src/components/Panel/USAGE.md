@@ -15,12 +15,13 @@ import { Panel } from "@recursica/adapter-mantine-v8";
 ## 2. Basic Example
 
 ```tsx
-import React from "react";
+import React, { useState } from "react";
 import { Panel } from "@recursica/adapter-mantine-v8";
 
 export default function Demo() {
+  const [opened, setOpened] = useState(false);
   return (
-    <Panel>
+    <Panel opened={opened} onClose={() => setOpened(false)} title="Settings">
       <Text>This is a clean, structured visual container.</Text>
     </Panel>
   );
@@ -46,6 +47,12 @@ All Recursica components in the `@recursica/adapter-mantine-v8` package adhere s
 ### Placement
 
 Use the `placement` prop (not `position`) to choose which edge the panel slides in from: `"left"`, `"right"`, `"top"`, or `"bottom"`. It defaults to `"right"`.
+
+### Header: required title and Close button
+
+`title` and `onClose` are required. The header always renders the title and an icon-only Recursica Close button with `aria-label="Close"`; pass `closeButtonAriaLabel` to translate it. There is no prop to hide the Close button.
+
+The `header` prop replaces the whole default header. Avoid it: a custom header must supply its own title and Close button, and the adapter can no longer guarantee either.
 
 ### Panel.Footer
 

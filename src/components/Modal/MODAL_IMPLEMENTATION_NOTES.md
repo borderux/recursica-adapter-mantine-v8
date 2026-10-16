@@ -30,3 +30,7 @@ Despite §1 above, `.content` never actually scaled fluidly: Mantine's own CSS s
 ### 5. Close button restyled to match Button
 
 `.close` reuses Button's text-variant/icon-only/small tokens (radius, padding, background/icon color, hover overlay, focus ring) instead of Mantine's native CloseButton look. Two overrides need `!important`/an explicit reset to win: Mantine's `CloseIcon` sizes itself via an inline `style` (`--cb-icon-size`, default `70%`), which beats any plain class rule — same category as Tree's `--level-offset` override; and Mantine's own subtle-variant `:hover` background (from `CloseButton.css`) is pinned back to the Button background token so only our `::after` overlay renders hover feedback.
+
+### 3. Required header with an always-present Close button (2026-10-16)
+
+`title` and `onClose` are required (contract in `RecursicaModalProps`, `@recursica/adapter-common`), and `withCloseButton` and `closeButtonProps` are removed. `Modal.tsx` always renders `Modal.Header` > `Modal.Title` + `Modal.CloseButton` with `aria-label="Close"` unless `closeButtonAriaLabel` is passed. A `header` prop replaces the whole default header and is discouraged in its JSDoc.
