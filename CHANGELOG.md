@@ -1,5 +1,11 @@
 # @recursica/adapter-mantine-v8
 
+## 1.4.0
+
+### Minor Changes
+
+- 1dafd86: Panel and Modal now require `title` and `onClose` and always render a Recursica icon-only Close button (`aria-label` "Close"); `withCloseButton` is removed from Modal and Panel's Close button now matches Modal's styling.
+
 ## 1.3.6
 
 ### Patch Changes
