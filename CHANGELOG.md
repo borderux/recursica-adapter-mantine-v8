@@ -1,5 +1,11 @@
 # @recursica/adapter-mantine-v8
 
+## 1.4.1
+
+### Patch Changes
+
+- f220d90: CREATING_AN_ADAPTER.md now points to the canonical version in adapter-common; no user-visible change.
+
 ## 1.4.0
 
 ### Minor Changes
