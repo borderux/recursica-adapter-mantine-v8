@@ -264,6 +264,18 @@
   }
 }
 
+/* Full width: stretch the root to its container, but keep the icon + label grouped and centered.
+   `.label`'s default `flex: 1 1 0` would otherwise grow to fill the stretched inner, pinning the
+   left section (icon) to the button's edge. `0 1 auto` hugs the text yet still shrinks for
+   truncation. Mantine's own `[data-block]` width rule is wrapped in `:where()` (zero
+   specificity), so `.root`'s `width: fit-content` would win without this override. */
+.root[data-full-width] {
+  width: 100%;
+}
+.root[data-full-width] .label {
+  flex: 0 1 auto;
+}
+
 /* Icon Resets */
 .iconWrapper {
   display: flex;

@@ -101,6 +101,15 @@
   "ui-kit-button--disabled-solid": {
     "createdAt": "2026-10-08T17:34:13.174Z"
   },
+  "ui-kit-button--full-width": {
+    "createdAt": "2026-10-28T15:15:26.001Z"
+  },
+  "ui-kit-button--full-width-variants": {
+    "createdAt": "2026-10-28T15:15:27.884Z"
+  },
+  "ui-kit-button--full-width-with-icon": {
+    "createdAt": "2026-10-28T15:15:29.650Z"
+  },
   "ui-kit-button--icon-only": {
     "createdAt": "2026-10-08T17:34:14.962Z"
   },
