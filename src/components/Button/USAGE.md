@@ -55,6 +55,18 @@ When the button has an icon and no visible label (icon-only), callers must provi
 
 ---
 
+## Full width
+
+Pass `fullWidth` to stretch the button to fill its container. The icon stays next to the label and the two are centered together — the icon is not pinned to the button's edge.
+
+```tsx
+<Button fullWidth icon={<SearchIcon />}>
+  Search
+</Button>
+```
+
+---
+
 ## Label truncation at max-width
 
 When the button hits its Recursica max-width (500px), the label truncates with an ellipsis instead of wrapping.

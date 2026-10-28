@@ -7,7 +7,6 @@ import {
 } from "@mantine/core";
 import {
   filterStylingProps,
-  omitUnsupportedProps,
   withCallerOverride,
   mergeClassNames,
   type RecursicaOverStyled,
@@ -17,7 +16,7 @@ import styles from "./Button.module.css";
 import { type RecursicaButtonProps } from "@recursica/adapter-common";
 
 export type ButtonProps = RecursicaOverStyled<
-  Omit<MantineButtonProps, "variant" | "size" | "leftSection" | "fullWidth"> &
+  Omit<MantineButtonProps, "variant" | "size" | "leftSection"> &
     RecursicaButtonProps
 >;
 
@@ -37,6 +36,7 @@ const _Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     loaderVariant = "oval",
     loaderSize,
     useRecursicaLoader = true,
+    fullWidth = false,
     ...rest
   },
   ref,
@@ -52,16 +52,9 @@ const _Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     small: "sm",
   } as const;
 
-  // Props this component intentionally doesn't support — deleted at runtime so they can't leak
-  // through even if a caller forces them via plain JavaScript, bypassing the `Omit<>` above.
-  const UNSUPPORTED_PROPS = [
-    "fullWidth", // Recursica Button width comes from layout/token constraints, not Mantine's boolean fullWidth toggle.
-  ] as const satisfies readonly (keyof MantineButtonProps)[];
-
-  const sanitizedProps = omitUnsupportedProps(
-    filterStylingProps(rest, overStyled) as Record<string, unknown>,
-    UNSUPPORTED_PROPS,
-  ) as Partial<typeof rest>;
+  const sanitizedProps = filterStylingProps(rest, overStyled) as Partial<
+    typeof rest
+  >;
   const restRecord = sanitizedProps as Record<string, unknown>;
 
   const hasLeftSection = !!icon || !!restRecord["leftSection"];
@@ -144,6 +137,7 @@ const _Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
       classNames={mergedClassNames}
       variant={mapVariant[variant]}
       size={mapSize[size]}
+      fullWidth={fullWidth}
       loaderProps={mergedLoaderProps}
       leftSection={
         icon != null ? (
@@ -155,6 +149,7 @@ const _Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
       data-variant={variant}
       data-size={size}
       data-content={contentType}
+      data-full-width={fullWidth || undefined}
       disabled={!!restRecord.disabled || !!restRecord.loading}
     >
       <span className={styles.labelText}>{children}</span>
