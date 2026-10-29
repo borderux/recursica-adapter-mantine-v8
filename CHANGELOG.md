@@ -1,5 +1,15 @@
 # @recursica/adapter-mantine-v8
 
+## 1.5.0
+
+### Minor Changes
+
+- 832201a: Button now supports `fullWidth`; the icon stays grouped with the label (centered) instead of pinning to the edge.
+
+### Patch Changes
+
+- cca2b4a: Update `@recursica/adapter-common` to `^1.3.1`.
+
 ## 1.4.1
 
 ### Patch Changes
