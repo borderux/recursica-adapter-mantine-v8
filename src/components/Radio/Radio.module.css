@@ -22,35 +22,27 @@
   );
 }
 
-/* SideBySide Variant */
-.groupRoot[data-layout="side-by-side"] {
-  flex-direction: column;
+/* Each layout owns different properties, so each reads only its own. */
+.groupRoot[data-recursica-layouts="side-by-side"] {
   flex-wrap: nowrap;
-  gap: var(
-    --recursica_ui-kit_components_radio-button-group_variants_layouts_side-by-side_properties_gutter
-  );
+  gap: var(--recursica_ui-kit_components_radio-button-group_properties_gutter);
   padding-top: var(
-    --recursica_ui-kit_components_radio-button-group_variants_layouts_side-by-side_properties_vertical-padding
+    --recursica_ui-kit_components_radio-button-group_properties_vertical-padding
   );
   padding-bottom: var(
-    --recursica_ui-kit_components_radio-button-group_variants_layouts_side-by-side_properties_vertical-padding
+    --recursica_ui-kit_components_radio-button-group_properties_vertical-padding
   );
-  margin-top: var(
-    --recursica_ui-kit_components_radio-button-group_variants_layouts_side-by-side_properties_top-bottom-margin
-  );
-  margin-bottom: var(
-    --recursica_ui-kit_components_radio-button-group_variants_layouts_side-by-side_properties_top-bottom-margin
+  margin-block: var(
+    --recursica_ui-kit_components_radio-button-group_properties_top-bottom-margin
   );
 }
 
-/* Stacked Variant */
-.groupRoot[data-layout="stacked"] {
-  flex-direction: column;
+.groupRoot[data-recursica-layouts="stacked"] {
   margin-top: var(
-    --recursica_ui-kit_components_radio-button-group_variants_layouts_stacked_properties_label-field-gap
+    --recursica_ui-kit_components_radio-button-group_properties_label-field-gap
   );
   margin-bottom: var(
-    --recursica_ui-kit_components_radio-button-group_variants_layouts_stacked_properties_top-bottom-margin
+    --recursica_ui-kit_components_radio-button-group_properties_top-bottom-margin
   );
 }
 
@@ -110,51 +102,28 @@
   );
   border-style: solid; /* HARDCODE: normalize primitive border-style */
 
-  /* Standard unchecked state */
-  background-color: var(
-    --recursica_ui-kit_components_radio-button_variants_selection-states_unselected_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_radio-button_variants_selection-states_unselected_properties_colors_border-color
-  );
   transition: all 0.2s ease; /* HARDCODE: consider global transition token */
 }
 
-/* Checked State */
-.root .radio:checked {
+/* Colours live in a three-class selector so they outrank Mantine's own
+   :checked / :disabled fills. */
+.root .inner .radio {
   background-color: var(
-    --recursica_ui-kit_components_radio-button_variants_selection-states_selected_properties_colors_background-color
+    --recursica_ui-kit_components_radio-button_properties_colors_background-color
   );
   border-color: var(
-    --recursica_ui-kit_components_radio-button_variants_selection-states_selected_properties_colors_border-color
+    --recursica_ui-kit_components_radio-button_properties_colors_border-color
+  );
+  /* Exists only while disabled. */
+  opacity: var(
+    --recursica_ui-kit_components_radio-button_properties_opacity,
+    1
   );
 }
 
-/* Disabled State (colors now differ per selection state, so each combination is mapped explicitly) */
+/* Disabled values come from data-recursica-disabled; :disabled only sets the cursor. */
 .root .radio:disabled {
   cursor: not-allowed; /* HARDCODE: disabled state default */
-}
-.root .radio:disabled:not(:checked) {
-  opacity: var(
-    --recursica_ui-kit_components_radio-button_variants_selection-states_unselected_variants_states_disabled_properties_opacity
-  );
-  background-color: var(
-    --recursica_ui-kit_components_radio-button_variants_selection-states_unselected_variants_states_disabled_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_radio-button_variants_selection-states_unselected_variants_states_disabled_properties_colors_border-color
-  );
-}
-.root .radio:checked:disabled {
-  opacity: var(
-    --recursica_ui-kit_components_radio-button_variants_selection-states_selected_variants_states_disabled_properties_opacity
-  );
-  background-color: var(
-    --recursica_ui-kit_components_radio-button_variants_selection-states_selected_variants_states_disabled_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_radio-button_variants_selection-states_selected_variants_states_disabled_properties_colors_border-color
-  );
 }
 
 .root .icon {
@@ -165,17 +134,10 @@
   width: var(--recursica_ui-kit_components_radio-button_properties_icon-size);
   height: var(--recursica_ui-kit_components_radio-button_properties_icon-size);
 }
-/* No icon-color token exists for the unselected state (no icon is visible then) */
-.root .radio:checked + .iconWrapper .icon,
-.root .radio:checked + .icon {
+/* Undefined for unselected, where no icon is visible. */
+.root .inner .icon {
   color: var(
-    --recursica_ui-kit_components_radio-button_variants_selection-states_selected_properties_colors_icon-color
-  );
-}
-.root .radio:checked:disabled + .iconWrapper .icon,
-.root .radio:checked:disabled + .icon {
-  color: var(
-    --recursica_ui-kit_components_radio-button_variants_selection-states_selected_variants_states_disabled_properties_colors_icon-color
+    --recursica_ui-kit_components_radio-button_properties_colors_icon-color
   );
 }
 
@@ -220,12 +182,14 @@
     --recursica_ui-kit_components_radio-button-item_properties_text_text-transform
   );
 }
-.root:has(input:disabled) .label {
+.root[data-recursica-disabled] .label {
   cursor: not-allowed; /* HARDCODE: disabled interaction */
   color: var(
     --recursica_ui-kit_components_radio-button-item_properties_colors_disabled-text
   );
+  /* Exists only while disabled. */
   opacity: var(
-    --recursica_ui-kit_components_radio-button-item_variants_states_disabled_properties_opacity
+    --recursica_ui-kit_components_radio-button-item_properties_opacity,
+    1
   );
 }

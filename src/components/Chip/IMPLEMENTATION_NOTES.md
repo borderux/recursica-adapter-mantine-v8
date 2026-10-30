@@ -2,9 +2,9 @@
 
 ## Scoped CSS contract
 
-`Chip.tsx` sets `data-recursica="chip"`, `data-recursica-selection-states="selected|unselected"` and `data-recursica-error` (when `error`) on Mantine's root wrapper (via `wrapperProps`, merged with `withCallerOverride`). `Chip.module.css` reads only the stable `--recursica_ui-kit_components_chip_properties_*` names; there are no `_variants_`/`_modes_`/`_layer_N_` names and no per-state CSS blocks. The custom properties inherit from the root to `.label`, `.leadingIcon`, `.deleteIcon` and the check icon.
+`Chip.tsx` sets `data-recursica="chip"`, `data-recursica-error` (when `error`) on Mantine's root wrapper (via `wrapperProps`, merged with `withCallerOverride`). `Chip.module.css` reads only the stable `--recursica_ui-kit_components_chip_properties_*` names; there are no `_variants_`/`_modes_`/`_layer_N_` names and no per-state CSS blocks. The custom properties inherit from the root to `.label`, `.leadingIcon`, `.deleteIcon` and the check icon.
 
-- `selection-states` is derived from the chip's own checked state (`useUncontrolled`, same semantics as Mantine's), which is also passed to Mantine as `checked`, so controlled, `defaultChecked` and uncontrolled chips all get the right attribute.
+- Checked state is not tracked in JS: the wrapper contains the native input, so Forge's `:where(:has(input:checked))` rules match natively. `Chip.module.css` hides `.leadingIcon` with `:has(input:checked)` (Mantine's check icon replaces it).
 - Disabled sets `data-recursica-disabled` on the wrapper; opacity is read from the chip `opacity` root name (defined only while disabled, so it is read only inside `.root[data-disabled]`).
 - Unused by design: `properties_leading-icon-color`, `properties_close-icon-color` (non-colors variants) and the error-only `colors_icon-color`. The leading icon and check icon are mutually exclusive, so `colors_leading-icon-color` / `colors_selected-icon-color` cover each case.
 

@@ -12,9 +12,9 @@
 
 **Implementation:**
 
-- Mantine's `attributes` prop puts the contracts on its own elements. Mantine's `root` (input and label) is `radio-button-item`. The `inner` box (input and icon) is `radio-button`, with `data-recursica-selection-states` set to `selected` or `unselected`. Both get `data-recursica-disabled` when disabled or read-only. The group's `groupRoot` is `radio-button-group` with `data-recursica-layouts`.
+- Mantine's `attributes` prop puts the contracts on its own elements. Mantine's `root` (input and label) is `radio-button-item`. The `inner` box (input and icon) is `radio-button`. Both get `data-recursica-disabled` when disabled or read-only. The group's `groupRoot` is `radio-button-group` with `data-recursica-layouts`.
 - The `.label` reads the `radio-button-item` root names, so `radio-button-item` has to be the Mantine root; the radio contract sits on `inner`, the only element holding both input and icon.
-- Mantine keeps checked state private, so `Radio` derives `selection-states` from the `checked` prop, else its own `onChange`-tracked state, else the group's value. `RadioGroup` always passes Mantine a controlled `value` and shares it (with `disabled`) through `RadioGroupStateContext`. Limitation: an uncontrolled standalone radio is not told when another radio of the same `name` takes the selection, nor on a native form reset.
+- Selection state is not tracked in JS. The `radio-button` root (`inner`) contains the native input, so Forge's `:where(:has(input:checked))` rules match natively. `RadioGroup` still always passes Mantine a controlled `value` and shares it (with `disabled`) through `RadioGroupStateContext`.
 - `opacity` (radio-button and radio-button-item) exists only while disabled, so CSS reads it with a fallback of `1`. The icon colour has no unselected value, since no icon shows then.
 - Stacked and side-by-side groups own different properties, so those two layout blocks stay in the CSS, keyed on `data-recursica-layouts`. Stacked keeps its original margin-top of `label-field-gap`.
 - `:disabled` is kept only for `cursor`.

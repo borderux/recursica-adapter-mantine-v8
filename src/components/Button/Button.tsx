@@ -64,6 +64,7 @@ const _Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   ) as Partial<typeof rest>;
   const restRecord = sanitizedProps as Record<string, unknown>;
 
+  const isDisabled = !!restRecord.disabled || !!restRecord.loading;
   const hasLeftSection = !!icon || !!restRecord["leftSection"];
   const hasRightSection = !!restRecord["rightSection"];
   const hasVisibleText = hasVisibleChildren(children);
@@ -155,7 +156,12 @@ const _Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
       data-variant={variant}
       data-size={size}
       data-content={contentType}
-      disabled={!!restRecord.disabled || !!restRecord.loading}
+      data-recursica="button"
+      data-recursica-styles={variant}
+      data-recursica-sizes={size}
+      data-recursica-content={contentType}
+      data-recursica-disabled={isDisabled ? "" : undefined}
+      disabled={isDisabled}
     >
       <span className={styles.labelText}>{children}</span>
     </MantineButton>

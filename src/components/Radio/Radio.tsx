@@ -1,10 +1,11 @@
-import { forwardRef } from "react";
+import { forwardRef, useContext } from "react";
 import {
   Radio as MantineRadio,
   type RadioProps as MantineRadioProps,
 } from "@mantine/core";
 import { type ReadOnlyControlProps } from "@recursica/adapter-common";
 import { RadioGroup } from "./RadioGroup";
+import { RadioGroupStateContext } from "./RadioGroupStateContext";
 import {
   filterStylingProps,
   omitUnsupportedProps,
@@ -22,6 +23,10 @@ import {
 } from "../FormControlLayout/FormControlLayout";
 
 import styles from "./Radio.module.css";
+
+// Forge name: this component is `radio-button` in `recursica_ui-kit.json` (`radio-button-item` when inside a
+// RadioGroup, `radio-button-group` for RadioGroup). Recursica keeps the name `Radio`; see RecursicaRadioProps
+// in @recursica/adapter-common.
 
 const RadioIcon: React.FC<{
   className?: string;
@@ -62,6 +67,7 @@ type RadioComponent = React.ForwardRefExoticComponent<
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(
   function Radio(props, ref) {
+    const groupState = useContext(RadioGroupStateContext);
     const {
       overStyled = false,
       readOnly,
@@ -108,6 +114,9 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
       ? `${styles.root} ${classNameProp}`
       : styles.root;
 
+    const isDisabled = !!(readOnly || disabled || groupState?.disabled);
+    const disabledAttr = isDisabled ? "" : undefined;
+
     if (readOnly && !!readOnlyComponent) {
       const isChecked = !!(restRecord.checked ?? restRecord.defaultChecked);
       const ReadOnlyComp = readOnlyComponent;
@@ -144,6 +153,17 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
         className={finalClass}
         classNames={mergedClassNames}
         disabled={readOnly || disabled}
+        // The root is the item (label); the inner box holds the input and icon, so it is the radio.
+        attributes={{
+          root: {
+            "data-recursica": "radio-button-item",
+            "data-recursica-disabled": disabledAttr,
+          },
+          inner: {
+            "data-recursica": "radio-button",
+            "data-recursica-disabled": disabledAttr,
+          },
+        }}
       />
     );
 

@@ -174,6 +174,11 @@
   height: var(--recursica_ui-kit_components_chip_properties_icon-size);
 }
 
+/* Mantine's check icon replaces the leading icon when checked. */
+.root:has(input:checked) .leadingIcon {
+  display: none;
+}
+
 .leadingIcon svg {
   width: 100%;
   height: 100%;

@@ -36,9 +36,9 @@ To decouple `<CheckboxGroup>` away from `<Input.Wrapper>`, we explicitly extract
 
 **Implementation:**
 
-- Mantine's `attributes` prop puts the contracts on its own elements. Mantine's `root` (input and label) is `checkbox-item`. The `inner` box (input and icon) is `checkbox`, with `data-recursica-selection-states` set to `checked`, `unchecked` or `indeterminate`. Both get `data-recursica-disabled` when disabled or read-only. The group's `groupRoot` is `checkbox-group` with `data-recursica-layouts`.
+- Mantine's `attributes` prop puts the contracts on its own elements. Mantine's `root` (input and label) is `checkbox-item`. The `inner` box (input and icon) is `checkbox`. Both get `data-recursica-disabled` when disabled or read-only. The group's `groupRoot` is `checkbox-group` with `data-recursica-layouts`.
 - The `.label` reads the `checkbox-item` root names, so `checkbox-item` has to be the Mantine root. That is why the checkbox contract sits on `inner`: the input and icon share it, and `inner` is the only element that holds both.
-- Mantine keeps checked state private, so `Checkbox` derives `selection-states` from the `checked` prop, else its own `onChange`-tracked state, else the group's selection. `CheckboxGroup` always passes Mantine a controlled `value` and shares it through `CheckboxGroupStateContext` (own file, for fast refresh; with `disabled`) for that reason. A native form reset of an uncontrolled checkbox is not tracked.
+- Selection state is not tracked in JS. The `checkbox` root (`inner`) contains the native input, so Forge's `:where(:has(input:checked))` and `:indeterminate` rules match natively. `CheckboxGroup` still always passes Mantine a controlled `value` and shares it through `CheckboxGroupStateContext` (own file, for fast refresh; with `disabled`).
 - `opacity` (checkbox and checkbox-item) exists only while disabled, so CSS reads it with a fallback of `1`. The icon colour has no unchecked value, since no icon shows then.
 - Stacked and side-by-side groups own different properties (`label-field-gap` versus `gutter` and `vertical-padding`), so those two layout blocks stay in the CSS, keyed on `data-recursica-layouts`.
 - `:disabled` is kept only for `cursor`.

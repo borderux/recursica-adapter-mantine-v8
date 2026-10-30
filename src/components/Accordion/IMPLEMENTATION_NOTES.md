@@ -79,6 +79,6 @@ fix; see Chip's `IMPLEMENTATION_NOTES.md` for the original discovery.
 
 **Implementation:**
 
-- `AccordionControl` sets `data-recursica="accordion-header"` and `data-recursica-appearance="open|closed"`. Text, icon, background and border colors resolve from that on the control and are inherited by the chevron and left icon, so there are no per-appearance CSS rules.
-- Mantine does not export its active state, so `Accordion` owns the open value (`useUncontrolled`, passed to Mantine as controlled) and shares it with items through context. `value`, `defaultValue`, `onChange` and `multiple` keep working.
+- `AccordionControl` sets `data-recursica="accordion-header"`; the open/closed appearance is matched natively through Mantine's `aria-expanded`. Text, icon, background and border colors resolve from that on the control and are inherited by the chevron and left icon, so there are no per-appearance CSS rules.
+- No open-state plumbing: `value`, `defaultValue`, `onChange` and `multiple` go straight to Mantine.
 - `.item[data-active]` is kept only for the chevron rotation.

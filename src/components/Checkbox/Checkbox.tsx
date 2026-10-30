@@ -1,10 +1,11 @@
-import { forwardRef } from "react";
+import { forwardRef, useContext } from "react";
 import {
   Checkbox as MantineCheckbox,
   type CheckboxProps as MantineCheckboxProps,
 } from "@mantine/core";
 import { type ReadOnlyControlProps } from "@recursica/adapter-common";
 import { CheckboxGroup } from "./CheckboxGroup";
+import { CheckboxGroupStateContext } from "./CheckboxGroupStateContext";
 import {
   filterStylingProps,
   omitUnsupportedProps,
@@ -46,6 +47,7 @@ type CheckboxComponent = React.ForwardRefExoticComponent<
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   function Checkbox(props, ref) {
+    const groupState = useContext(CheckboxGroupStateContext);
     const {
       overStyled = false,
       readOnly,
@@ -92,13 +94,15 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       ? `${styles.root} ${classNameProp}`
       : styles.root;
 
+    const isDisabled = !!(readOnly || disabled || groupState?.disabled);
+    const disabledAttr = isDisabled ? "" : undefined;
+
     if (readOnly && !!readOnlyComponent) {
-      const isChecked = !!(restRecord.checked ?? restRecord.defaultChecked);
       const ReadOnlyComp = readOnlyComponent;
       const roNode = (
         <ReadOnlyComp
           {...props}
-          checked={isChecked}
+          checked={!!(restRecord.checked ?? restRecord.defaultChecked)}
           label={restRecord.label as React.ReactNode}
         />
       );
@@ -127,6 +131,17 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         className={finalClass}
         classNames={mergedClassNames}
         disabled={readOnly || disabled}
+        // The root is the item (label); the inner box holds the input and icon, so it is the checkbox.
+        attributes={{
+          root: {
+            "data-recursica": "checkbox-item",
+            "data-recursica-disabled": disabledAttr,
+          },
+          inner: {
+            "data-recursica": "checkbox",
+            "data-recursica-disabled": disabledAttr,
+          },
+        }}
       />
     );
 

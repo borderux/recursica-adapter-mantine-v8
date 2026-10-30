@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import {
   Radio as MantineRadio,
   type RadioGroupProps as MantineRadioGroupProps,
@@ -13,6 +13,7 @@ import {
 import { type RecursicaFormControlWrapperProps } from "../FormControlWrapper/FormControlWrapper";
 import { WithReadOnlyWrapper } from "../ReadOnlyField/WithReadOnlyWrapper";
 import styles from "./Radio.module.css";
+import { RadioGroupStateContext } from "./RadioGroupStateContext";
 
 import { type RecursicaRadioGroupProps as BaseRecursicaRadioGroupProps } from "@recursica/adapter-common";
 
@@ -74,6 +75,17 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
     ) as Partial<typeof rest>;
     const restRecord = sanitizedProps as Record<string, unknown>;
 
+    // Mantine owns uncontrolled group state privately, so track it here and always hand
+    // Mantine a controlled value.
+    const [internalValue, setInternalValue] = useState<string>(
+      (defaultValue as string | undefined) ?? "",
+    );
+    const currentValue = (value as string | undefined) ?? internalValue;
+    const handleGroupChange = (next: string) => {
+      setInternalValue(next);
+      (restRecord.onChange as ((value: string) => void) | undefined)?.(next);
+    };
+
     return (
       <WithReadOnlyWrapper
         className={className}
@@ -108,12 +120,23 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
             /* Natively bind local disabled lock dynamically */
             {...(sanitizedProps as unknown as MantineRadioGroupProps)}
             disabled={readOnly || (restRecord as any).disabled}
-            value={value as any}
-            defaultValue={defaultValue as any}
+            value={currentValue}
+            onChange={handleGroupChange}
           >
-            <div className={styles.groupRoot} data-layout={formLayout}>
-              {children}
-            </div>
+            <RadioGroupStateContext.Provider
+              value={{
+                value: currentValue,
+                disabled: !!(readOnly || (restRecord as any).disabled),
+              }}
+            >
+              <div
+                className={styles.groupRoot}
+                data-recursica="radio-button-group"
+                data-recursica-layouts={formLayout}
+              >
+                {children}
+              </div>
+            </RadioGroupStateContext.Provider>
           </MantineRadio.Group>
         }
       />

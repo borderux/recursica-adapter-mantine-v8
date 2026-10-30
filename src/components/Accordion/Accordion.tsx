@@ -169,6 +169,7 @@ export const AccordionControl = forwardRef<
     <MantineAccordion.Control
       ref={ref}
       {...(sanitizedProps as unknown as AccordionControlProps)}
+      data-recursica="accordion-header"
       className={classNameProp}
       icon={
         leftIcon ? (
