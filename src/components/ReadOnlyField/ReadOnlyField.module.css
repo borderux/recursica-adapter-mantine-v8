@@ -1,14 +1,9 @@
 /* LAYOUT SPACING OVERRIDES:
-   - Sets the --form-control-margin-bottom spacing hook to map component-specific layout tokens. */
+   - Maps the contract's layout-resolved margin onto the --form-control-margin-bottom hook.
+   - data-recursica* attributes live on this element; see ReadOnlyField.tsx. */
 .layoutOverride {
   --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_read-only-field_variants_layouts_stacked_properties_top-bottom-margin
-  );
-}
-
-.layoutOverride[data-form-layout="side-by-side"] {
-  --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_read-only-field_variants_layouts_side-by-side_properties_top-bottom-margin
+    --recursica_ui-kit_components_read-only-field_properties_top-bottom-margin
   );
 }
 

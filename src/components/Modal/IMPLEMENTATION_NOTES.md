@@ -21,7 +21,7 @@ Mantine internally handles scroll state natively, dynamically showing/hiding a d
 `.title` used plain `overflow: hidden` until 2026-08-28 (Matt Massey) — it clipped descenders
 (e.g. "g" in a long title) whenever `text_line-height` is tighter than the font's natural
 ascent+descent. `overflow-clip-margin` gives ink a small bleed allowance while still clipping
-genuinely overflowing text, same project-wide fix as Chip's `CHIP_IMPLEMENTATION_NOTES.md`.
+genuinely overflowing text, same project-wide fix as Chip's `IMPLEMENTATION_NOTES.md`.
 
 ### 4. Width was pinned to Mantine's `md` size, not content-driven
 
@@ -29,8 +29,14 @@ Despite §1 above, `.content` never actually scaled fluidly: Mantine's own CSS s
 
 ### 5. Close button restyled to match Button
 
-`.close` reuses Button's text-variant/icon-only/small tokens (radius, padding, background/icon color, hover overlay, focus ring) instead of Mantine's native CloseButton look. Two overrides need `!important`/an explicit reset to win: Mantine's `CloseIcon` sizes itself via an inline `style` (`--cb-icon-size`, default `70%`), which beats any plain class rule — same category as Tree's `--level-offset` override; and Mantine's own subtle-variant `:hover` background (from `CloseButton.css`) is pinned back to the Button background token so only our `::after` overlay renders hover feedback.
+`.close` reuses Button's text-style/icon-only/small tokens (radius, padding, background/icon color, hover overlay, focus ring) instead of Mantine's native CloseButton look. Two overrides need `!important`/an explicit reset to win: Mantine's `CloseIcon` sizes itself via an inline `style` (`--cb-icon-size`, default `70%`), which beats any plain class rule — same category as Tree's `--level-offset` override; and Mantine's own subtle-variant `:hover` background (from `CloseButton.css`) is pinned back to the Button background token so only our `::after` overlay renders hover feedback.
 
 ### 3. Required header with an always-present Close button (2026-10-16)
 
 `title` and `onClose` are required (contract in `RecursicaModalProps`, `@recursica/adapter-common`), and `withCloseButton` and `closeButtonProps` are removed. `Modal.tsx` always renders `Modal.Header` > `Modal.Title` + `Modal.CloseButton` with `aria-label="Close"` unless `closeButtonAriaLabel` is passed. A `header` prop replaces the whole default header and is discouraged in its JSDoc.
+
+### 6. Scoped CSS contract (2026-10-26)
+
+Modal has no `data-recursica` contract of its own: the export defines `--recursica_ui-kit_components_modal_properties_*` directly in the theme and layer blocks, so `.content`, `.header`, `.title`, `.scrollArea` and `.footer` read them with no attributes. The close button borrows the Button contract: `ModalCloseButton` sets `data-recursica="button"`, `data-recursica-styles="text"`, `data-recursica-sizes="small"` and `data-recursica-content="icon-only"` (never disabled, so no `-disabled`), and `.close` reads only `--recursica_ui-kit_components_button_properties_*`. No `_variants_` names remain.
+
+**Layer:** Modal is layer-0 by design (the export defines only `layer-0`; backgrounds already point at layer-1's surface). Portaled content resolves under the root layer, so `data-recursica-theme` stays on `<html>` (`ColorSchemeWrapper`); with no `data-recursica-layer` set, layer 0 applies.

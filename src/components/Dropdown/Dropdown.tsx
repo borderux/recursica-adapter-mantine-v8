@@ -16,6 +16,7 @@ import {
 import { type RecursicaFormControlWrapperProps } from "../FormControlWrapper/FormControlWrapper";
 import { WithReadOnlyWrapper } from "../ReadOnlyField/WithReadOnlyWrapper";
 import { renderRichOption } from "../../utils/renderRichOption";
+import { menuItemOption } from "./menuItemOption";
 import styles from "./Dropdown.module.css";
 
 import { type RecursicaDropdownProps as BaseRecursicaDropdownProps } from "@recursica/adapter-common";
@@ -139,6 +140,10 @@ export const Dropdown = forwardRef<HTMLInputElement, DropdownProps>(
       <WithReadOnlyWrapper
         className={wrapperClass}
         style={injectedStyles}
+        data-recursica="dropdown"
+        data-recursica-layouts={formLayout}
+        data-recursica-error={error ? "" : undefined}
+        data-recursica-disabled={disabled ? "" : undefined}
         controlMaxWidth="var(--dropdown-control-max-width)"
         controlMinWidth="var(--dropdown-control-min-width)"
         overStyled={overStyled as true}
@@ -179,10 +184,14 @@ export const Dropdown = forwardRef<HTMLInputElement, DropdownProps>(
             data={
               (normalizedData as unknown as MantineSelectProps["data"]) || []
             }
-            renderOption={
-              renderOption ??
-              ((input) =>
-                renderRichOption(input, optionClassNames, wrapItemText))
+            renderOption={(input) =>
+              menuItemOption(
+                renderOption
+                  ? renderOption(input)
+                  : renderRichOption(input, optionClassNames, wrapItemText),
+                input.checked,
+                input.option.disabled,
+              )
             }
             clearButtonProps={mergedClearButtonProps}
             label={undefined}
@@ -198,6 +207,8 @@ export const Dropdown = forwardRef<HTMLInputElement, DropdownProps>(
             // `classNames.wrapper`) is the correct hook — `wrapperProps` here meant the error state
             // never actually applied a border color.
             attributes={{
+              // The popup is portaled out of the wrapper, so it needs its own contract root.
+              dropdown: { "data-recursica": "dropdown" },
               wrapper: {
                 "data-disabled": disabled ? "true" : undefined,
                 "data-error": error ? "true" : undefined,

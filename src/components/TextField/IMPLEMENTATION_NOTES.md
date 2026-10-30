@@ -17,3 +17,12 @@ To accomplish this safely without spilling random pseudo-variables onto the inpu
 ### 3. Component Definition Intersections
 
 To strictly acquire native HTML typings, `TextField.tsx` explicitly extracts `React.ComponentPropsWithoutRef<"input">`. However, to prevent Typescript strict union collisions with overlapping Mantine definitions over functional `style` components and custom mappings natively, we meticulously omit (`Pick<InputWrapperProps, ...>`) explicit base elements to guarantee that strictly Recursica styles traverse the array flawlessly.
+
+## Scoped CSS contract
+
+Resolved by `data-recursica="text-field"` + `data-recursica-layouts="stacked|side-by-side"` (from `formLayout`) +
+`data-recursica-error` / `data-recursica-disabled`, set on the outer `FormControlWrapper` element
+(`.layoutOverride`) and inherited by `.root`/`.input`. Per-state `!important` color rules, per-layout
+blocks and the border-size `recursica-ignore`s are removed. `.root[data-disabled] .input` re-asserts the
+contract colors because Mantine's own disabled input rule (grey bg/text) otherwise wins; `opacity` exists only
+while disabled, so it uses `var(..._opacity, 1)`. Gaps: none.

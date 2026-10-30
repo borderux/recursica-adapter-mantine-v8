@@ -9,11 +9,15 @@ The `Avatar` component is an adapter over Mantine's `Avatar`. To ensure adherenc
 
 ## Structural Workarounds
 
-### Implicit `data-style`
+### Scoped CSS contract
 
-Mantine's Avatar implicitly renders an image, an icon, or a text node based on the properties passed (`src`, `var`, `children`).
-Recursica Tokens split Avatar styling distinctly across three separate categories: `image`, `icon`, and `text`.
-To correctly map these variables, our React component observes standard prop states and manually injects a `data-style="image|icon|text"` onto the root. The `Avatar.module.css` explicitly gates padding and generic sizing modifiers under these `data-style` attributes.
+The root carries `data-recursica="avatar"` plus one attribute per axis; the CSS reads only the stable root names `--recursica_ui-kit_components_avatar_properties_*`.
+
+- `data-recursica-styles="image|icon|text"` is derived from props (`src` -> image, `icon` -> icon, otherwise text).
+- `data-recursica-sizes="small|default|large"` is the `size` prop.
+- `data-recursica-types="solid|outline|ghost"` is the `variant` prop. It is omitted for `image`, which has no types axis.
+
+`color` is the one style-gated declaration: the export defines `text-color` only for text and `icon-color` only for icon. `border-size` comes from the types axis (or the image style), not from sizes. `.iconWrapper` and `.textWrapper` read the size-axis `icon-size` / `text_*` names directly since the CSS is unconditional.
 
 ### Flex Layout & Internal Spans
 
@@ -31,4 +35,4 @@ really is the same color-treatment concept Recursica's own `variant` is, so `map
 though the CSS reset hack above means it's visually inert either way. Worth noting only because
 the MUI adapter's `Avatar.variant` means something completely different (shape) and had a real
 bug from assuming the same word meant the same thing there; see mui-adapter's own
-`AVATAR_IMPLEMENTATION_NOTES.md`.
+`IMPLEMENTATION_NOTES.md`.

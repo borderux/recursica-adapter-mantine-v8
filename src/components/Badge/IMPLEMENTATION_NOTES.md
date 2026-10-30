@@ -16,3 +16,7 @@ Mantine supports multiple visual variants (`outline`, `filled`, `light`). Howeve
 ## 3. The `overStyled` Prop
 
 This component implements the newly added `overStyled` architectural standard. By default, passing inline `{style}` React properties to `Badge` will be ignored. This prevents accidental cascading regressions of our strict CSS-variables layouts unless a developer explicitly forces `overStyled={true}`.
+
+## 4. Scoped CSS contract
+
+The root sets `data-recursica="badge"` and `data-recursica-styles={variant}` (the only axis). `Badge.module.css` reads only the stable `--recursica_ui-kit_components_badge_properties_*` names; the per-variant CSS blocks and `_variants_styles_*` references were removed. Badge has no states, so no fallbacks are needed. The old `data-variant` attribute was dropped (nothing else read it).

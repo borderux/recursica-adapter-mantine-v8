@@ -259,9 +259,11 @@ const OPTION_ROW_PREVIEW_ITEMS = [
 const renderOptionRowPreview = (wrapItemText: boolean) => (
   <div
     className={styles.dropdown}
+    data-recursica="autocomplete"
+    data-recursica-layouts="stacked"
     style={{
       width:
-        "var(--recursica_ui-kit_components_autocomplete_variants_layouts_stacked_properties_max-width)",
+        "var(--recursica_ui-kit_components_autocomplete_properties_max-width)",
     }}
   >
     {OPTION_ROW_PREVIEW_ITEMS.map((item) => (

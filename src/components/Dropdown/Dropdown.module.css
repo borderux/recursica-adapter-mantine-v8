@@ -9,30 +9,18 @@
  */
 
 /* LAYOUT SPACING OVERRIDES:
-   - Sets the --form-control-margin-bottom spacing hook to map component-specific layout tokens.
-   - Also sets the --dropdown-control-{max,min}-width hooks consumed inline in Dropdown.tsx, since
-     the token schema no longer provides a single layout-agnostic min/max width. */
+   - Maps the contract's layout-resolved properties onto the --form-control-margin-bottom hook and
+     the --dropdown-control-{max,min}-width hooks consumed inline in Dropdown.tsx.
+   - The contract attributes (data-recursica*) live on this element; see Dropdown.tsx. */
 .layoutOverride {
   --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_dropdown_variants_layouts_stacked_properties_top-bottom-margin
+    --recursica_ui-kit_components_dropdown_properties_top-bottom-margin
   );
   --dropdown-control-max-width: var(
-    --recursica_ui-kit_components_dropdown_variants_layouts_stacked_properties_max-width
+    --recursica_ui-kit_components_dropdown_properties_max-width
   );
   --dropdown-control-min-width: var(
-    --recursica_ui-kit_components_dropdown_variants_layouts_stacked_properties_min-width
-  );
-}
-
-.layoutOverride[data-form-layout="side-by-side"] {
-  --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_dropdown_variants_layouts_side-by-side_properties_top-bottom-margin
-  );
-  --dropdown-control-max-width: var(
-    --recursica_ui-kit_components_dropdown_variants_layouts_side-by-side_properties_max-width
-  );
-  --dropdown-control-min-width: var(
-    --recursica_ui-kit_components_dropdown_variants_layouts_side-by-side_properties_min-width
+    --recursica_ui-kit_components_dropdown_properties_min-width
   );
 }
 
@@ -42,12 +30,6 @@
    - flex/layout: display: flex on the root wrapper safely encapsulating internal section rendering.
    - placeholder opacity: 0.5. The dropdown parameters currently lack a dedicated placeholder-opacity variable.
 */
-
-/* EXEMPTIONS:
-   - border-size is constant across disabled/error states — only border-color changes; the
-     disabled/error border-size tokens are never applied by design. */
-/* recursica-ignore: --recursica_ui-kit_components_dropdown_variants_states_disabled_properties_border-size */
-/* recursica-ignore: --recursica_ui-kit_components_dropdown_variants_states_error_properties_border-size */
 
 .root {
   display: flex;
@@ -132,6 +114,9 @@
   color: var(
     --recursica_ui-kit_components_dropdown_properties_colors_text-color
   );
+
+  /* Opacity exists only while disabled. */
+  opacity: var(--recursica_ui-kit_components_dropdown_properties_opacity, 1);
 
   outline: none;
 }
@@ -236,58 +221,17 @@
       var(--recursica_brand_states_focus_color);
 }
 
-/* Error State Mapping (Propagated strictly down from the wrapper DOM context) */
-.root[data-error] .input {
-  border-color: var(
-    --recursica_ui-kit_components_dropdown_variants_states_error_properties_colors_border-color
-  ) !important;
-  background-color: var(
-    --recursica_ui-kit_components_dropdown_variants_states_error_properties_colors_background-color
-  ) !important;
-  color: var(
-    --recursica_ui-kit_components_dropdown_variants_states_error_properties_colors_text-color
-  ) !important;
-}
-
-.root[data-error] .section[data-position="left"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_dropdown_variants_states_error_properties_colors_leading-icon
-  ) !important;
-}
-
-.root[data-error] .section[data-position="right"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_dropdown_variants_states_error_properties_colors_trailing-icon
-  ) !important;
-}
-
-/* Disabled State Mapping (Propagated strictly down from the wrapper DOM context) */
+/* Error/disabled colors and border-size resolve through the contract's data-recursica-error /
+   data-recursica-disabled attributes, so no per-state value rules are needed. This rule only
+   outranks Mantine's own disabled input styles and sets the cursor. */
 .root[data-disabled] .input {
-  border-color: var(
-    --recursica_ui-kit_components_dropdown_variants_states_disabled_properties_colors_border-color
-  ) !important;
   background-color: var(
-    --recursica_ui-kit_components_dropdown_variants_states_disabled_properties_colors_background-color
-  ) !important;
+    --recursica_ui-kit_components_dropdown_properties_colors_background-color
+  );
   color: var(
-    --recursica_ui-kit_components_dropdown_variants_states_disabled_properties_colors_text-color
-  ) !important;
-  opacity: var(
-    --recursica_ui-kit_components_dropdown_variants_states_disabled_properties_opacity
-  ) !important;
+    --recursica_ui-kit_components_dropdown_properties_colors_text-color
+  );
   cursor: not-allowed;
-}
-
-.root[data-disabled] .section[data-position="left"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_dropdown_variants_states_disabled_properties_colors_leading-icon
-  ) !important;
-}
-
-.root[data-disabled] .section[data-position="right"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_dropdown_variants_states_disabled_properties_colors_trailing-icon
-  ) !important;
 }
 
 /* -------------------------------------
@@ -317,7 +261,41 @@
   );
 }
 
+/* The option row itself is only a hover/spacing host. Mantine can't set per-option attributes, so
+   `.optionItem` (rendered inside it, see menuItemOption.tsx) carries the menu-item contract
+   (data-recursica="menu-item" + selection-states) and the padding/colors. */
 .option {
+  margin-bottom: var(--recursica_ui-kit_components_menu_properties_item-gap);
+  padding: 0;
+  cursor: pointer;
+}
+
+.option:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Mantine tints the whole option row on hover/keyboard selection and lays it out as flex, which
+   shrinks `.optionItem` to its text. The tint lives on `.optionItem` (below), so clear the row's and
+   let the item fill it; otherwise two overlapping tints show. */
+.option,
+.option:hover:not([data-combobox-disabled]),
+.option[data-combobox-selected]:not([data-combobox-disabled]) {
+  background-color: transparent;
+}
+
+.option > .optionItem {
+  flex: 1;
+}
+
+/* Disabled dimming comes from `option-disabled-opacity` on `.optionItem`; neutralise
+   Mantine's own 0.35 on the option so it is not applied twice. */
+.option[data-combobox-disabled] {
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.optionItem {
+  display: block;
   font-family: var(
     --recursica_ui-kit_components_dropdown_properties_text_font-family
   );
@@ -327,54 +305,35 @@
   font-weight: var(
     --recursica_ui-kit_components_dropdown_properties_text_font-weight
   );
-  color: var(
-    --recursica_ui-kit_components_dropdown_properties_colors_text-color
-  );
-  /* Padding/inter-item gap reuse the menu-item component's tokens (same reasoning as the icon/
-     supporting-text tokens below) instead of an arbitrary scaled dropdown padding — matches
-     Menu.module.css's `.item` padding + `margin-bottom` gap exactly. */
   padding: var(
       --recursica_ui-kit_components_menu-item_properties_vertical-padding
     )
     var(--recursica_ui-kit_components_menu-item_properties_horizontal-padding);
-  margin-bottom: var(--recursica_ui-kit_components_menu_properties_item-gap);
-  cursor: pointer;
+  background-color: var(
+    --recursica_ui-kit_components_menu-item_properties_colors_background-color
+  );
+  color: var(
+    --recursica_ui-kit_components_menu-item_properties_colors_text-color
+  );
 }
 
-.option:last-of-type {
-  margin-bottom: 0;
+/* Disabled options dim with the Dropdown's own option-disabled-opacity. */
+.option[data-combobox-disabled] .optionItem {
+  opacity: var(
+    --recursica_ui-kit_components_dropdown_properties_option-disabled-opacity
+  );
 }
 
 /* No per-option hovered token exists in the schema; use the generic overlay tint (same technique
-   as Table's row hover) to highlight a hovered-but-not-selected option. */
-.option[data-hovered="true"],
-.option:hover {
+   as Table's row hover). Only unselected items show it (selected has a solid background). */
+.option[data-hovered="true"]
+  .optionItem[data-recursica-selection-states="unselected"],
+.option:hover .optionItem[data-recursica-selection-states="unselected"] {
   background-color: color-mix(
     in srgb,
     var(--recursica_brand_states_hover_color)
       calc(var(--recursica_brand_states_hover_opacity) * 100%),
     transparent
-  );
-}
-
-/* No dedicated dropdown-option "selected" token exists in the schema either, but the menu-item
-   component's selected-state colors are the closest real token family for the same concept (a
-   selected row in a list) — reused here rather than the neutral hover tint above, which is what
-   previously made the selected option read as grey instead of Recursica's brand color. Matches
-   the mui-adapter fix for the same gap. Despite the name, Mantine's `data-combobox-active` — not
-   `data-combobox-selected` — is the attribute it sets when an option's value matches the current
-   field value (see OptionsDropdown.mjs: `active: checked`); `data-combobox-selected` is an
-   unrelated transient keyboard-navigation highlight (imperatively set/cleared via arrow keys —
-   use-combobox.mjs's `selectOption`/`clearSelectedItem`). Keying this off `data-combobox-selected`
-   meant the real selected option only showed the brand color while arrow-key navigating, and lost
-   it as soon as the dropdown was reopened normally. */
-.option[data-selected="true"],
-.option[data-combobox-active="true"] {
-  background-color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_selected_properties_colors_background-color
-  );
-  color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_selected_properties_colors_text-color
   );
 }
 
@@ -397,7 +356,7 @@
     --recursica_ui-kit_components_menu-item_properties_icon-leading-size
   );
   color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_unselected_properties_colors_leading-icon-color
+    --recursica_ui-kit_components_menu-item_properties_colors_leading-icon-color
   );
 }
 
@@ -458,20 +417,6 @@
     --recursica_ui-kit_components_menu-item_properties_supporting-text_text-transform
   );
   color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_unselected_properties_colors_supporting-text-color
-  );
-}
-
-.option[data-selected="true"] .optionIcon,
-.option[data-combobox-active="true"] .optionIcon {
-  color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_selected_properties_colors_leading-icon-color
-  );
-}
-
-.option[data-selected="true"] .optionSupportingText,
-.option[data-combobox-active="true"] .optionSupportingText {
-  color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_selected_properties_colors_supporting-text-color
+    --recursica_ui-kit_components_menu-item_properties_colors_supporting-text-color
   );
 }

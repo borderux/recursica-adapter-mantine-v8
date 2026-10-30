@@ -12,9 +12,14 @@ The baseline structure maps identical `HARDCODED VALUES` as standard text inputs
 
 The Mantine `<Autocomplete>` dropdown menu and options are styled strictly using native UI-Kit variables mapping border radii, shadows, and base colors (`.dropdown` and `.option`).
 
-## State Cascade Architecture
+## Scoped CSS Contract
 
-Focus, errors, and disabled visual states are enforced explicitly via the outer `<FormControlWrapper>` boundary emitting context down structurally (`[data-error]`, `[data-disabled]`) and evaluated efficiently against scoped nested selectors natively inside `AutoComplete.module.css`.
+The component reads only the stable root names `--recursica_ui-kit_components_autocomplete_properties_*`, resolved by `data-recursica="autocomplete"` plus `data-recursica-layouts="stacked|side-by-side"` (from `formLayout`) and `data-recursica-error` / `data-recursica-disabled` (from `error` / `disabled`). These sit on the outer `FormControlWrapper` element (`.layoutOverride`); custom properties inherit down to the input, sections and wrapper-level hooks (`--form-control-margin-bottom`, `--autocomplete-control-{min,max}-width`).
+
+- The dropdown is portaled out of that element, so Mantine's `attributes` prop gives it its own `data-recursica="autocomplete"` (no state axes).
+- Each option carries `data-recursica="menu-item"` with `data-recursica-selection-states="unselected"`, so the leading-icon and supporting-text colors come from the root `menu-item_properties_colors_*` names. Padding, gaps and icon sizes read root `menu-item_properties_*` / `menu_properties_*` names directly.
+- Error/disabled colors and border-size need no per-state CSS. Opacity exists only while disabled, so `.input` uses `var(..._opacity, 1)`. `.root[data-disabled] .input` re-asserts background/color only to outrank Mantine's own `.input:disabled` styles.
+- Focus uses the global brand focus tokens (unchanged).
 
 ## Missing Selected Option Highlight
 
@@ -22,11 +27,9 @@ Focus, errors, and disabled visual states are enforced explicitly via the outer 
 equivalent for "this option matches the current value" though, and it isn't fixable in CSS alone:
 Mantine's `Autocomplete` never passes a `value` prop into its internal `OptionsDropdown` (only
 `search`, for filtering — see `node_modules/@mantine/core/esm/components/Autocomplete/Autocomplete.mjs`),
-so `OptionsDropdown`'s `checked` (and the `data-combobox-active` attribute it drives — the same one
-`Dropdown`'s equivalent highlight below keys off) never gets set on any option, no matter what's
-typed into the field. See `Dropdown.module.css`'s `.option[data-combobox-active="true"]` rule for
-what a real fix would key off, if this ever gets solved upstream or by reimplementing option
-rendering with our own value comparison.
+so `OptionsDropdown`'s `checked` (and the `data-combobox-active` attribute it drives) never gets set on any option, no matter what's
+typed into the field. Because it can never apply, there is no selected-option rule: options are always
+`selection-states="unselected"`. If this is solved upstream, set that attribute from the real selection state.
 
 ## Rich Option Content (`leadingIcon`/`supportingText`)
 
@@ -39,4 +42,4 @@ rendering with our own value comparison.
 `.optionText > *` used plain `overflow: hidden` until 2026-08-28 (Matt Massey) — it clipped
 descenders (e.g. "g") whenever `text_line-height` is tighter than the font's natural
 ascent+descent. `overflow-clip-margin` gives ink a small bleed allowance while still clipping
-genuinely overflowing text; same project-wide fix as Chip's `CHIP_IMPLEMENTATION_NOTES.md`.
+genuinely overflowing text; same project-wide fix as Chip's `IMPLEMENTATION_NOTES.md`.

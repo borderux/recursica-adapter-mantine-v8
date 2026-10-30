@@ -113,7 +113,7 @@ Mantine's Drawer handles this automatically — the `body` section scrolls when 
 clips descenders (e.g. the "g" in a long title) whenever `text_line-height` is tighter than the
 font's natural ascent+descent. Switched to `overflow: clip; overflow-clip-margin: 0.35em;` — same
 truncation, but ink can bleed slightly past the line box before it's actually clipped.
-Project-wide fix; see Chip's `CHIP_IMPLEMENTATION_NOTES.md` for the original discovery.
+Project-wide fix; see Chip's `IMPLEMENTATION_NOTES.md` for the original discovery.
 
 ---
 
@@ -138,3 +138,11 @@ Project-wide fix; see Chip's `CHIP_IMPLEMENTATION_NOTES.md` for the original dis
 **Decision:** Every Panel has a header with a required `title` and a Close button wired to a required `onClose`. The footer is optional.
 
 **Implementation:** The contract lives in `RecursicaPanelProps` in `@recursica/adapter-common`. `Panel.tsx` composes `Drawer.Root` > `Drawer.Content` > (`Drawer.Header` > `Drawer.Title` + `Drawer.CloseButton`) + `Drawer.Body`, so the header cannot be omitted. The Close button gets `aria-label="Close"` unless `closeButtonAriaLabel` is passed. `title`, `withCloseButton` and `closeButtonProps` are omitted from the Mantine props type. The `.close` class matches Button's text-variant, icon-only, small-size treatment (same as Modal), so the Close button looks like a Recursica icon-only Button. A `header` prop replaces the whole default header; it is discouraged in its JSDoc because nothing then guarantees a title or Close button.
+
+---
+
+## 12. Scoped CSS contract (2026-10-26)
+
+Panel has no `data-recursica` contract of its own: the export defines `--recursica_ui-kit_components_panel_properties_*` directly in the theme and layer blocks, so `.content`, `.header`, `.title`, `.body` and `.footer` read them with no attributes. The close button borrows the Button contract: `PanelCloseButton` (also used by the default header) sets `data-recursica="button"`, `data-recursica-styles="text"`, `data-recursica-sizes="small"` and `data-recursica-content="icon-only"` (never disabled), and `.close` reads only `--recursica_ui-kit_components_button_properties_*`. No `_variants_` names remain.
+
+**Layer:** Panel is layer-0 by design (the export defines only `layer-0`; backgrounds already point at layer-1's surface). Portaled content resolves under the root layer, so `data-recursica-theme` stays on `<html>` (`ColorSchemeWrapper`); with no `data-recursica-layer` set, layer 0 applies.

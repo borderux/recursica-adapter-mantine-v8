@@ -76,7 +76,8 @@ export const AssistiveElement = forwardRef<
       ref={ref}
       {...restRecord} // Spread standard HTML attributes (like id, aria-*) natively.
       className={finalClass}
-      data-variant={assistiveVariant}
+      data-recursica="assistive-element"
+      data-recursica-types={assistiveVariant}
       role={resolvedRole}
       style={restRecord.style as React.CSSProperties}
     >

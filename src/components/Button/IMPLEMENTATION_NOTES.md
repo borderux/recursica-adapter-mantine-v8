@@ -11,7 +11,7 @@ Decisions and design tweaks for the Recursica Button that go beyond the Componen
 **Implementation:**
 
 - When `icon` is provided, the Button wraps it in a single element with class `iconWrapper` before passing it to Mantine’s `leftSection`.
-- In `Button.module.css`, `.iconWrapper` has explicit `width` and `height` from the Recursica tokens mapping natively based on `data-size`.
+- In `Button.module.css`, `.iconWrapper` has explicit `width` and `height` from the Recursica tokens from the stable root name `..._button_properties_icon`, which the `data-recursica-sizes` attribute resolves.
 - The rule `.iconWrapper > *` sets `width: 100%`, `height: 100%`, and `object-fit: contain` so whatever the caller passes scales cleanly with the token constraints.
 
 ---
@@ -106,4 +106,19 @@ font's natural ascent+descent. Switched to `overflow: clip; overflow-clip-margin
 truncation, but ink can bleed slightly past the line box before it's actually clipped. `.root`'s
 own `overflow: hidden` (the max-width truncation bounding box) is untouched — it has padding
 around the label so it isn't tight against the glyphs the way `.labelText` is. Project-wide fix;
-see Chip's `CHIP_IMPLEMENTATION_NOTES.md` for the original discovery.
+see Chip's `IMPLEMENTATION_NOTES.md` for the original discovery.
+
+---
+
+## Scoped CSS contract
+
+**Decision:** Button reads only the stable root names `--recursica_ui-kit_components_button_properties_*` and never a variant-path name. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
+
+**Implementation:**
+
+- `Button.tsx` sets `data-recursica="button"`, `data-recursica-styles`, `data-recursica-sizes` and `data-recursica-content` on every render, and `data-recursica-disabled` when disabled or loading. The CSS has no per-variant or per-size rules.
+- `data-variant`, `data-size` and `data-content` stay on the root only to stop Mantine applying its own `filled`/`md` styling.
+- `opacity` exists only while disabled, so `.root` reads it with a fallback of `1`.
+- Disabled values come from `data-recursica-disabled`, not `:disabled`. `:disabled` is kept only for `cursor` and the hover overlay.
+
+**Hover colors:** Mantine's own `:hover` rule (`--button-hover`) outranks the plain `.root` contract colors, so `.root:hover:not(:disabled)` re-asserts background, border and text color; the only hover tint is the global `::after` overlay.

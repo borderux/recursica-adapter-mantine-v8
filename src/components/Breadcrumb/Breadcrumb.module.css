@@ -29,7 +29,7 @@
 
 /* Current-page item (last crumb): Breadcrumb.tsx (via markCurrentPageItem) marks it
    aria-current="page". This is a style-layer backstop in case that item still renders as a Link
-   despite having its href/onClick stripped — see BREADCRUMB_IMPLEMENTATION_NOTES.md. Two classes'
+   despite having its href/onClick stripped — see IMPLEMENTATION_NOTES.md. Two classes'
    worth of specificity beats Link's single .root color/text-decoration rule regardless of module
    load order. pointer-events only blocks mouse activation, not a router Link's own internal
    handler — the last crumb should really just be plain text. */

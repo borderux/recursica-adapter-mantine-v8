@@ -55,7 +55,7 @@ function formatReadOnlyTime(value: string | undefined): string | undefined {
  * Simulates a real user interaction on Mantine's own (CSS-hidden) native AM/PM <select>, since it's
  * a React-controlled element — setting `.value` directly and dispatching a plain DOM event doesn't
  * trigger React's change handling; using the native property setter first does. See "Why AM/PM is
- * seeded on mount" in TIMEPICKER_IMPLEMENTATION_NOTES.md.
+ * seeded on mount" in IMPLEMENTATION_NOTES.md.
  */
 function setNativeSelectValue(el: HTMLSelectElement, value: string): void {
   const nativeSetter = Object.getOwnPropertyDescriptor(
@@ -78,7 +78,7 @@ export interface RecursicaTimePickerProps
       | "max"
       // AM/PM is always shown via our own BareDropdown, driving a fixed 12h format — these all
       // control Mantine's own native (now CSS-hidden) AM/PM select and would be misleading to
-      // expose, since they'd have no visible effect. See TIMEPICKER_IMPLEMENTATION_NOTES.md.
+      // expose, since they'd have no visible effect. See IMPLEMENTATION_NOTES.md.
       | "amPmInputLabel"
       | "amPmLabels"
       | "amPmSelectProps"
@@ -155,7 +155,7 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
 
     // Internal full 24-hour value. Needed because Mantine's TimePicker (hour/minute/second entry)
     // and our own BareDropdown (AM/PM) both mutate the same conceptual value — see
-    // TIMEPICKER_IMPLEMENTATION_NOTES.md.
+    // IMPLEMENTATION_NOTES.md.
     const [internalValue, setInternalValue] = useState<string | undefined>(
       () => value ?? defaultValue,
     );
@@ -174,7 +174,7 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
     // own BareDropdown (which drives the same native select the same way, see handleMeridiemChange)
     // correctly displays and changes it from there. Skipped whenever a real initial value/defaultValue
     // is already present — Mantine already derives the correct AM/PM from that on its own. See
-    // TIMEPICKER_IMPLEMENTATION_NOTES.md.
+    // IMPLEMENTATION_NOTES.md.
     const amPmRef = useRef<HTMLSelectElement>(null);
     useEffect(() => {
       if (getHour(value ?? defaultValue) === undefined && amPmRef.current) {
@@ -217,6 +217,10 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
         controlMinWidth={undefined}
         overStyled={overStyled as true}
         formLayout={formLayout}
+        data-recursica="time-picker"
+        data-recursica-layouts={formLayout}
+        data-recursica-error={error ? "" : undefined}
+        data-recursica-disabled={disabled ? "" : undefined}
         labelSize={labelSize}
         labelAlignment={labelAlignment}
         labelOptionalText={labelOptionalText}
@@ -240,13 +244,12 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
         activeComponent={
           /* Naked field execution safely decoupled from Mantine's macro Input.Wrapper DOM hooks.
              format="12h" is always on — this is the only way this component operates, not a user
-             choice (see TIMEPICKER_IMPLEMENTATION_NOTES.md). Mantine's own native AM/PM <select>
+             choice (see IMPLEMENTATION_NOTES.md). Mantine's own native AM/PM <select>
              (bundled unconditionally with format="12h") is CSS-hidden; our own BareDropdown next to
              it is the only AM/PM control the user interacts with. */
           <div
             className={styles.root}
             data-disabled={disabled ? "true" : undefined}
-            data-error={error ? "true" : undefined}
           >
             <MantineTimePicker
               ref={ref}
@@ -273,7 +276,7 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
               withDropdown={false}
               // Internal-only — not part of the public API (see the Omit list above) — used solely
               // to seed the mount-time AM default onto Mantine's own hidden native select. See
-              // TIMEPICKER_IMPLEMENTATION_NOTES.md.
+              // IMPLEMENTATION_NOTES.md.
               amPmRef={amPmRef}
             />
             <BareDropdown
@@ -285,7 +288,7 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
               // A plain `style` prop won't do this: Mantine's Select/InputBase internals
               // (useInputProps) route a top-level `style` prop to the *label* InputWrapper, not
               // the bordered input box itself — `styles={{ wrapper: ... }}` is the styles-api hook
-              // that actually targets that box. See TIMEPICKER_IMPLEMENTATION_NOTES.md.
+              // that actually targets that box. See IMPLEMENTATION_NOTES.md.
               styles={{ wrapper: { width: "fit-content" } }}
               data={AM_PM_DATA}
               value={isPM ? "PM" : "AM"}

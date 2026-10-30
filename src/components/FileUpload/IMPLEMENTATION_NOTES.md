@@ -43,18 +43,9 @@ unchecked removable tag — `Chip` is fundamentally a Mantine `Chip` (checkbox/r
 under the hood, and a file name isn't something a user should be able to "check"; controlling
 `checked` prevents clicking the label text from toggling Chip's own selected-state styling.
 
-## `border-style` and the malformed Figma token
+## `border-style`
 
-`--recursica_ui-kit_components_file-upload_properties_border-style` exists in
-`recursica_variables_scoped.css`, but its value is the **literal string** `"dashed"` (quotes
-included) — not a valid CSS `<line-style>` keyword. Using it via `var(...)` would silently resolve
-to an invalid declaration (the browser drops it, and the border falls back to `initial`/`none`,
-with no error surfaced anywhere). This is consistent with how `border-style` is already treated
-everywhere else in this adapter (e.g. `TimePicker`/`DatePicker` both hardcode `border-style:
-solid`) — the canonical guide explicitly lists `border-style` as a baseline/hardcoded structural
-value, not a tokenized one. Hardcoded to the keyword `dashed` directly; the malformed token is
-`recursica-ignore`d with a note in `FileUpload.module.css`. Worth flagging to design/Forge if the
-token is meant to be consumable as-is in a future export.
+Read from `--recursica_ui-kit_components_file-upload_properties_border-style` (now exported as the bare keyword `dashed`). The earlier export quoted the value, which made it invalid, so it was hardcoded.
 
 ## No dedicated icon-size token
 
@@ -178,7 +169,7 @@ Implemented a standard roving-tabindex pattern instead, matching `Tree`'s existi
 - **Tab reaches exactly one stop per chip list, landing on the first chip.** `FileUpload` tracks
   `activeChipIndex` (initially `0`) and passes `deleteTabIndex={index === activeChipIndex ? 0 : -1}`
   to each `Chip` — a new pass-through prop added to `RecursicaChipProps`/both adapters' `Chip.tsx`
-  (see `../Chip/CHIP_IMPLEMENTATION_NOTES.md`) that overrides the remove icon's own tabIndex. Every
+  (see `../Chip/IMPLEMENTATION_NOTES.md`) that overrides the remove icon's own tabIndex. Every
   chip in the Mantine adapter is also given a plain `tabIndex={-1}` directly (flows through to
   `MantineChip`'s underlying checkbox `<input>` via the existing `sanitizedProps` passthrough) to
   kill that second, unwanted tab stop — the chip's label/checkbox was never meant to be
@@ -242,3 +233,12 @@ Confirmed via Playwright against a running Storybook (not just DOM inspection): 
 its remove icon — an extra, invisible tab stop before the intended one. After the fix, `Tab` goes
 directly to the remove icon, and in `ReadOnly`, `Tab` skips the file list entirely (there's nothing
 in it to focus).
+
+## Scoped CSS contract
+
+`FileUpload.tsx` passes `data-recursica="file-upload"`, `data-recursica-layouts={formLayout}`,
+`data-recursica-error` and `data-recursica-disabled` to `FormControlWrapper`'s root (the same
+element as `.layoutOverride`, mirroring FileInput). Custom properties inherit, so the dropzone,
+icon, text and file list read only `--recursica_ui-kit_components_file-upload_properties_*`. No
+`_variants_` names or per-state/per-layout value blocks remain. `opacity` exists only while
+disabled, so it keeps a `, 1` fallback.

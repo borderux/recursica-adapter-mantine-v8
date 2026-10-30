@@ -9,30 +9,18 @@
  */
 
 /* LAYOUT SPACING OVERRIDES:
-   - Sets the --form-control-margin-bottom spacing hook to map component-specific layout tokens.
-   - Also sets the --autocomplete-control-{max,min}-width hooks consumed inline in AutoComplete.tsx,
-     since the token schema no longer provides a single layout-agnostic min/max width. */
+   - Maps the contract's layout-resolved properties onto the --form-control-margin-bottom hook and
+     the --autocomplete-control-{max,min}-width hooks consumed inline in AutoComplete.tsx.
+   - The contract attributes (data-recursica*) live on this element; see AutoComplete.tsx. */
 .layoutOverride {
   --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_autocomplete_variants_layouts_stacked_properties_top-bottom-margin
+    --recursica_ui-kit_components_autocomplete_properties_top-bottom-margin
   );
   --autocomplete-control-max-width: var(
-    --recursica_ui-kit_components_autocomplete_variants_layouts_stacked_properties_max-width
+    --recursica_ui-kit_components_autocomplete_properties_max-width
   );
   --autocomplete-control-min-width: var(
-    --recursica_ui-kit_components_autocomplete_variants_layouts_stacked_properties_min-width
-  );
-}
-
-.layoutOverride[data-form-layout="side-by-side"] {
-  --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_autocomplete_variants_layouts_side-by-side_properties_top-bottom-margin
-  );
-  --autocomplete-control-max-width: var(
-    --recursica_ui-kit_components_autocomplete_variants_layouts_side-by-side_properties_max-width
-  );
-  --autocomplete-control-min-width: var(
-    --recursica_ui-kit_components_autocomplete_variants_layouts_side-by-side_properties_min-width
+    --recursica_ui-kit_components_autocomplete_properties_min-width
   );
 }
 
@@ -41,12 +29,6 @@
    - outline: none. Bypassing browser focus rings to rely strictly on Recursica focus states natively.
    - flex/layout: display: flex on the root wrapper safely encapsulating internal section rendering.
 */
-
-/* EXEMPTIONS:
-   - border-size is constant across disabled/error states — only border-color changes; the
-     disabled/error border-size tokens are never applied by design. */
-/* recursica-ignore: --recursica_ui-kit_components_autocomplete_variants_states_disabled_properties_border-size */
-/* recursica-ignore: --recursica_ui-kit_components_autocomplete_variants_states_error_properties_border-size */
 
 .root {
   display: flex;
@@ -255,25 +237,6 @@
   );
 }
 
-/* No dedicated autocomplete-option "selected" token exists in the schema either, but the
-   menu-item component's selected-state colors are the closest real token family for the same
-   concept (a selected row in a list) — same reuse Dropdown.module.css makes. Despite the name,
-   Mantine's `data-combobox-active` is the attribute it sets when an option's value matches the
-   current field value (see OptionsDropdown.mjs: `active: checked`) — the actual "this is the
-   selected item" flag, distinct from the transient `data-combobox-selected` keyboard-highlight
-   grouped with hover above. Keying this rule off `data-combobox-selected` instead (as it
-   previously did) is why the selected option only showed a highlight while arrow-key navigating,
-   and lost it as soon as the dropdown was reopened normally. */
-.option[data-combobox-active="true"],
-.option[data-combobox-active] {
-  background-color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_selected_properties_colors_background-color
-  );
-  color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_selected_properties_colors_text-color
-  );
-}
-
 /* Rich option content (leadingIcon/supportingText — see MANTINE_ADAPTER_RICH_OPTION_DATA.md). No
    dedicated autocomplete-option icon or supporting-text token exists in the schema either; reuse
    the menu-item component's tokens, same reasoning as Dropdown.module.css. */
@@ -293,7 +256,7 @@
     --recursica_ui-kit_components_menu-item_properties_icon-leading-size
   );
   color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_unselected_properties_colors_leading-icon-color
+    --recursica_ui-kit_components_menu-item_properties_colors_leading-icon-color
   );
 }
 
@@ -354,7 +317,7 @@
     --recursica_ui-kit_components_menu-item_properties_supporting-text_text-transform
   );
   color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_unselected_properties_colors_supporting-text-color
+    --recursica_ui-kit_components_menu-item_properties_colors_supporting-text-color
   );
 }
 
@@ -375,56 +338,24 @@
       var(--recursica_brand_states_focus_color);
 }
 
-/* Error State Mapping (Propagated strictly down from the wrapper DOM context) */
-.root[data-error] .input {
-  border-color: var(
-    --recursica_ui-kit_components_autocomplete_variants_states_error_properties_colors_border-color
-  );
-  background-color: var(
-    --recursica_ui-kit_components_autocomplete_variants_states_error_properties_colors_background-color
-  );
-  color: var(
-    --recursica_ui-kit_components_autocomplete_variants_states_error_properties_colors_text-color
-  );
-}
-
-.root[data-error] .section[data-position="left"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_autocomplete_variants_states_error_properties_colors_leading-icon
-  );
-}
-
-.root[data-error] .section[data-position="right"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_autocomplete_variants_states_error_properties_colors_trailing-icon
-  );
-}
-
-/* Disabled State Mapping (Propagated strictly down from the wrapper DOM context) */
-.root[data-disabled] .input {
-  border-color: var(
-    --recursica_ui-kit_components_autocomplete_variants_states_disabled_properties_colors_border-color
-  );
-  background-color: var(
-    --recursica_ui-kit_components_autocomplete_variants_states_disabled_properties_colors_background-color
-  );
-  color: var(
-    --recursica_ui-kit_components_autocomplete_variants_states_disabled_properties_colors_text-color
-  );
+/* Error/disabled colors and border-size resolve through the contract's data-recursica-error /
+   data-recursica-disabled attributes, so no per-state value rules are needed. Opacity is defined
+   only while disabled. */
+.input {
   opacity: var(
-    --recursica_ui-kit_components_autocomplete_variants_states_disabled_properties_opacity
+    --recursica_ui-kit_components_autocomplete_properties_opacity,
+    1
+  );
+}
+
+/* Higher specificity than Mantine's own `.input:disabled` background/color, which would otherwise
+   win over `.input` (same values, re-asserted). */
+.root[data-disabled] .input {
+  background-color: var(
+    --recursica_ui-kit_components_autocomplete_properties_colors_background-color
+  );
+  color: var(
+    --recursica_ui-kit_components_autocomplete_properties_colors_text-color
   );
   cursor: not-allowed;
-}
-
-.root[data-disabled] .section[data-position="left"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_autocomplete_variants_states_disabled_properties_colors_leading-icon
-  );
-}
-
-.root[data-disabled] .section[data-position="right"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_autocomplete_variants_states_disabled_properties_colors_trailing-icon
-  );
 }

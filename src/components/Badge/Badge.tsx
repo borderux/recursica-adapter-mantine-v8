@@ -48,7 +48,8 @@ const _Badge = forwardRef<HTMLDivElement, BadgeProps>(function Badge(
       ref={ref}
       {...sanitizedProps}
       variant="filled" // We manage visual style purely through our CSS variables mapping
-      data-variant={variant}
+      data-recursica="badge"
+      data-recursica-styles={variant}
       className={finalClass}
       classNames={mergedClassNames}
     />

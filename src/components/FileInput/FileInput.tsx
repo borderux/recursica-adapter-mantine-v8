@@ -237,7 +237,7 @@ export const FileInput = forwardRef<HTMLDivElement, FileInputProps>(
 
     // Roving tabindex across the file chip list (single- or multiple-file mode): only the
     // "active" chip's delete icon is a tab stop, and Left/Right/Up/Down move it — same pattern
-    // as FileUpload, see FILEINPUT_IMPLEMENTATION_NOTES.md.
+    // as FileUpload, see IMPLEMENTATION_NOTES.md.
     const [activeChipIndex, setActiveChipIndex] = useState(0);
     const deleteIconRefs = useRef<Array<HTMLSpanElement | null>>([]);
     const prevFileCountRef = useRef(files?.length ?? 0);
@@ -292,6 +292,10 @@ export const FileInput = forwardRef<HTMLDivElement, FileInputProps>(
         className={wrapperClass}
         style={style}
         formLayout={formLayout}
+        data-recursica="file-input"
+        data-recursica-layouts={formLayout}
+        data-recursica-error={effectiveError ? "" : undefined}
+        data-recursica-disabled={disabled ? "" : undefined}
         labelSize={labelSize}
         labelAlignment={labelAlignment}
         labelOptionalText={labelOptionalText}

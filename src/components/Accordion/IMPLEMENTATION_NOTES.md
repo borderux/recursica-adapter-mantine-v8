@@ -69,4 +69,16 @@ wants to override the cascaded container-level chevron for a single item.
 descenders (e.g. the "g" in a long title) whenever `text_line-height` is tighter than the font's
 natural ascent+descent. Switched to `overflow: clip; overflow-clip-margin: 0.35em;` — same
 truncation, but ink can bleed slightly past the line box before it's actually clipped. Project-wide
-fix; see Chip's `CHIP_IMPLEMENTATION_NOTES.md` for the original discovery.
+fix; see Chip's `IMPLEMENTATION_NOTES.md` for the original discovery.
+
+---
+
+## Scoped CSS contract
+
+**Decision:** The header reads only the stable root names `--recursica_ui-kit_components_accordion-header_properties_*` and never a variant-path name. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`. `accordion`, `accordion-item` and `accordion-content` have no contract; they use their generic names from the theme/layer blocks.
+
+**Implementation:**
+
+- `AccordionControl` sets `data-recursica="accordion-header"` and `data-recursica-appearance="open|closed"`. Text, icon, background and border colors resolve from that on the control and are inherited by the chevron and left icon, so there are no per-appearance CSS rules.
+- Mantine does not export its active state, so `Accordion` owns the open value (`useUncontrolled`, passed to Mantine as controlled) and shares it with items through context. `value`, `defaultValue`, `onChange` and `multiple` keep working.
+- `.item[data-active]` is kept only for the chevron rotation.

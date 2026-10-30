@@ -6,23 +6,12 @@
  *   recursica-allow-brand: --recursica_brand_states_focus_margin
  */
 
-/* EXEMPTIONS:
-   - border-size is constant across disabled/error states — only border-color changes; the
-     disabled/error border-size tokens are never applied by design. */
-/* recursica-ignore: --recursica_ui-kit_components_time-picker_variants_states_disabled_properties_border-size */
-/* recursica-ignore: --recursica_ui-kit_components_time-picker_variants_states_error_properties_border-size */
-
 /* LAYOUT SPACING OVERRIDES:
-   - Sets the --form-control-margin-bottom spacing hook to map component-specific layout tokens. */
+   - Maps the contract's layout-resolved margin onto the --form-control-margin-bottom hook.
+   - The contract attributes (data-recursica*) live on this element; see TimePicker.tsx. */
 .layoutOverride {
   --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_time-picker_variants_layouts_stacked_properties_top-bottom-margin
-  );
-}
-
-.layoutOverride[data-form-layout="side-by-side"] {
-  --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_time-picker_variants_layouts_side-by-side_properties_top-bottom-margin
+    --recursica_ui-kit_components_time-picker_properties_top-bottom-margin
   );
 }
 
@@ -30,7 +19,7 @@
    - border-style: solid. Native structural rendering rule.
    - display: flex on .root — the time field and the AM/PM BareDropdown are two visually separate
      controls sitting side by side, not merged into one shared box. See
-     TIMEPICKER_IMPLEMENTATION_NOTES.md for why this composite exists.
+     IMPLEMENTATION_NOTES.md for why this composite exists.
 */
 
 .root {
@@ -62,7 +51,7 @@
   /* time-picker has no dedicated min-height token (unlike text-field/date-picker); this global is
      the one text-field's own min-height token resolves to, so both controls land on the same 48px
      height without binding to another component's own namespace. See
-     TIMEPICKER_IMPLEMENTATION_NOTES.md. */
+     IMPLEMENTATION_NOTES.md. */
   min-height: var(
     --recursica_ui-kit_globals_form_field_size_single-line-input-height
   );
@@ -73,6 +62,8 @@
     --recursica_ui-kit_components_time-picker_properties_border-size
   );
   border-style: solid;
+  /* Opacity exists only while disabled. */
+  opacity: var(--recursica_ui-kit_components_time-picker_properties_opacity, 1);
   border-color: var(
     --recursica_ui-kit_components_time-picker_properties_colors_border-color
   );
@@ -232,44 +223,15 @@
       var(--recursica_brand_states_focus_color);
 }
 
-/* Error State Mapping (Propagated strictly down from the wrapper DOM context) */
-.root[data-error="true"] .timeWrapper {
-  border-color: var(
-    --recursica_ui-kit_components_time-picker_variants_states_error_properties_colors_border-color
-  ) !important;
-  background-color: var(
-    --recursica_ui-kit_components_time-picker_variants_states_error_properties_colors_background-color
-  ) !important;
+/* Mantine's disabled input styling can outrank inherited color, so the contract's text color is
+   re-asserted on the fields. Error needs no such rule: the contract already resolves the root names
+   for error. */
+.root[data-disabled] .timeField {
   color: var(
-    --recursica_ui-kit_components_time-picker_variants_states_error_properties_colors_text-color
-  ) !important;
+    --recursica_ui-kit_components_time-picker_properties_colors_text-color
+  );
 }
 
-.root[data-error="true"] .section :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_time-picker_variants_states_error_properties_colors_icon-color
-  ) !important;
-}
-
-/* Disabled State Mapping (Propagated strictly down from the wrapper DOM context) */
-.root[data-disabled="true"] .timeWrapper {
-  border-color: var(
-    --recursica_ui-kit_components_time-picker_variants_states_disabled_properties_colors_border-color
-  ) !important;
-  background-color: var(
-    --recursica_ui-kit_components_time-picker_variants_states_disabled_properties_colors_background-color
-  ) !important;
-  color: var(
-    --recursica_ui-kit_components_time-picker_variants_states_disabled_properties_colors_text-color
-  ) !important;
-  opacity: var(
-    --recursica_ui-kit_components_time-picker_variants_states_disabled_properties_opacity
-  ) !important;
+.root[data-disabled] .timeWrapper {
   cursor: not-allowed;
-}
-
-.root[data-disabled="true"] .section :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_time-picker_variants_states_disabled_properties_colors_icon-color
-  ) !important;
 }

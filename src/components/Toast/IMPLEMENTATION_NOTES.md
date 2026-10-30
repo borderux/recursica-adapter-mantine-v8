@@ -37,3 +37,15 @@ If dynamic popups are required, developers can configure `@mantine/notifications
 **Implementation:** Mantine's `Notification` inherently supports a `loading={true}` state that natively spins up a loader instead of an icon. However, Recursica's UI Kit strictly does not define structural tokens for loader states inside toasts.
 Instead of attempting to tightly couple the internal `Loader` abstraction or mapping variables incorrectly, the `loading` property is explicitly omitted and `false`-enforced from the public API.
 If consumers explicitly require a loading toast, they must manually inject a `<Loader />` component into the `icon` slot.
+
+---
+
+## 5. Scoped CSS contract
+
+**Decision:** Toast reads only the stable root names `--recursica_ui-kit_components_toast_properties_*`. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
+
+**Implementation:**
+
+- `Toast.tsx` sets `data-recursica="toast"` and `data-recursica-styles={variant}` on the Mantine root. The CSS has no per-variant blocks.
+- `data-variant` stays on the root only so Mantine does not apply its own styling.
+- Elevation is read from the generic `elevation` root name.

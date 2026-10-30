@@ -249,8 +249,8 @@
    ====================================== */
 
 .close {
-  /* Matches the Button component's text-variant, icon-only, small-size visual treatment
-     (see Button.module.css) so the modal close control looks like a Recursica Button
+  /* Matches the Button component's text-style, icon-only, small-size contract
+     (data-recursica="button", see Panel.tsx) so the panel close control looks like a Recursica Button
      rather than Mantine's native CloseButton. */
   box-sizing: border-box;
   display: flex;
@@ -260,33 +260,25 @@
   overflow: hidden;
   transition: all 0.2s ease;
 
-  height: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_height
-  );
-  min-width: var(
-    --recursica_ui-kit_components_button_variants_content_icon-only_variants_sizes_small_properties_min-width
-  );
+  height: var(--recursica_ui-kit_components_button_properties_height);
+  min-width: var(--recursica_ui-kit_components_button_properties_min-width);
   padding: 0
-    var(
-      --recursica_ui-kit_components_button_variants_content_icon-only_variants_sizes_small_properties_horizontal-padding
-    );
+    var(--recursica_ui-kit_components_button_properties_horizontal-padding);
   border-radius: var(
-    --recursica_ui-kit_components_button_variants_content_icon-only_variants_sizes_small_properties_border-radius
+    --recursica_ui-kit_components_button_properties_border-radius
   );
 
   border-style: solid;
   border-width: var(
-    --recursica_ui-kit_components_button_variants_styles_text_properties_border-size
+    --recursica_ui-kit_components_button_properties_border-size
   );
   border-color: var(
-    --recursica_ui-kit_components_button_variants_styles_text_properties_colors_border-color
+    --recursica_ui-kit_components_button_properties_colors_border-color
   );
   background-color: var(
-    --recursica_ui-kit_components_button_variants_styles_text_properties_colors_background-color
+    --recursica_ui-kit_components_button_properties_colors_background-color
   );
-  color: var(
-    --recursica_ui-kit_components_button_variants_styles_text_properties_colors_icon-color
-  );
+  color: var(--recursica_ui-kit_components_button_properties_colors_icon-color);
 }
 
 /* Mantine's CloseIcon sets width/height via an inline `style` attribute
@@ -296,12 +288,8 @@
 .close svg {
   position: relative;
   z-index: 1;
-  width: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_icon
-  ) !important;
-  height: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_icon
-  ) !important;
+  width: var(--recursica_ui-kit_components_button_properties_icon) !important;
+  height: var(--recursica_ui-kit_components_button_properties_icon) !important;
 }
 
 .close::after {
@@ -324,7 +312,7 @@
    `::after` overlay renders the hover feedback, matching Button's single-overlay treatment. */
 .close:hover {
   background-color: var(
-    --recursica_ui-kit_components_button_variants_styles_text_properties_colors_background-color
+    --recursica_ui-kit_components_button_properties_colors_background-color
   );
 }
 

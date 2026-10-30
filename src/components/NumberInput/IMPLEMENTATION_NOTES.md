@@ -22,3 +22,13 @@ This document contains specific design decisions, architectural constraints, and
 **Bug:** `leftSection`/`rightSection` content that isn't an `<svg>` (e.g. a plain `<span>$</span>` currency stand-in, as used in the story) rendered in Mantine's own gray (`--mantine-color-dimmed`, via `--input-section-color`) instead of the Recursica leading/trailing-icon token. Only the `.section :global(svg)` rule was token-colored; anything else fell through to Mantine's `Input.Section` default.
 **Fix:** `.section` now sets `--input-section-color` — the exact variable Mantine's own `Input.Section` rule reads — to the Recursica leading-icon/trailing-icon token per position. This colors any section content (svg or plain text) with the real token instead of leaving a Mantine-library gray leaking through. The `:global(svg)` color rule is left in place (redundant but harmless).
 **Note:** the on-screen color didn't change — Recursica's token already resolves near-black; this fixed the _source_ it comes from, not the value.
+
+## 5. Scoped CSS contract
+
+Reads only the stable root names `--recursica_ui-kit_components_number-input_properties_*`, resolved by
+`data-recursica="number-input"` + `data-recursica-layouts="stacked|side-by-side"` (from `formLayout`) +
+`data-recursica-error` / `data-recursica-disabled`. They sit on the outer `FormControlWrapper` element
+(`.layoutOverride`) and inherit down to `.root`/`.input`. The old per-state `!important` color rules and
+the border-size `recursica-ignore`s are gone (values are identical across states). `opacity` exists only
+while disabled, so `.root[data-disabled] .input` uses `var(..._opacity, 1)`. Gap: none; the
+`min-height`, padding, icon-size and text names used all exist as root names.

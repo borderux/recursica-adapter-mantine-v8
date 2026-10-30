@@ -7,27 +7,16 @@
 /* HARDCODED VALUES:
    - .root: display: flex; flex-direction: column; width: 100% — structural layout, not a design
      token concern (matches how other block-level components like Layer are laid out).
-   - .dropzone: border-style: dashed — see EXEMPTIONS below.
    - .uploadIcon: width/height: 2rem — no icon-size token exists for file-upload (unlike
      TextField/DatePicker); sized to visually match the Figma reference. Revisit if a dedicated
      token is ever added. */
 
-/* EXEMPTIONS:
-   - border-style is ignored: the dropzone is deliberately dashed (conventional drop-target
-     affordance), not the UI Kit's solid-border default. */
-/* recursica-ignore: --recursica_ui-kit_components_file-upload_properties_border-style */
-
 /* LAYOUT SPACING OVERRIDES:
-   - Sets the --form-control-margin-bottom spacing hook to map component-specific layout tokens. */
+   - Maps the contract's layout-resolved margin onto the --form-control-margin-bottom hook.
+   - The contract attributes (data-recursica*) live on this element; see FileUpload.tsx. */
 .layoutOverride {
   --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_file-upload_variants_layouts_stacked_properties_top-bottom-margin
-  );
-}
-
-.layoutOverride[data-form-layout="side-by-side"] {
-  --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_file-upload_variants_layouts_side-by-side_properties_top-bottom-margin
+    --recursica_ui-kit_components_file-upload_properties_top-bottom-margin
   );
 }
 
@@ -47,7 +36,9 @@
   position: relative; /* HARDCODE: anchors the drag-over overlay below */
   box-sizing: border-box;
   width: 100%;
-  border-style: dashed; /* HARDCODE: see EXEMPTIONS above */
+  border-style: var(
+    --recursica_ui-kit_components_file-upload_properties_border-style
+  );
   border-width: var(
     --recursica_ui-kit_components_file-upload_properties_border-size
   );
@@ -69,7 +60,7 @@
 /* Dragging-over state: reuses the generic hover overlay recipe (see Button.module.css) for the
    background, and the shared "selected" border bridge var FormControlWrapper already exposes
    (see FormControlWrapper.module.css) for the border — file-upload has no color tokens of its own
-   for this state. See "Dragging-over visual state" in FILEUPLOAD_IMPLEMENTATION_NOTES.md. */
+   for this state. See "Dragging-over visual state" in IMPLEMENTATION_NOTES.md. */
 .dropzone > * {
   position: relative;
   z-index: 1;
@@ -144,63 +135,10 @@
   gap: var(--recursica_ui-kit_components_file-upload_properties_item-gap);
 }
 
-/* -------------------------------------
-   STATE CASCADE ARCHITECTURE
--------------------------------------- */
-
-/* Error State Mapping (Propagated strictly down from the wrapper DOM context) */
-.root[data-error="true"] .dropzone {
-  border-width: var(
-    --recursica_ui-kit_components_file-upload_variants_states_error_properties_border-size
-  );
-  border-color: var(
-    --recursica_ui-kit_components_file-upload_variants_states_error_properties_colors_border-color
-  );
-  background-color: var(
-    --recursica_ui-kit_components_file-upload_variants_states_error_properties_colors_background-color
-  );
-}
-
-.root[data-error="true"] .dropzoneText {
-  color: var(
-    --recursica_ui-kit_components_file-upload_variants_states_error_properties_colors_text-color
-  );
-}
-
-.root[data-error="true"] .uploadIcon {
-  color: var(
-    --recursica_ui-kit_components_file-upload_variants_states_error_properties_colors_upload-icon
-  );
-}
-
-/* Disabled State Mapping (Propagated strictly down from the wrapper DOM context) */
-.root[data-disabled="true"] .dropzone {
-  border-width: var(
-    --recursica_ui-kit_components_file-upload_variants_states_disabled_properties_border-size
-  );
-  border-color: var(
-    --recursica_ui-kit_components_file-upload_variants_states_disabled_properties_colors_border-color
-  );
-  background-color: var(
-    --recursica_ui-kit_components_file-upload_variants_states_disabled_properties_colors_background-color
-  );
-}
-
-.root[data-disabled="true"] .dropzoneText {
-  color: var(
-    --recursica_ui-kit_components_file-upload_variants_states_disabled_properties_colors_text-color
-  );
-}
-
-.root[data-disabled="true"] .uploadIcon {
-  color: var(
-    --recursica_ui-kit_components_file-upload_variants_states_disabled_properties_colors_upload-icon
-  );
-}
-
+/* Error/disabled colors and border-size resolve through the contract's data-recursica-error /
+   data-recursica-disabled attributes, so no per-state value rules are needed. */
 .root[data-disabled="true"] {
-  opacity: var(
-    --recursica_ui-kit_components_file-upload_variants_states_disabled_properties_opacity
-  );
+  /* Opacity exists only while disabled. */
+  opacity: var(--recursica_ui-kit_components_file-upload_properties_opacity, 1);
   cursor: not-allowed;
 }

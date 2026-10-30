@@ -60,6 +60,8 @@ export const Loader = forwardRef<HTMLSpanElement, LoaderProps>(function Loader(
       data-variant={variant}
       data-size={resolvedSize}
       data-animate={animate}
+      data-recursica="loader"
+      data-recursica-sizes={resolvedSize}
       className={finalClass}
       classNames={mergedClassNames}
     />

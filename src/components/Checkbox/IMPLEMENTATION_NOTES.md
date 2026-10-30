@@ -27,3 +27,18 @@ To decouple `<CheckboxGroup>` away from `<Input.Wrapper>`, we explicitly extract
 ### Accessible name lands on the native `<input>` (verified 2026-10-15)
 
 `RequireAccessibleLabel` enforces a name at compile time (`label`, `aria-label` or `aria-labelledby`). Mantine forwards `aria-*` to the native `<input>` and auto-generates the `id` that links `<label for>`, so no adapter code is needed. This is the behavior the other adapters must match. Covered by `src/components/NativeInputA11y.dom.test.tsx`, which asserts it for Checkbox, Radio and Switch.
+
+---
+
+## Scoped CSS contract
+
+**Decision:** Checkbox reads only the stable root names `--recursica_ui-kit_components_checkbox*_properties_*`, never a variant-path name. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
+
+**Implementation:**
+
+- Mantine's `attributes` prop puts the contracts on its own elements. Mantine's `root` (input and label) is `checkbox-item`. The `inner` box (input and icon) is `checkbox`, with `data-recursica-selection-states` set to `checked`, `unchecked` or `indeterminate`. Both get `data-recursica-disabled` when disabled or read-only. The group's `groupRoot` is `checkbox-group` with `data-recursica-layouts`.
+- The `.label` reads the `checkbox-item` root names, so `checkbox-item` has to be the Mantine root. That is why the checkbox contract sits on `inner`: the input and icon share it, and `inner` is the only element that holds both.
+- Mantine keeps checked state private, so `Checkbox` derives `selection-states` from the `checked` prop, else its own `onChange`-tracked state, else the group's selection. `CheckboxGroup` always passes Mantine a controlled `value` and shares it through `CheckboxGroupStateContext` (own file, for fast refresh; with `disabled`) for that reason. A native form reset of an uncontrolled checkbox is not tracked.
+- `opacity` (checkbox and checkbox-item) exists only while disabled, so CSS reads it with a fallback of `1`. The icon colour has no unchecked value, since no icon shows then.
+- Stacked and side-by-side groups own different properties (`label-field-gap` versus `gutter` and `vertical-padding`), so those two layout blocks stay in the CSS, keyed on `data-recursica-layouts`.
+- `:disabled` is kept only for `cursor`.

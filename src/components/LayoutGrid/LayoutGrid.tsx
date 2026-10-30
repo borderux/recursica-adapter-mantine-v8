@@ -32,7 +32,7 @@ import styles from "./LayoutGrid.module.css";
 //   3. "auto" and "content" don't depend on the column count, so they hand back to Mantine's vars.
 // Alternatives considered and rejected (2026-10-02): reading the manifest in JS to pass Mantine the
 // current column count (makes the manifest required, flips layout after hydration, no clamping),
-// and a native CSS-grid rewrite (loses Mantine's Grid API). See LAYOUT_GRID_IMPLEMENTATION_NOTES.md.
+// and a native CSS-grid rewrite (loses Mantine's Grid API). See IMPLEMENTATION_NOTES.md.
 
 // Mantine's Grid requires a column count for its own span math. Every width this component sets
 // is re-derived from Forge's --recursica_brand_layout-grids_columns (see colVars below), so this
@@ -56,7 +56,7 @@ const LayoutGridContext = createContext<LayoutGridContext>({});
  * design-system-managed and breakpoint-aware (Forge redefines them inside `@media` blocks), so
  * LayoutGrid applies them itself via CSS variables. Neither Mantine's `gutter` nor `columns` is
  * accepted; use Mantine's Grid directly for a fixed N-column grid. See
- * `LAYOUT_GRID_IMPLEMENTATION_NOTES.md`.
+ * `IMPLEMENTATION_NOTES.md`.
  */
 export type LayoutGridProps = WithRecursicaSpacing<
   Omit<MantineGridProps, "gutter" | "columns"> &
@@ -159,7 +159,7 @@ const LayoutGridBase = createPolymorphicComponent<"div", LayoutGridProps>(
 // but commented out for now (2026-09-22, Matt — paused to get Grid merged). Until they're
 // restored there, this stays a plain pass-through of Mantine's own `GridColProps`; no Omit needed
 // since nothing here is contract-backed yet. Re-add the intersection/Omit once
-// `RecursicaLayoutGridColProps` picks these back up. See `LAYOUT_GRID_IMPLEMENTATION_NOTES.md`.
+// `RecursicaLayoutGridColProps` picks these back up. See `IMPLEMENTATION_NOTES.md`.
 export type LayoutGridColProps = WithRecursicaSpacing<
   MantineGridColProps & RecursicaLayoutGridColProps
 >;

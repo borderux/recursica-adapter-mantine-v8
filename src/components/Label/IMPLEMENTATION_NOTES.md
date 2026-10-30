@@ -46,3 +46,9 @@ The `Label` component is fundamentally built as a strict, localized wrapper arou
 - **Issue:** Currently, the `editIconWrapper` lacks a dedicated hover background layer.
 - **Context:** While the global theme abstracts interactive hover environments deeply using layered variable syntax (e.g., `--recursica_brand_layer_1_elements_interactive_hover-color`), Recursica's token generation framework natively fails to expose a universally generic placeholder token (e.g., `--recursica_elements_interactive_hover-color`) which downstream wrappers can map their `<Layer>` injections directly into safely.
 - **Resolution Path:** We are explicitly ignoring the `.editIconWrapper:hover` background color assignment until the raw Figma token exports directly scaffold a generic token placeholder that we can interface cleanly with across arbitrary `<Layer>` contexts, avoiding manually mapping statically hardcoded depths (`layer-0`, `layer-1`).
+
+## Scoped CSS contract (`data-recursica="label"`)
+
+- `Label.module.css` already reads only stable root names `--recursica_ui-kit_components_label_properties_*` (colors, label-text/optional-text typography, gaps, optional-text-opacity). Those are defined ungated on `:root` and in the theme/layer blocks, so `Label` sets no `data-recursica*` attributes and needs none.
+- The only attribute-gated names (`width`, `min-height`, `bottom-padding`, `vertical-padding`, `gutter`) are selected by the `layouts` (stacked/side-by-side) and `sizes` (default/small) axes. They size the label column, not the label text, and `Label` does not know its layout.
+- Gap: `FormControlLayout.module.css` (`.leftSection`) still reads the old `..._label_variants_layouts_*` names. It should set `data-recursica="label"`, `data-recursica-layouts`, `data-recursica-sizes` on `.leftSection` and read the root names (`width`, `min-height`, `bottom-padding`, `vertical-padding`, `gutter`).

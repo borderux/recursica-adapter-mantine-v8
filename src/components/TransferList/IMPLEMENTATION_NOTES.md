@@ -17,6 +17,17 @@ Follows Matt's reference implementation (Forge's fallback `TransferList.tsx`) fa
 - Data model: `data`/`defaultData` as a `[sourceItems, targetItems]` tuple + `onChange`, matching
   Forge's controlled/uncontrolled pattern (same shape as `FileUpload`'s `files`/`onFilesAdded`).
 
+## Scoped CSS contract (`data-recursica="transfer-list"`)
+
+The CSS reads only `--recursica_ui-kit_components_transfer-list_properties_*`. The contract
+attributes are set on the `WithReadOnlyWrapper`/`FormControlWrapper` root (not the inner `.root`),
+because `top-bottom-margin` (axis `layouts`, = `formLayout`) feeds `--form-control-margin-bottom`
+on that same element; custom properties inherit down to the panes. Attributes:
+`data-recursica-layouts`, and `data-recursica-error` / `data-recursica-disabled` (present when
+`error` / `disabled`). `colors_*`, `border-size` and `opacity` are overridden by the state rules
+in the export, so the old `.root[data-error|data-disabled]` `!important` cascade is gone.
+`opacity` exists only in `disabled`, so `.pane` uses `var(..._opacity, 1)`.
+
 ## Routed through `FormControlWrapper` directly, not Forge's hand-rolled label/assistive
 
 Forge's reference renders its own `Label`/`AssistiveElement` directly instead of going through
@@ -81,14 +92,12 @@ names that don't pin down a single location by themselves:
   box size (`flex: 1 1 <width>`, so panes still stretch evenly in a wider container; `height` is
   literal since a dual-listbox needs a bounded, independently-scrollable list).
 
-No exemptions needed beyond `border-size` (see below) — all 31 variables are referenced; verified
-zero broken/unused via `recursica-token-analyzer`.
+No `recursica-ignore` exemptions are needed.
 
-## Border-size intentionally unused
+## Border-size
 
-Same house policy `TextField`/`TextArea`/`FileInput` already follow: `border-size` (base,
-`disabled`, `error`) is `recursica-ignore`d and a flat 1px border is applied uniformly instead, so
-switching states doesn't shift layout.
+`border-size` is read from the stable root name like every other property. The export currently
+sets 1px for the base, `disabled` and `error`, so the border never shifts between states.
 
 ## No forge-defined focus state
 

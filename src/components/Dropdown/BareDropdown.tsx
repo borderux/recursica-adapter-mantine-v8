@@ -9,6 +9,7 @@ import {
   mergeClassNames,
   type RecursicaOverStyled,
 } from "../../utils/filterStylingProps";
+import { menuItemOption } from "./menuItemOption";
 import styles from "./Dropdown.module.css";
 
 /**
@@ -78,14 +79,29 @@ export const BareDropdown = forwardRef<
       label={undefined}
       description={undefined}
       error={undefined}
+      renderOption={(input) =>
+        menuItemOption(
+          (sanitizedProps as MantineSelectProps).renderOption
+            ? (sanitizedProps as MantineSelectProps).renderOption!(input)
+            : input.option.label,
+          input.checked,
+          input.option.disabled,
+        )
+      }
       // `wrapperProps` targets Mantine's *outer* `Input.Wrapper` (the label/description/error
       // stacking element) — a different, ancestor element from the "wrapper" styles-api slot that
       // actually carries `styles.root`'s border/background. Dropdown.module.css's error/disabled
       // rules (`.root[data-error]`/`[data-disabled]`) need the attribute on that inner element, so
       // `attributes.wrapper` (which targets the same slot as `classNames.wrapper`/`styles.wrapper`)
-      // is the correct hook here, not `wrapperProps`. See TIMEPICKER_IMPLEMENTATION_NOTES.md.
+      // is the correct hook here, not `wrapperProps`. See IMPLEMENTATION_NOTES.md.
       attributes={{
+        // The popup is portaled out of the wrapper, so it needs its own contract root.
+        dropdown: { "data-recursica": "dropdown" },
         wrapper: {
+          "data-recursica": "dropdown",
+          "data-recursica-layouts": "stacked",
+          "data-recursica-error": error ? "" : undefined,
+          "data-recursica-disabled": disabled ? "" : undefined,
           "data-disabled": disabled ? "true" : undefined,
           "data-error": error ? "true" : undefined,
         },

@@ -13,3 +13,11 @@ Unlike standard input variables, standard HTML output `<p>` tags inherently carr
 
 The main wrapper intercepts `readOnly` boolean blocks, maintaining its own `isReadOnly` state. Natively, if a user clicks an exposed 'Edit' action (like our legacy SVG or custom `labelActionArea`), the context permanently switches to active.
 There is intentionally no built-in reverse toggle inside typical field bindings (like input "Blur") to revert state. Parents must pass external controls to `readOnly` forcing the internal hooks to reset via standard `useEffect` propagation.
+
+## 3. Scoped CSS contract
+
+Reads only the stable root names `--recursica_ui-kit_components_read-only-field_properties_*`, resolved by
+`data-recursica="read-only-field"` + `data-recursica-layouts="stacked|side-by-side"` (from `formLayout`,
+default `stacked`) on the outer `FormControlWrapper` element (`.layoutOverride`). The contract only varies
+`top-bottom-margin` per layout; the per-layout CSS block was removed. The text/min-height names were
+already root names. There are no states in this contract (no disabled/error), so no fallbacks are needed.

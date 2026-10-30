@@ -43,3 +43,13 @@ static help text doesn't. Rather than requiring every integrator to remember `ro
 **Implementation:** `role` is destructured out and resolved as `role ?? (assistiveVariant ===
 "error" ? "alert" : undefined)` before the spread — an explicit caller-supplied `role` always
 wins over the default, and `"help"` gets no default at all.
+
+---
+
+## 4. Scoped CSS contract
+
+**Decision:** The root sets `data-recursica="assistive-element"` and `data-recursica-types="help|error"`
+(the `types` axis). CSS reads only the stable `--recursica_ui-kit_components_assistive-element_properties_*`
+names, including `colors_text-color` / `colors_icon-color`.
+**Implementation:** The per-variant `_variants_types_*` colour blocks and the `data-variant` attribute were
+removed; the contract rules resolve the colours. No state axes are emitted for this component.

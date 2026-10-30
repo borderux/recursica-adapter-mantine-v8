@@ -213,9 +213,17 @@ export type PaginationDotsProps = React.ComponentPropsWithoutRef<"div"> & {
 
 const _PaginationDots = forwardRef<HTMLDivElement, PaginationDotsProps>(
   function PaginationDots({ icon, ...rest }, ref) {
-    const { size } = usePaginationRole("inactive-pages");
+    const { variant, size } = usePaginationRole("inactive-pages");
     return (
-      <div ref={ref} className={styles.dots} data-size={size} {...rest}>
+      <div
+        ref={ref}
+        className={styles.dots}
+        data-recursica="button"
+        data-recursica-styles={variant}
+        data-recursica-sizes={size}
+        data-recursica-content="icon-only"
+        {...rest}
+      >
         {icon ?? "…"}
       </div>
     );

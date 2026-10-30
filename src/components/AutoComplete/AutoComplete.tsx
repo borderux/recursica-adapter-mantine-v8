@@ -131,6 +131,10 @@ export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
       <WithReadOnlyWrapper
         className={wrapperClass}
         style={style as React.CSSProperties}
+        data-recursica="autocomplete"
+        data-recursica-layouts={formLayout}
+        data-recursica-error={error ? "" : undefined}
+        data-recursica-disabled={disabled ? "" : undefined}
         controlMaxWidth="var(--autocomplete-control-max-width)"
         controlMinWidth="var(--autocomplete-control-min-width)"
         overStyled={overStyled as true}
@@ -159,6 +163,15 @@ export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
             ref={ref}
             {...(sanitizedProps as unknown as MantineAutocompleteProps)}
             classNames={mergedClassNames}
+            // The dropdown is portaled out of the wrapper, so it needs its own contract root; each
+            // option is a menu-item (never "selected": Mantine's Autocomplete doesn't mark one).
+            attributes={{
+              dropdown: { "data-recursica": "autocomplete" },
+              option: {
+                "data-recursica": "menu-item",
+                "data-recursica-selection-states": "unselected",
+              },
+            }}
             disabled={disabled}
             value={value as string | undefined}
             defaultValue={defaultValue as string | undefined}

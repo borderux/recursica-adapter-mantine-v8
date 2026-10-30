@@ -20,11 +20,11 @@ Decisions and design tweaks strictly tailored for the UI Kit's Menu wrapped agai
 
 ---
 
-## 3. Selected vs Unselected Item States
+## 3. Selected vs Unselected Item States (scoped CSS contract)
 
-**Decision:** Menu items map to Recursica's `selected-item` and `unselected-item` color token groups.
+**Decision:** Items, sub-items and section labels carry `data-recursica="menu-item"` plus `data-recursica-selection-states="selected|unselected"`; `data-recursica-disabled` is added when `disabled`. The CSS reads only the stable `--recursica_ui-kit_components_menu-item_properties_*` names (colors, text, geometry, and `opacity`). The popup container reads the root `menu_properties_*` names and has no contract of its own.
 
-**Implementation:** The CSS module defaults all items to `unselected-item_*` tokens (background, text, opacity). Items with `[data-selected]` switch to `selected-item_*` tokens. This mapping is natively driven by Mantine's internal state tracking without React state hooks.
+**Implementation:** Mantine exposes no selected state, so `menuItemContract()` in `Menu.tsx` derives it from the caller's `data-selected` attribute (no `useUncontrolled`/context needed). `opacity` exists only while disabled, so the CSS uses `var(..._opacity, 1)` as a fallback. `Menu.Label` is always `unselected` (it reads the supporting-text color).
 
 ---
 

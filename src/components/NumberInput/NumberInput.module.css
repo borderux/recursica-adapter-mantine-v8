@@ -7,30 +7,18 @@
  */
 
 /* LAYOUT SPACING OVERRIDES:
-   - Sets the --form-control-margin-bottom spacing hook to map component-specific layout tokens.
-   - Also sets the --number-input-control-{max,min}-width hooks consumed inline in NumberInput.tsx,
-     since the token schema no longer provides a single layout-agnostic min/max width. */
+   - Maps the contract's layout-resolved properties onto the --form-control-margin-bottom hook and
+     the --number-input-control-{max,min}-width hooks consumed inline in NumberInput.tsx.
+   - The contract attributes (data-recursica*) live on this element; see NumberInput.tsx. */
 .layoutOverride {
   --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_number-input_variants_layouts_stacked_properties_top-bottom-margin
+    --recursica_ui-kit_components_number-input_properties_top-bottom-margin
   );
   --number-input-control-max-width: var(
-    --recursica_ui-kit_components_number-input_variants_layouts_stacked_properties_max-width
+    --recursica_ui-kit_components_number-input_properties_max-width
   );
   --number-input-control-min-width: var(
-    --recursica_ui-kit_components_number-input_variants_layouts_stacked_properties_min-width
-  );
-}
-
-.layoutOverride[data-form-layout="side-by-side"] {
-  --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_number-input_variants_layouts_side-by-side_properties_top-bottom-margin
-  );
-  --number-input-control-max-width: var(
-    --recursica_ui-kit_components_number-input_variants_layouts_side-by-side_properties_max-width
-  );
-  --number-input-control-min-width: var(
-    --recursica_ui-kit_components_number-input_variants_layouts_side-by-side_properties_min-width
+    --recursica_ui-kit_components_number-input_properties_min-width
   );
 }
 
@@ -40,12 +28,6 @@
    - flex/layout: display: flex on the root wrapper safely encapsulating internal section rendering.
    - Controls: Hardcoded to bypass Mantine's default borders and backgrounds on the increment/decrement arrows.
 */
-
-/* EXEMPTIONS:
-   - border-size is constant across disabled/error states — only border-color changes; the
-     disabled/error border-size tokens are never applied by design. */
-/* recursica-ignore: --recursica_ui-kit_components_number-input_variants_states_disabled_properties_border-size */
-/* recursica-ignore: --recursica_ui-kit_components_number-input_variants_states_error_properties_border-size */
 
 .root {
   display: flex;
@@ -245,58 +227,13 @@
       var(--recursica_brand_states_focus_color);
 }
 
-/* Error State Mapping (Propagated strictly down from the wrapper DOM context) */
-.root[data-error] .input {
-  border-color: var(
-    --recursica_ui-kit_components_number-input_variants_states_error_properties_colors_border-color
-  ) !important;
-  background-color: var(
-    --recursica_ui-kit_components_number-input_variants_states_error_properties_colors_background-color
-  ) !important;
-  color: var(
-    --recursica_ui-kit_components_number-input_variants_states_error_properties_colors_text-color
-  ) !important;
-}
-
-.root[data-error] .section[data-position="left"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_number-input_variants_states_error_properties_colors_leading-icon
-  ) !important;
-}
-
-.root[data-error] .section[data-position="right"] :global(svg),
-.root[data-error] .control {
-  color: var(
-    --recursica_ui-kit_components_number-input_variants_states_error_properties_colors_trailing-icon
-  ) !important;
-}
-
-/* Disabled State Mapping (Propagated strictly down from the wrapper DOM context) */
+/* Error/disabled colors and border-size resolve through the contract's data-recursica-error /
+   data-recursica-disabled attributes, so no per-state value rules are needed. */
 .root[data-disabled] .input {
-  border-color: var(
-    --recursica_ui-kit_components_number-input_variants_states_disabled_properties_colors_border-color
-  ) !important;
-  background-color: var(
-    --recursica_ui-kit_components_number-input_variants_states_disabled_properties_colors_background-color
-  ) !important;
-  color: var(
-    --recursica_ui-kit_components_number-input_variants_states_disabled_properties_colors_text-color
-  ) !important;
+  /* Opacity exists only while disabled. */
   opacity: var(
-    --recursica_ui-kit_components_number-input_variants_states_disabled_properties_opacity
-  ) !important;
+    --recursica_ui-kit_components_number-input_properties_opacity,
+    1
+  );
   cursor: not-allowed;
-}
-
-.root[data-disabled] .section[data-position="left"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_number-input_variants_states_disabled_properties_colors_leading-icon
-  ) !important;
-}
-
-.root[data-disabled] .section[data-position="right"] :global(svg),
-.root[data-disabled] .control {
-  color: var(
-    --recursica_ui-kit_components_number-input_variants_states_disabled_properties_colors_trailing-icon
-  ) !important;
 }

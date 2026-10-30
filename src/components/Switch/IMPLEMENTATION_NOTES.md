@@ -66,3 +66,19 @@ column at left with the switches beside it; stacked layout unaffected.
 ### Accessible name lands on the native `<input>` (verified 2026-10-15)
 
 `RequireAccessibleLabel` enforces a name at compile time (`label`, `aria-label` or `aria-labelledby`). Mantine forwards `aria-*` to the native `<input>` and auto-generates the `id` that links `<label for>`, so no adapter code is needed. This is the behavior the other adapters must match. Covered by `src/components/NativeInputA11y.dom.test.tsx`, which asserts it for Checkbox, Radio and Switch.
+
+---
+
+## Scoped CSS contract
+
+**Decision:** Switch reads only the stable root names `--recursica_ui-kit_components_switch*_properties_*`, never a variant-path name. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
+
+**Implementation:**
+
+- Mantine's `attributes` prop puts the contracts on its own elements. Mantine's `root` (track and label) is `switch-item`. The `track` (holds thumb and icons) is `switch`, with `data-recursica-selection-states` set to `selected` or `unselected`. Both get `data-recursica-disabled` when disabled or read-only. The group's `groupRoot` is `switch-group` with `data-recursica-layouts`.
+- The `.label` reads the `switch-item` root names, so `switch-item` has to be the Mantine root.
+- Mantine keeps checked state private, so `Switch` derives `selection-states` from the `checked` prop, else its own `onChange`-tracked state, else the group's selection. `SwitchGroup` always passes Mantine a controlled `value` and shares it through `SwitchGroupStateContext` (own file, for fast refresh; with `disabled`). A native form reset of an uncontrolled switch is not tracked.
+- `opacity` (switch and switch-item) exists only while disabled, so CSS reads it with a fallback of `1`.
+- Thumb, track and icon colours are single state-resolved names. The two thumb icons share `icon-color`; only the visible one matters.
+- Stacked and side-by-side groups own different properties (`label-field-gap` versus `gutter` and `vertical-padding`), so those two layout blocks stay in the CSS, keyed on `data-recursica-layouts`.
+- Disabled styling keys on `data-recursica-disabled`, not `:has(input:disabled)`.

@@ -72,6 +72,8 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
         withCloseButton={withCloseButton}
         withBorder={false} // Border is handled via CSS or tokens if needed
         data-variant={variant}
+        data-recursica="toast"
+        data-recursica-styles={variant}
         classNames={mergedClassNames}
         loading={false}
       />

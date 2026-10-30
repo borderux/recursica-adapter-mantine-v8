@@ -321,6 +321,10 @@ export const TransferList = forwardRef<HTMLDivElement, TransferListProps>(
       <WithReadOnlyWrapper
         ref={ref}
         formLayout={formLayout}
+        data-recursica="transfer-list"
+        data-recursica-layouts={formLayout}
+        data-recursica-error={error ? "" : undefined}
+        data-recursica-disabled={disabled ? "" : undefined}
         labelSize={labelSize}
         labelAlignment={labelAlignment}
         labelOptionalText={labelOptionalText}
@@ -348,8 +352,6 @@ export const TransferList = forwardRef<HTMLDivElement, TransferListProps>(
           <div
             {...(sanitizedProps as Record<string, unknown>)}
             className={styles.root}
-            data-disabled={disabled ? "true" : undefined}
-            data-error={error ? "true" : undefined}
           >
             <div className={styles.panes}>
               {renderPane(

@@ -26,3 +26,13 @@ source of truth — rendered them in this incidental gray).
 changed the `.step` label/description rules to `[data-completed]` / `[data-progress]` /
 `:not([data-completed]):not([data-progress])`. No `mui-adapter` change was needed for this: its
 class-based state selectors were already correct against the design tokens.
+
+## Scoped CSS contract (`data-recursica="stepper"`)
+
+`Stepper.tsx` sets `data-recursica="stepper"`, `data-recursica-sizes` (large/small) and
+`data-recursica-orientation` (horizontal/vertical) on the Mantine root. `Stepper.module.css` reads only
+the stable `--recursica_ui-kit_components_stepper_properties_*` names; the `_variants_` names and the
+per-size `.large`/`.small` blocks (and per-orientation variable assignments) were removed. One `.root`
+block bridges the root names to Mantine's `--stepper-*` variables. Orientation still selects layout
+rules via the `.horizontal`/`.vertical` classes (structure only, no tokens). No state-only properties
+and no gaps found.

@@ -3,7 +3,7 @@
 ## Architecture overview
 
 `FileInput` replaces the previous "coming soon" stub with a fully custom composite, the same way
-`FileUpload` was built (see `../FileUpload/FILEUPLOAD_IMPLEMENTATION_NOTES.md`). It shares
+`FileUpload` was built (see `../FileUpload/IMPLEMENTATION_NOTES.md`). It shares
 `FileUpload`'s selection/validation contract (`accept`/`maxSize`/`maxFiles`, `onFilesRejected`,
 `readOnly`) via a common `RecursicaFileUploadItem` type and near-identical `handleFiles`/drag
 logic, but is presented as a single-line, `TextField`-shaped control rather than a dropzone —
@@ -67,7 +67,7 @@ states shifts the layout), just applied here to real rather than phantom tokens.
 
 `FileUpload`'s dropzone deliberately has no `onClick`/`role="button"`/`tabIndex` of its own — the
 separate "Browse files" `<Button>` is its sole click/keyboard affordance, avoiding a
-nested-interactive-element ambiguity (see `FILEUPLOAD_IMPLEMENTATION_NOTES.md`, "Not a nested
+nested-interactive-element ambiguity (see `IMPLEMENTATION_NOTES.md`, "Not a nested
 interactive element"). `FileInput` has no separate Browse button in the reference design — the
 box itself plays that role, the same way a real `<input type="file">` is its own focusable,
 clickable, `Enter`/`Space`-activatable control. So it needs to be one directly: `role="button"`,
@@ -101,8 +101,7 @@ The clear-all affordance shown whenever `files.length > 0` is a real shared `But
 (`variant="text" size="small"`, icon-only), not a bespoke `<span role="button">` — it gets real
 button semantics and keyboard handling for free, the same reasoning as `Tree`'s expand/collapse
 button (see `Tree.module.css`'s `.expandButton`). It's rendered through Button's own tokened
-color/disabled states, so `file-input`'s own `properties_colors_trailing-icon` token (and its
-`disabled`/`error` state variants) is `recursica-ignore`d rather than applied — it has no
+color/disabled states, so `file-input`'s own `properties_colors_trailing-icon` token is `recursica-ignore`d rather than applied — it has no
 "clear button is disabled" state of its own anyway, since `disabled` already omits interactivity
 entirely. Clicking/activating it calls `onFileRemove` once per currently-selected file (reusing
 the same callback `FileUpload`'s individual chip removal uses, rather than introducing a separate
@@ -151,3 +150,15 @@ structurally the same but inert (`tabIndex={-1}`, `aria-disabled`, no handlers, 
 disabled) — both are computed together as a single `interactive` flag used throughout, but remain
 independently toggleable props (a `readOnly` control is never simultaneously `disabled` in
 practice, but nothing enforces that at the type level, matching `FileUpload`'s own convention).
+
+## Scoped CSS contract
+
+Reads only the stable root names `--recursica_ui-kit_components_file-input_properties_*`, resolved by
+`data-recursica="file-input"` + `data-recursica-layouts="stacked|side-by-side"` (from `formLayout`) +
+`data-recursica-error` (set when the effective error, including the built-in accept/cap messages,
+is present) / `data-recursica-disabled`. They sit on the outer `FormControlWrapper` element
+(`.layoutOverride`) and inherit down to `.root`. Error/disabled colors and border-size need no
+per-state CSS (the old `!important` rules and the border-size `recursica-ignore`s are gone; the
+values are identical across states). `opacity` exists only while disabled, so
+`.root[data-disabled]` uses `var(..._opacity, 1)`. The nested `Chip`/`Button` carry their own
+contracts; the assistive-element is rendered by `FormControlWrapper`.

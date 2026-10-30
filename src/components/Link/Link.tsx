@@ -41,6 +41,7 @@ const _Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
       className={finalClass}
       classNames={mergedClassNames}
       underline="never"
+      data-recursica="link"
       {...(icon ? { "data-has-icon": "" } : {})}
     >
       {icon && (

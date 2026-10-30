@@ -1,6 +1,5 @@
 /* Brand-layer exemptions (recursica-allow-brand) — see recursica-token-analyzer README.md.
  * Global hover/focus/disabled state tokens (recursica_variables_scoped.css header, 'Hover & Focus states' / 'Disabled state' — implicit rule for every interactive element; components must not define their own per-component treatment).
- *   recursica-allow-brand: --recursica_brand_states_disabled
  *   recursica-allow-brand: --recursica_brand_states_focus_blur
  *   recursica-allow-brand: --recursica_brand_states_focus_border-size
  *   recursica-allow-brand: --recursica_brand_states_focus_color
@@ -43,10 +42,8 @@
 /* Whole-tree `disabled` (no per-node concept — see RecursicaTreeProps.ts). `pointer-events: none`
    blocks every mouse interaction tree-wide in one rule (row clicks, chevron clicks); keyboard is
    separately blocked in Tree.tsx, since pointer-events has no effect on Tab/Enter/Space/arrows.
-   Uses the generic disabled opacity token, same convention as every other disabled component in
-   the design system (no tree-specific disabled token exists). */
+   The dimming itself comes from the tree `opacity` root name, read on `.row`. */
 .root[data-disabled] {
-  opacity: var(--recursica_brand_states_disabled);
   pointer-events: none;
 }
 
@@ -95,6 +92,9 @@
   align-items: center;
   cursor: pointer;
   margin-left: var(--label-offset, 0px);
+  /* Read on the row so the expand button dims with the label. Defined only while
+     data-recursica-disabled is set. */
+  opacity: var(--recursica_ui-kit_components_tree_properties_opacity, 1);
   gap: var(--recursica_ui-kit_components_tree_properties_button-node-gap);
 }
 
@@ -138,38 +138,34 @@
   );
 
   font-family: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_unselected_properties_text_font-family
+    --recursica_ui-kit_components_tree_properties_text_font-family
   );
-  font-size: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_unselected_properties_text_font-size
-  );
+  font-size: var(--recursica_ui-kit_components_tree_properties_text_font-size);
   font-style: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_unselected_properties_text_font-style
+    --recursica_ui-kit_components_tree_properties_text_font-style
   );
   font-weight: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_unselected_properties_text_font-weight
+    --recursica_ui-kit_components_tree_properties_text_font-weight
   );
   letter-spacing: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_unselected_properties_text_letter-spacing
+    --recursica_ui-kit_components_tree_properties_text_letter-spacing
   );
   line-height: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_unselected_properties_text_line-height
+    --recursica_ui-kit_components_tree_properties_text_line-height
   );
   text-decoration: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_unselected_properties_text_text-decoration
+    --recursica_ui-kit_components_tree_properties_text_text-decoration
   );
   text-transform: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_unselected_properties_text_text-transform
+    --recursica_ui-kit_components_tree_properties_text_text-transform
   );
 
-  color: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_unselected_properties_colors_text-color
-  );
+  color: var(--recursica_ui-kit_components_tree_properties_colors_text-color);
   background-color: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_unselected_properties_colors_background-color
+    --recursica_ui-kit_components_tree_properties_colors_background-color
   );
   border-color: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_unselected_properties_colors_border-color
+    --recursica_ui-kit_components_tree_properties_colors_border-color
   );
 }
 
@@ -192,41 +188,4 @@
 .row:hover .label::after,
 .row[data-hovered] .label::after {
   opacity: var(--recursica_brand_states_hover_opacity);
-}
-
-.label[data-selected] {
-  font-family: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_selected_properties_text_font-family
-  );
-  font-size: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_selected_properties_text_font-size
-  );
-  font-style: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_selected_properties_text_font-style
-  );
-  font-weight: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_selected_properties_text_font-weight
-  );
-  letter-spacing: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_selected_properties_text_letter-spacing
-  );
-  line-height: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_selected_properties_text_line-height
-  );
-  text-decoration: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_selected_properties_text_text-decoration
-  );
-  text-transform: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_selected_properties_text_text-transform
-  );
-
-  color: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_selected_properties_colors_text-color
-  );
-  background-color: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_selected_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_tree_variants_selection-states_selected_properties_colors_border-color
-  );
 }

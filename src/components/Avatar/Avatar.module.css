@@ -16,177 +16,67 @@ HARDCODED VALUES:
   transition: all 0.2s ease;
   box-shadow: var(--recursica_ui-kit_components_avatar_properties_elevation);
 
+  /* Every value is a stable root name, resolved by the data-recursica-* attributes set in Avatar.tsx. */
+  width: var(--recursica_ui-kit_components_avatar_properties_width);
+  height: var(--recursica_ui-kit_components_avatar_properties_height);
+  padding: var(--recursica_ui-kit_components_avatar_properties_padding);
+  border-radius: var(
+    --recursica_ui-kit_components_avatar_properties_border-radius
+  );
+  border-width: var(
+    --recursica_ui-kit_components_avatar_properties_border-size
+  );
+  border-color: var(
+    --recursica_ui-kit_components_avatar_properties_colors_border-color
+  );
+  background-color: var(
+    --recursica_ui-kit_components_avatar_properties_colors_background-color
+  );
+
   /* HARDCODE: Remove internal Mantine custom props that interfere */
   --avatar-bd: none;
   --avatar-bg: transparent;
   --avatar-color: inherit;
 }
 
-/* ==== SIZES ==== */
-.root[data-size="small"] {
-  width: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_small_properties_width
-  );
-  height: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_small_properties_height
-  );
-  border-width: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_small_properties_border-size
-  );
+/* Text color is style-specific: the image style has neither text nor icon color. */
+.root[data-recursica-styles="text"] {
+  color: var(--recursica_ui-kit_components_avatar_properties_colors_text-color);
 }
 
-.root[data-size="small"] .iconWrapper {
-  width: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_small_properties_icon-size
-  );
-  height: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_small_properties_icon-size
-  );
+.root[data-recursica-styles="icon"] {
+  color: var(--recursica_ui-kit_components_avatar_properties_colors_icon-color);
 }
 
-.root[data-size="small"] .textWrapper {
+.iconWrapper {
+  width: var(--recursica_ui-kit_components_avatar_properties_icon-size);
+  height: var(--recursica_ui-kit_components_avatar_properties_icon-size);
+}
+
+.textWrapper {
   font-family: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_small_properties_text_font-family
+    --recursica_ui-kit_components_avatar_properties_text_font-family
   );
   font-size: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_small_properties_text_font-size
+    --recursica_ui-kit_components_avatar_properties_text_font-size
   );
   font-style: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_small_properties_text_font-style
+    --recursica_ui-kit_components_avatar_properties_text_font-style
   );
   font-weight: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_small_properties_text_font-weight
+    --recursica_ui-kit_components_avatar_properties_text_font-weight
   );
   letter-spacing: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_small_properties_text_letter-spacing
+    --recursica_ui-kit_components_avatar_properties_text_letter-spacing
   );
   line-height: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_small_properties_text_line-height
+    --recursica_ui-kit_components_avatar_properties_text_line-height
   );
   text-decoration: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_small_properties_text_text-decoration
+    --recursica_ui-kit_components_avatar_properties_text_text-decoration
   );
   text-transform: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_small_properties_text_text-transform
-  );
-}
-
-.root[data-size="default"] {
-  width: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_default_properties_width
-  );
-  height: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_default_properties_height
-  );
-  border-width: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_default_properties_border-size
-  );
-}
-
-.root[data-size="default"] .iconWrapper {
-  width: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_default_properties_icon-size
-  );
-  height: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_default_properties_icon-size
-  );
-}
-
-.root[data-size="default"] .textWrapper {
-  font-family: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_default_properties_text_font-family
-  );
-  font-size: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_default_properties_text_font-size
-  );
-  font-style: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_default_properties_text_font-style
-  );
-  font-weight: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_default_properties_text_font-weight
-  );
-  letter-spacing: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_default_properties_text_letter-spacing
-  );
-  line-height: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_default_properties_text_line-height
-  );
-  text-decoration: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_default_properties_text_text-decoration
-  );
-  text-transform: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_default_properties_text_text-transform
-  );
-}
-
-.root[data-size="large"] {
-  width: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_large_properties_width
-  );
-  height: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_large_properties_height
-  );
-  border-width: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_large_properties_border-size
-  );
-}
-
-.root[data-size="large"] .iconWrapper {
-  width: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_large_properties_icon-size
-  );
-  height: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_large_properties_icon-size
-  );
-}
-
-.root[data-size="large"] .textWrapper {
-  font-family: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_large_properties_text_font-family
-  );
-  font-size: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_large_properties_text_font-size
-  );
-  font-style: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_large_properties_text_font-style
-  );
-  font-weight: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_large_properties_text_font-weight
-  );
-  letter-spacing: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_large_properties_text_letter-spacing
-  );
-  line-height: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_large_properties_text_line-height
-  );
-  text-decoration: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_large_properties_text_text-decoration
-  );
-  text-transform: var(
-    --recursica_ui-kit_components_avatar_variants_sizes_large_properties_text_text-transform
-  );
-}
-
-/* ==== STYLES & VARIANTS ==== */
-
-/* 1. IMAGE */
-.root[data-style="image"] {
-  border-radius: var(
-    --recursica_ui-kit_components_avatar_variants_styles_image_properties_border-radius
-  );
-  border-width: var(
-    --recursica_ui-kit_components_avatar_variants_styles_image_properties_border-size
-  );
-  padding: var(
-    --recursica_ui-kit_components_avatar_variants_styles_image_properties_padding
-  );
-
-  /* Image variant styles */
-  background-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_image_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_image_properties_colors_border-color
+    --recursica_ui-kit_components_avatar_properties_text_text-transform
   );
 }
 
@@ -223,114 +113,4 @@ HARDCODED VALUES:
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-/* 2. ICON */
-.root[data-style="icon"] {
-  border-radius: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_properties_border-radius
-  );
-  padding: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_properties_padding
-  );
-}
-
-.root[data-style="icon"][data-variant="solid"] {
-  border-width: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_variants_types_solid_properties_border-size
-  );
-  background-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_variants_types_solid_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_variants_types_solid_properties_colors_border-color
-  );
-  color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_variants_types_solid_properties_colors_icon-color
-  );
-}
-
-.root[data-style="icon"][data-variant="outline"] {
-  border-width: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_variants_types_outline_properties_border-size
-  );
-  background-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_variants_types_outline_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_variants_types_outline_properties_colors_border-color
-  );
-  color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_variants_types_outline_properties_colors_icon-color
-  );
-}
-
-.root[data-style="icon"][data-variant="ghost"] {
-  border-width: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_variants_types_ghost_properties_border-size
-  );
-  background-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_variants_types_ghost_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_variants_types_ghost_properties_colors_border-color
-  );
-  color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_icon_variants_types_ghost_properties_colors_icon-color
-  );
-}
-
-/* 3. TEXT */
-.root[data-style="text"] {
-  border-radius: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_properties_border-radius
-  );
-  padding: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_properties_padding
-  );
-}
-
-.root[data-style="text"][data-variant="solid"] {
-  border-width: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_variants_types_solid_properties_border-size
-  );
-  background-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_variants_types_solid_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_variants_types_solid_properties_colors_border-color
-  );
-  color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_variants_types_solid_properties_colors_text-color
-  );
-}
-
-.root[data-style="text"][data-variant="outline"] {
-  border-width: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_variants_types_outline_properties_border-size
-  );
-  background-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_variants_types_outline_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_variants_types_outline_properties_colors_border-color
-  );
-  color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_variants_types_outline_properties_colors_text-color
-  );
-}
-
-.root[data-style="text"][data-variant="ghost"] {
-  border-width: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_variants_types_ghost_properties_border-size
-  );
-  background-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_variants_types_ghost_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_variants_types_ghost_properties_colors_border-color
-  );
-  color: var(
-    --recursica_ui-kit_components_avatar_variants_styles_text_variants_types_ghost_properties_colors_text-color
-  );
 }

@@ -27,7 +27,7 @@ export type BreadcrumbProps = RecursicaOverStyled<
  * there anyway via `markCurrentPageItem` (aria-current, stripped href/onClick, CSS reset in
  * Breadcrumb.module.css), but that's a best-effort safety net, not a guarantee — it can't stop a
  * custom Link component (e.g. a router Link) that navigates from its own internal handler. See
- * BREADCRUMB_IMPLEMENTATION_NOTES.md.
+ * IMPLEMENTATION_NOTES.md.
  */
 export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
   function Breadcrumb(

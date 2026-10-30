@@ -117,3 +117,13 @@ convention.
 
 - **AM/PM error-state border wasn't changing**: `BareDropdown` set `data-error`/`data-disabled` via Mantine's `wrapperProps` — which targets the _outer_ `Input.Wrapper` (the label/description/error stacking element), a different, ancestor element from the "wrapper" styles-api slot that actually carries `styles.root`'s border. `Dropdown.module.css`'s `.root[data-error]`/`[data-disabled]` rules never matched as a result. This is the exact same "two different things both called 'wrapper'" trap as the earlier `style` vs `styles.wrapper` bug. Fixed by using `attributes={{ wrapper: {...} }}` instead — the styles-api hook that actually targets the same slot as `classNames.wrapper`. **This is a shared, pre-existing bug** — the real `Dropdown.tsx` had the identical mistake, so its error/disabled states never applied a border color either; fixed there too (low-risk, purely-additive, same reasoning as the `data-selected` fix above).
 - **Static/Editable ReadOnly showed the raw 24-hour value with no AM/PM** (e.g. "14:30" instead of "2:30 PM"): `readOnlyValue` was passed the raw internal string as-is. Added `formatReadOnlyTime`, converting to a 12-hour + AM/PM display string before handing it to `WithReadOnlyWrapper`.
+
+## Scoped CSS contract
+
+Resolved by `data-recursica="time-picker"` + `data-recursica-layouts="stacked|side-by-side"` (from `formLayout`) +
+`data-recursica-error` / `data-recursica-disabled`, set on the outer `FormControlWrapper` element
+(`.layoutOverride`) and inherited by `.root`/`.timeWrapper`. Only stable `..._time-picker_properties_*` names are read;
+the per-state `!important` rules, per-layout block and border-size `recursica-ignore`s are removed (error/disabled
+border-size now resolves through the contract). `.root[data-disabled] .timeField` re-asserts the text color against
+Mantine's disabled styling; `opacity` exists only while disabled, so it uses `var(..._opacity, 1)`.
+The AM/PM `BareDropdown` keeps its own `dropdown` contract. Gaps: none.

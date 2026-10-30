@@ -84,12 +84,13 @@
 
   /* Default State: Unselected */
   background-color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_unselected_properties_colors_background-color
+    --recursica_ui-kit_components_menu-item_properties_colors_background-color
   );
   color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_unselected_properties_colors_text-color
+    --recursica_ui-kit_components_menu-item_properties_colors_text-color
   );
-  opacity: 1;
+  /* Opacity exists only while disabled. */
+  opacity: var(--recursica_ui-kit_components_menu-item_properties_opacity, 1);
 }
 .item:last-of-type {
   margin-bottom: 0;
@@ -98,7 +99,7 @@
 /* Override Mantine's native hover background to use our overlay technique */
 .item:hover {
   background-color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_unselected_properties_colors_background-color
+    --recursica_ui-kit_components_menu-item_properties_colors_background-color
   );
 }
 
@@ -121,38 +122,14 @@
   opacity: var(--recursica_brand_states_hover_opacity);
 }
 
-/* Selected item state */
-.item[data-selected] {
-  background-color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_selected_properties_colors_background-color
-  );
-  color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_selected_properties_colors_text-color
-  );
-  opacity: 1;
-}
-
 /* Hovered item state (keyboard navigation) */
 .item[data-hovered] {
   background-color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_unselected_properties_colors_background-color
+    --recursica_ui-kit_components_menu-item_properties_colors_background-color
   );
 }
 .item[data-hovered]::after {
   opacity: var(--recursica_brand_states_hover_opacity);
-}
-
-/* Disabled item (opacity differs depending on selection state) */
-.item[data-disabled]:not([data-selected]) {
-  opacity: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_unselected_variants_states_disabled_properties_opacity
-  );
-}
-
-.item[data-disabled][data-selected] {
-  opacity: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_selected_variants_states_disabled_properties_opacity
-  );
 }
 
 /* ======================================
@@ -185,7 +162,7 @@
     --recursica_ui-kit_components_menu-item_properties_icon-text-gap
   );
   color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_unselected_properties_colors_leading-icon-color
+    --recursica_ui-kit_components_menu-item_properties_colors_leading-icon-color
   );
 }
 
@@ -198,19 +175,7 @@
   );
   margin-left: var(--recursica_ui-kit_components_menu-item_properties_text-gap);
   color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_unselected_properties_colors_trailing-icon-color
-  );
-}
-
-.item[data-selected] .itemSection[data-position="left"] {
-  color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_selected_properties_colors_leading-icon-color
-  );
-}
-
-.item[data-selected] .itemSection[data-position="right"] {
-  color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_selected_properties_colors_trailing-icon-color
+    --recursica_ui-kit_components_menu-item_properties_colors_trailing-icon-color
   );
 }
 
@@ -264,7 +229,7 @@
   );
 
   color: var(
-    --recursica_ui-kit_components_menu-item_variants_selection-states_unselected_properties_colors_supporting-text-color
+    --recursica_ui-kit_components_menu-item_properties_colors_supporting-text-color
   );
   opacity: 0.7;
 }

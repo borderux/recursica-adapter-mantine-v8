@@ -76,3 +76,13 @@ header cells had no way to opt into this before.
   from our current CSS on these (see the 2026-08-22 review), but none of them are confirmed
   bugs vs. intentional design choices already baked into Figma's tokens. Left as-is; flag to
   design if a change is wanted.
+
+## Scoped CSS contract
+
+**Decision:** Table reads only stable root names (`--recursica_ui-kit_components_table*_properties_*`) and never a `_variants_`, `_modes_` or `_layer_N_` name. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
+
+- Three contracts, no axes, one state: `Table.Th` sets `data-recursica="table-header"`; `Table.Td` sets `table-cell`, or `table-footer` when inside `Table.Tfoot`. Each adds `data-recursica-disabled` when disabled. `Table` itself has no contract (only root names).
+- `Table.Td` cannot see its ancestors, so `Table.Tfoot` and `Table.Tr` share "in footer" and "row disabled" through two small React contexts in `Table.tsx`. A disabled `Table.Tr` therefore marks its cells with `data-recursica-disabled`; `Table.Tr` no longer emits `data-disabled`, and cells no longer emit `data-disabled`.
+- The per-state CSS blocks for disabled header/cell/footer are removed: the contract re-points `colors_cell-color`, `colors_text-color` and `opacity`. `opacity` exists only while disabled, so each rule reads it with a fallback of `1`.
+- Header sorted/unsorted colours are separate root names, so they stay selected by `data-sorted`. They are skipped while disabled so the disabled `cell-color`/`text-color` still win, as before.
+- Currency `text-align` for header and footer still reads the `table-cell` name, which is a plain root name and resolves on any element.

@@ -7,30 +7,18 @@
  */
 
 /* LAYOUT SPACING OVERRIDES:
-   - Sets the --form-control-margin-bottom spacing hook to map component-specific layout tokens.
-   - Also sets the --text-field-control-{max,min}-width hooks consumed inline in TextField.tsx,
-     since the token schema no longer provides a single layout-agnostic min/max width. */
+   - Maps the contract's layout-resolved properties onto the --form-control-margin-bottom hook and
+     the --text-field-control-{max,min}-width hooks consumed inline in TextField.tsx.
+   - The contract attributes (data-recursica*) live on this element; see TextField.tsx. */
 .layoutOverride {
   --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_text-field_variants_layouts_stacked_properties_top-bottom-margin
+    --recursica_ui-kit_components_text-field_properties_top-bottom-margin
   );
   --text-field-control-max-width: var(
-    --recursica_ui-kit_components_text-field_variants_layouts_stacked_properties_max-width
+    --recursica_ui-kit_components_text-field_properties_max-width
   );
   --text-field-control-min-width: var(
-    --recursica_ui-kit_components_text-field_variants_layouts_stacked_properties_min-width
-  );
-}
-
-.layoutOverride[data-form-layout="side-by-side"] {
-  --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_text-field_variants_layouts_side-by-side_properties_top-bottom-margin
-  );
-  --text-field-control-max-width: var(
-    --recursica_ui-kit_components_text-field_variants_layouts_side-by-side_properties_max-width
-  );
-  --text-field-control-min-width: var(
-    --recursica_ui-kit_components_text-field_variants_layouts_side-by-side_properties_min-width
+    --recursica_ui-kit_components_text-field_properties_min-width
   );
 }
 
@@ -39,12 +27,6 @@
    - outline: none. Bypassing browser focus rings to rely strictly on Recursica focus states natively.
    - flex/layout: display: flex on the root wrapper safely encapsulating internal section rendering.
 */
-
-/* EXEMPTIONS:
-   - border-size is constant across disabled/error states — only border-color changes; the
-     disabled/error border-size tokens are never applied by design. */
-/* recursica-ignore: --recursica_ui-kit_components_text-field_variants_states_disabled_properties_border-size */
-/* recursica-ignore: --recursica_ui-kit_components_text-field_variants_states_error_properties_border-size */
 
 .root {
   display: flex;
@@ -209,56 +191,19 @@
       var(--recursica_brand_states_focus_color);
 }
 
-/* Error State Mapping (Propagated strictly down from the wrapper DOM context) */
-.root[data-error] .input {
-  border-color: var(
-    --recursica_ui-kit_components_text-field_variants_states_error_properties_colors_border-color
-  ) !important;
-  background-color: var(
-    --recursica_ui-kit_components_text-field_variants_states_error_properties_colors_background-color
-  ) !important;
-  color: var(
-    --recursica_ui-kit_components_text-field_variants_states_error_properties_colors_text-color
-  ) !important;
-}
-
-.root[data-error] .section[data-position="left"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_text-field_variants_states_error_properties_colors_leading-icon
-  ) !important;
-}
-
-.root[data-error] .section[data-position="right"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_text-field_variants_states_error_properties_colors_trailing-icon
-  ) !important;
-}
-
-/* Disabled State Mapping (Propagated strictly down from the wrapper DOM context) */
+/* Mantine's own disabled input rules (grey background/text) outrank the base .input colors, so the
+   contract's colors are re-asserted here. Error needs no such rule: Mantine sets no error colors. */
 .root[data-disabled] .input {
-  border-color: var(
-    --recursica_ui-kit_components_text-field_variants_states_disabled_properties_colors_border-color
-  ) !important;
   background-color: var(
-    --recursica_ui-kit_components_text-field_variants_states_disabled_properties_colors_background-color
-  ) !important;
+    --recursica_ui-kit_components_text-field_properties_colors_background-color
+  );
+  border-color: var(
+    --recursica_ui-kit_components_text-field_properties_colors_border-color
+  );
   color: var(
-    --recursica_ui-kit_components_text-field_variants_states_disabled_properties_colors_text-color
-  ) !important;
-  opacity: var(
-    --recursica_ui-kit_components_text-field_variants_states_disabled_properties_opacity
-  ) !important;
+    --recursica_ui-kit_components_text-field_properties_colors_text-color
+  );
+  /* Opacity exists only while disabled. */
+  opacity: var(--recursica_ui-kit_components_text-field_properties_opacity, 1);
   cursor: not-allowed;
-}
-
-.root[data-disabled] .section[data-position="left"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_text-field_variants_states_disabled_properties_colors_leading-icon
-  ) !important;
-}
-
-.root[data-disabled] .section[data-position="right"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_text-field_variants_states_disabled_properties_colors_trailing-icon
-  ) !important;
 }
