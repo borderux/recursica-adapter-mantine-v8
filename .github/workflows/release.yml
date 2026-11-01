@@ -35,12 +35,12 @@ jobs:
       id-token: write # Required for NPM OIDC Trusted Publishing
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "24"
           cache: "npm"
@@ -67,7 +67,7 @@ jobs:
       # - Publishes to npm with proper authentication
       # - Creates a GitHub release automatically with changelog and links to PRs
       - name: Create Release Pull Request or Publish to npm
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
           publish: npm run release
         env:
