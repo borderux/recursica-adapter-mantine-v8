@@ -123,6 +123,11 @@
       --recursica_ui-kit_components_table-header_properties_colors_horizontal-divider-color
     );
 
+  opacity: var(
+    --recursica_ui-kit_components_table-header_properties_opacity,
+    1
+  ); /* Defined only while disabled */
+
   /* Unsorted text style by default */
   font-family: var(
     --recursica_ui-kit_components_table-header_properties_unsorted-text-style_font-family
@@ -160,8 +165,9 @@
     );
 }
 
-/* Unsorted specific state overrides */
-.root thead th:not([data-sorted="true"]) {
+/* Unsorted/sorted colours; skipped while disabled so the contract's disabled cell-color/text-color
+   (which override the base names below) win. */
+.root thead th:not([data-sorted="true"]):not([data-recursica-disabled]) {
   background-color: var(
     --recursica_ui-kit_components_table-header_properties_colors_unsorted-cell-color
   );
@@ -170,15 +176,17 @@
   );
 }
 
-/* Sorted specific state overrides */
-.root thead th[data-sorted="true"] {
+.root thead th[data-sorted="true"]:not([data-recursica-disabled]) {
   background-color: var(
     --recursica_ui-kit_components_table-header_properties_colors_sorted-cell-color
   );
   color: var(
     --recursica_ui-kit_components_table-header_properties_colors_sorted-text-color
   );
+}
 
+/* Sorted text style */
+.root thead th[data-sorted="true"] {
   font-family: var(
     --recursica_ui-kit_components_table-header_properties_sorted-text-style_font-family
   );
@@ -202,19 +210,6 @@
   );
   text-transform: var(
     --recursica_ui-kit_components_table-header_properties_sorted-text-style_text-transform
-  );
-}
-
-/* Disabled Header */
-.root thead th[data-disabled="true"] {
-  background-color: var(
-    --recursica_ui-kit_components_table-header_variants_states_disabled_properties_colors_cell-color
-  );
-  color: var(
-    --recursica_ui-kit_components_table-header_variants_states_disabled_properties_colors_text-color
-  );
-  opacity: var(
-    --recursica_ui-kit_components_table-header_variants_states_disabled_properties_opacity
   );
 }
 

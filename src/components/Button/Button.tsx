@@ -143,7 +143,7 @@ const _Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
       {...sanitizedProps}
       className={finalClass}
       classNames={mergedClassNames}
-      variant={mapVariant[variant]}
+      variant={(mapVariant as Record<string, string>)[variant] ?? variant}
       size={mapSize[size]}
       loaderProps={mergedLoaderProps}
       leftSection={

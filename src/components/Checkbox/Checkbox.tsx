@@ -1,11 +1,11 @@
-import { forwardRef, useContext } from "react";
+import { forwardRef } from "react";
 import {
   Checkbox as MantineCheckbox,
   type CheckboxProps as MantineCheckboxProps,
+  useCheckboxGroupContext,
 } from "@mantine/core";
 import { type ReadOnlyControlProps } from "@recursica/adapter-common";
 import { CheckboxGroup } from "./CheckboxGroup";
-import { CheckboxGroupStateContext } from "./CheckboxGroupStateContext";
 import {
   filterStylingProps,
   omitUnsupportedProps,
@@ -47,7 +47,7 @@ type CheckboxComponent = React.ForwardRefExoticComponent<
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   function Checkbox(props, ref) {
-    const groupState = useContext(CheckboxGroupStateContext);
+    const groupState = useCheckboxGroupContext();
     const {
       overStyled = false,
       readOnly,

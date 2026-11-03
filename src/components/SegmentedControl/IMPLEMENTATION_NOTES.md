@@ -26,8 +26,6 @@ The moving active background element (`.indicator`) is decoupled from the actual
 
 ## 7. Scoped CSS contract
 
-SegmentedControl reads only the stable root names `--recursica_ui-kit_components_segmented-control-item_properties_*` for items (plus the container's own `segmented-control_properties_*`); no variant-path names. The export has one contract, `segmented-control-item`, with one axis, `selection-states` (`selected` / `unselected`); the container has none.
+Only the `.indicator` uses the scoped contract: `SegmentedControl.tsx` sets `data-recursica="segmented-control-item"` and `data-recursica-selection-states="selected"` on it through Mantine's `attributes` prop, so it reads the root `segmented-control-item_properties_*` names. The export has one contract, `segmented-control-item`, with one axis, `selection-states` (`selected` / `unselected`); the container has none.
 
-- Mantine renders each `.control` and the `.indicator` and allows no per-item attributes, so `SegmentedControl.tsx` sets `data-recursica="segmented-control-item"` and `data-recursica-selection-states` on each control in a layout effect, following Mantine's own `data-active`. The indicator (rendered later by Mantine's FloatingIndicator, so an effect would miss it) gets them as `selected` through Mantine's `attributes` prop.
-- The selected value is derived with `useUncontrolled` (mirroring Mantine's default of the first item) and passed back to Mantine as a controlled value, so the effect re-runs on change.
-- `.label` inherits the root names from its `.control`; the active label keeps only the text values, with background, border colour and shadow neutralised because `.indicator` draws the selected block.
+- Mantine allows no per-item attributes, so items (`.control` / `.label`) read the variant-path `selection-states_unselected_*` names, and the active label reads `selection-states_selected_*`, keyed on Mantine's own `data-active`. No DOM mutation or value tracking is done in TSX.

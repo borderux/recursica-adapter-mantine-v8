@@ -5,7 +5,7 @@ If you are an AI agent building components:
 1. You are forbidden from modifying native Mantine source code or injecting system styles directly (no `style={{}}` for design tokens).
 2. All style overrides must be done via `{ComponentName}.module.css` scoped to `.root`.
 3. You must use native CSS variables derived from `recursica_variables_scoped.css`.
-4. You must document integration and usage details in a `USAGE.md` file, and internal technical layout hooks in a `{COMPONENT}_IMPLEMENTATION_NOTES.md` file.
+4. You must document integration and usage details in a `USAGE.md` file, and internal technical layout hooks in an `IMPLEMENTATION_NOTES.md` file in the component folder.
 5. You are strictly FORBIDDEN from using CSS variable fallbacks (e.g. `var(--variable-name, fallback-value)`) in `module.css` files.
    </critical_agent_directive>
 

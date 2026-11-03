@@ -30,11 +30,10 @@ gap; no regression on Default/Outline/Pills/Vertical stories.
 
 - `Tabs` root sets `data-recursica="tabs"` + `-styles` (variant) + `-orientation`; it supplies
   `tabs-content-gap` and `space-between-tabs` to `.list`.
-- Each `Tabs.Tab` sets `data-recursica="tabs-item"` + `-styles` + `-orientation` +
-  and reads only `--recursica_ui-kit_components_tabs-item_properties_*`.
+- Each tab gets `data-recursica="tabs-item"` + `-styles` + `-orientation` from the root through
+  Mantine's `attributes.tab`; `Tabs.Tab` adds only `-disabled`. Each tab reads only `--recursica_ui-kit_components_tabs-item_properties_*`.
 - The selected state is not mirrored: the contract matches Mantine's native `aria-selected` on the
-  tab. Mantine does not hand variant/orientation to each Tab, so `Tabs` shares them via a small
-  context. Root `value`/`defaultValue`/`onChange` go straight to Mantine.
+  tab. Root `value`/`defaultValue`/`onChange` go straight to Mantine.
 - Removed: all `_variants_` names, per-variant/per-orientation custom-prop blocks and the
   duplicated active/inactive color+typography rules (the contract resolves them).
 - Pills and outline use the token `border-size`/`border-color` (outline via Mantine's `--tab-border-color`; the list line under the tabs is still Mantine's). The default variant's border still comes from Mantine's indicator lines (unchanged). `--tabs-color` on `.tab` feeds Mantine's

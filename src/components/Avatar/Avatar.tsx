@@ -81,7 +81,7 @@ const _Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
       {...sanitizedProps}
       className={classNameProp}
       classNames={mergedClassNames}
-      variant={mapVariant[variant]}
+      variant={(mapVariant as Record<string, string>)[variant] ?? variant}
       size={mapSize[size]}
       src={src}
       data-recursica="avatar"

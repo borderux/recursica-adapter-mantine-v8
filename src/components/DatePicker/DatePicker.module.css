@@ -14,17 +14,10 @@
  *   recursica-allow-brand: --recursica_brand_states_overlay_opacity
  */
 
-/* LAYOUT SPACING OVERRIDES:
-   - Sets the --form-control-margin-bottom spacing hook to map component-specific layout tokens. */
+/* LAYOUT SPACING: data-recursica-layouts on the wrapper resolves top-bottom-margin. */
 .layoutOverride {
   --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_date-picker_variants_layouts_stacked_properties_top-bottom-margin
-  );
-}
-
-.layoutOverride[data-form-layout="side-by-side"] {
-  --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_date-picker_variants_layouts_side-by-side_properties_top-bottom-margin
+    --recursica_ui-kit_components_date-picker_properties_top-bottom-margin
   );
 }
 
@@ -33,12 +26,6 @@
    - outline: none. Bypassing browser focus rings to rely strictly on Recursica focus states natively.
    - flex/layout: display: flex on the root wrapper safely encapsulating internal section rendering.
 */
-
-/* EXEMPTIONS:
-   - border-size is constant across disabled/error states — only border-color changes; the
-     disabled/error border-size tokens are never applied by design. */
-/* recursica-ignore: --recursica_ui-kit_components_date-picker_variants_states_disabled_properties_border-size */
-/* recursica-ignore: --recursica_ui-kit_components_date-picker_variants_states_error_properties_border-size */
 
 .root {
   display: flex;
@@ -132,6 +119,8 @@
     --recursica_ui-kit_components_date-picker_properties_colors_text-color
   );
 
+  opacity: var(--recursica_ui-kit_components_date-picker_properties_opacity, 1);
+
   outline: none;
 
   /* Single-line enforcement: DatePickerInput renders its value/placeholder as a <button>'s text
@@ -205,51 +194,27 @@
       var(--recursica_brand_states_focus_color);
 }
 
-/* Error State Mapping (Propagated strictly down from the wrapper DOM context) */
-.root[data-error] .input {
-  border-color: var(
-    --recursica_ui-kit_components_date-picker_variants_states_error_properties_colors_border-color
-  ) !important;
+/* Error and disabled values come from the contract (data-recursica-error / -disabled on the
+   wrapper). Mantine's own disabled input styles win on specificity, so re-assert the contract
+   values here; the state-only opacity is already covered by the fallback on .input. */
+.input:disabled,
+.input[data-disabled] {
   background-color: var(
-    --recursica_ui-kit_components_date-picker_variants_states_error_properties_colors_background-color
-  ) !important;
-  color: var(
-    --recursica_ui-kit_components_date-picker_variants_states_error_properties_colors_text-color
-  ) !important;
-}
-
-.root[data-error] .section[data-position="left"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_date-picker_variants_states_error_properties_colors_leading-icon
-  ) !important;
-}
-
-/* Disabled State Mapping (Propagated strictly down from the wrapper DOM context) */
-.root[data-disabled] .input {
+    --recursica_ui-kit_components_date-picker_properties_colors_background-color
+  );
   border-color: var(
-    --recursica_ui-kit_components_date-picker_variants_states_disabled_properties_colors_border-color
-  ) !important;
-  background-color: var(
-    --recursica_ui-kit_components_date-picker_variants_states_disabled_properties_colors_background-color
-  ) !important;
+    --recursica_ui-kit_components_date-picker_properties_colors_border-color
+  );
   color: var(
-    --recursica_ui-kit_components_date-picker_variants_states_disabled_properties_colors_text-color
-  ) !important;
-  opacity: var(
-    --recursica_ui-kit_components_date-picker_variants_states_disabled_properties_opacity
-  ) !important;
+    --recursica_ui-kit_components_date-picker_properties_colors_text-color
+  );
+  opacity: var(--recursica_ui-kit_components_date-picker_properties_opacity, 1);
   cursor: not-allowed;
-}
-
-.root[data-disabled] .section[data-position="left"] :global(svg) {
-  color: var(
-    --recursica_ui-kit_components_date-picker_variants_states_disabled_properties_colors_leading-icon
-  ) !important;
 }
 
 /* =========================================
    CALENDAR POPOVER OVERRIDES
-   Maps generic popover & solid button tokens
+   Popover surface reads hover-card-popover root names; calendar buttons read root button names
    to enforce Recursica's global styling.
    ========================================= */
 
@@ -287,81 +252,68 @@
   );
 }
 
-/* Month label + prev/next nav controls: styled as Recursica's own "text" button variant (small
-   size) rather than bare popover text — same border/background/color/typography tokens Button
-   uses for data-variant="text", since these are functionally buttons inside the popover. */
+/* Month label + prev/next nav controls carry the Button contract (text style, small size) via
+   nextControlProps/previousControlProps/levelControlProps, so they read root button_properties_*.
+   The disabled opacity is only emitted with data-recursica-disabled, which Mantine's internal
+   disabled state cannot set, so it falls back to the same generic disabled token. */
 .calendarHeaderControl,
 .calendarHeaderLevel {
   position: relative;
   border-style: solid;
   border-width: var(
-    --recursica_ui-kit_components_button_variants_styles_text_properties_border-size
+    --recursica_ui-kit_components_button_properties_border-size
   );
   border-color: var(
-    --recursica_ui-kit_components_button_variants_styles_text_properties_colors_border-color
+    --recursica_ui-kit_components_button_properties_colors_border-color
   );
   background-color: var(
-    --recursica_ui-kit_components_button_variants_styles_text_properties_colors_background-color
+    --recursica_ui-kit_components_button_properties_colors_background-color
   );
-  box-shadow: var(
-    --recursica_ui-kit_components_button_variants_styles_text_properties_elevation
-  );
-  color: var(
-    --recursica_ui-kit_components_button_variants_styles_text_properties_colors_text-color
-  );
+  box-shadow: var(--recursica_ui-kit_components_button_properties_elevation);
+  color: var(--recursica_ui-kit_components_button_properties_colors_text-color);
   font-family: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_text_font-family
+    --recursica_ui-kit_components_button_properties_text_font-family
   );
   font-size: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_text_font-size
+    --recursica_ui-kit_components_button_properties_text_font-size
   );
   font-style: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_text_font-style
+    --recursica_ui-kit_components_button_properties_text_font-style
   );
   font-weight: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_text_font-weight
+    --recursica_ui-kit_components_button_properties_text_font-weight
   );
   letter-spacing: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_text_letter-spacing
+    --recursica_ui-kit_components_button_properties_text_letter-spacing
   );
   text-decoration: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_text_text-decoration
+    --recursica_ui-kit_components_button_properties_text_text-decoration
   );
   text-transform: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_text_text-transform
+    --recursica_ui-kit_components_button_properties_text_text-transform
   );
   transition: all 0.2s ease;
 }
 
 /* Prev/next nav: icon-only button sizing (small). */
 .calendarHeaderControl {
-  min-width: var(
-    --recursica_ui-kit_components_button_variants_content_icon-only_variants_sizes_small_properties_min-width
-  );
-  height: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_height
-  );
+  min-width: var(--recursica_ui-kit_components_button_properties_min-width);
+  height: var(--recursica_ui-kit_components_button_properties_height);
   border-radius: var(
-    --recursica_ui-kit_components_button_variants_content_icon-only_variants_sizes_small_properties_border-radius
+    --recursica_ui-kit_components_button_properties_border-radius
   );
   padding: 0
-    var(
-      --recursica_ui-kit_components_button_variants_content_icon-only_variants_sizes_small_properties_horizontal-padding
-    );
+    var(--recursica_ui-kit_components_button_properties_horizontal-padding);
 }
 
 /* Month/year label: label-content button sizing (small). */
 .calendarHeaderLevel {
-  height: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_height
-  );
+  height: var(--recursica_ui-kit_components_button_properties_height);
   border-radius: var(
-    --recursica_ui-kit_components_button_variants_content_label_variants_sizes_small_properties_border-radius
+    --recursica_ui-kit_components_button_properties_border-radius
   );
   padding: 0
-    var(
-      --recursica_ui-kit_components_button_variants_content_label_variants_sizes_small_properties_horizontal-padding
-    );
+    var(--recursica_ui-kit_components_button_properties_horizontal-padding);
 }
 
 /* Neutralize Mantine's own native :hover background-color (gray-0/dark-5) so only our
@@ -394,10 +346,8 @@
 .calendarHeaderLevel:disabled,
 .calendarHeaderLevel[data-disabled] {
   opacity: var(
-    --recursica_ui-kit_components_button_variants_styles_text_variants_states_disabled_properties_opacity
-  );
-  box-shadow: var(
-    --recursica_ui-kit_components_button_variants_styles_text_variants_states_disabled_properties_elevation
+    --recursica_ui-kit_components_button_properties_opacity,
+    var(--recursica_brand_states_disabled)
   );
 }
 
@@ -414,15 +364,9 @@
 }
 
 .calendarHeaderControlIcon {
-  color: var(
-    --recursica_ui-kit_components_button_variants_styles_text_properties_colors_icon-color
-  );
-  width: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_icon
-  );
-  height: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_icon
-  );
+  color: var(--recursica_ui-kit_components_button_properties_colors_icon-color);
+  width: var(--recursica_ui-kit_components_button_properties_icon);
+  height: var(--recursica_ui-kit_components_button_properties_icon);
 }
 
 /* Weekday row (Mo, Tu, We...) */
@@ -475,7 +419,7 @@
    native :hover background-color (gray-0/dark-5) — neutralize it so only our token-driven
    overlay below is visible. Same specificity as Mantine's own selector, so this relies on our
    CSS module loading after @mantine/dates' stylesheet to win the tie (true today; see
-   DATEPICKER_IMPLEMENTATION_NOTES.md if that load order ever changes). */
+   IMPLEMENTATION_NOTES.md if that load order ever changes). */
 .day:hover:not(:disabled, [data-disabled], [data-static]) {
   background-color: transparent;
 }
@@ -541,6 +485,7 @@
   border-radius: var(--recursica_brand_dimensions_border-radii_default);
 }
 
+/* Mantine hides the selection from getDayProps, so the selected day reads the Button solid names directly. */
 .day[data-selected],
 .day[data-selected]:hover {
   background-color: var(

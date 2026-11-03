@@ -32,10 +32,13 @@ export const TimelineItem = React.forwardRef<HTMLDivElement, TimelineItemProps>(
       timestamp,
       bulletVariant = "default",
       children,
+      __active,
       ...rest
     },
     ref,
   ) {
+    const selectionState = __active ? "active" : "inactive";
+
     const sanitizedProps = filterStylingProps(rest, overStyled);
     const restRecord = sanitizedProps as Record<string, unknown>;
 
@@ -63,12 +66,27 @@ export const TimelineItem = React.forwardRef<HTMLDivElement, TimelineItemProps>(
     return (
       <MantineTimelineItem
         ref={ref}
+        __active={__active}
         {...(sanitizedProps as unknown as Omit<
           MantineTimelineItemProps,
           "radius" | "color" | "lineVariant"
         >)}
         classNames={mergedClassNames}
         data-variant={bulletVariant}
+        data-recursica="timeline"
+        data-recursica-selection-states={selectionState}
+        // Mantine's own bullet element takes no per-item attributes, so it stays an invisible
+        // shell and this face, which carries the timeline-bullet contract, paints the bullet.
+        bullet={
+          <span
+            className={styles.bulletFace}
+            data-recursica="timeline-bullet"
+            data-recursica-types={bulletVariant}
+            data-recursica-selection-states={selectionState}
+          >
+            {restRecord.bullet as React.ReactNode}
+          </span>
+        }
       >
         {content}
       </MantineTimelineItem>

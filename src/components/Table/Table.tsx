@@ -79,6 +79,7 @@ export const TableTbody = forwardRef<HTMLTableSectionElement, TableTbodyProps>(
     return (
       <MantineTable.Tbody
         ref={ref}
+        data-recursica="table-cell"
         {...(sanitizedProps as unknown as MantineTableTbodyProps)}
       />
     );
@@ -129,8 +130,9 @@ export const TableTh = forwardRef<HTMLTableCellElement, TableThProps>(
       <MantineTable.Th
         ref={ref}
         {...(sanitizedProps as unknown as MantineTableThProps)}
+        data-recursica="table-header"
+        data-recursica-disabled={disabled ? "" : undefined}
         data-sorted={sorted ? "true" : undefined}
-        data-disabled={disabled ? "true" : undefined}
         data-currency={variant === "currency" ? "true" : undefined}
         aria-sort={
           sorted === "asc"
@@ -179,6 +181,7 @@ export const TableTfoot = forwardRef<HTMLTableSectionElement, TableTfootProps>(
     return (
       <MantineTable.Tfoot
         ref={ref}
+        data-recursica="table-footer"
         {...(sanitizedProps as unknown as MantineTableTfootProps)}
       />
     );

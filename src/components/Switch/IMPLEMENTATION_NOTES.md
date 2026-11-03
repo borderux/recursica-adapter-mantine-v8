@@ -71,14 +71,9 @@ column at left with the switches beside it; stacked layout unaffected.
 
 ## Scoped CSS contract
 
-**Decision:** Switch reads only the stable root names `--recursica_ui-kit_components_switch*_properties_*`, never a variant-path name. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
+**Decision:** Only `SwitchGroup` uses the scoped contract (`switch-group`, axis `layouts`). `Switch` itself reads the `switch*_variants_selection-states_*` and disabled variant-path names, keyed on native `input:checked` and `:has(input:disabled)`: Mantine keeps checked state and the group context private (`useSwitchGroupContext` is not exported), and tracking them in JS was judged not worth it. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
 
 **Implementation:**
 
-- Mantine's `attributes` prop puts the contracts on its own elements. Mantine's `root` (track and label) is `switch-item`. The `track` (holds thumb and icons) is `switch`, with `data-recursica-selection-states` set to `selected` or `unselected`. Both get `data-recursica-disabled` when disabled or read-only. The group's `groupRoot` is `switch-group` with `data-recursica-layouts`.
-- The `.label` reads the `switch-item` root names, so `switch-item` has to be the Mantine root.
-- Mantine keeps checked state private, so `Switch` derives `selection-states` from the `checked` prop, else its own `onChange`-tracked state, else the group's selection. `SwitchGroup` always passes Mantine a controlled `value` and shares it through `SwitchGroupStateContext` (own file, for fast refresh; with `disabled`). A native form reset of an uncontrolled switch is not tracked.
-- `opacity` (switch and switch-item) exists only while disabled, so CSS reads it with a fallback of `1`.
-- Thumb, track and icon colours are single state-resolved names. The two thumb icons share `icon-color`; only the visible one matters.
-- Stacked and side-by-side groups own different properties (`label-field-gap` versus `gutter` and `vertical-padding`), so those two layout blocks stay in the CSS, keyed on `data-recursica-layouts`.
-- Disabled styling keys on `data-recursica-disabled`, not `:has(input:disabled)`.
+- `SwitchGroup`'s `groupRoot` carries `data-recursica="switch-group"` and `data-recursica-layouts`; the root names for `top-bottom-margin`, `gutter`, `vertical-padding` and `label-field-gap` resolve from it.
+- Stacked and side-by-side groups own different properties, so those two layout blocks stay in the CSS, keyed on `data-recursica-layouts`.

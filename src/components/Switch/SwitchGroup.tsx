@@ -114,7 +114,11 @@ export const SwitchGroup = forwardRef<HTMLDivElement, SwitchGroupProps>(
             value={value}
             defaultValue={defaultValue}
           >
-            <div className={styles.groupRoot} data-layout={formLayout}>
+            <div
+              className={styles.groupRoot}
+              data-recursica="switch-group"
+              data-recursica-layouts={formLayout}
+            >
               {children}
             </div>
           </MantineSwitch.Group>

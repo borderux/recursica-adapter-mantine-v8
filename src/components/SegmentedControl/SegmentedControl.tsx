@@ -50,6 +50,10 @@ function useSegmentedControlClassNames(restRecord: Record<string, unknown>): {
   return { className: finalClass, classNames: mergedClassNames };
 }
 
+// Mantine renders the indicator itself and exposes it through `attributes`; items style off
+// Mantine's own data-active instead.
+const CONTRACT = "segmented-control-item";
+
 const _SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps>(
   function SegmentedControl(
     {
@@ -96,6 +100,13 @@ const _SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps>(
         classNames={stylingParams.classNames}
         orientation={orientation}
         fullWidth={fullWidth}
+        attributes={{
+          indicator: {
+            "data-recursica": CONTRACT,
+            "data-recursica-selection-states": "selected",
+          },
+          ...(restRecord.attributes as object | undefined),
+        }}
         data-orientation={orientation}
         data={mappedData}
       />

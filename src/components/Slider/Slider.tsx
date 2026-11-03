@@ -259,6 +259,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         ref={ref}
         className={wrapperClass}
         style={style as React.CSSProperties}
+        data-recursica="slider"
+        data-recursica-layouts={formLayout}
+        data-recursica-error={error ? "" : undefined}
+        data-recursica-disabled={disabled ? "" : undefined}
         controlMaxWidth={undefined}
         controlMinWidth={undefined}
         overStyled={overStyled as true}
@@ -287,7 +291,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
             className={styles.sliderContainer}
             data-form-layout={formLayout}
             data-disabled={disabled ? "true" : undefined}
-            data-error={error ? "true" : undefined}
           >
             {isRange && showInput && (
               <input
@@ -300,7 +303,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
                 max={(resolvedValue as [number, number])[1]}
                 step={step}
                 disabled={disabled}
-                data-error={error ? "true" : undefined}
                 aria-label="Minimum value"
               />
             )}
@@ -364,7 +366,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
                   max={max}
                   step={step}
                   disabled={disabled}
-                  data-error={error ? "true" : undefined}
                   aria-label="Maximum value"
                 />
               ) : (
@@ -378,7 +379,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
                   max={max}
                   step={step}
                   disabled={disabled}
-                  data-error={error ? "true" : undefined}
                 />
               ))}
           </div>

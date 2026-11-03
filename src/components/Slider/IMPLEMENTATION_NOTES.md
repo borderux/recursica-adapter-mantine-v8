@@ -50,7 +50,7 @@ This document contains specific design decisions, architectural constraints, and
 
 ## 6. Focus Treatment (Generic State Tokens)
 
-**Decision:** The token schema dropped the component-level `focus` state entirely. Only a narrower `active` state remains, covering `colors_track`/`colors_step-indicator-color` for the track/mark while any part of the slider has focus-within. It is emitted as `data-recursica-active`, which `Slider.tsx` drives from focus/blur handlers on the track wrapper (Mantine exposes no focus state).
+**Decision:** The token schema dropped the component-level `focus` state entirely. Only a narrower `active` state remains, covering `colors_track`/`colors_step-indicator-color` for the track/mark while any part of the slider has focus-within. Mantine exposes no focus state, so the CSS reads the `variants_states_active_*` names directly on `.sliderRoot:focus-within` (suppressed while `data-recursica-error` is set) rather than using a contract attribute.
 **Implementation:**
 
 - Thumb, icon, and numeric input no longer have per-component focus colors. Instead they get a focus _ring_ built from the generic `--recursica_brand_states_focus_{border-size,color,margin,blur}` tokens, applied as a `box-shadow` (crisp inner ring at `border-size` plus a soft outer glow using `blur`/`margin`) rather than a color swap.
@@ -99,6 +99,6 @@ This document contains specific design decisions, architectural constraints, and
 
 **Implementation:**
 
-- `Slider.tsx` sets `data-recursica="slider"` and `data-recursica-layouts` (from `formLayout`) on the outer `FormControlWrapper` element, plus `data-recursica-error`, `data-recursica-disabled` and `data-recursica-active` while those states apply. Custom properties inherit down to the track, thumb, marks, icons and input. The CSS has no per-state colour rules.
+- `Slider.tsx` sets `data-recursica="slider"` and `data-recursica-layouts` (from `formLayout`) on the outer `FormControlWrapper` element, plus `data-recursica-error` and `data-recursica-disabled` while those states apply. Custom properties inherit down to the track, thumb, marks, icons and input. The CSS has no per-state colour rules except the focus (`active`) track/mark colours.
 - `opacity` exists only while disabled, so `.sliderContainer` reads it with a fallback of `1`.
 - `data-disabled` stays on `.sliderContainer` only for the non-token disabled text colour, cursor and thumb shadow removal.

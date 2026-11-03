@@ -250,35 +250,27 @@
   align-items: flex-start;
   padding: var(--recursica_ui-kit_components_switch-group_properties_padding);
   gap: var(--recursica_ui-kit_components_switch-group_properties_item-gap);
+  margin-bottom: var(
+    --recursica_ui-kit_components_switch-group_properties_top-bottom-margin
+  );
 }
 
-/* SideBySide Variant */
-.groupRoot[data-layout="side-by-side"] {
-  flex-direction: column;
-  gap: var(
-    --recursica_ui-kit_components_switch-group_variants_layouts_side-by-side_properties_gutter
-  );
+/* Each layout owns different properties, so each reads only its own. */
+.groupRoot[data-recursica-layouts="side-by-side"] {
+  gap: var(--recursica_ui-kit_components_switch-group_properties_gutter);
   padding-top: var(
-    --recursica_ui-kit_components_switch-group_variants_layouts_side-by-side_properties_vertical-padding
+    --recursica_ui-kit_components_switch-group_properties_vertical-padding
   );
   padding-bottom: var(
-    --recursica_ui-kit_components_switch-group_variants_layouts_side-by-side_properties_vertical-padding
+    --recursica_ui-kit_components_switch-group_properties_vertical-padding
   );
   margin-top: var(
-    --recursica_ui-kit_components_switch-group_variants_layouts_side-by-side_properties_top-bottom-margin
-  );
-  margin-bottom: var(
-    --recursica_ui-kit_components_switch-group_variants_layouts_side-by-side_properties_top-bottom-margin
+    --recursica_ui-kit_components_switch-group_properties_top-bottom-margin
   );
 }
 
-/* Stacked Variant */
-.groupRoot[data-layout="stacked"] {
-  flex-direction: column;
+.groupRoot[data-recursica-layouts="stacked"] {
   margin-top: var(
-    --recursica_ui-kit_components_switch-group_variants_layouts_stacked_properties_label-field-gap
-  );
-  margin-bottom: var(
-    --recursica_ui-kit_components_switch-group_variants_layouts_stacked_properties_top-bottom-margin
+    --recursica_ui-kit_components_switch-group_properties_label-field-gap
   );
 }

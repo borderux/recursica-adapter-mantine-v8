@@ -79,10 +79,10 @@ header cells had no way to opt into this before.
 
 ## Scoped CSS contract
 
-**Decision:** Table reads only stable root names (`--recursica_ui-kit_components_table*_properties_*`) and never a `_variants_`, `_modes_` or `_layer_N_` name. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
+**Decision:** The header, body and footer read stable root names (`--recursica_ui-kit_components_table*_properties_*`); disabled body/footer cells and rows still read `_variants_states_disabled_*` names. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
 
-- Three contracts, no axes, one state: `Table.Th` sets `data-recursica="table-header"`; `Table.Td` sets `table-cell`, or `table-footer` when inside `Table.Tfoot`. Each adds `data-recursica-disabled` when disabled. `Table` itself has no contract (only root names).
-- `Table.Td` cannot see its ancestors, so `Table.Tfoot` and `Table.Tr` share "in footer" and "row disabled" through two small React contexts in `Table.tsx`. A disabled `Table.Tr` therefore marks its cells with `data-recursica-disabled`; `Table.Tr` no longer emits `data-disabled`, and cells no longer emit `data-disabled`.
-- The per-state CSS blocks for disabled header/cell/footer are removed: the contract re-points `colors_cell-color`, `colors_text-color` and `opacity`. `opacity` exists only while disabled, so each rule reads it with a fallback of `1`.
+- Three contracts, no axes, one state: `Table.Th` sets `data-recursica="table-header"` (plus `data-recursica-disabled` when disabled); `Table.Tbody` sets `table-cell` and `Table.Tfoot` sets `table-footer` on their section element, and the cells inherit the resolved properties. `Table` itself has no contract (only root names).
+- Disabled rows and cells are CSS-only: `tr[data-disabled] td` and `td[data-disabled]` read the `variants_states_disabled_*` names, as before. A `Td` cannot see its ancestors, and the contract's `disabled` attribute must sit on the same element as the contract, so no React context is used.
+- The header's disabled block is removed: the contract re-points `colors_cell-color`, `colors_text-color` and `opacity`. `opacity` exists only while disabled, so it is read with a fallback of `1`.
 - Header sorted/unsorted colours are separate root names, so they stay selected by `data-sorted`. They are skipped while disabled so the disabled `cell-color`/`text-color` still win, as before.
 - Currency `text-align` for header and footer still reads the `table-cell` name, which is a plain root name and resolves on any element.
