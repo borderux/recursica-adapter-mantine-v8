@@ -416,24 +416,6 @@
    6. State-Specific Overrides
    ========================================== */
 
-/* Focus (the `active` state): Mantine exposes no focus attribute, so the active names are read
-   directly on :focus-within. Error still wins, as it did before the contract. */
-[data-recursica="slider"]:not([data-recursica-error])
-  .sliderRoot:focus-within
-  .sliderTrack {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_active_properties_colors_track
-  );
-}
-
-[data-recursica="slider"]:not([data-recursica-error])
-  .sliderRoot:focus-within
-  .sliderMark {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_active_properties_colors_step-indicator-color
-  );
-}
-
 /* Disabled and error colours come from the contract's data-recursica-* attributes (set in
    Slider.tsx); only non-token behaviour stays here. */
 .sliderContainer:focus-within .iconWrapper {

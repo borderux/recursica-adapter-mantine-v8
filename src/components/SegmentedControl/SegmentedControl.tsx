@@ -50,8 +50,9 @@ function useSegmentedControlClassNames(restRecord: Record<string, unknown>): {
   return { className: finalClass, classNames: mergedClassNames };
 }
 
-// Mantine renders the indicator itself and exposes it through `attributes`; items style off
-// Mantine's own data-active instead.
+// Each control holds a native radio input, so the export's `:has(input:checked)` match resolves
+// the item's selection state with no attribute. The indicator holds no input, so it names the
+// selected state explicitly.
 const CONTRACT = "segmented-control-item";
 
 const _SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps>(
@@ -101,6 +102,7 @@ const _SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps>(
         orientation={orientation}
         fullWidth={fullWidth}
         attributes={{
+          control: { "data-recursica": CONTRACT },
           indicator: {
             "data-recursica": CONTRACT,
             "data-recursica-selection-states": "selected",

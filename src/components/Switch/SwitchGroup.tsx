@@ -13,6 +13,7 @@ import {
 import { type RecursicaFormControlWrapperProps } from "../FormControlWrapper/FormControlWrapper";
 import { WithReadOnlyWrapper } from "../ReadOnlyField/WithReadOnlyWrapper";
 import styles from "./Switch.module.css";
+import { SwitchGroupDisabledContext } from "./SwitchGroupDisabledContext";
 
 import { type RecursicaSwitchGroupProps as BaseRecursicaSwitchGroupProps } from "@recursica/adapter-common";
 
@@ -114,13 +115,17 @@ export const SwitchGroup = forwardRef<HTMLDivElement, SwitchGroupProps>(
             value={value}
             defaultValue={defaultValue}
           >
-            <div
-              className={styles.groupRoot}
-              data-recursica="switch-group"
-              data-recursica-layouts={formLayout}
+            <SwitchGroupDisabledContext.Provider
+              value={!!(readOnly || (restRecord as any).disabled)}
             >
-              {children}
-            </div>
+              <div
+                className={styles.groupRoot}
+                data-recursica="switch-group"
+                data-recursica-layouts={formLayout}
+              >
+                {children}
+              </div>
+            </SwitchGroupDisabledContext.Provider>
           </MantineSwitch.Group>
         }
       />

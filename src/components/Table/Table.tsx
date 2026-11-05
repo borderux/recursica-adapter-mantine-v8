@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { createContext, forwardRef, useContext } from "react";
 import {
   Table as MantineTable,
   type TableProps as MantineTableProps,
@@ -23,6 +23,13 @@ import {
 } from "@recursica/adapter-common";
 import styles from "./Table.module.css";
 import { ChevronUpIcon, ChevronDownIcon } from "./Table.icons";
+
+// Cells read the section's contract, and a disabled row or cell re-points it, but the contract's
+// `disabled` attribute must sit on the same element as `data-recursica`. So each cell sets both
+// itself, and learns its section and its row's disabled state from these contexts.
+type CellContract = "table-cell" | "table-footer";
+const CellContractContext = createContext<CellContract | null>(null);
+const RowDisabledContext = createContext(false);
 
 export type TableProps = RecursicaOverStyled<
   MantineTableProps & RecursicaTableProps
@@ -77,11 +84,13 @@ export const TableTbody = forwardRef<HTMLTableSectionElement, TableTbodyProps>(
   function TableTbody({ overStyled = false, ...rest }, ref) {
     const sanitizedProps = filterStylingProps(rest, overStyled);
     return (
-      <MantineTable.Tbody
-        ref={ref}
-        data-recursica="table-cell"
-        {...(sanitizedProps as unknown as MantineTableTbodyProps)}
-      />
+      <CellContractContext.Provider value="table-cell">
+        <MantineTable.Tbody
+          ref={ref}
+          data-recursica="table-cell"
+          {...(sanitizedProps as unknown as MantineTableTbodyProps)}
+        />
+      </CellContractContext.Provider>
     );
   },
 );
@@ -98,12 +107,14 @@ export const TableTr = forwardRef<HTMLTableRowElement, TableTrProps>(
   ) {
     const sanitizedProps = filterStylingProps(rest, overStyled);
     return (
-      <MantineTable.Tr
-        ref={ref}
-        {...(sanitizedProps as unknown as MantineTableTrProps)}
-        data-selected={selected ? "true" : undefined}
-        data-disabled={disabled ? "true" : undefined}
-      />
+      <RowDisabledContext.Provider value={disabled}>
+        <MantineTable.Tr
+          ref={ref}
+          {...(sanitizedProps as unknown as MantineTableTrProps)}
+          data-selected={selected ? "true" : undefined}
+          data-disabled={disabled ? "true" : undefined}
+        />
+      </RowDisabledContext.Provider>
     );
   },
 );
@@ -161,10 +172,20 @@ export const TableTd = forwardRef<HTMLTableCellElement, TableTdProps>(
     ref,
   ) {
     const sanitizedProps = filterStylingProps(rest, overStyled);
+    const contract = useContext(CellContractContext);
+    const rowDisabled = useContext(RowDisabledContext);
+    if (!contract) {
+      throw new Error(
+        "Table.Td must be rendered inside Table.Tbody or Table.Tfoot.",
+      );
+    }
+    const isDisabled = disabled || rowDisabled;
     return (
       <MantineTable.Td
         ref={ref}
         {...(sanitizedProps as unknown as MantineTableTdProps)}
+        data-recursica={contract}
+        data-recursica-disabled={isDisabled ? "" : undefined}
         data-disabled={disabled ? "true" : undefined}
         data-currency={variant === "currency" ? "true" : undefined}
       />
@@ -179,11 +200,13 @@ export const TableTfoot = forwardRef<HTMLTableSectionElement, TableTfootProps>(
   function TableTfoot({ overStyled = false, ...rest }, ref) {
     const sanitizedProps = filterStylingProps(rest, overStyled);
     return (
-      <MantineTable.Tfoot
-        ref={ref}
-        data-recursica="table-footer"
-        {...(sanitizedProps as unknown as MantineTableTfootProps)}
-      />
+      <CellContractContext.Provider value="table-footer">
+        <MantineTable.Tfoot
+          ref={ref}
+          data-recursica="table-footer"
+          {...(sanitizedProps as unknown as MantineTableTfootProps)}
+        />
+      </CellContractContext.Provider>
     );
   },
 );

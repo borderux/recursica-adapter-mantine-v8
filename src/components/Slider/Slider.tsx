@@ -124,6 +124,8 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       value !== undefined ? value : internalValue;
     const isRange = Array.isArray(resolvedValue);
 
+    // The contract's `active` state applies while any part of the slider has focus.
+    const [active, setActive] = useState(false);
     const [inputValue, setInputValue] = useState<string | [string, string]>(
       () =>
         Array.isArray(resolvedValue)
@@ -263,6 +265,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         data-recursica-layouts={formLayout}
         data-recursica-error={error ? "" : undefined}
         data-recursica-disabled={disabled ? "" : undefined}
+        data-recursica-active={active ? "" : undefined}
         controlMaxWidth={undefined}
         controlMinWidth={undefined}
         overStyled={overStyled as true}
@@ -291,6 +294,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
             className={styles.sliderContainer}
             data-form-layout={formLayout}
             data-disabled={disabled ? "true" : undefined}
+            onFocus={() => setActive(true)}
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget)) setActive(false);
+            }}
           >
             {isRange && showInput && (
               <input

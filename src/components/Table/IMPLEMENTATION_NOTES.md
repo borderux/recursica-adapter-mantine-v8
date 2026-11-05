@@ -79,10 +79,10 @@ header cells had no way to opt into this before.
 
 ## Scoped CSS contract
 
-**Decision:** The header, body and footer read stable root names (`--recursica_ui-kit_components_table*_properties_*`); disabled body/footer cells and rows still read `_variants_states_disabled_*` names. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
+**Decision:** The header, body and footer read only stable root names (`--recursica_ui-kit_components_table*_properties_*`). See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
 
 - Three contracts, no axes, one state: `Table.Th` sets `data-recursica="table-header"` (plus `data-recursica-disabled` when disabled); `Table.Tbody` sets `table-cell` and `Table.Tfoot` sets `table-footer` on their section element, and the cells inherit the resolved properties. `Table` itself has no contract (only root names).
-- Disabled rows and cells are CSS-only: `tr[data-disabled] td` and `td[data-disabled]` read the `variants_states_disabled_*` names, as before. A `Td` cannot see its ancestors, and the contract's `disabled` attribute must sit on the same element as the contract, so no React context is used.
+- Body and footer cells set their own contract: the contract's `disabled` attribute must sit on the same element as `data-recursica`, so `Table.Td` sets `data-recursica` (`table-cell` or `table-footer`, from a context provided by `Table.Tbody` / `Table.Tfoot`) and `data-recursica-disabled` when the cell or its row (context from `Table.Tr`) is disabled. A `Td` outside a body or footer throws. `opacity` exists only while disabled, so it is read with a fallback of `1`. Striped, selected and hover row backgrounds skip disabled cells so the disabled `cell-color` wins.
 - The header's disabled block is removed: the contract re-points `colors_cell-color`, `colors_text-color` and `opacity`. `opacity` exists only while disabled, so it is read with a fallback of `1`.
 - Header sorted/unsorted colours are separate root names, so they stay selected by `data-sorted`. They are skipped while disabled so the disabled `cell-color`/`text-color` still win, as before.
 - Currency `text-align` for header and footer still reads the `table-cell` name, which is a plain root name and resolves on any element.

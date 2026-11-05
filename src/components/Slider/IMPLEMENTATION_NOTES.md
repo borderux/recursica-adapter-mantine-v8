@@ -50,7 +50,7 @@ This document contains specific design decisions, architectural constraints, and
 
 ## 6. Focus Treatment (Generic State Tokens)
 
-**Decision:** The token schema dropped the component-level `focus` state entirely. Only a narrower `active` state remains, covering `colors_track`/`colors_step-indicator-color` for the track/mark while any part of the slider has focus-within. Mantine exposes no focus state, so the CSS reads the `variants_states_active_*` names directly on `.sliderRoot:focus-within` (suppressed while `data-recursica-error` is set) rather than using a contract attribute.
+**Decision:** The token schema dropped the component-level `focus` state entirely. Only a narrower `active` state remains, covering `colors_track`/`colors_step-indicator-color` while any part of the slider has focus. Mantine exposes no focus attribute, so `Slider.tsx` tracks focus in state (`onFocus`/`onBlur` on `.sliderContainer`, ignoring moves within it) and sets `data-recursica-active` on the contract root. The CSS reads only the stable names; error follows `active` in the export, so it still wins.
 **Implementation:**
 
 - Thumb, icon, and numeric input no longer have per-component focus colors. Instead they get a focus _ring_ built from the generic `--recursica_brand_states_focus_{border-size,color,margin,blur}` tokens, applied as a `box-shadow` (crisp inner ring at `border-size` plus a soft outer glow using `blur`/`margin`) rather than a color swap.

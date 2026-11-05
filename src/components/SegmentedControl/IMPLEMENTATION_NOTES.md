@@ -26,6 +26,8 @@ The moving active background element (`.indicator`) is decoupled from the actual
 
 ## 7. Scoped CSS contract
 
-Only the `.indicator` uses the scoped contract: `SegmentedControl.tsx` sets `data-recursica="segmented-control-item"` and `data-recursica-selection-states="selected"` on it through Mantine's `attributes` prop, so it reads the root `segmented-control-item_properties_*` names. The export has one contract, `segmented-control-item`, with one axis, `selection-states` (`selected` / `unselected`); the container has none.
+`SegmentedControl.tsx` sets `data-recursica="segmented-control-item"` on every `control` slot and, through Mantine's `attributes` prop, on the `indicator` with `data-recursica-selection-states="selected"`. The export has one contract, `segmented-control-item`, with one axis, `selection-states` (`selected` / `unselected`); the container has none.
 
-- Mantine allows no per-item attributes, so items (`.control` / `.label`) read the variant-path `selection-states_unselected_*` names, and the active label reads `selection-states_selected_*`, keyed on Mantine's own `data-active`. No DOM mutation or value tracking is done in TSX.
+- Each control contains Mantine's native radio input, so the export's `:has(input:checked)` match resolves the item's selection state: the label reads only the stable `segmented-control-item_properties_*` text names (font, colour) and border-radius, and they switch with selection. The indicator contains no input, so it names `selected` explicitly.
+- The label paints no background, border or elevation: the indicator paints the selected item's, and the unselected values are transparent, 0 and none.
+- No DOM mutation or value tracking is done in TSX.

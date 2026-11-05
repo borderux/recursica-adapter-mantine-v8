@@ -1,4 +1,4 @@
-import { forwardRef, type CSSProperties } from "react";
+import { forwardRef, useContext, type CSSProperties } from "react";
 import {
   Switch as MantineSwitch,
   type SwitchProps as MantineSwitchProps,
@@ -26,6 +26,7 @@ import {
 import styles from "./Switch.module.css";
 
 import { SwitchGroup } from "./SwitchGroup";
+import { SwitchGroupDisabledContext } from "./SwitchGroupDisabledContext";
 
 export type SwitchWrapperProps = Omit<
   MantineSwitchProps,
@@ -51,6 +52,7 @@ type SwitchComponent = React.ForwardRefExoticComponent<
 
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
   function Switch(props, ref) {
+    const groupDisabled = useContext(SwitchGroupDisabledContext);
     const {
       overStyled = false,
       readOnly,
@@ -139,6 +141,8 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       </div>
     );
 
+    const disabledAttr = readOnly || disabled || groupDisabled ? "" : undefined;
+
     // We omit Mantine's sizing/coloring so we rely strictly on variables from Switch.module.css
     const switchNode = (
       <MantineSwitch
@@ -149,6 +153,24 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
         styles={mergedStyles}
         disabled={readOnly || disabled}
         data-disabled={readOnly || disabled || undefined}
+        // The root is the item (label); the body holds the native input and track, so it is the switch.
+        // Mantine's Switch drops `attributes.body`; InlineInput renders the body, so it takes them via wrapperProps.
+        attributes={{
+          root: {
+            "data-recursica": "switch-item",
+            "data-recursica-disabled": disabledAttr,
+          },
+        }}
+        wrapperProps={
+          {
+            attributes: {
+              body: {
+                "data-recursica": "switch",
+                "data-recursica-disabled": disabledAttr,
+              },
+            },
+          } as unknown as MantineSwitchProps["wrapperProps"]
+        }
         thumbIcon={withCallerOverride<React.ReactNode>(
           FinalThumbIcon,
           thumbIcon,

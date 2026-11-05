@@ -1,3 +1,9 @@
+/* Unstable-name exemption: Mantine hides a day's selection from getDayProps, so the selected day
+ * cannot carry the Button contract's solid style; it reads the Button solid names directly.
+ * recursica-ignore: --recursica_ui-kit_components_button_variants_styles_solid_properties_colors_background-color
+ * recursica-ignore: --recursica_ui-kit_components_button_variants_styles_solid_properties_colors_text-color
+ */
+
 /* Brand-layer exemptions (recursica-allow-brand) — see recursica-token-analyzer README.md.
  * No ui-kit_components_date-picker radius token exists for the calendar day cells; reuses the brand default border-radius.
  *   recursica-allow-brand: --recursica_brand_dimensions_border-radii_default

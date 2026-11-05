@@ -71,7 +71,7 @@ column at left with the switches beside it; stacked layout unaffected.
 
 ## Scoped CSS contract
 
-**Decision:** Only `SwitchGroup` uses the scoped contract (`switch-group`, axis `layouts`). `Switch` itself reads the `switch*_variants_selection-states_*` and disabled variant-path names, keyed on native `input:checked` and `:has(input:disabled)`: Mantine keeps checked state and the group context private (`useSwitchGroupContext` is not exported), and tracking them in JS was judged not worth it. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
+**Decision:** `Switch` reads only the stable root names. Mantine's `root` is the item (`data-recursica="switch-item"`) and its `body` holds the native input and track, so it carries `data-recursica="switch"`; both get `data-recursica-disabled` when disabled or read-only. The selection state comes from the export's native `:has(input:checked)` match, so no selection attribute is needed. Track and thumb `opacity` and the label `opacity` exist only while disabled, so they fall back to 1. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
 
 **Implementation:**
 
