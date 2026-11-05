@@ -124,6 +124,8 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       value !== undefined ? value : internalValue;
     const isRange = Array.isArray(resolvedValue);
 
+    // The contract's `active` state applies while any part of the slider has focus.
+    const [active, setActive] = useState(false);
     const [inputValue, setInputValue] = useState<string | [string, string]>(
       () =>
         Array.isArray(resolvedValue)
@@ -259,6 +261,11 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         ref={ref}
         className={wrapperClass}
         style={style as React.CSSProperties}
+        data-recursica="slider"
+        data-recursica-layouts={formLayout}
+        data-recursica-error={error ? "" : undefined}
+        data-recursica-disabled={disabled ? "" : undefined}
+        data-recursica-active={active ? "" : undefined}
         controlMaxWidth={undefined}
         controlMinWidth={undefined}
         overStyled={overStyled as true}
@@ -287,7 +294,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
             className={styles.sliderContainer}
             data-form-layout={formLayout}
             data-disabled={disabled ? "true" : undefined}
-            data-error={error ? "true" : undefined}
+            onFocus={() => setActive(true)}
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget)) setActive(false);
+            }}
           >
             {isRange && showInput && (
               <input
@@ -300,7 +310,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
                 max={(resolvedValue as [number, number])[1]}
                 step={step}
                 disabled={disabled}
-                data-error={error ? "true" : undefined}
                 aria-label="Minimum value"
               />
             )}
@@ -364,7 +373,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
                   max={max}
                   step={step}
                   disabled={disabled}
-                  data-error={error ? "true" : undefined}
                   aria-label="Maximum value"
                 />
               ) : (
@@ -378,7 +386,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
                   max={max}
                   step={step}
                   disabled={disabled}
-                  data-error={error ? "true" : undefined}
                 />
               ))}
           </div>

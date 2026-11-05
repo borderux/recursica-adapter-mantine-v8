@@ -29,55 +29,28 @@
   flex-direction: column;
 }
 
-/* Stacked Layout constraints */
+/* Label column: sized by the `label` contract (set on the element in the TSX). */
+.leftSection {
+  width: var(--recursica_ui-kit_components_label_properties_width);
+  min-height: var(--recursica_ui-kit_components_label_properties_min-height);
+}
+
+/* Stacked: bottom-padding only exists in the stacked layout. */
 .root[data-form-layout="stacked"] .leftSection {
   padding-bottom: var(
-    --recursica_ui-kit_components_label_variants_layouts_stacked_properties_bottom-padding
-  );
-  min-height: var(
-    --recursica_ui-kit_components_label_variants_layouts_stacked_properties_min-height
+    --recursica_ui-kit_components_label_properties_bottom-padding
   );
 }
 
-.root[data-form-layout="stacked"] .leftSection[data-size="default"] {
-  width: var(
-    --recursica_ui-kit_components_label_variants_layouts_stacked_variants_sizes_default_properties_width
-  );
-}
-
-.root[data-form-layout="stacked"] .leftSection[data-size="small"] {
-  width: var(
-    --recursica_ui-kit_components_label_variants_layouts_stacked_variants_sizes_small_properties_width
-  );
-}
-
-/* SideBySide Layout constraints */
+/* Side-by-side: vertical-padding and gutter only exist in this layout. */
 .root[data-form-layout="side-by-side"] .leftSection {
   padding-top: var(
-    --recursica_ui-kit_components_label_variants_layouts_side-by-side_properties_vertical-padding
+    --recursica_ui-kit_components_label_properties_vertical-padding
   );
   padding-bottom: var(
-    --recursica_ui-kit_components_label_variants_layouts_side-by-side_properties_vertical-padding
+    --recursica_ui-kit_components_label_properties_vertical-padding
   );
-  min-height: var(
-    --recursica_ui-kit_components_label_variants_layouts_side-by-side_properties_min-height
-  );
-  /* In side-by-side, the label column exists to the left of its input, so we use the gutter gap here. */
-  margin-right: var(
-    --recursica_ui-kit_components_label_variants_layouts_side-by-side_properties_gutter
-  );
-}
-
-.root[data-form-layout="side-by-side"] .leftSection[data-size="default"] {
-  width: var(
-    --recursica_ui-kit_components_label_variants_layouts_side-by-side_variants_sizes_default_properties_width
-  );
-}
-
-.root[data-form-layout="side-by-side"] .leftSection[data-size="small"] {
-  width: var(
-    --recursica_ui-kit_components_label_variants_layouts_side-by-side_variants_sizes_small_properties_width
-  );
+  margin-right: var(--recursica_ui-kit_components_label_properties_gutter);
 }
 
 .rightSection {

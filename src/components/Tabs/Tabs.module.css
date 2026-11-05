@@ -2,7 +2,6 @@
  * Global hover/focus/disabled state tokens (recursica_variables_scoped.css header, 'Hover & Focus states' / 'Disabled state' — implicit rule for every interactive element; components must not define their own per-component treatment).
  *   recursica-allow-brand: --recursica_brand_states_hover_color
  *   recursica-allow-brand: --recursica_brand_states_hover_opacity
- *   recursica-allow-brand: --recursica_brand_states_disabled
  */
 
 /*
@@ -33,264 +32,137 @@
   display: flex;
   flex-direction: column;
 }
+
+/* ---------------------------------
+   LIST LAYOUT
+   Root properties come from the tabs contract (data-recursica="tabs"), set on .root.
+--------------------------------- */
+
+.root[data-orientation="horizontal"] .list {
+  gap: var(--recursica_ui-kit_components_tabs_properties_space-between-tabs);
+  width: 100%;
+  margin-bottom: var(
+    --recursica_ui-kit_components_tabs_properties_tabs-content-gap
+  );
+}
 .root[data-orientation="horizontal"][data-inverted] .list {
   order: 1;
   margin-bottom: 0;
-  margin-top: var(--tabs-content-gap);
-}
-
-/* ---------------------------------
-   VARIANTS
-   Sizing, geometry, colors, and typography are all scoped per style (default/outline/pills) in
-   the token schema now — nothing is shared flat across variants anymore. Content-alignment,
-   space-between-tabs, and the tabs-content-gap remain additionally scoped per orientation.
---------------------------------- */
-
-.root[data-variant="default"][data-orientation] {
-  --tabs-element-gap: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_properties_element-gap
-  );
-  --tabs-horizontal-padding: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_properties_horizontal-padding
-  );
-  --tabs-vertical-padding: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_properties_vertical-padding
-  );
-  --tabs-icon-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_properties_icon-size
-  );
-  --tabs-min-width: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_properties_min-width
-  );
-  --tabs-max-width: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_properties_max-width
-  );
-
-  --tabs-active-border-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_active_properties_border-size
-  ) !important;
-  --tabs-inactive-border-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_inactive_properties_border-size
-  ) !important;
-  --tabs-border-radius: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_properties_border-radius
-  ) !important;
-  --tabs-border-color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_inactive_properties_colors_border-color
-  ) !important;
-  --tabs-color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_active_properties_colors_border-color
-  ) !important;
-}
-
-.root[data-variant="default"][data-orientation="horizontal"] {
-  --tabs-content-alignment: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_orientation_horizontal_properties_tab-content-alignment
-  );
-  --tabs-space-between-tabs: var(
-    --recursica_ui-kit_components_tabs_variants_styles_default_variants_orientation_horizontal_properties_space-between-tabs
-  );
-  --tabs-content-gap: var(
-    --recursica_ui-kit_components_tabs_variants_styles_default_variants_orientation_horizontal_properties_tabs-content-gap
+  margin-top: var(
+    --recursica_ui-kit_components_tabs_properties_tabs-content-gap
   );
 }
-.root[data-variant="default"][data-orientation="horizontal"] .list {
-  gap: var(--tabs-space-between-tabs);
-  width: 100%;
-  margin-bottom: var(--tabs-content-gap);
-}
-
-.root[data-variant="default"][data-orientation="vertical"] {
-  --tabs-content-alignment: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_orientation_vertical_properties_tab-content-alignment
-  );
-  --tabs-space-between-tabs: var(
-    --recursica_ui-kit_components_tabs_variants_styles_default_variants_orientation_vertical_properties_space-between-tabs
-  );
-}
-.root[data-variant="default"][data-orientation="vertical"] .list {
-  gap: var(--tabs-space-between-tabs);
+.root[data-orientation="vertical"] .list {
+  gap: var(--recursica_ui-kit_components_tabs_properties_space-between-tabs);
   margin-right: var(
-    --recursica_ui-kit_components_tabs_variants_styles_default_variants_orientation_vertical_properties_tabs-content-gap
-  );
-}
-
-/* Outline Variant */
-.root[data-variant="outline"][data-orientation] {
-  --tabs-element-gap: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_properties_element-gap
-  );
-  --tabs-horizontal-padding: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_properties_horizontal-padding
-  );
-  --tabs-vertical-padding: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_properties_vertical-padding
-  );
-  --tabs-icon-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_properties_icon-size
-  );
-  --tabs-min-width: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_properties_min-width
-  );
-  --tabs-max-width: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_properties_max-width
-  );
-
-  --tabs-active-border-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_active_properties_border-size
-  ) !important;
-  --tabs-inactive-border-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_inactive_properties_border-size
-  ) !important;
-  --tabs-border-radius: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_properties_border-radius
-  ) !important;
-  --tabs-border-color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_inactive_properties_colors_border-color
-  ) !important;
-  --tabs-color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_active_properties_colors_border-color
-  ) !important;
-}
-
-.root[data-variant="outline"][data-orientation="horizontal"] {
-  --tabs-content-alignment: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_orientation_horizontal_properties_tab-content-alignment
-  );
-  --tabs-space-between-tabs: var(
-    --recursica_ui-kit_components_tabs_variants_styles_outline_variants_orientation_horizontal_properties_space-between-tabs
-  );
-  --tabs-content-gap: var(
-    --recursica_ui-kit_components_tabs_variants_styles_outline_variants_orientation_horizontal_properties_tabs-content-gap
-  );
-}
-.root[data-variant="outline"][data-orientation="horizontal"] .list {
-  gap: var(--tabs-space-between-tabs);
-  width: 100%;
-  margin-bottom: var(--tabs-content-gap);
-}
-
-.root[data-variant="outline"][data-orientation="vertical"] {
-  --tabs-content-alignment: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_orientation_vertical_properties_tab-content-alignment
-  );
-  --tabs-space-between-tabs: var(
-    --recursica_ui-kit_components_tabs_variants_styles_outline_variants_orientation_vertical_properties_space-between-tabs
-  );
-}
-.root[data-variant="outline"][data-orientation="vertical"] .list {
-  gap: var(--tabs-space-between-tabs);
-  margin-right: var(
-    --recursica_ui-kit_components_tabs_variants_styles_outline_variants_orientation_vertical_properties_tabs-content-gap
-  );
-}
-
-/* Pills Variant */
-.root[data-variant="pills"][data-orientation] {
-  --tabs-element-gap: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_properties_element-gap
-  );
-  --tabs-horizontal-padding: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_properties_horizontal-padding
-  );
-  --tabs-vertical-padding: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_properties_vertical-padding
-  );
-  --tabs-icon-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_properties_icon-size
-  );
-  --tabs-min-width: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_properties_min-width
-  );
-  --tabs-max-width: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_properties_max-width
-  );
-
-  --tabs-active-border-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_active_properties_border-size
-  );
-  --tabs-inactive-border-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_inactive_properties_border-size
-  );
-  --tabs-border-radius: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_properties_border-radius
-  );
-}
-
-.root[data-variant="pills"][data-orientation="horizontal"] {
-  --tabs-content-alignment: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_orientation_horizontal_properties_tab-content-alignment
-  );
-  --tabs-space-between-tabs: var(
-    --recursica_ui-kit_components_tabs_variants_styles_pills_variants_orientation_horizontal_properties_space-between-tabs
-  );
-  --tabs-content-gap: var(
-    --recursica_ui-kit_components_tabs_variants_styles_pills_variants_orientation_horizontal_properties_tabs-content-gap
-  );
-}
-.root[data-variant="pills"][data-orientation="horizontal"] .list {
-  gap: var(--tabs-space-between-tabs);
-  width: 100%;
-  margin-bottom: var(--tabs-content-gap);
-}
-
-.root[data-variant="pills"][data-orientation="vertical"] {
-  --tabs-content-alignment: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_orientation_vertical_properties_tab-content-alignment
-  );
-  --tabs-space-between-tabs: var(
-    --recursica_ui-kit_components_tabs_variants_styles_pills_variants_orientation_vertical_properties_space-between-tabs
-  );
-}
-.root[data-variant="pills"][data-orientation="vertical"] .list {
-  gap: var(--tabs-space-between-tabs);
-  margin-right: var(
-    --recursica_ui-kit_components_tabs_variants_styles_pills_variants_orientation_vertical_properties_tabs-content-gap
+    --recursica_ui-kit_components_tabs_properties_tabs-content-gap
   );
 }
 
 /* ---------------------------------
    TAB ELEMENT
+   Values come from the tabs-item contract (data-recursica="tabs-item") set on .tab.
 --------------------------------- */
 .root .tab {
-  min-width: var(--tabs-min-width);
-  max-width: var(--tabs-max-width);
-  padding: var(--tabs-vertical-padding) var(--tabs-horizontal-padding);
-  gap: var(--tabs-element-gap);
+  /* Mantine reads --tabs-color for the active border of the default variant. */
+  --tabs-color: var(
+    --recursica_ui-kit_components_tabs-item_properties_colors_border-color
+  );
+  min-width: var(--recursica_ui-kit_components_tabs-item_properties_min-width);
+  max-width: var(--recursica_ui-kit_components_tabs-item_properties_max-width);
+  padding: var(
+      --recursica_ui-kit_components_tabs-item_properties_vertical-padding
+    )
+    var(--recursica_ui-kit_components_tabs-item_properties_horizontal-padding);
+  gap: var(--recursica_ui-kit_components_tabs-item_properties_element-gap);
   display: flex;
   align-items: center;
-  justify-content: var(--tabs-content-alignment);
+  justify-content: var(
+    --recursica_ui-kit_components_tabs-item_properties_tab-content-alignment
+  );
   cursor: pointer;
   position: relative;
+
+  background-color: var(
+    --recursica_ui-kit_components_tabs-item_properties_colors_background-color
+  );
+  color: var(
+    --recursica_ui-kit_components_tabs-item_properties_colors_text-color
+  );
+  font-family: var(
+    --recursica_ui-kit_components_tabs-item_properties_text_font-family
+  );
+  font-size: var(
+    --recursica_ui-kit_components_tabs-item_properties_text_font-size
+  );
+  font-style: var(
+    --recursica_ui-kit_components_tabs-item_properties_text_font-style
+  );
+  font-weight: var(
+    --recursica_ui-kit_components_tabs-item_properties_text_font-weight
+  );
+  letter-spacing: var(
+    --recursica_ui-kit_components_tabs-item_properties_text_letter-spacing
+  );
+  line-height: var(
+    --recursica_ui-kit_components_tabs-item_properties_text_line-height
+  );
+  text-decoration: var(
+    --recursica_ui-kit_components_tabs-item_properties_text_text-decoration
+  );
+  text-transform: var(
+    --recursica_ui-kit_components_tabs-item_properties_text_text-transform
+  );
 }
 
-/* Icon support */
+/* Pills carry the token border; default/outline borders come from Mantine's indicator lines. */
+.root[data-variant="pills"] .tab {
+  border: var(--recursica_ui-kit_components_tabs-item_properties_border-size)
+    solid
+    var(--recursica_ui-kit_components_tabs-item_properties_colors_border-color);
+}
+
+/* Outline: Mantine draws the active tab's border and corner pixels from --tab-border-color. */
+.root[data-variant="outline"] .tab {
+  --tab-border-color: var(
+    --recursica_ui-kit_components_tabs-item_properties_colors_border-color
+  );
+  border-width: var(
+    --recursica_ui-kit_components_tabs-item_properties_border-size
+  );
+}
+
 /* Mantine core adds an xs margin between the section and label on top of the element-gap token. */
 .root .tabSection {
   margin-inline: 0;
 }
 
 .root .tab svg {
-  width: var(--tabs-icon-size);
-  height: var(--tabs-icon-size);
+  width: var(--recursica_ui-kit_components_tabs-item_properties_icon-size);
+  height: var(--recursica_ui-kit_components_tabs-item_properties_icon-size);
+  color: var(
+    --recursica_ui-kit_components_tabs-item_properties_colors_icon-color
+  );
 }
 
-/* Disabled State */
+/* Disabled State: opacity exists only while data-recursica-disabled is set. */
+.root .tab {
+  opacity: var(--recursica_ui-kit_components_tabs-item_properties_opacity, 1);
+}
 .root .tab[data-disabled] {
-  opacity: var(--recursica_brand_states_disabled);
   cursor: not-allowed;
 }
 
 /* ---------------------------------
    BORDER RADIUS GEOMETRY
 --------------------------------- */
-
-/* Pills get full radius on all sides */
 .root[data-variant="pills"] .tab {
-  border-radius: var(--tabs-border-radius);
+  border-radius: var(
+    --recursica_ui-kit_components_tabs-item_properties_border-radius
+  );
 }
 
-/* Default & Outline Horizontal get top radius only so they sit flush on the panel */
+/* Default & Outline horizontal: top radius only so they sit flush on the panel */
 .root[data-variant="default"][data-orientation="horizontal"]:not(
     [data-inverted]
   )
@@ -299,7 +171,10 @@
     [data-inverted]
   )
   .tab {
-  border-radius: var(--tabs-border-radius) var(--tabs-border-radius) 0 0;
+  border-radius: var(
+      --recursica_ui-kit_components_tabs-item_properties_border-radius
+    )
+    var(--recursica_ui-kit_components_tabs-item_properties_border-radius) 0 0;
 }
 
 /* Inverted horizontal tabs hang downwards, so bottom corners are rounded */
@@ -307,267 +182,18 @@
   .tab,
 .root[data-variant="outline"][data-orientation="horizontal"][data-inverted]
   .tab {
-  border-radius: 0 0 var(--tabs-border-radius) var(--tabs-border-radius);
+  border-radius: 0 0
+    var(--recursica_ui-kit_components_tabs-item_properties_border-radius)
+    var(--recursica_ui-kit_components_tabs-item_properties_border-radius);
 }
 
-/* Default & Outline Vertical get left radius only so they sit flush against the right-side panel */
+/* Default & Outline vertical: left radius only so they sit flush against the right-side panel */
 .root[data-variant="default"][data-orientation="vertical"] .tab,
 .root[data-variant="outline"][data-orientation="vertical"] .tab {
-  border-radius: var(--tabs-border-radius) 0 0 var(--tabs-border-radius);
-}
-
-/* ---------------------------------
-   COLORS & TYPOGRAPHY
-   Because colors are defined per-layer and theme via generic variable structures,
-   we rely on Mantine injecting the correct data-variant attributes, but we must
-   map the colors in our CSS. Recursica handles dark/light automatically via root.
-   Typography is now scoped per style (not shared flat across variants), so each
-   variant repeats its own inactive/active text rules.
---------------------------------- */
-
-/* Default Variant Colors & Typography */
-.root[data-variant="default"] .tab {
-  background-color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_inactive_properties_colors_background-color
-  );
-  color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_inactive_properties_colors_text-color
-  );
-
-  font-family: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_inactive_properties_text_font-family
-  );
-  font-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_inactive_properties_text_font-size
-  );
-  font-style: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_inactive_properties_text_font-style
-  );
-  font-weight: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_inactive_properties_text_font-weight
-  );
-  letter-spacing: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_inactive_properties_text_letter-spacing
-  );
-  line-height: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_inactive_properties_text_line-height
-  );
-  text-decoration: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_inactive_properties_text_text-decoration
-  );
-  text-transform: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_inactive_properties_text_text-transform
-  );
-}
-.root[data-variant="default"] .tab svg {
-  color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_inactive_properties_colors_icon-color
-  );
-}
-
-.root[data-variant="default"] .tab[data-active] {
-  background-color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_active_properties_colors_background-color
-  );
-  color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_active_properties_colors_text-color
-  );
-
-  font-family: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_active_properties_text_font-family
-  );
-  font-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_active_properties_text_font-size
-  );
-  font-style: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_active_properties_text_font-style
-  );
-  font-weight: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_active_properties_text_font-weight
-  );
-  letter-spacing: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_active_properties_text_letter-spacing
-  );
-  line-height: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_active_properties_text_line-height
-  );
-  text-decoration: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_active_properties_text_text-decoration
-  );
-  text-transform: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_active_properties_text_text-transform
-  );
-}
-.root[data-variant="default"] .tab[data-active] svg {
-  color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_default_variants_selection-states_active_properties_colors_icon-color
-  );
-}
-
-/* Outline Variant Colors & Typography */
-.root[data-variant="outline"] .tab {
-  background-color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_inactive_properties_colors_background-color
-  );
-  color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_inactive_properties_colors_text-color
-  );
-
-  font-family: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_inactive_properties_text_font-family
-  );
-  font-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_inactive_properties_text_font-size
-  );
-  font-style: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_inactive_properties_text_font-style
-  );
-  font-weight: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_inactive_properties_text_font-weight
-  );
-  letter-spacing: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_inactive_properties_text_letter-spacing
-  );
-  line-height: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_inactive_properties_text_line-height
-  );
-  text-decoration: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_inactive_properties_text_text-decoration
-  );
-  text-transform: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_inactive_properties_text_text-transform
-  );
-}
-.root[data-variant="outline"] .tab svg {
-  color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_inactive_properties_colors_icon-color
-  );
-}
-
-.root[data-variant="outline"] .tab[data-active] {
-  background-color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_active_properties_colors_background-color
-  );
-  color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_active_properties_colors_text-color
-  );
-
-  font-family: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_active_properties_text_font-family
-  );
-  font-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_active_properties_text_font-size
-  );
-  font-style: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_active_properties_text_font-style
-  );
-  font-weight: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_active_properties_text_font-weight
-  );
-  letter-spacing: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_active_properties_text_letter-spacing
-  );
-  line-height: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_active_properties_text_line-height
-  );
-  text-decoration: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_active_properties_text_text-decoration
-  );
-  text-transform: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_active_properties_text_text-transform
-  );
-}
-.root[data-variant="outline"] .tab[data-active] svg {
-  color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_outline_variants_selection-states_active_properties_colors_icon-color
-  );
-}
-
-/* Pills Variant Colors & Typography */
-.root[data-variant="pills"] .tab {
-  background-color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_inactive_properties_colors_background-color
-  );
-  color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_inactive_properties_colors_text-color
-  );
-  border: var(--tabs-inactive-border-size) solid
-    var(
-      --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_inactive_properties_colors_border-color
-    );
-
-  font-family: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_inactive_properties_text_font-family
-  );
-  font-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_inactive_properties_text_font-size
-  );
-  font-style: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_inactive_properties_text_font-style
-  );
-  font-weight: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_inactive_properties_text_font-weight
-  );
-  letter-spacing: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_inactive_properties_text_letter-spacing
-  );
-  line-height: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_inactive_properties_text_line-height
-  );
-  text-decoration: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_inactive_properties_text_text-decoration
-  );
-  text-transform: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_inactive_properties_text_text-transform
-  );
-}
-.root[data-variant="pills"] .tab svg {
-  color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_inactive_properties_colors_icon-color
-  );
-}
-
-.root[data-variant="pills"] .tab[data-active] {
-  background-color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_active_properties_colors_background-color
-  );
-  color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_active_properties_colors_text-color
-  );
-  border: var(--tabs-active-border-size) solid
-    var(
-      --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_active_properties_colors_border-color
-    );
-
-  font-family: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_active_properties_text_font-family
-  );
-  font-size: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_active_properties_text_font-size
-  );
-  font-style: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_active_properties_text_font-style
-  );
-  font-weight: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_active_properties_text_font-weight
-  );
-  letter-spacing: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_active_properties_text_letter-spacing
-  );
-  line-height: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_active_properties_text_line-height
-  );
-  text-decoration: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_active_properties_text_text-decoration
-  );
-  text-transform: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_active_properties_text_text-transform
-  );
-}
-.root[data-variant="pills"] .tab[data-active] svg {
-  color: var(
-    --recursica_ui-kit_components_tabs-item_variants_styles_pills_variants_selection-states_active_properties_colors_icon-color
-  );
+  border-radius: var(
+      --recursica_ui-kit_components_tabs-item_properties_border-radius
+    )
+    0 0 var(--recursica_ui-kit_components_tabs-item_properties_border-radius);
 }
 
 /* Content panel */

@@ -57,6 +57,7 @@ const _Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   >;
   const restRecord = sanitizedProps as Record<string, unknown>;
 
+  const isDisabled = !!restRecord.disabled || !!restRecord.loading;
   const hasLeftSection = !!icon || !!restRecord["leftSection"];
   const hasRightSection = !!restRecord["rightSection"];
   const hasVisibleText = hasVisibleChildren(children);
@@ -135,7 +136,7 @@ const _Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
       {...sanitizedProps}
       className={finalClass}
       classNames={mergedClassNames}
-      variant={mapVariant[variant]}
+      variant={(mapVariant as Record<string, string>)[variant] ?? variant}
       size={mapSize[size]}
       fullWidth={fullWidth}
       loaderProps={mergedLoaderProps}
@@ -149,8 +150,13 @@ const _Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
       data-variant={variant}
       data-size={size}
       data-content={contentType}
+      data-recursica="button"
+      data-recursica-styles={variant}
+      data-recursica-sizes={size}
+      data-recursica-content={contentType}
+      data-recursica-disabled={isDisabled ? "" : undefined}
       data-full-width={fullWidth || undefined}
-      disabled={!!restRecord.disabled || !!restRecord.loading}
+      disabled={isDisabled}
     >
       <span className={styles.labelText}>{children}</span>
     </MantineButton>

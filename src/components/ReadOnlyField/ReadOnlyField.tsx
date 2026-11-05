@@ -38,6 +38,7 @@ export const ReadOnlyField = forwardRef<HTMLDivElement, ReadOnlyFieldProps>(
       value,
       type = "text",
       emptyValueComponent,
+      formLayout = "stacked",
       overStyled = false,
       className,
       style,
@@ -104,6 +105,9 @@ export const ReadOnlyField = forwardRef<HTMLDivElement, ReadOnlyFieldProps>(
         overStyled={overStyled as true}
         className={wrapperClass}
         style={style}
+        formLayout={formLayout}
+        data-recursica="read-only-field"
+        data-recursica-layouts={formLayout}
       >
         {content}
       </FormControlWrapper>

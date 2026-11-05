@@ -47,6 +47,8 @@ export const Chip = forwardRef<HTMLInputElement, ChipProps>(function Chip(
     deleteIconRef,
     children,
     checked,
+    defaultChecked,
+    onChange,
     overStyled = false,
     wrapperProps,
     tabIndex,
@@ -75,7 +77,6 @@ export const Chip = forwardRef<HTMLInputElement, ChipProps>(function Chip(
     : styles.root;
 
   // Determine state
-  const dataError = error ? "" : undefined;
   const isIconOnly = !children && (!!icon || !!onDelete);
   // A chip only counts as interactive when something actually responds to it — merely passing a
   // `checked` value (e.g. to pin a display-only chip to a fixed visual state, as FileUpload's
@@ -84,13 +85,15 @@ export const Chip = forwardRef<HTMLInputElement, ChipProps>(function Chip(
   const isInteractive =
     onDelete !== undefined ||
     restRecord.onClick !== undefined ||
-    restRecord.onChange !== undefined;
+    onChange !== undefined;
 
-  // Our own computed default for Mantine's `wrapperProps` — flags the internal error/interactive
-  // CSS hooks. This is a real Mantine `ChipProps` slot a caller could legitimately pass their own
+  // Our own computed default for Mantine's `wrapperProps` — sets the data-recursica contract attributes
+  // and the internal interactive CSS hook. This is a real Mantine `ChipProps` slot a caller could legitimately pass their own
   // value for, so it must merge via `withCallerOverride`, not silently clobber theirs.
   const computedWrapperProps = {
-    ...(dataError !== undefined ? { "data-error": "" } : {}),
+    "data-recursica": "chip",
+    ...(error ? { "data-recursica-error": "" } : {}),
+    ...(restRecord.disabled ? { "data-recursica-disabled": "" } : {}),
     ...(isInteractive ? { "data-interactive": "" } : {}),
   } as NonNullable<MantineChipProps["wrapperProps"]>;
 
@@ -99,6 +102,8 @@ export const Chip = forwardRef<HTMLInputElement, ChipProps>(function Chip(
       ref={ref}
       {...sanitizedProps}
       checked={checked}
+      defaultChecked={defaultChecked}
+      onChange={onChange}
       className={finalClass}
       classNames={mergedClassNames}
       wrapperProps={withCallerOverride(computedWrapperProps, wrapperProps)}
@@ -116,7 +121,7 @@ export const Chip = forwardRef<HTMLInputElement, ChipProps>(function Chip(
         {/* When checked, Mantine's own check icon (rendered in its native iconWrapper slot,
             ahead of this children span) overlays/replaces the leading icon rather than sitting
             next to it — matching mui-adapter's `icon={checked ? checkIcon : icon}` swap. */}
-        {icon && !checked && (
+        {icon && (
           <span className={styles.leadingIcon} aria-hidden>
             {icon}
           </span>

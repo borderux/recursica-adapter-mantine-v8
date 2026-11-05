@@ -12,6 +12,9 @@ import {
 } from "../../utils/filterStylingProps";
 import styles from "./Popover.module.css";
 
+// Forge name: `hover-card-popover` is one contract shared with HoverCard; Recursica keeps HoverCard and Popover as
+// two components that both read it. See RecursicaPopoverProps in @recursica/adapter-common.
+
 // ============================================================
 // POPOVER ROOT
 // ============================================================

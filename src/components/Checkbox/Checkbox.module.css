@@ -12,38 +12,29 @@
 /* --- GROUP STYLES --- */
 .groupRoot {
   padding: var(--recursica_ui-kit_components_checkbox-group_properties_padding);
-  margin: 0; /* HARDCODE: structural reset; consider token if layout needs change */
+  margin: 0; /* HARDCODE: structural reset; only the vertical margin is tokenised */
+  margin-block: var(
+    --recursica_ui-kit_components_checkbox-group_properties_top-bottom-margin
+  );
   display: flex;
   flex-direction: column;
   gap: var(--recursica_ui-kit_components_checkbox-group_properties_item-gap);
 }
 
-/* SideBySide Variant */
-.groupRoot[data-layout="side-by-side"] {
-  flex-direction: column;
+/* Each layout owns different properties, so each reads only its own. */
+.groupRoot[data-recursica-layouts="side-by-side"] {
   flex-wrap: nowrap;
   padding-top: var(
-    --recursica_ui-kit_components_checkbox-group_variants_layouts_side-by-side_properties_vertical-padding
+    --recursica_ui-kit_components_checkbox-group_properties_vertical-padding
   );
   padding-bottom: var(
-    --recursica_ui-kit_components_checkbox-group_variants_layouts_side-by-side_properties_vertical-padding
+    --recursica_ui-kit_components_checkbox-group_properties_vertical-padding
   );
-  margin-top: var(
-    --recursica_ui-kit_components_checkbox-group_variants_layouts_side-by-side_properties_top-bottom-margin
-  );
-  margin-bottom: var(
-    --recursica_ui-kit_components_checkbox-group_variants_layouts_side-by-side_properties_top-bottom-margin
-  );
+  gap: var(--recursica_ui-kit_components_checkbox-group_properties_gutter);
 }
-
-/* Stacked Variant */
-.groupRoot[data-layout="stacked"] {
-  flex-direction: column;
-  margin-top: var(
-    --recursica_ui-kit_components_checkbox-group_variants_layouts_stacked_properties_top-bottom-margin
-  );
-  margin-bottom: var(
-    --recursica_ui-kit_components_checkbox-group_variants_layouts_stacked_properties_top-bottom-margin
+.groupRoot[data-recursica-layouts="stacked"] {
+  gap: var(
+    --recursica_ui-kit_components_checkbox-group_properties_label-field-gap
   );
 }
 
@@ -101,99 +92,36 @@
   );
   border-style: solid; /* HARDCODE: normalize primitive border-style */
 
-  /* Standard unchecked state */
-  background-color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_unchecked_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_unchecked_properties_colors_border-color
-  );
   transition: all 0.2s ease; /* HARDCODE: consider global transition token */
 }
 
-/* Checked/Indeterminate State */
-.input:checked,
-.inputChecked {
+/* Colours live in a three-class selector so they outrank Mantine's own
+   :checked / :disabled fills, which would otherwise win on specificity. */
+.root .inner .input {
   background-color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_checked_properties_colors_background-color
+    --recursica_ui-kit_components_checkbox_properties_colors_background-color
   );
   border-color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_checked_properties_colors_border-color
+    --recursica_ui-kit_components_checkbox_properties_colors_border-color
   );
-}
-.input[data-indeterminate],
-.inputIndeterminate {
-  background-color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_indeterminate_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_indeterminate_properties_colors_border-color
-  );
+  /* Exists only while disabled. */
+  opacity: var(--recursica_ui-kit_components_checkbox_properties_opacity, 1);
 }
 
-/* Disabled State (colors now differ per selection state, so each combination is mapped explicitly) */
+/* Disabled values come from data-recursica-disabled; :disabled only sets the cursor. */
 .input:disabled {
   cursor: not-allowed; /* HARDCODE: disabled state default */
-}
-.input:disabled:not(:checked):not([data-indeterminate]) {
-  opacity: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_unchecked_variants_states_disabled_properties_opacity
-  );
-  background-color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_unchecked_variants_states_disabled_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_unchecked_variants_states_disabled_properties_colors_border-color
-  );
-}
-.input:checked:disabled {
-  opacity: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_checked_variants_states_disabled_properties_opacity
-  );
-  background-color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_checked_variants_states_disabled_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_checked_variants_states_disabled_properties_colors_border-color
-  );
-}
-.input[data-indeterminate]:disabled {
-  opacity: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_indeterminate_variants_states_disabled_properties_opacity
-  );
-  background-color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_indeterminate_variants_states_disabled_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_indeterminate_variants_states_disabled_properties_colors_border-color
-  );
 }
 
 .icon {
   width: var(--recursica_ui-kit_components_checkbox_properties_icon-size);
   height: var(--recursica_ui-kit_components_checkbox_properties_icon-size);
 }
-/* No icon-color token exists for the unchecked state (no icon is visible then) */
-.input:checked + .icon,
-.inputChecked + .icon {
+/* Three classes so it outranks Mantine's disabled icon colour. Undefined for
+   unchecked, where no icon is visible. */
+.root .inner .icon {
   color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_checked_properties_colors_icon-color
-  );
-}
-.input[data-indeterminate] + .icon,
-.inputIndeterminate + .icon {
-  color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_indeterminate_properties_colors_icon-color
-  );
-}
-.input:checked:disabled + .icon {
-  color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_checked_variants_states_disabled_properties_colors_icon-color
-  );
-}
-.input[data-indeterminate]:disabled + .icon {
-  color: var(
-    --recursica_ui-kit_components_checkbox_variants_selection-states_indeterminate_variants_states_disabled_properties_colors_icon-color
+    --recursica_ui-kit_components_checkbox_properties_colors_icon-color
   );
 }
 
@@ -238,28 +166,14 @@
     --recursica_ui-kit_components_checkbox-item_properties_text_text-transform
   );
 }
-.root:has(input:disabled) .label {
+.root[data-recursica-disabled] .label {
   cursor: not-allowed; /* HARDCODE: disabled interaction */
+  /* Exists only while disabled. */
   opacity: var(
-    --recursica_ui-kit_components_checkbox-item_variants_states_disabled_properties_opacity
+    --recursica_ui-kit_components_checkbox-item_properties_opacity,
+    1
   );
   color: var(
     --recursica_ui-kit_components_checkbox-item_properties_colors_disabled-text
-  );
-}
-
-/* CheckboxGroup Layouts */
-.groupRoot {
-  display: flex;
-}
-.groupRoot[data-layout="stacked"] {
-  flex-direction: column;
-  gap: var(
-    --recursica_ui-kit_components_checkbox-group_variants_layouts_stacked_properties_label-field-gap
-  );
-}
-.groupRoot[data-layout="side-by-side"] {
-  gap: var(
-    --recursica_ui-kit_components_checkbox-group_variants_layouts_side-by-side_properties_gutter
   );
 }

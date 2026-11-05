@@ -8,37 +8,19 @@
  *   recursica-allow-brand: --recursica_brand_states_hover_opacity
  */
 
-/* EXEMPTIONS:
-   - border-size is constant across disabled/error states — only border-color changes; the
-     disabled/error border-size tokens are never applied by design. */
-/* recursica-ignore: --recursica_ui-kit_components_file-input_variants_states_disabled_properties_border-size */
-/* recursica-ignore: --recursica_ui-kit_components_file-input_variants_states_error_properties_border-size */
-
 /* LAYOUT SPACING OVERRIDES:
-   - Sets the --form-control-margin-bottom spacing hook to map component-specific layout tokens.
-   - Also sets the --file-input-control-{max,min}-width hooks consumed inline in FileInput.tsx,
-     since max-width/min-width are split per layout variant (same shape as TextField). */
+   - Maps the contract's layout-resolved properties onto the --form-control-margin-bottom hook and
+     the --file-input-control-{max,min}-width hooks consumed inline in FileInput.tsx.
+   - The contract attributes (data-recursica*) live on this element; see FileInput.tsx. */
 .layoutOverride {
   --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_file-input_variants_layouts_stacked_properties_top-bottom-margin
+    --recursica_ui-kit_components_file-input_properties_top-bottom-margin
   );
   --file-input-control-max-width: var(
-    --recursica_ui-kit_components_file-input_variants_layouts_stacked_properties_max-width
+    --recursica_ui-kit_components_file-input_properties_max-width
   );
   --file-input-control-min-width: var(
-    --recursica_ui-kit_components_file-input_variants_layouts_stacked_properties_min-width
-  );
-}
-
-.layoutOverride[data-form-layout="side-by-side"] {
-  --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_file-input_variants_layouts_side-by-side_properties_top-bottom-margin
-  );
-  --file-input-control-max-width: var(
-    --recursica_ui-kit_components_file-input_variants_layouts_side-by-side_properties_max-width
-  );
-  --file-input-control-min-width: var(
-    --recursica_ui-kit_components_file-input_variants_layouts_side-by-side_properties_min-width
+    --recursica_ui-kit_components_file-input_properties_min-width
   );
 }
 
@@ -111,7 +93,7 @@
 /* Dragging-over state: reuses the generic hover overlay recipe (see Button.module.css) for the
    background, and the shared "selected" border bridge var FormControlWrapper already exposes —
    file-input has no color tokens of its own for this state. Same recipe as FileUpload's
-   dropzone; see "Dragging-over visual state" in FILEINPUT_IMPLEMENTATION_NOTES.md. */
+   dropzone; see "Dragging-over visual state" in IMPLEMENTATION_NOTES.md. */
 .root::after {
   content: "";
   position: absolute;
@@ -220,11 +202,9 @@
 /* Structural placement only — the button's own "text" variant/size="small" tokens (including its
    own disabled state) own its visual appearance, same as Tree's .expandButton. */
 /* EXEMPTIONS:
-   - trailing-icon color (base/disabled/error) is ignored — the trailing icon is a nested Button
+   - trailing-icon color is ignored — the trailing icon is a nested Button
      that owns its own color tokens per state; FileInput never recolors it directly. */
 /* recursica-ignore: --recursica_ui-kit_components_file-input_properties_colors_trailing-icon */
-/* recursica-ignore: --recursica_ui-kit_components_file-input_variants_states_disabled_properties_colors_trailing-icon */
-/* recursica-ignore: --recursica_ui-kit_components_file-input_variants_states_error_properties_colors_trailing-icon */
 .trailingIcon {
   position: relative;
   z-index: 1;
@@ -247,42 +227,10 @@
       var(--recursica_brand_states_focus_color);
 }
 
-/* Error State Mapping (Propagated strictly down from the wrapper DOM context) */
-.root[data-error="true"] {
-  border-color: var(
-    --recursica_ui-kit_components_file-input_variants_states_error_properties_colors_border-color
-  ) !important;
-  background-color: var(
-    --recursica_ui-kit_components_file-input_variants_states_error_properties_colors_background-color
-  ) !important;
-  color: var(
-    --recursica_ui-kit_components_file-input_variants_states_error_properties_colors_text-color
-  ) !important;
-}
-.root[data-error="true"] .leadingIcon {
-  color: var(
-    --recursica_ui-kit_components_file-input_variants_states_error_properties_colors_leading-icon
-  ) !important;
-}
-
-/* Disabled State Mapping (Propagated strictly down from the wrapper DOM context) */
+/* Error/disabled colors and border-size resolve through the contract's data-recursica-error /
+   data-recursica-disabled attributes, so no per-state value rules are needed. */
 .root[data-disabled="true"] {
-  border-color: var(
-    --recursica_ui-kit_components_file-input_variants_states_disabled_properties_colors_border-color
-  ) !important;
-  background-color: var(
-    --recursica_ui-kit_components_file-input_variants_states_disabled_properties_colors_background-color
-  ) !important;
-  color: var(
-    --recursica_ui-kit_components_file-input_variants_states_disabled_properties_colors_text-color
-  ) !important;
-  opacity: var(
-    --recursica_ui-kit_components_file-input_variants_states_disabled_properties_opacity
-  ) !important;
+  /* Opacity exists only while disabled. */
+  opacity: var(--recursica_ui-kit_components_file-input_properties_opacity, 1);
   cursor: not-allowed;
-}
-.root[data-disabled="true"] .leadingIcon {
-  color: var(
-    --recursica_ui-kit_components_file-input_variants_states_disabled_properties_colors_leading-icon
-  ) !important;
 }

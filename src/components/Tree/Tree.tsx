@@ -59,6 +59,9 @@ function createRenderTreeNode(disabled: boolean) {
         className={styles.row}
         data-has-children={hasChildren || undefined}
         data-expanded={hasChildren && expanded ? true : undefined}
+        data-recursica="tree"
+        data-recursica-selection-states={selected ? "selected" : "unselected"}
+        data-recursica-disabled={disabled || undefined}
       >
         {/* The only element that toggles expand/collapse on click — independent of selection,
             which `elementProps.onClick` (spread onto `.row` above) handles for the rest of the
@@ -91,7 +94,11 @@ function createRenderTreeNode(disabled: boolean) {
             tree.toggleExpanded(node.value);
           }}
         />
-        <span className={styles.label} data-selected={selected || undefined}>
+        <span
+          className={styles.label}
+          data-recursica="tree"
+          data-recursica-selection-states={selected ? "selected" : "unselected"}
+        >
           {node.label}
         </span>
       </div>

@@ -23,3 +23,11 @@ The moving active background element (`.indicator`) is decoupled from the actual
 ## 6. Whole-control `disabled`
 
 `RecursicaSegmentedControlProps.disabled` was previously typed `never` and stripped at runtime. It's now a real `boolean?`, passed straight through to Mantine's own native `disabled` — Mantine's `SegmentedControl` already disables every item when set. Per-item disabling via `data[].disabled` continues to work independently of it.
+
+## 7. Scoped CSS contract
+
+`SegmentedControl.tsx` sets `data-recursica="segmented-control-item"` on every `control` slot and, through Mantine's `attributes` prop, on the `indicator` with `data-recursica-selection-states="selected"`. The export has one contract, `segmented-control-item`, with one axis, `selection-states` (`selected` / `unselected`); the container has none.
+
+- Each control contains Mantine's native radio input, so the export's `:has(input:checked)` match resolves the item's selection state: the label reads only the stable `segmented-control-item_properties_*` text names (font, colour) and border-radius, and they switch with selection. The indicator contains no input, so it names `selected` explicitly.
+- The label paints no background, border or elevation: the indicator paints the selected item's, and the unselected values are transparent, 0 and none.
+- No DOM mutation or value tracking is done in TSX.

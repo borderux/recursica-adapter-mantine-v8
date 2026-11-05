@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import {
   DatePickerInput,
   type DatePickerInputProps,
@@ -55,6 +55,28 @@ const UNSUPPORTED_PROPS = [
   "description", // Managed by FormControlWrapper via assistiveText.
 ] as const satisfies readonly (keyof DatePickerInputProps)[];
 
+// Recursica Button contract for the calendar's own buttons (nav arrows and month/year label via `attributes`, days via `getDayProps`).
+const BUTTON_CONTRACT = {
+  "data-recursica": "button",
+  "data-recursica-sizes": "small",
+} as const;
+
+// A Mantine date value as a local "YYYY-MM-DD" key, the form `getDayProps` receives.
+function toDayKey(value: unknown): string | null {
+  if (value instanceof Date) {
+    const month = String(value.getMonth() + 1).padStart(2, "0");
+    const day = String(value.getDate()).padStart(2, "0");
+    return `${value.getFullYear()}-${month}-${day}`;
+  }
+  return typeof value === "string" ? value.slice(0, 10) : null;
+}
+
+// Same rule as Mantine's own `selected` day flag: any value in a range/multiple array, or the single value.
+function isSelectedDay(date: string, selection: unknown): boolean {
+  const values = Array.isArray(selection) ? selection : [selection];
+  return values.some((value) => toDayKey(value) === date);
+}
+
 export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
   function DatePicker(props, ref) {
     const {
@@ -83,6 +105,9 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
       emptyValueComponent,
       value,
       defaultValue,
+      onChange,
+      getDayProps,
+      attributes,
       highlightToday = true, // Default on so today is visually marked; consumers can still override.
       valueFormat = "MM/DD/YY", // Default display format; consumers can still override.
       placeholder = "MM / DD / YY", // Default placeholder; consumers can still override.
@@ -95,6 +120,11 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
       UNSUPPORTED_PROPS,
     );
     const restRecord = sanitizedProps as Record<string, unknown>;
+
+    // Mantine hides the selection from `getDayProps`, so it's mirrored here to give the selected
+    // day the Button contract's solid style. Controlled `value` wins; otherwise track `onChange`.
+    const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
+    const selection = value !== undefined ? value : uncontrolledValue;
 
     // Securely map core native blocks down ensuring nested CSS modules map precisely
     const mergedClassNames = mergeClassNames(
@@ -141,10 +171,20 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
       ? `${styles.layoutOverride} ${className}`
       : styles.layoutOverride;
 
+    // Contract attributes sit on the outer wrapper: the layout margin is read there and every
+    // other property is inherited by the input and its sections.
+    const contractAttrs = {
+      "data-recursica": "date-picker",
+      "data-recursica-layouts": formLayout,
+      ...(error ? { "data-recursica-error": "" } : {}),
+      ...(disabled ? { "data-recursica-disabled": "" } : {}),
+    };
+
     return (
       <WithReadOnlyWrapper
         className={wrapperClass}
         style={style as React.CSSProperties}
+        {...contractAttrs}
         controlMaxWidth={undefined}
         controlMinWidth={undefined}
         overStyled={overStyled as true}
@@ -192,6 +232,33 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
             disabled={disabled}
             value={value}
             defaultValue={defaultValue}
+            onChange={(next) => {
+              setUncontrolledValue(next);
+              onChange?.(next);
+            }}
+            getDayProps={(date) => ({
+              ...BUTTON_CONTRACT,
+              "data-recursica-content": "label",
+              "data-recursica-styles": isSelectedDay(date, selection)
+                ? "solid"
+                : "text",
+              ...getDayProps?.(date),
+            })}
+            attributes={{
+              ...attributes,
+              calendarHeaderControl: {
+                ...BUTTON_CONTRACT,
+                "data-recursica-content": "icon-only",
+                "data-recursica-styles": "text",
+                ...attributes?.calendarHeaderControl,
+              },
+              calendarHeaderLevel: {
+                ...BUTTON_CONTRACT,
+                "data-recursica-content": "label",
+                "data-recursica-styles": "text",
+                ...attributes?.calendarHeaderLevel,
+              },
+            }}
             label={undefined} // Disable Mantine's native label
             description={undefined} // Disable Mantine's native description
             error={undefined} // Disable Mantine's native error text (handled by wrapper)
@@ -203,10 +270,6 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
               <CalendarIcon />,
               leftSection,
             )}
-            wrapperProps={{
-              "data-disabled": disabled ? "true" : undefined,
-              "data-error": error ? "true" : undefined,
-            }}
             popoverProps={mergedPopoverProps}
           />
         }

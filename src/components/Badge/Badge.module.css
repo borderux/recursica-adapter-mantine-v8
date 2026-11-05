@@ -15,10 +15,14 @@
   justify-content: center;
   border-style: solid;
 
-  /* Base style resets to fully clear Mantine's defaults before applying ours */
-  background-color: transparent;
-  color: inherit;
-  border-color: transparent;
+  /* Colours come from the scoped contract (data-recursica="badge" + styles axis) */
+  background-color: var(
+    --recursica_ui-kit_components_badge_properties_colors_background-color
+  );
+  color: var(--recursica_ui-kit_components_badge_properties_colors_text-color);
+  border-color: var(
+    --recursica_ui-kit_components_badge_properties_colors_border-color
+  );
 
   /* Apply global badge properties */
   border-radius: var(
@@ -61,56 +65,6 @@
   );
   text-transform: var(
     --recursica_ui-kit_components_badge_properties_text_text-transform
-  );
-}
-
-/* Variant Definitions */
-
-.root[data-variant="alert"] {
-  background-color: var(
-    --recursica_ui-kit_components_badge_variants_styles_alert_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_badge_variants_styles_alert_properties_colors_border-color
-  );
-  color: var(
-    --recursica_ui-kit_components_badge_variants_styles_alert_properties_colors_text-color
-  );
-}
-
-.root[data-variant="primary-color"] {
-  background-color: var(
-    --recursica_ui-kit_components_badge_variants_styles_primary-color_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_badge_variants_styles_primary-color_properties_colors_border-color
-  );
-  color: var(
-    --recursica_ui-kit_components_badge_variants_styles_primary-color_properties_colors_text-color
-  );
-}
-
-.root[data-variant="success"] {
-  background-color: var(
-    --recursica_ui-kit_components_badge_variants_styles_success_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_badge_variants_styles_success_properties_colors_border-color
-  );
-  color: var(
-    --recursica_ui-kit_components_badge_variants_styles_success_properties_colors_text-color
-  );
-}
-
-.root[data-variant="warning"] {
-  background-color: var(
-    --recursica_ui-kit_components_badge_variants_styles_warning_properties_colors_background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_badge_variants_styles_warning_properties_colors_border-color
-  );
-  color: var(
-    --recursica_ui-kit_components_badge_variants_styles_warning_properties_colors_text-color
   );
 }
 

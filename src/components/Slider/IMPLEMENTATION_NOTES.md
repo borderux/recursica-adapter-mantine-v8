@@ -32,7 +32,7 @@ This document contains specific design decisions, architectural constraints, and
 **Decision:** Enforce layout margins dynamically based on container orientation parameters.
 **Implementation:**
 
-- Using custom layouts (e.g. `stacked` and `side-by-side`), we override the margins by assigning the component-specific Figma spacing variables to the unified `--form-control-margin-bottom` property.
+- Using custom layouts (e.g. `stacked` and `side-by-side`), `.layoutOverride` assigns the stable root name `..._slider_properties_top-bottom-margin` (resolved by `data-recursica-layouts`) to the unified `--form-control-margin-bottom` property.
 
 ## 5. Right-Aligned Floating Current Value
 
@@ -50,12 +50,12 @@ This document contains specific design decisions, architectural constraints, and
 
 ## 6. Focus Treatment (Generic State Tokens)
 
-**Decision:** The token schema dropped the component-level `focus` state entirely. Only a narrower `active` state remains, covering `colors_track`/`colors_step-indicator-color` for the track/mark while any part of the slider has focus-within.
+**Decision:** The token schema dropped the component-level `focus` state entirely. Only a narrower `active` state remains, covering `colors_track`/`colors_step-indicator-color` while any part of the slider has focus. Mantine exposes no focus attribute, so `Slider.tsx` tracks focus in state (`onFocus`/`onBlur` on `.sliderContainer`, ignoring moves within it) and sets `data-recursica-active` on the contract root. The CSS reads only the stable names; error follows `active` in the export, so it still wins.
 **Implementation:**
 
 - Thumb, icon, and numeric input no longer have per-component focus colors. Instead they get a focus _ring_ built from the generic `--recursica_brand_states_focus_{border-size,color,margin,blur}` tokens, applied as a `box-shadow` (crisp inner ring at `border-size` plus a soft outer glow using `blur`/`margin`) rather than a color swap.
 - The thumb's focus box-shadow layers the ring on top of its existing `thumb-elevation` shadow rather than replacing it.
-- `.sliderMark[data-filled]` has no default-state "-active" step-indicator token anymore (only `disabled`/`error` define one); it reuses `colors_track-active` so filled marks stay visually tied to the filled portion of the track. Worth a design review if a distinct filled-mark color is expected.
+- `.sliderMark[data-filled]` reads `colors_step-indicator-color-active` directly; the export now defines it for the base, error and disabled states.
 - `markLabel` was already mapped in the `classNames` prop but had no matching `.sliderMarkLabel` rule in this file, so Mantine silently fell back to its own default theme grey instead of any recursica token. Added a `.sliderMarkLabel` rule reusing the min-max-label typography tokens with `color: inherit`, matching the mui-adapter's equivalent.
 
 ## 7. Formatted Current Value, Label Overrides, Trailing Icon
@@ -90,3 +90,15 @@ This document contains specific design decisions, architectural constraints, and
 
 - `markWrapper` is anchored to Mantine's own `top: 0` (the track's top edge), with the mark dot inside it unpositioned. Mantine's own dot has no size override so it happens to fill the track height exactly by default; our `step-indicator-width` token is independent of track height, so the dot rendered small and flush to the top instead of centered. Added `markWrapper: styles.sliderMarkWrapper` to `mergedClassNames`, with `.sliderMarkWrapper { top: 50%; }`, and changed `.sliderMark`'s transform from `translateX(-50%)` to `translate(-50%, -50%)` to center the dot on that midpoint.
 - `.sliderMarkLabel` never overrode `transform`, so its vertical offset stayed Mantine's own `calc(var(--mantine-spacing-xs) / 2)` — an unbound theme default, not a recursica token. Replaced the vertical term with `--recursica_ui-kit_globals_form_properties_label-field-gap-vertical` (the same token the mui-adapter's markLabel already uses), keeping the horizontal term (`-50% + var(--slider-size) / 2`, Mantine's own mark-offset compensation) unchanged.
+
+---
+
+## 11. Scoped CSS contract
+
+**Decision:** The slider reads only the stable root names `--recursica_ui-kit_components_slider_properties_*`. See `docs/SCOPED_CSS_INTEGRATION_GUIDE.md`.
+
+**Implementation:**
+
+- `Slider.tsx` sets `data-recursica="slider"` and `data-recursica-layouts` (from `formLayout`) on the outer `FormControlWrapper` element, plus `data-recursica-error` and `data-recursica-disabled` while those states apply. Custom properties inherit down to the track, thumb, marks, icons and input. The CSS has no per-state colour rules except the focus (`active`) track/mark colours.
+- `opacity` exists only while disabled, so `.sliderContainer` reads it with a fallback of `1`.
+- `data-disabled` stays on `.sliderContainer` only for the non-token disabled text colour, cursor and thumb shadow removal.

@@ -50,8 +50,9 @@
    2. Row Highlighting & Selection Styles
    ========================================== */
 
+/* Row highlights skip disabled cells, which keep the contract's disabled cell-color. */
 /* Striped rows */
-.root tbody tr:nth-of-type(even) td {
+.root tbody tr:nth-of-type(even) td:not([data-recursica-disabled]) {
   background-color: color-mix(
     in srgb,
     var(--recursica_ui-kit_components_table_properties_colors_striped-color)
@@ -66,7 +67,7 @@
 }
 
 /* Selected rows */
-.root tbody tr[data-selected] td {
+.root tbody tr[data-selected] td:not([data-recursica-disabled]) {
   background-color: color-mix(
     in srgb,
     var(--recursica_ui-kit_components_table_properties_colors_selected-color)
@@ -83,7 +84,7 @@
 /* Hover rows */
 /* Table's dedicated highlight-on-hover token was removed from the schema; hover feedback now
    uses the generic cross-component overlay tokens instead. */
-.root tbody tr:hover td {
+.root tbody tr:hover td:not([data-recursica-disabled]) {
   background-color: color-mix(
     in srgb,
     var(--recursica_brand_states_hover_color)
@@ -123,6 +124,11 @@
       --recursica_ui-kit_components_table-header_properties_colors_horizontal-divider-color
     );
 
+  opacity: var(
+    --recursica_ui-kit_components_table-header_properties_opacity,
+    1
+  ); /* Defined only while disabled */
+
   /* Unsorted text style by default */
   font-family: var(
     --recursica_ui-kit_components_table-header_properties_unsorted-text-style_font-family
@@ -160,8 +166,9 @@
     );
 }
 
-/* Unsorted specific state overrides */
-.root thead th:not([data-sorted="true"]) {
+/* Unsorted/sorted colours; skipped while disabled so the contract's disabled cell-color/text-color
+   (which override the base names below) win. */
+.root thead th:not([data-sorted="true"]):not([data-recursica-disabled]) {
   background-color: var(
     --recursica_ui-kit_components_table-header_properties_colors_unsorted-cell-color
   );
@@ -170,15 +177,17 @@
   );
 }
 
-/* Sorted specific state overrides */
-.root thead th[data-sorted="true"] {
+.root thead th[data-sorted="true"]:not([data-recursica-disabled]) {
   background-color: var(
     --recursica_ui-kit_components_table-header_properties_colors_sorted-cell-color
   );
   color: var(
     --recursica_ui-kit_components_table-header_properties_colors_sorted-text-color
   );
+}
 
+/* Sorted text style */
+.root thead th[data-sorted="true"] {
   font-family: var(
     --recursica_ui-kit_components_table-header_properties_sorted-text-style_font-family
   );
@@ -205,19 +214,6 @@
   );
 }
 
-/* Disabled Header */
-.root thead th[data-disabled="true"] {
-  background-color: var(
-    --recursica_ui-kit_components_table-header_variants_states_disabled_properties_colors_cell-color
-  );
-  color: var(
-    --recursica_ui-kit_components_table-header_variants_states_disabled_properties_colors_text-color
-  );
-  opacity: var(
-    --recursica_ui-kit_components_table-header_variants_states_disabled_properties_opacity
-  );
-}
-
 /* Currency column header alignment override. No dedicated table-header currency-style token
    exists yet, so this reuses the table-cell currency-style text-align token to match the
    currency value cells below it. */
@@ -241,6 +237,10 @@
    ========================================== */
 
 .root tbody td {
+  opacity: var(
+    --recursica_ui-kit_components_table-cell_properties_opacity,
+    1
+  ); /* Defined only while disabled */
   background-color: var(
     --recursica_ui-kit_components_table-cell_properties_colors_cell-color
   );
@@ -314,25 +314,15 @@
   );
 }
 
-/* Disabled Cells */
-.root tbody tr[data-disabled="true"] td,
-.root tbody td[data-disabled="true"] {
-  background-color: var(
-    --recursica_ui-kit_components_table-cell_variants_states_disabled_properties_colors_cell-color
-  );
-  color: var(
-    --recursica_ui-kit_components_table-cell_variants_states_disabled_properties_colors_text-color
-  );
-  opacity: var(
-    --recursica_ui-kit_components_table-cell_variants_states_disabled_properties_opacity
-  );
-}
-
 /* ==========================================
    5. Table Footers (tfoot td)
    ========================================== */
 
 .root tfoot td {
+  opacity: var(
+    --recursica_ui-kit_components_table-footer_properties_opacity,
+    1
+  ); /* Defined only while disabled */
   background-color: var(
     --recursica_ui-kit_components_table-footer_properties_colors_cell-color
   );
@@ -426,19 +416,5 @@
   );
   text-transform: var(
     --recursica_ui-kit_components_table-footer_properties_currency-style_text-transform
-  );
-}
-
-/* Disabled Footer Row/Cells */
-.root tfoot tr[data-disabled="true"] td,
-.root tfoot td[data-disabled="true"] {
-  background-color: var(
-    --recursica_ui-kit_components_table-footer_variants_states_disabled_properties_colors_cell-color
-  );
-  color: var(
-    --recursica_ui-kit_components_table-footer_variants_states_disabled_properties_colors_text-color
-  );
-  opacity: var(
-    --recursica_ui-kit_components_table-footer_variants_states_disabled_properties_opacity
   );
 }

@@ -107,7 +107,7 @@ This document tracks known issues, edge cases, missing variables, or design syst
 
 - **Description:** Recursica defines a `beak-size` design token (`--recursica_ui-kit_components_hover-card-popover_properties_beak-size: 16px`) intended to control the beak (arrow) size via CSS. However, Mantine's `arrowSize` prop is a JavaScript number used for inline style calculations: it sets `width`, `height`, and a positioning offset (`-arrowSize/2`) directly on the arrow `<div>` element. These inline styles cannot be overridden via CSS without `!important`, and the positioning offset has no CSS-only equivalent.
 - **Impact:** The beak size is not purely token-driven. The `arrowSize` default (16) in `HoverCard.tsx` must be manually kept in sync with the `beak-size` token value. Developers can also override `arrowSize` via props, which breaks design system consistency.
-- **Current Resolution:** `arrowSize` defaults to `16` in the component to match the token. The value is documented as a hardcoded exception in `HOVERCARD_IMPLEMENTATION_NOTES.md`. A future improvement could involve reading the CSS variable value at runtime via `getComputedStyle`, though this would add complexity and a dependency on `useEffect`/state.
+- **Current Resolution:** `arrowSize` defaults to `16` in the component to match the token. The value is documented as a hardcoded exception in `IMPLEMENTATION_NOTES.md`. A future improvement could involve reading the CSS variable value at runtime via `getComputedStyle`, though this would add complexity and a dependency on `useEffect`/state.
 
 ## Tooltip
 

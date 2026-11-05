@@ -61,7 +61,13 @@ export const FormControlLayout = forwardRef<
       {...rest}
     >
       {shouldRenderLeft && (
-        <div className={styles.leftSection} data-size={labelSize}>
+        <div
+          className={styles.leftSection}
+          data-size={labelSize}
+          data-recursica="label"
+          data-recursica-layouts={formLayout}
+          data-recursica-sizes={labelSize}
+        >
           {leftSection}
         </div>
       )}

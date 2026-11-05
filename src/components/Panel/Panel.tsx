@@ -138,7 +138,7 @@ const PanelBase = function Panel({
         {header ?? (
           <MantineDrawer.Header>
             <MantineDrawer.Title>{title}</MantineDrawer.Title>
-            <MantineDrawer.CloseButton aria-label={closeButtonAriaLabel} />
+            <PanelCloseButton aria-label={closeButtonAriaLabel} />
           </MantineDrawer.Header>
         )}
         <MantineDrawer.Body>{children}</MantineDrawer.Body>
@@ -267,6 +267,11 @@ export const PanelCloseButton = forwardRef<
   return (
     <MantineDrawer.CloseButton
       ref={ref}
+      // Recursica Button contract (text style, small size, icon-only); read via root `button_properties_*` names.
+      data-recursica="button"
+      data-recursica-styles="text"
+      data-recursica-sizes="small"
+      data-recursica-content="icon-only"
       {...(sanitizedProps as unknown as MantineDrawerCloseButtonProps)}
     />
   );

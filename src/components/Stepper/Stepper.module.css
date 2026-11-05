@@ -10,25 +10,15 @@
   whole step wrapper.
 */
 
-.root {
-  /* Orientation specific gaps are mapped via data attributes */
-}
-
 .root.horizontal .steps {
   align-items: flex-start;
-  --stepper-step-gap: var(
-    --recursica_ui-kit_components_stepper_variants_orientation_horizontal_properties_step-gap
-  );
-  --stepper-max-text-width: var(
-    --recursica_ui-kit_components_stepper_variants_orientation_horizontal_properties_max-text-width
-  );
 }
 
 .root.horizontal .step {
   flex-direction: column;
   align-items: center;
   gap: var(
-    --recursica_ui-kit_components_stepper_variants_orientation_horizontal_properties_indicator-label-gap
+    --recursica_ui-kit_components_stepper_properties_indicator-label-gap
   );
 }
 
@@ -40,7 +30,7 @@
   justify-content: flex-start;
   margin-left: 0; /* Mantine natively applies a margin-inline-start */
   gap: var(
-    --recursica_ui-kit_components_stepper_variants_orientation_horizontal_properties_label-description-gap
+    --recursica_ui-kit_components_stepper_properties_label-description-gap
   );
 }
 
@@ -65,18 +55,12 @@
 
 /* Vertical Orientation */
 .root.vertical {
-  --stepper-step-gap: var(
-    --recursica_ui-kit_components_stepper_variants_orientation_vertical_properties_step-gap
-  );
   --separator-spacing: 0px; /* Force the line to touch the circle */
-  --stepper-max-text-width: var(
-    --recursica_ui-kit_components_stepper_variants_orientation_vertical_properties_max-text-width
-  );
 }
 
 .root.vertical .step {
   gap: var(
-    --recursica_ui-kit_components_stepper_variants_orientation_vertical_properties_indicator-label-gap
+    --recursica_ui-kit_components_stepper_properties_indicator-label-gap
   );
   margin-top: 0 !important; /* Remove Mantine's gap */
   padding-bottom: var(
@@ -105,92 +89,57 @@
 
 .root.vertical .stepBody {
   gap: var(
-    --recursica_ui-kit_components_stepper_variants_orientation_vertical_properties_label-description-gap
+    --recursica_ui-kit_components_stepper_properties_label-description-gap
   );
 }
 
-/* Sizes */
-.large {
+/* Mantine variable bridge. Every value is a stable root name resolved by the
+   data-recursica-* attributes set in Stepper.tsx. */
+.root {
+  --stepper-step-gap: var(
+    --recursica_ui-kit_components_stepper_properties_step-gap
+  );
+  --stepper-max-text-width: var(
+    --recursica_ui-kit_components_stepper_properties_max-text-width
+  );
   --stepper-icon-size: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_large_properties_indicator-size
+    --recursica_ui-kit_components_stepper_properties_indicator-size
   ); /* Maps to Mantine's circle size */
   --stepper-indicator-size: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_large_properties_indicator-size
+    --recursica_ui-kit_components_stepper_properties_indicator-size
   );
   --stepper-border-size: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_large_properties_indicator-border-size
+    --recursica_ui-kit_components_stepper_properties_indicator-border-size
   );
   --stepper-border-radius: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_large_properties_indicator-border-radius
+    --recursica_ui-kit_components_stepper_properties_indicator-border-radius
   );
   --stepper-font-family: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_large_properties_step-number-text_font-family
+    --recursica_ui-kit_components_stepper_properties_step-number-text_font-family
   );
   --stepper-font-size: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_large_properties_step-number-text_font-size
+    --recursica_ui-kit_components_stepper_properties_step-number-text_font-size
   );
   --stepper-font-style: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_large_properties_step-number-text_font-style
+    --recursica_ui-kit_components_stepper_properties_step-number-text_font-style
   );
   --stepper-font-weight: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_large_properties_step-number-text_font-weight
+    --recursica_ui-kit_components_stepper_properties_step-number-text_font-weight
   );
   --stepper-letter-spacing: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_large_properties_step-number-text_letter-spacing
+    --recursica_ui-kit_components_stepper_properties_step-number-text_letter-spacing
   );
   --stepper-line-height: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_large_properties_step-number-text_line-height
+    --recursica_ui-kit_components_stepper_properties_step-number-text_line-height
   );
   --stepper-text-decoration: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_large_properties_step-number-text_text-decoration
+    --recursica_ui-kit_components_stepper_properties_step-number-text_text-decoration
   );
   --stepper-text-transform: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_large_properties_step-number-text_text-transform
+    --recursica_ui-kit_components_stepper_properties_step-number-text_text-transform
   );
   --stepper-svg-size: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_large_properties_completed-icon-size
-  );
-}
-
-.small {
-  --stepper-icon-size: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_small_properties_indicator-size
-  ); /* Maps to Mantine's circle size */
-  --stepper-indicator-size: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_small_properties_indicator-size
-  );
-  --stepper-border-size: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_small_properties_indicator-border-size
-  );
-  --stepper-border-radius: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_small_properties_indicator-border-radius
-  );
-  --stepper-font-family: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_small_properties_step-number-text_font-family
-  );
-  --stepper-font-size: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_small_properties_step-number-text_font-size
-  );
-  --stepper-font-style: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_small_properties_step-number-text_font-style
-  );
-  --stepper-font-weight: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_small_properties_step-number-text_font-weight
-  );
-  --stepper-letter-spacing: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_small_properties_step-number-text_letter-spacing
-  );
-  --stepper-line-height: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_small_properties_step-number-text_line-height
-  );
-  --stepper-text-decoration: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_small_properties_step-number-text_text-decoration
-  );
-  --stepper-text-transform: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_small_properties_step-number-text_text-transform
-  );
-  --stepper-svg-size: var(
-    --recursica_ui-kit_components_stepper_variants_sizes_small_properties_completed-icon-size
+    --recursica_ui-kit_components_stepper_properties_completed-icon-size
   );
 }
 

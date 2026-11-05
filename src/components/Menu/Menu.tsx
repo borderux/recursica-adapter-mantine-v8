@@ -68,7 +68,7 @@ const MenuBase = function Menu({ overStyled = false, ...rest }: MenuProps) {
   // `maxHeight` is a caller-supplied override of the token-driven dropdown max-height, applied
   // via Mantine's per-part `styles` API (same mechanism as `classNames` above) rather than a CSS
   // module change, since it's an explicit per-instance escape hatch, not a design token. The CSS
-  // module deliberately leaves `overflow` unset (see MENU_IMPLEMENTATION_NOTES.md §8) so it
+  // module deliberately leaves `overflow` unset (see IMPLEMENTATION_NOTES.md §8) so it
   // doesn't clip sub-menus at the token default height; once a caller opts into a fixed
   // `maxHeight`, though, items need to scroll instead of spilling out past the boundary.
   const callerStyles = menuRestRecord.styles as
@@ -143,6 +143,20 @@ const MenuDropdown = forwardRef<HTMLDivElement, MenuDropdownProps>(
 );
 MenuDropdown.displayName = "MenuDropdown";
 
+/**
+ * menu-item contract attributes. Mantine exposes no selected state, so it comes from the
+ * caller's `data-selected` attribute (the same hook the CSS used before the contract).
+ */
+function menuItemContract(props: Record<string, unknown>) {
+  const selected =
+    props["data-selected"] !== undefined && props["data-selected"] !== false;
+  return {
+    "data-recursica": "menu-item",
+    "data-recursica-selection-states": selected ? "selected" : "unselected",
+    "data-recursica-disabled": props.disabled ? "" : undefined,
+  };
+}
+
 // ============================================================
 // MENU ITEM
 // ============================================================
@@ -175,6 +189,7 @@ const _MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
     return (
       <MantineMenu.Item
         {...(sanitizedProps as unknown as MantineMenuItemProps)}
+        {...menuItemContract(restRecord)}
         ref={ref}
         className={classNameProp}
       />
@@ -236,6 +251,8 @@ const MenuLabel = forwardRef<HTMLDivElement, MenuLabelProps>(function MenuLabel(
   return (
     <MantineMenu.Label
       {...(sanitizedProps as unknown as MantineMenuLabelProps)}
+      data-recursica="menu-item"
+      data-recursica-selection-states="unselected"
       ref={ref}
       className={classNameProp}
     />
@@ -298,6 +315,7 @@ const _MenuSubItem = forwardRef<HTMLButtonElement, MenuSubItemProps>(
     return (
       <MantineMenu.Sub.Item
         {...(sanitizedProps as unknown as MantineMenuItemProps)}
+        {...menuItemContract(restRecord)}
         ref={ref}
         className={classNameProp}
       />

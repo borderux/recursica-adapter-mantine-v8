@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Dropdown } from "./Dropdown";
 import { formControlArgTypes } from "../../../.storybook/commonArgTypes";
 import { renderRichOption } from "../../utils/renderRichOption";
+import { menuItemOption } from "./menuItemOption";
 import styles from "./Dropdown.module.css";
 
 type DropdownStoryProps = React.ComponentProps<typeof Dropdown>;
@@ -195,17 +196,21 @@ const OPTION_ROW_PREVIEW_ITEMS = [
 const renderOptionRowPreview = (wrapItemText: boolean) => (
   <div
     className={styles.dropdown}
+    data-recursica="dropdown"
+    data-recursica-layouts="stacked"
     style={{
-      width:
-        "var(--recursica_ui-kit_components_dropdown_variants_layouts_stacked_properties_max-width)",
+      width: "var(--recursica_ui-kit_components_dropdown_properties_max-width)",
     }}
   >
     {OPTION_ROW_PREVIEW_ITEMS.map((item) => (
       <div key={item.value} className={styles.option}>
-        {renderRichOption(
-          { option: item },
-          optionRowPreviewClassNames,
-          wrapItemText,
+        {menuItemOption(
+          renderRichOption(
+            { option: item },
+            optionRowPreviewClassNames,
+            wrapItemText,
+          ),
+          false,
         )}
       </div>
     ))}

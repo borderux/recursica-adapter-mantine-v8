@@ -26,12 +26,21 @@ buttons have fixed `aria-label`s.
 ## Labels
 
 `withLabels` adds a text label to each navigation button. `Previous`/`First` put the icon first
-(`Button`'s `icon`); `Next`/`Last` put it after the label (`rightSection`, sized to the Button's
-icon token via `[data-size]` in `Pagination.module.css`).
+(`Button`'s `icon`); `Next`/`Last` put it after the label (`rightSection`, sized by the Button's
+stable `button_properties_icon` name, which the enclosing Button root resolves).
 
 ## Styling
 
 `Pagination.module.css` only lays out the row (`item-gap`) and styles the dots (`dots-color`).
+
+- Page and navigation controls are Recursica `Button`s, which already set `data-recursica="button"` and
+  every axis attribute (`styles`, `sizes`, `content`, `disabled`), so no per-control wiring is needed here
+  (`getItemProps`/`getControlProps` stay pass-throughs).
+- The dots are not buttons, but match the page buttons' height. They carry
+  `data-recursica="button"` with the `inactive-pages` style and size and `content="icon-only"` (a compact glyph
+  like the icon-only navigation buttons, 32px wide as in the goldens), and read only `button_properties_height` and `button_properties_min-width`.
+  Colours, padding and the other Button names that attribute set also defines are unused. Not disabled-aware
+  (nothing to disable). The pagination contract has no sizing names of its own (only `item-gap`, `dots-color`).
 
 - The root is a `<nav aria-label="Pagination">` landmark, and each page button has `aria-label="Page N"`
   (`Previous page`, `Next page`, etc. for the navigation buttons). Both can be overridden by props.

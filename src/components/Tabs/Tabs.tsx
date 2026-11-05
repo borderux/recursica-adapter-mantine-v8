@@ -52,6 +52,19 @@ const _Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(props, ref) {
       className={`${styles.root} ${className || ""}`}
       data-variant={variant}
       data-orientation={orientation}
+      data-recursica="tabs"
+      data-recursica-styles={variant}
+      data-recursica-orientation={orientation}
+      // Each Tab is a Mantine-rendered element; the tabs-item contract is applied through `attributes`.
+      attributes={{
+        ...(sanitizedProps as MantineTabsProps).attributes,
+        tab: {
+          "data-recursica": "tabs-item",
+          "data-recursica-styles": variant,
+          "data-recursica-orientation": orientation,
+          ...(sanitizedProps as MantineTabsProps).attributes?.tab,
+        },
+      }}
       classNames={mergedClassNames}
     />
   );
@@ -82,6 +95,7 @@ const _TabsTab = forwardRef<HTMLButtonElement, TabsTabProps>(
     return (
       <MantineTabs.Tab
         ref={ref}
+        data-recursica-disabled={rest.disabled || undefined}
         {...(filterStylingProps(rest, overStyled) as MantineTabsTabProps)}
       />
     );

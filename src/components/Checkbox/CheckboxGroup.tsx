@@ -123,7 +123,11 @@ export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
               value={value as any}
               defaultValue={defaultValue as any}
             >
-              <div className={styles.groupRoot} data-layout={formLayout}>
+              <div
+                className={styles.groupRoot}
+                data-recursica="checkbox-group"
+                data-recursica-layouts={formLayout}
+              >
                 {children}
               </div>
             </MantineCheckbox.Group>
@@ -133,7 +137,8 @@ export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
               {...(sanitizedProps as Record<string, unknown>)}
               role="group"
               className={styles.groupRoot}
-              data-layout={formLayout}
+              data-recursica="checkbox-group"
+              data-recursica-layouts={formLayout}
             >
               {children}
             </div>

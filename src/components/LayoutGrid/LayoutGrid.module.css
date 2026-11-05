@@ -6,7 +6,7 @@
  * representation in Forge's model (a grid is a page-layout primitive, not a "component"), so
  * LayoutGrid is the one component that reads brand_layout-grids_* directly (the responsive alias, which Forge
  * redefines per breakpoint inside @media). See
- * LAYOUT_GRID_IMPLEMENTATION_NOTES.md.
+ * IMPLEMENTATION_NOTES.md.
  *   recursica-allow-brand: --recursica_brand_layout-grids_column-gutter
  *   recursica-allow-brand: --recursica_brand_layout-grids_row-gutter
  *   recursica-allow-brand: --recursica_brand_layout-grids_columns

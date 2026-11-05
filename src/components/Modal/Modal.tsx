@@ -114,7 +114,7 @@ const ModalInner = React.forwardRef<HTMLDivElement, ModalProps>(function Modal(
         {header ?? (
           <MantineModal.Header>
             <MantineModal.Title>{title}</MantineModal.Title>
-            <MantineModal.CloseButton aria-label={closeButtonAriaLabel} />
+            <ModalCloseButton aria-label={closeButtonAriaLabel} />
           </MantineModal.Header>
         )}
         <ModalBody>{children}</ModalBody>
@@ -350,6 +350,11 @@ const ModalCloseButton = React.forwardRef<
   return (
     <MantineModal.CloseButton
       ref={ref}
+      // Recursica Button contract (text style, small size, icon-only); read via root `button_properties_*` names.
+      data-recursica="button"
+      data-recursica-styles="text"
+      data-recursica-sizes="small"
+      data-recursica-content="icon-only"
       {...(sanitizedProps as unknown as MantineModalCloseButtonProps)}
     />
   );

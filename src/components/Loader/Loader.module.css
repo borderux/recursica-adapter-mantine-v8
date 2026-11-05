@@ -1,5 +1,4 @@
 .root {
-  /* Default inheritance mapped from component variables if not explicitly overridden by variants */
   --loader-color: var(
     --recursica_ui-kit_components_loader_properties_indicator-color
   );
@@ -15,49 +14,15 @@
   animation: none !important;
 }
 
-/* data-size mapping */
-
-/* SMALL */
-.root[data-size="small"] {
-  --loader-size: var(
-    --recursica_ui-kit_components_loader_variants_sizes_small_properties_size
-  );
+/* Size and thickness come from stable root names resolved by the data-recursica-sizes attribute set in Loader.tsx. */
+.root {
+  --loader-size: var(--recursica_ui-kit_components_loader_properties_size);
 }
-.root[data-size="small"][data-variant="oval"]::after {
+.root[data-variant="oval"]::after {
   border-width: var(
-    --recursica_ui-kit_components_loader_variants_sizes_small_properties_thickness-size
+    --recursica_ui-kit_components_loader_properties_thickness-size
   );
   border-radius: var(
-    --recursica_ui-kit_components_loader_variants_sizes_small_properties_border-radius
-  );
-}
-
-/* DEFAULT */
-.root[data-size="default"] {
-  --loader-size: var(
-    --recursica_ui-kit_components_loader_variants_sizes_default_properties_size
-  );
-}
-.root[data-size="default"][data-variant="oval"]::after {
-  border-width: var(
-    --recursica_ui-kit_components_loader_variants_sizes_default_properties_thickness-size
-  );
-  border-radius: var(
-    --recursica_ui-kit_components_loader_variants_sizes_default_properties_border-radius
-  );
-}
-
-/* LARGE */
-.root[data-size="large"] {
-  --loader-size: var(
-    --recursica_ui-kit_components_loader_variants_sizes_large_properties_size
-  );
-}
-.root[data-size="large"][data-variant="oval"]::after {
-  border-width: var(
-    --recursica_ui-kit_components_loader_variants_sizes_large_properties_thickness-size
-  );
-  border-radius: var(
-    --recursica_ui-kit_components_loader_variants_sizes_large_properties_border-radius
+    --recursica_ui-kit_components_loader_properties_border-radius
   );
 }

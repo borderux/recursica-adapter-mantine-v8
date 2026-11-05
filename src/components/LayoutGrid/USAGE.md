@@ -62,7 +62,7 @@ All Recursica components in the `@recursica/adapter-mantine-v8` package adhere s
 accept the same shapes, including per-breakpoint objects (`{ xs, sm, md, lg, xl }`) — all still a
 straight Mantine pass-through for now. A formal `RecursicaLayoutGridColProps` contract in
 `adapter-common` is scaffolded but not filled in yet (TODO, tracked in
-`LAYOUT_GRID_IMPLEMENTATION_NOTES.md`).
+`IMPLEMENTATION_NOTES.md`).
 
 `LayoutGrid` does not accept Mantine's `gutter` or `columns` props — column count, column-gutter,
 row-gutter, and margin are design-system-managed (Forge-controlled, breakpoint-aware, applied via

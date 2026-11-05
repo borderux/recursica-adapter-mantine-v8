@@ -46,7 +46,7 @@ const _Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
   // Props this component intentionally doesn't support — deleted at runtime so they can't leak
   // through even if a caller forces them via plain JavaScript, bypassing the `Omit<>` above.
   const UNSUPPORTED_PROPS = [
-    "color", // Colors are token-driven via `data-variant`; Mantine's native palette isn't exposed.
+    "color", // Colors are token-driven via `data-recursica-*`; Mantine's native palette isn't exposed.
     "radius", // Avatar corner radius is controlled by design tokens, not a raw radius prop.
   ] as const satisfies readonly (keyof MantineAvatarProps)[];
 
@@ -81,12 +81,13 @@ const _Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
       {...sanitizedProps}
       className={classNameProp}
       classNames={mergedClassNames}
-      variant={mapVariant[variant]}
+      variant={(mapVariant as Record<string, string>)[variant] ?? variant}
       size={mapSize[size]}
       src={src}
-      data-variant={variant}
-      data-size={size}
-      data-style={computedStyle}
+      data-recursica="avatar"
+      data-recursica-styles={computedStyle}
+      data-recursica-sizes={size}
+      data-recursica-types={computedStyle === "image" ? undefined : variant}
     >
       {icon != null ? (
         <span className={styles.iconWrapper} aria-hidden>

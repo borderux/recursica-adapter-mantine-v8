@@ -26,17 +26,11 @@
    1. Baseline, Reset & Layout Overrides
    ========================================== */
 
-/* Stacked Layout Spacing Override */
+/* Maps the contract's layout-resolved margin onto the --form-control-margin-bottom hook.
+   The contract attributes (data-recursica*) live on this element; see Slider.tsx. */
 .layoutOverride {
   --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_slider_variants_layouts_stacked_properties_top-bottom-margin
-  );
-}
-
-/* Side-by-Side Layout Spacing Override */
-.layoutOverride[data-form-layout="side-by-side"] {
-  --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_slider_variants_layouts_side-by-side_properties_top-bottom-margin
+    --recursica_ui-kit_components_slider_properties_top-bottom-margin
   );
 }
 
@@ -47,6 +41,10 @@
   box-sizing: border-box;
   gap: var(--recursica_ui-kit_components_slider_properties_input-gap);
   color: var(--form-field-text-valued);
+  opacity: var(
+    --recursica_ui-kit_components_slider_properties_opacity,
+    1
+  ); /* Defined only while disabled */
 }
 
 .sliderTrackWrapper {
@@ -152,10 +150,8 @@
 }
 
 .sliderMark[data-filled] {
-  /* No default-state "-active" step-indicator token exists anymore (only disabled/error define
-     one); reusing the active-track color keeps filled marks visually tied to the filled track. */
   background-color: var(
-    --recursica_ui-kit_components_slider_properties_colors_track-active
+    --recursica_ui-kit_components_slider_properties_colors_step-indicator-color-active
   );
 }
 
@@ -417,26 +413,11 @@
 }
 
 /* ==========================================
-   6. State-Specific Overrides (Disabled, Error)
+   6. State-Specific Overrides
    ========================================== */
 
-/* Focus states */
-/* The token schema's `active` state (not a separate `focus` state) now covers track/step-indicator
-   color while focus is within the slider; there is no `active` override for the filled mark. */
-.sliderRoot:has(.sliderThumb:focus) .sliderTrack,
-.sliderRoot:focus-within .sliderTrack {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_active_properties_colors_track
-  );
-}
-
-.sliderRoot:has(.sliderThumb:focus) .sliderMark,
-.sliderRoot:focus-within .sliderMark {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_active_properties_colors_step-indicator-color
-  );
-}
-
+/* Disabled and error colours come from the contract's data-recursica-* attributes (set in
+   Slider.tsx); only non-token behaviour stays here. */
 .sliderContainer:focus-within .iconWrapper {
   box-shadow:
     0 0 0 var(--recursica_brand_states_focus_border-size)
@@ -446,118 +427,17 @@
       var(--recursica_brand_states_focus_color);
 }
 
-/* Disabled state */
-.sliderContainer[data-disabled="true"] .iconWrapper {
-  color: var(
-    --recursica_ui-kit_components_slider_variants_states_disabled_properties_colors_icon-color
-  );
-}
-
-.sliderContainer[data-disabled="true"] .sliderTrack {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_disabled_properties_colors_track
-  );
-}
-
-.sliderContainer[data-disabled="true"] .sliderBar {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_disabled_properties_colors_track-active
-  );
+.sliderContainer[data-disabled="true"] {
+  color: var(--form-field-disabled-text);
 }
 
 .sliderContainer[data-disabled="true"] .sliderThumb {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_disabled_properties_colors_thumb
-  );
   cursor: not-allowed;
   box-shadow: none;
 }
 
-.sliderContainer[data-disabled="true"] .sliderMark {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_disabled_properties_colors_step-indicator-color
-  );
-}
-
-.sliderContainer[data-disabled="true"] .sliderMark[data-filled] {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_disabled_properties_colors_step-indicator-color-active
-  );
-}
-
-.sliderContainer[data-disabled="true"] {
-  color: var(--form-field-disabled-text);
-  opacity: var(
-    --recursica_ui-kit_components_slider_variants_states_disabled_properties_opacity
-  );
-}
-
 .inputField:disabled {
   cursor: not-allowed;
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_disabled_properties_colors_input-background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_slider_variants_states_disabled_properties_colors_input-border-color
-  );
-  color: var(
-    --recursica_ui-kit_components_slider_variants_states_disabled_properties_colors_input-text
-  );
-  border-width: var(
-    --recursica_ui-kit_components_slider_variants_states_disabled_properties_input-border-size
-  );
-}
-
-/* Error state */
-.sliderContainer[data-error="true"] .iconWrapper {
-  color: var(
-    --recursica_ui-kit_components_slider_variants_states_error_properties_colors_icon-color
-  );
-}
-
-.sliderContainer[data-error="true"] .sliderTrack {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_error_properties_colors_track
-  );
-}
-
-.sliderContainer[data-error="true"] .sliderBar {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_error_properties_colors_track-active
-  );
-}
-
-.sliderContainer[data-error="true"] .sliderThumb {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_error_properties_colors_thumb
-  );
-}
-
-.sliderContainer[data-error="true"] .sliderMark {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_error_properties_colors_step-indicator-color
-  );
-}
-
-.sliderContainer[data-error="true"] .sliderMark[data-filled] {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_error_properties_colors_step-indicator-color-active
-  );
-}
-
-.inputField[data-error="true"] {
-  background-color: var(
-    --recursica_ui-kit_components_slider_variants_states_error_properties_colors_input-background-color
-  );
-  border-color: var(
-    --recursica_ui-kit_components_slider_variants_states_error_properties_colors_input-border-color
-  );
-  color: var(
-    --recursica_ui-kit_components_slider_variants_states_error_properties_colors_input-text
-  );
-  border-width: var(
-    --recursica_ui-kit_components_slider_variants_states_error_properties_input-border-size
-  );
 }
 
 /* ==========================================

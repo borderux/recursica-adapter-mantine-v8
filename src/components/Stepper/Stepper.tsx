@@ -54,10 +54,13 @@ const _Stepper = forwardRef<HTMLDivElement, StepperProps>(
         ref={ref}
         {...(sanitizedProps as MantineStepperProps)}
         orientation={orientation}
-        className={`${styles.root} ${orientation === "horizontal" ? styles.horizontal : styles.vertical} ${size === "large" ? styles.large : styles.small} ${className || ""}`}
+        className={`${styles.root} ${orientation === "horizontal" ? styles.horizontal : styles.vertical} ${className || ""}`}
         style={style as React.CSSProperties}
         data-size={size}
         data-orientation={orientation}
+        data-recursica="stepper"
+        data-recursica-sizes={size}
+        data-recursica-orientation={orientation}
         classNames={mergedClassNames}
       />
     );

@@ -7,28 +7,16 @@
   gap: var(--recursica_ui-kit_components_pagination_properties_item-gap);
 }
 
-/* Dots: sized like the page buttons around them (the inactive-pages size from the manifest). */
+/* Dots: sized like the page buttons around them. Pagination.tsx puts the Button contract
+ * attributes (inactive-pages style/size, content="icon-only": same footprint as the icon-only navigation buttons) on them, so the stable root names resolve. */
 .dots {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: var(
-    --recursica_ui-kit_components_button_variants_sizes_default_properties_height
-  );
-  min-width: var(
-    --recursica_ui-kit_components_button_variants_sizes_default_properties_min-width
-  );
+  height: var(--recursica_ui-kit_components_button_properties_height);
+  min-width: var(--recursica_ui-kit_components_button_properties_min-width);
   color: var(
     --recursica_ui-kit_components_pagination_properties_colors_dots-color
-  );
-}
-
-.dots[data-size="small"] {
-  height: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_height
-  );
-  min-width: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_min-width
   );
 }
 
@@ -38,21 +26,9 @@
   height: 100%;
 }
 
+/* Inside the Button root, which resolves the size-dependent icon name. */
 .rightIcon {
   display: flex;
-  width: var(
-    --recursica_ui-kit_components_button_variants_sizes_default_properties_icon
-  );
-  height: var(
-    --recursica_ui-kit_components_button_variants_sizes_default_properties_icon
-  );
-}
-
-[data-size="small"] .rightIcon {
-  width: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_icon
-  );
-  height: var(
-    --recursica_ui-kit_components_button_variants_sizes_small_properties_icon
-  );
+  width: var(--recursica_ui-kit_components_button_properties_icon);
+  height: var(--recursica_ui-kit_components_button_properties_icon);
 }

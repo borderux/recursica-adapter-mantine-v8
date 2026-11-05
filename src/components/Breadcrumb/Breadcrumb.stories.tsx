@@ -19,7 +19,7 @@ const meta: Meta<BreadcrumbStoryProps> = {
           "crumb — the current page — is plain text (e.g. a `<span>`), not a link. `Breadcrumb` " +
           "does its best to neutralize a `Link` passed as the last item anyway (see " +
           "`LastItemAsLink`), but that's a safety net, not something to rely on — see " +
-          "BREADCRUMB_IMPLEMENTATION_NOTES.md.",
+          "IMPLEMENTATION_NOTES.md.",
       },
     },
   },

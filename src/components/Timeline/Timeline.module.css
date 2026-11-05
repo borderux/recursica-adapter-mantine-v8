@@ -11,62 +11,17 @@
 }
 
 .item {
-  /* Mantine uses these vars to calculate the exact left: position of the connector line */
+  /* Mantine uses this var to position the connector line. Stable root name, resolved by the item's data-recursica-selection-states. */
   --tl-line-width: var(
-    --recursica_ui-kit_components_timeline_variants_selection-states_inactive_properties_connector-size
+    --recursica_ui-kit_components_timeline_properties_connector-size
   ) !important;
 
-  &[data-active] {
-    --tl-line-width: var(
-      --recursica_ui-kit_components_timeline_variants_selection-states_active_properties_connector-size
-    ) !important;
-  }
-
-  &[data-variant="default"] {
-    --tl-bullet-size: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_default_properties_bullet-size
-    ) !important;
-  }
-  &[data-variant="icon"] {
-    --tl-bullet-size: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon_properties_bullet-size
-    ) !important;
-  }
-  &[data-variant="icon-alternative"] {
-    --tl-bullet-size: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_properties_bullet-size
-    ) !important;
-  }
-  &[data-variant="avatar"] {
-    /* Avatar sizing fallback to default to maintain connector alignment */
-    --tl-bullet-size: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_default_properties_bullet-size
-    ) !important;
-  }
-  /* EXEMPTIONS:
-     - The avatar variant's own avatar-size token is ignored — sizing is deliberately pinned to
-       the default bullet-size above (not the avatar's own size) to keep the connector line
-       aligned across bullet variants; the child Avatar component governs its own visual size. */
-  /* recursica-ignore: --recursica_ui-kit_components_timeline-bullet_variants_types_avatar_properties_avatar-size */
-
-  /* Control connector lines via the item ::before pseudo-element */
-  /* Inactive connector */
   &::before {
     border-left-width: var(
-      --recursica_ui-kit_components_timeline_variants_selection-states_inactive_properties_connector-size
+      --recursica_ui-kit_components_timeline_properties_connector-size
     ) !important;
     border-left-color: var(
-      --recursica_ui-kit_components_timeline_variants_selection-states_inactive_properties_colors_connector-color
-    ) !important;
-  }
-
-  /* Active connector */
-  &[data-active]::before {
-    border-left-width: var(
-      --recursica_ui-kit_components_timeline_variants_selection-states_active_properties_connector-size
-    ) !important;
-    border-left-color: var(
-      --recursica_ui-kit_components_timeline_variants_selection-states_active_properties_colors_connector-color
+      --recursica_ui-kit_components_timeline_properties_colors_connector-color
     ) !important;
   }
 }
@@ -78,168 +33,71 @@
   ) !important;
 }
 
+/* Mantine's own bullet is an invisible, default-sized shell: it still positions the bullet on the
+   connector, while .bulletFace (which carries the timeline-bullet contract) paints it. */
 .itemBullet {
-  /* Default Variant */
-  :global(.mantine-Timeline-item)[data-variant="default"] & {
-    width: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_default_properties_bullet-size
-    ) !important;
-    height: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_default_properties_bullet-size
-    ) !important;
-    border-radius: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_default_properties_border-radius
-    ) !important;
-    border-width: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_default_properties_border-size
-    ) !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  background-color: transparent !important;
+  border-width: 0 !important;
+}
 
-    background-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_default_variants_selection-states_inactive_properties_colors_background-color
-    ) !important;
-    border-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_default_variants_selection-states_inactive_properties_colors_border-color
-    ) !important;
-  }
-  :global(.mantine-Timeline-item)[data-variant="default"][data-active] & {
-    background-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_default_variants_selection-states_active_properties_colors_background-color
-    ) !important;
-    border-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_default_variants_selection-states_active_properties_colors_border-color
-    ) !important;
-  }
+.bulletFace {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(
+    --recursica_ui-kit_components_timeline-bullet_properties_bullet-size
+  );
+  height: var(
+    --recursica_ui-kit_components_timeline-bullet_properties_bullet-size
+  );
+  border-style: solid;
+  border-radius: var(
+    --recursica_ui-kit_components_timeline-bullet_properties_border-radius
+  );
+  border-width: var(
+    --recursica_ui-kit_components_timeline-bullet_properties_border-size
+  );
+  background-color: var(
+    --recursica_ui-kit_components_timeline-bullet_properties_colors_background-color
+  );
+  border-color: var(
+    --recursica_ui-kit_components_timeline-bullet_properties_colors_border-color
+  );
 
-  /* Icon Variant */
-  :global(.mantine-Timeline-item)[data-variant="icon"] & {
-    width: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon_properties_bullet-size
-    ) !important;
-    height: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon_properties_bullet-size
-    ) !important;
-    border-radius: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon_properties_border-radius
-    ) !important;
-    border-width: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon_properties_border-size
-    ) !important;
-
-    background-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon_variants_selection-states_inactive_properties_colors_background-color
-    ) !important;
-    border-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon_variants_selection-states_inactive_properties_colors_border-color
-    ) !important;
+  /* Icon types */
+  &[data-recursica-types="icon"],
+  &[data-recursica-types="icon-alternative"] {
     color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon_variants_selection-states_inactive_properties_colors_icon-color
-    ) !important;
-
-    /* Propagate icon size */
+      --recursica_ui-kit_components_timeline-bullet_properties_colors_icon-color
+    );
     font-size: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon_properties_icon-size
+      --recursica_ui-kit_components_timeline-bullet_properties_icon-size
     );
     & svg {
       width: var(
-        --recursica_ui-kit_components_timeline-bullet_variants_types_icon_properties_icon-size
+        --recursica_ui-kit_components_timeline-bullet_properties_icon-size
       );
       height: var(
-        --recursica_ui-kit_components_timeline-bullet_variants_types_icon_properties_icon-size
+        --recursica_ui-kit_components_timeline-bullet_properties_icon-size
       );
     }
   }
-  :global(.mantine-Timeline-item)[data-variant="icon"][data-active] & {
-    background-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon_variants_selection-states_active_properties_colors_background-color
-    ) !important;
-    border-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon_variants_selection-states_active_properties_colors_border-color
-    ) !important;
-    color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon_variants_selection-states_active_properties_colors_icon-color
-    ) !important;
-  }
 
-  /* Icon Alternative Variant */
-  :global(.mantine-Timeline-item)[data-variant="icon-alternative"] & {
+  /* Avatar type: avatar-size and avatar-opacity exist only for this type. */
+  &[data-recursica-types="avatar"] {
     width: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_properties_bullet-size
-    ) !important;
-    height: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_properties_bullet-size
-    ) !important;
-    border-radius: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_properties_border-radius
-    ) !important;
-    border-width: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_properties_border-size
-    ) !important;
-
-    background-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_variants_selection-states_inactive_properties_colors_background-color
-    ) !important;
-    border-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_variants_selection-states_inactive_properties_colors_border-color
-    ) !important;
-    color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_variants_selection-states_inactive_properties_colors_icon-color
-    ) !important;
-
-    font-size: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_properties_icon-size
+      --recursica_ui-kit_components_timeline-bullet_properties_avatar-size
     );
-    & svg {
-      width: var(
-        --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_properties_icon-size
-      );
-      height: var(
-        --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_properties_icon-size
-      );
-    }
-  }
-  :global(.mantine-Timeline-item)[data-variant="icon-alternative"][data-active]
-    & {
-    background-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_variants_selection-states_active_properties_colors_background-color
-    ) !important;
-    border-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_variants_selection-states_active_properties_colors_border-color
-    ) !important;
-    color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_icon-alternative_variants_selection-states_active_properties_colors_icon-color
-    ) !important;
-  }
-
-  /* Avatar Variant */
-  :global(.mantine-Timeline-item)[data-variant="avatar"] & {
-    /* Avatar sizing is often governed by the avatar itself, but we'll apply the radius and opacity */
-    border-radius: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_avatar_properties_border-radius
-    ) !important;
-    border-width: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_avatar_properties_border-size
-    ) !important;
+    height: var(
+      --recursica_ui-kit_components_timeline-bullet_properties_avatar-size
+    );
     opacity: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_avatar_variants_selection-states_inactive_properties_avatar-opacity
-    ) !important;
-
-    background-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_avatar_variants_selection-states_inactive_properties_colors_background-color
-    ) !important;
-    border-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_avatar_variants_selection-states_inactive_properties_colors_border-color
-    ) !important;
-  }
-  :global(.mantine-Timeline-item)[data-variant="avatar"][data-active] & {
-    opacity: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_avatar_variants_selection-states_active_properties_avatar-opacity
-    ) !important;
-    background-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_avatar_variants_selection-states_active_properties_colors_background-color
-    ) !important;
-    border-color: var(
-      --recursica_ui-kit_components_timeline-bullet_variants_types_avatar_variants_selection-states_active_properties_colors_border-color
-    ) !important;
+      --recursica_ui-kit_components_timeline-bullet_properties_avatar-opacity
+    );
   }
 }
 
@@ -274,17 +132,9 @@
     --recursica_ui-kit_components_timeline_properties_title-description-gap
   ) !important;
 
-  /* Inactive Title Color */
   color: var(
-    --recursica_ui-kit_components_timeline_variants_selection-states_inactive_properties_colors_title-color
+    --recursica_ui-kit_components_timeline_properties_colors_title-color
   ) !important;
-
-  /* Active Title Color */
-  :global(.mantine-Timeline-item)[data-active] & {
-    color: var(
-      --recursica_ui-kit_components_timeline_variants_selection-states_active_properties_colors_title-color
-    ) !important;
-  }
 }
 
 .itemContent {
@@ -325,14 +175,8 @@
   );
 
   color: var(
-    --recursica_ui-kit_components_timeline_variants_selection-states_inactive_properties_colors_description-color
+    --recursica_ui-kit_components_timeline_properties_colors_description-color
   );
-
-  :global(.mantine-Timeline-item)[data-active] & {
-    color: var(
-      --recursica_ui-kit_components_timeline_variants_selection-states_active_properties_colors_description-color
-    );
-  }
 }
 
 .timestamp {
@@ -362,12 +206,6 @@
   );
 
   color: var(
-    --recursica_ui-kit_components_timeline_variants_selection-states_inactive_properties_colors_timestamp-color
+    --recursica_ui-kit_components_timeline_properties_colors_timestamp-color
   );
-
-  :global(.mantine-Timeline-item)[data-active] & {
-    color: var(
-      --recursica_ui-kit_components_timeline_variants_selection-states_active_properties_colors_timestamp-color
-    );
-  }
 }

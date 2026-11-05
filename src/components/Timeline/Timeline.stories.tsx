@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Timeline } from "./Timeline";
+import avatarSrc from "./assets/avatar.svg";
 
 const meta: Meta<typeof Timeline> = {
   title: "UI-Kit/Timeline",
@@ -109,7 +110,7 @@ export const BulletVariants: Story = {
         bulletVariant="avatar"
         bullet={
           <img
-            src="https://avatars.githubusercontent.com/u/10353856?s=460&v=4"
+            src={avatarSrc}
             alt="avatar"
             style={{
               width: "100%",

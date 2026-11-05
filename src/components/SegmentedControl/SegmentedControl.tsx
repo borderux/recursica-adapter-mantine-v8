@@ -50,6 +50,11 @@ function useSegmentedControlClassNames(restRecord: Record<string, unknown>): {
   return { className: finalClass, classNames: mergedClassNames };
 }
 
+// Each control holds a native radio input, so the export's `:has(input:checked)` match resolves
+// the item's selection state with no attribute. The indicator holds no input, so it names the
+// selected state explicitly.
+const CONTRACT = "segmented-control-item";
+
 const _SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps>(
   function SegmentedControl(
     {
@@ -96,6 +101,14 @@ const _SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps>(
         classNames={stylingParams.classNames}
         orientation={orientation}
         fullWidth={fullWidth}
+        attributes={{
+          control: { "data-recursica": CONTRACT },
+          indicator: {
+            "data-recursica": CONTRACT,
+            "data-recursica-selection-states": "selected",
+          },
+          ...(restRecord.attributes as object | undefined),
+        }}
         data-orientation={orientation}
         data={mappedData}
       />

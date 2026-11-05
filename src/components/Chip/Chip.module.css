@@ -1,6 +1,5 @@
 /* Brand-layer exemptions (recursica-allow-brand) — see recursica-token-analyzer README.md.
  * Global hover/focus/disabled state tokens (recursica_variables_scoped.css header, 'Hover & Focus states' / 'Disabled state' — implicit rule for every interactive element; components must not define their own per-component treatment).
- *   recursica-allow-brand: --recursica_brand_states_disabled
  *   recursica-allow-brand: --recursica_brand_states_focus_blur
  *   recursica-allow-brand: --recursica_brand_states_focus_border-size
  *   recursica-allow-brand: --recursica_brand_states_focus_color
@@ -17,23 +16,13 @@
    background: transparent; (Override mantine default)
  */
 
-/* EXEMPTIONS:
-   - The leading icon and the selected/check icon are mutually exclusive (Chip.tsx only renders
-     the leading icon when `!checked`; Mantine's own check icon takes over when checked) — so for
-     any given state, exactly one of `leading-icon-color`/`selected-icon-color` ever applies. The
-     other one, and the non-state-specific base `properties_leading-icon-color`/
-     `properties_close-icon-color` (superseded by the per-selection-state values actually used),
-     are never referenced by design, not missing. Same for the generic (non-leading/selected)
-     `colors_icon-color` on the error variants — the more specific leading/selected token already
-     covers it. */
+/* EXEMPTIONS: the leading icon and the selected/check icon are mutually exclusive (Chip.tsx only
+   renders the leading icon when unchecked), so for any state only one of leading-icon-color /
+   selected-icon-color applies. The base properties_leading-icon-color / properties_close-icon-color
+   and the error-only colors_icon-color are never referenced by design. */
 /* recursica-ignore: --recursica_ui-kit_components_chip_properties_close-icon-color */
 /* recursica-ignore: --recursica_ui-kit_components_chip_properties_leading-icon-color */
-/* recursica-ignore: --recursica_ui-kit_components_chip_variants_selection-states_selected_properties_colors_leading-icon-color */
-/* recursica-ignore: --recursica_ui-kit_components_chip_variants_selection-states_selected_variants_states_error_properties_colors_icon-color */
-/* recursica-ignore: --recursica_ui-kit_components_chip_variants_selection-states_selected_variants_states_error_properties_colors_leading-icon-color */
-/* recursica-ignore: --recursica_ui-kit_components_chip_variants_selection-states_unselected_properties_colors_selected-icon-color */
-/* recursica-ignore: --recursica_ui-kit_components_chip_variants_selection-states_unselected_variants_states_error_properties_colors_icon-color */
-/* recursica-ignore: --recursica_ui-kit_components_chip_variants_selection-states_unselected_variants_states_error_properties_colors_selected-icon-color */
+/* recursica-ignore: --recursica_ui-kit_components_chip_properties_colors_icon-color */
 
 .root.root {
   /* Set preset layout variables to override mantine defaults safely */
@@ -42,22 +31,6 @@
 
   /* Token properties */
   --chip-height: max-content; /* Sizing is driven by padding and line height */
-  --chip-bg: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_unselected_properties_colors_background-color
-  );
-  --chip-border: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_unselected_properties_colors_border-color
-  );
-  --chip-text: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_unselected_properties_colors_text-color
-  );
-  --chip-icon: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_unselected_properties_colors_leading-icon-color
-  );
-  --chip-close: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_unselected_properties_colors_close-icon-color
-  );
-
   /* Override Mantine's internal variables */
   --chip-size: max-content;
   --chip-radius: var(
@@ -114,9 +87,13 @@
   );
 
   /* Token evaluation */
-  background-color: var(--chip-bg);
-  border-color: var(--chip-border);
-  color: var(--chip-text);
+  background-color: var(
+    --recursica_ui-kit_components_chip_properties_colors_background-color
+  );
+  border-color: var(
+    --recursica_ui-kit_components_chip_properties_colors_border-color
+  );
+  color: var(--recursica_ui-kit_components_chip_properties_colors_text-color);
   min-width: var(--recursica_ui-kit_components_chip_properties_min-width);
   max-width: var(--recursica_ui-kit_components_chip_properties_max-width);
   box-shadow: var(--recursica_ui-kit_components_chip_properties_elevation);
@@ -130,82 +107,31 @@
   flex: 1 1 auto; /* HARDCODE: let this anonymous wrapper actually fill/shrink to .label's real
     width instead of sizing to its content — otherwise a long .children label overflows this
     span well past .label's 200px max-width, and .children's own text-overflow: ellipsis never
-    engages because ITS box is still as wide as the unwrapped text (see CHIP_IMPLEMENTATION_NOTES.md) */
+    engages because ITS box is still as wide as the unwrapped text (see IMPLEMENTATION_NOTES.md) */
   min-width: 0; /* HARDCODE: flex items default to min-width: auto (their content's min-content
     size) — without this override, flex-shrink is a no-op and the span never shrinks below that */
 }
 
 .label.label:hover {
-  background-color: var(--chip-bg);
+  background-color: var(
+    --recursica_ui-kit_components_chip_properties_colors_background-color
+  );
 }
 
 .root[data-interactive] .label.label {
   cursor: pointer;
 }
 
-/* Default (Unselected) hover/active interactions (Mantine overrides) */
-.label.label[data-checked] {
-  --chip-bg: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_selected_properties_colors_background-color
-  );
-  --chip-border: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_selected_properties_colors_border-color
-  );
-  --chip-text: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_selected_properties_colors_text-color
-  );
-  --chip-icon: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_selected_properties_colors_selected-icon-color
-  );
-  --chip-close: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_selected_properties_colors_close-icon-color
-  );
-}
-
-.root[data-error] .label.label {
-  --chip-bg: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_unselected_variants_states_error_properties_colors_background-color
-  );
-  --chip-border: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_unselected_variants_states_error_properties_colors_border-color
-  );
-  --chip-text: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_unselected_variants_states_error_properties_colors_text-color
-  );
-  --chip-icon: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_unselected_variants_states_error_properties_colors_leading-icon-color
-  );
-  --chip-close: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_unselected_variants_states_error_properties_colors_close-icon-color
-  );
-}
-
-.root[data-error] .label.label[data-checked] {
-  --chip-bg: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_selected_variants_states_error_properties_colors_background-color
-  );
-  --chip-border: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_selected_variants_states_error_properties_colors_border-color
-  );
-  --chip-text: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_selected_variants_states_error_properties_colors_text-color
-  );
-  --chip-icon: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_selected_variants_states_error_properties_colors_selected-icon-color
-  );
-  --chip-close: var(
-    --recursica_ui-kit_components_chip_variants_selection-states_selected_variants_states_error_properties_colors_close-icon-color
-  );
-}
-
 .root[data-disabled] .label.label {
-  opacity: var(--recursica_brand_states_disabled);
+  opacity: var(--recursica_ui-kit_components_chip_properties_opacity);
   cursor: not-allowed;
 }
 
 /* Override Mantine's built-in check icon colors and size if we keep it */
 .mantineIconWrapper.mantineIconWrapper {
-  color: var(--chip-icon);
+  color: var(
+    --recursica_ui-kit_components_chip_properties_colors_selected-icon-color
+  );
   width: var(--recursica_ui-kit_components_chip_properties_icon-size);
   height: var(--recursica_ui-kit_components_chip_properties_icon-size);
   margin-right: var(
@@ -241,9 +167,16 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0; /* HARDCODE: keep the icon from being squeezed by a long, truncating label */
-  color: var(--chip-icon);
+  color: var(
+    --recursica_ui-kit_components_chip_properties_colors_leading-icon-color
+  );
   width: var(--recursica_ui-kit_components_chip_properties_icon-size);
   height: var(--recursica_ui-kit_components_chip_properties_icon-size);
+}
+
+/* Mantine's check icon replaces the leading icon when checked. */
+.root:has(input:checked) .leadingIcon {
+  display: none;
 }
 
 .leadingIcon svg {
@@ -256,7 +189,9 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0; /* HARDCODE: keep the delete icon visible when the label truncates instead */
-  color: var(--chip-close);
+  color: var(
+    --recursica_ui-kit_components_chip_properties_colors_close-icon-color
+  );
   width: var(--recursica_ui-kit_components_chip_properties_close-icon-size);
   height: var(--recursica_ui-kit_components_chip_properties_close-icon-size);
   cursor: pointer;

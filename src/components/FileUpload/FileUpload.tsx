@@ -196,7 +196,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
 
     // Roving tabindex across the file chip list: only the "active" chip's delete icon is a tab
     // stop (Tab lands on the first chip), and Left/Right/Up/Down move it — see
-    // FILEUPLOAD_IMPLEMENTATION_NOTES.md.
+    // IMPLEMENTATION_NOTES.md.
     const [activeChipIndex, setActiveChipIndex] = useState(0);
     const deleteIconRefs = useRef<Array<HTMLSpanElement | null>>([]);
     const prevFileCountRef = useRef(files?.length ?? 0);
@@ -252,6 +252,10 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
         className={wrapperClass}
         style={style}
         formLayout={formLayout}
+        data-recursica="file-upload"
+        data-recursica-layouts={formLayout}
+        data-recursica-error={effectiveError ? "" : undefined}
+        data-recursica-disabled={disabled ? "" : undefined}
         labelSize={labelSize}
         labelAlignment={labelAlignment}
         labelOptionalText={labelOptionalText}

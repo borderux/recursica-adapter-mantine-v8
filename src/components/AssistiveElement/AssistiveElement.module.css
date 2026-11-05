@@ -83,29 +83,14 @@
   ) !important;
 }
 
-/* 
- * VARIANT MAPPINGS 
- * Inherits colors natively mapped per variant. 
- */
-
-.root[data-variant="help"] .textWrapper {
+/* Colours come from the scoped contract root names (selected by data-recursica attributes). */
+.textWrapper {
   color: var(
-    --recursica_ui-kit_components_assistive-element_variants_types_help_properties_colors_text-color
+    --recursica_ui-kit_components_assistive-element_properties_colors_text-color
   ) !important;
 }
-.root[data-variant="help"] .iconWrapper svg {
+.iconWrapper svg {
   color: var(
-    --recursica_ui-kit_components_assistive-element_variants_types_help_properties_colors_icon-color
-  ) !important;
-}
-
-.root[data-variant="error"] .textWrapper {
-  color: var(
-    --recursica_ui-kit_components_assistive-element_variants_types_error_properties_colors_text-color
-  ) !important;
-}
-.root[data-variant="error"] .iconWrapper svg {
-  color: var(
-    --recursica_ui-kit_components_assistive-element_variants_types_error_properties_colors_icon-color
+    --recursica_ui-kit_components_assistive-element_properties_colors_icon-color
   ) !important;
 }

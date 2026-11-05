@@ -1,24 +1,13 @@
-/* TOKEN INTERPRETATION NOTES (see TRANSFERLIST_IMPLEMENTATION_NOTES.md):
+/* TOKEN INTERPRETATION NOTES (see IMPLEMENTATION_NOTES.md):
    - `properties_gap` is applied to the row that holds [source pane, transfer buttons, target pane] —
      it's the only unnested gap the schema defines at the component's own level.
    - `properties_title-filter-gap` sits between each pane's header row and its search field.
    - `properties_filter-items-gap` sits between each pane's search field and its item list. */
 
-/* EXEMPTIONS:
-   - border-size is constant across disabled/error states — only border-color changes; the
-     disabled/error border-size tokens are never applied by design. */
-/* recursica-ignore: --recursica_ui-kit_components_transfer-list_variants_states_disabled_properties_border-size */
-/* recursica-ignore: --recursica_ui-kit_components_transfer-list_variants_states_error_properties_border-size */
-
+/* top-bottom-margin is resolved by data-recursica-layouts on the same (wrapper) element. */
 .layoutOverride {
   --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_transfer-list_variants_layouts_stacked_properties_top-bottom-margin
-  );
-}
-
-.layoutOverride[data-form-layout="side-by-side"] {
-  --form-control-margin-bottom: var(
-    --recursica_ui-kit_components_transfer-list_variants_layouts_side-by-side_properties_top-bottom-margin
+    --recursica_ui-kit_components_transfer-list_properties_top-bottom-margin
   );
 }
 
@@ -60,6 +49,10 @@
   background-color: var(
     --recursica_ui-kit_components_transfer-list_properties_colors_background-color
   );
+  opacity: var(
+    --recursica_ui-kit_components_transfer-list_properties_opacity,
+    1
+  ); /* Defined only while disabled */
 }
 
 .paneHeader {
@@ -111,7 +104,7 @@
   flex-direction: column;
   /* No token exists for the gap between stacked CheckboxGroup blocks (ungrouped row +
      each named group) — the 31-variable transfer-list schema only defines gaps at the
-     header/search/pane level (see TRANSFERLIST_IMPLEMENTATION_NOTES.md). Left as an
+     header/search/pane level (see IMPLEMENTATION_NOTES.md). Left as an
      intentional hardcoded value rather than borrowing another component's token, same
      as FileUpload's untokened icon size. */
   gap: 2px;
@@ -135,48 +128,11 @@
   align-items: center;
   justify-content: center;
   /* No token exists for spacing between the four transfer buttons — not part of the
-     31-variable schema. Left as an intentional hardcoded value (see TRANSFERLIST_IMPLEMENTATION_NOTES.md). */
+     31-variable schema. Left as an intentional hardcoded value (see IMPLEMENTATION_NOTES.md). */
   gap: 4px;
   flex-shrink: 0;
 }
 
 .chevron[data-direction="left"] {
   transform: scaleX(-1);
-}
-
-/* -------------------------------------
-   STATE CASCADE
--------------------------------------- */
-
-.root[data-error] .pane {
-  border-color: var(
-    --recursica_ui-kit_components_transfer-list_variants_states_error_properties_colors_border-color
-  ) !important;
-  background-color: var(
-    --recursica_ui-kit_components_transfer-list_variants_states_error_properties_colors_background-color
-  ) !important;
-}
-
-.root[data-error] .paneHeader {
-  color: var(
-    --recursica_ui-kit_components_transfer-list_variants_states_error_properties_colors_header-color
-  ) !important;
-}
-
-.root[data-disabled] .pane {
-  border-color: var(
-    --recursica_ui-kit_components_transfer-list_variants_states_disabled_properties_colors_border-color
-  ) !important;
-  background-color: var(
-    --recursica_ui-kit_components_transfer-list_variants_states_disabled_properties_colors_background-color
-  ) !important;
-  opacity: var(
-    --recursica_ui-kit_components_transfer-list_variants_states_disabled_properties_opacity
-  );
-}
-
-.root[data-disabled] .paneHeader {
-  color: var(
-    --recursica_ui-kit_components_transfer-list_variants_states_disabled_properties_colors_header-color
-  ) !important;
 }

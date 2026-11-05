@@ -62,12 +62,6 @@ HARDCODED VALUES:
   gap: var(--recursica_ui-kit_components_link_properties_icon-text-gap);
 }
 
-.root:visited {
-  color: var(
-    --recursica_ui-kit_components_link_variants_states_visited_properties_colors_text-color
-  );
-}
-
 .root:hover {
   text-decoration: var(--recursica_brand_states_link_decoration);
 }
@@ -95,12 +89,6 @@ HARDCODED VALUES:
   width: var(--recursica_ui-kit_components_link_properties_icon-size);
   height: var(--recursica_ui-kit_components_link_properties_icon-size);
   color: var(--recursica_ui-kit_components_link_properties_colors_icon-color);
-}
-
-.root:visited .iconWrapper {
-  color: var(
-    --recursica_ui-kit_components_link_variants_states_visited_properties_colors_icon-color
-  );
 }
 
 /* Label text wrapper */
