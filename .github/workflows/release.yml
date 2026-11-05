@@ -70,5 +70,7 @@ jobs:
         uses: changesets/action@v2
         with:
           publish-script: npm run release
+          # Open the Version Packages PR as a draft so a release isn't merged by accident.
+          pr-draft: create
         env:
           NPM_CONFIG_PROVENANCE: true
