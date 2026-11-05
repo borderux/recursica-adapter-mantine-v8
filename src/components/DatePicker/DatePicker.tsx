@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import {
   DatePickerInput,
   type DatePickerInputProps,
@@ -61,6 +61,22 @@ const BUTTON_CONTRACT = {
   "data-recursica-sizes": "small",
 } as const;
 
+// A Mantine date value as a local "YYYY-MM-DD" key, the form `getDayProps` receives.
+function toDayKey(value: unknown): string | null {
+  if (value instanceof Date) {
+    const month = String(value.getMonth() + 1).padStart(2, "0");
+    const day = String(value.getDate()).padStart(2, "0");
+    return `${value.getFullYear()}-${month}-${day}`;
+  }
+  return typeof value === "string" ? value.slice(0, 10) : null;
+}
+
+// Same rule as Mantine's own `selected` day flag: any value in a range/multiple array, or the single value.
+function isSelectedDay(date: string, selection: unknown): boolean {
+  const values = Array.isArray(selection) ? selection : [selection];
+  return values.some((value) => toDayKey(value) === date);
+}
+
 export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
   function DatePicker(props, ref) {
     const {
@@ -89,6 +105,7 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
       emptyValueComponent,
       value,
       defaultValue,
+      onChange,
       getDayProps,
       attributes,
       highlightToday = true, // Default on so today is visually marked; consumers can still override.
@@ -103,6 +120,11 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
       UNSUPPORTED_PROPS,
     );
     const restRecord = sanitizedProps as Record<string, unknown>;
+
+    // Mantine hides the selection from `getDayProps`, so it's mirrored here to give the selected
+    // day the Button contract's solid style. Controlled `value` wins; otherwise track `onChange`.
+    const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
+    const selection = value !== undefined ? value : uncontrolledValue;
 
     // Securely map core native blocks down ensuring nested CSS modules map precisely
     const mergedClassNames = mergeClassNames(
@@ -210,10 +232,16 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
             disabled={disabled}
             value={value}
             defaultValue={defaultValue}
+            onChange={(next) => {
+              setUncontrolledValue(next);
+              onChange?.(next);
+            }}
             getDayProps={(date) => ({
               ...BUTTON_CONTRACT,
               "data-recursica-content": "label",
-              "data-recursica-styles": "text",
+              "data-recursica-styles": isSelectedDay(date, selection)
+                ? "solid"
+                : "text",
               ...getDayProps?.(date),
             })}
             attributes={{
