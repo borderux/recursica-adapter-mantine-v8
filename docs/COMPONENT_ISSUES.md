@@ -46,11 +46,10 @@ This document tracks known issues, edge cases, missing variables, or design syst
 
 ## Button
 
-### 1. Omitted `fullWidth` Layout Attribute
+### 1. `fullWidth` Layout Attribute — supported
 
-- **Description:** Mantine natively supports a `fullWidth` prop on `<Button>` components which mathematically expands the node. Recursica bounds strict dimensional scaling explicitly, leaving dynamic expansion largely governed by flex-container grid parents.
-- **Impact:** Developers cannot force buttons to visually stretch 100% width inline natively using component overrides.
-- **Current Resolution:** We actively omit `fullWidth` from the native abstract. Developers should wrap components with flex grids or column lists rather than independently stretching boundary layouts.
+- **Description:** Mantine natively supports a `fullWidth` prop on `<Button>`. It was previously omitted; it is now passed through.
+- **Current Resolution:** `fullWidth` stretches the button to its container while keeping the icon grouped with the centered label (see `Button/IMPLEMENTATION_NOTES.md`).
 
 ### 2. Loader Color Contrast
 

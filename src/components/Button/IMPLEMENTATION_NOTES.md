@@ -42,6 +42,17 @@ Mantine's `.mantine-Button-label` flex centering breaks primitive truncation log
 
 ---
 
+## `fullWidth` support (2026-10-28)
+
+**Decision:** `fullWidth` was previously omitted (type-level and at runtime). It is now passed through to Mantine, and the root gets a `data-full-width` hook.
+
+**Implementation:**
+
+- Mantine's own `[data-block]` width rule is wrapped in `:where()` (zero specificity), so `.root`'s `width: fit-content` would beat it. `.root[data-full-width] { width: 100% }` restores the stretch.
+- `.label` normally has `flex: 1 1 0` (for truncation), which makes it grow to fill the stretched inner and pins the left section (icon) to the button's edge. Under `[data-full-width]` it becomes `flex: 0 1 auto`, so the icon + label hug each other and Mantine's `.inner` (`justify-content: center`) centers them as a group. `min-width: 0` is untouched, so the label still shrinks and truncates.
+
+---
+
 ## Disabled state: brand theme opacity (implicit)
 
 **Decision:** The UI kit enforces global brand theme disabled opacities. The `.root:disabled` logic implicitly overrides visibility locally via `var(--recursica_brand_states_disabled)`.

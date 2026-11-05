@@ -28,6 +28,11 @@ const meta: Meta<ButtonStoryProps> = {
       control: "boolean",
       description: "Sets the button to a loading state",
     },
+    fullWidth: {
+      control: "boolean",
+      description:
+        "Stretches the button to fill its container; the icon stays grouped with the label",
+    },
     useRecursicaLoader: {
       control: "boolean",
       description:
@@ -130,6 +135,87 @@ export const IconOnly: Story = {
       </svg>
     ),
   },
+};
+
+const searchIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+);
+
+export const FullWidth: Story = {
+  args: {
+    children: "Full Width",
+    variant: "solid",
+    size: "default",
+    fullWidth: true,
+  },
+  render: (args: ButtonStoryProps) => (
+    <div style={{ width: "400px" }}>
+      <Button {...args} />
+    </div>
+  ),
+};
+
+export const FullWidthWithIcon: Story = {
+  args: {
+    children: "Full Width With Icon",
+    variant: "solid",
+    size: "default",
+    fullWidth: true,
+    icon: searchIcon,
+  },
+  render: (args: ButtonStoryProps) => (
+    <div style={{ width: "400px" }}>
+      <Button {...args} />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "With `fullWidth`, the button stretches to its container while the icon stays next to the label, and the pair is centered together — the icon is not pinned to the button's edge.",
+      },
+    },
+  },
+};
+
+export const FullWidthVariants: Story = {
+  render: () => (
+    <div
+      style={{
+        width: "400px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px",
+      }}
+    >
+      {(["solid", "outline", "text"] as const).map((variant) =>
+        (["default", "small"] as const).map((size) => (
+          <Button
+            key={`${variant}-${size}`}
+            variant={variant}
+            size={size}
+            icon={searchIcon}
+            fullWidth
+          >
+            {`${variant} ${size}`}
+          </Button>
+        )),
+      )}
+    </div>
+  ),
 };
 
 export const LayerOneSolid: Story = {
