@@ -129,7 +129,7 @@ Project-wide fix; see Chip's `IMPLEMENTATION_NOTES.md` for the original discover
 
 **Decision:** Panel is never modal, and there are no props to change that.
 
-**Implementation:** The house rule is that the page behind a panel stays usable. `Panel.tsx` composes `Drawer.Root` without a `Drawer.Overlay` and always passes `trapFocus={false}`, `lockScroll={false}`, `returnFocus`, `closeOnEscape` and `closeOnClickOutside={false}` to Mantine's Drawer, after the caller's props, and omits those keys from `RecursicaPanelProps`. Escape is independent of outside clicks and always closes the panel; clicking the page behind never does. Every adapter must match: no overlay, no focus trap, no scroll lock, no `aria-modal`, no `aria-hidden` on the rest of the page.
+**Implementation:** The house rule is that the page behind a panel stays usable. `Panel.tsx` composes `Drawer.Root` without a `Drawer.Overlay` and always passes `trapFocus={false}`, `lockScroll={false}`, `returnFocus`, `closeOnEscape={false}` and `closeOnClickOutside={false}` to Mantine's Drawer, after the caller's props, and omits those keys from `RecursicaPanelProps`. Escape closes the panel when it is the topmost overlay (§12); clicking the page behind never does. Every adapter must match: no overlay, no focus trap, no scroll lock, no `aria-modal`, no `aria-hidden` on the rest of the page.
 
 ---
 
@@ -146,3 +146,11 @@ Project-wide fix; see Chip's `IMPLEMENTATION_NOTES.md` for the original discover
 Panel has no `data-recursica` contract of its own: the export defines `--recursica_ui-kit_components_panel_properties_*` directly in the theme and layer blocks, so `.content`, `.header`, `.title`, `.body` and `.footer` read them with no attributes. The close button borrows the Button contract: `PanelCloseButton` (also used by the default header) sets `data-recursica="button"`, `data-recursica-styles="text"`, `data-recursica-sizes="small"` and `data-recursica-content="icon-only"` (never disabled), and `.close` reads only `--recursica_ui-kit_components_button_properties_*`. No `_variants_` names remain.
 
 **Layer:** Panel is layer-0 by design (the export defines only `layer-0`; backgrounds already point at layer-1's surface). Portaled content resolves under the root layer, so `data-recursica-theme` stays on `<html>` (`ColorSchemeWrapper`); with no `data-recursica-layer` set, layer 0 applies.
+
+---
+
+## 12. Only the topmost overlay handles Escape; no `aria-modal` (2026-11-13)
+
+**Problem:** Mantine's Modal and Drawer each listen for Escape on `window` (capture phase), so with a Modal open over a Panel, one Escape closed both. Mantine's Drawer content also hardcodes `role="dialog"` and `aria-modal="true"` after spreading props, so screen readers treated the page behind the non-modal Panel as inert.
+
+**Implementation:** Panel and Modal pass `closeOnEscape={false}` to Mantine and call `useTopmostEscape` (`src/utils/useTopmostEscape.ts`). It keeps open Panels and Modals in opening order and closes only the last one. It ignores an Escape that was already `preventDefault`ed or whose target has `data-mantine-stop-propagation="true"` (Mantine sets this on an open Combobox target and on Menu items). A topmost Modal with `closeOnEscape={false}` still swallows the Escape. Panel removes `aria-modal` with a callback ref on `Drawer.Content`; `role="dialog"` stays, since a non-modal dialog named by its title is valid ARIA. Covered by `src/components/Modal/Overlay.escape.dom.test.tsx` (`npm run test:dom`).

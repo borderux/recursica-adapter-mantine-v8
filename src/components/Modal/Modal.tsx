@@ -16,6 +16,7 @@ import {
   mergeClassNames,
   type RecursicaOverStyled,
 } from "../../utils/filterStylingProps";
+import { useTopmostEscape } from "../../utils/useTopmostEscape";
 import styles from "./Modal.module.css";
 
 import { type RecursicaModalProps } from "@recursica/adapter-common";
@@ -69,10 +70,14 @@ const ModalInner = React.forwardRef<HTMLDivElement, ModalProps>(function Modal(
     header,
     overlayProps,
     withOverlay = true,
+    opened,
+    closeOnEscape = true,
     ...rest
   },
   ref,
 ) {
+  useTopmostEscape(opened, onClose, closeOnEscape);
+
   // Props this component intentionally doesn't support — deleted at runtime so they can't leak
   // through even if a caller forces them via plain JavaScript, bypassing the `Omit<>` above.
   const UNSUPPORTED_PROPS = [
@@ -106,7 +111,10 @@ const ModalInner = React.forwardRef<HTMLDivElement, ModalProps>(function Modal(
         MantineModalProps,
         "size" | "radius" | "shadow"
       >)}
+      opened={opened}
       onClose={onClose}
+      /* Escape is handled by useTopmostEscape, so only the topmost Modal or Panel closes. */
+      closeOnEscape={false}
       classNames={mergedClassNames}
     >
       {withOverlay && <MantineModal.Overlay {...overlayProps} />}

@@ -40,3 +40,9 @@ Despite §1 above, `.content` never actually scaled fluidly: Mantine's own CSS s
 Modal has no `data-recursica` contract of its own: the export defines `--recursica_ui-kit_components_modal_properties_*` directly in the theme and layer blocks, so `.content`, `.header`, `.title`, `.scrollArea` and `.footer` read them with no attributes. The close button borrows the Button contract: `ModalCloseButton` sets `data-recursica="button"`, `data-recursica-styles="text"`, `data-recursica-sizes="small"` and `data-recursica-content="icon-only"` (never disabled, so no `-disabled`), and `.close` reads only `--recursica_ui-kit_components_button_properties_*`. No `_variants_` names remain.
 
 **Layer:** Modal is layer-0 by design (the export defines only `layer-0`; backgrounds already point at layer-1's surface). Portaled content resolves under the root layer, so `data-recursica-theme` stays on `<html>` (`ColorSchemeWrapper`); with no `data-recursica-layer` set, layer 0 applies.
+
+---
+
+### 7. Only the topmost Modal or Panel handles Escape (2026-11-13)
+
+Mantine's Modal listens for Escape on `window`, so every open Modal (and a Panel underneath) closed on one Escape. `Modal.tsx` passes `closeOnEscape={false}` to Mantine and calls `useTopmostEscape` with the caller's `closeOnEscape` (default `true`); see Panel's IMPLEMENTATION_NOTES §12 for the shared mechanism.
