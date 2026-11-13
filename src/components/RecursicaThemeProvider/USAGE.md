@@ -31,9 +31,9 @@ function App() {
 }
 ```
 
-By default, `RecursicaThemeProvider` also wraps `children` in a base [`Layer`](../Layer/USAGE.md) (`layer={0}`), so surface/border/elevation variables resolve immediately — no separate `Layer` needed for the page background.
+By default, `RecursicaThemeProvider` also sets `data-recursica-layer="0"` on `document.body`, so the base page surface, text color and padding apply to the body itself. It adds no wrapper element around `children`.
 
-If you want to place the base layer yourself (e.g. to use `contentsOnly`, or to control exactly where layer 0 starts in the tree), opt out with `initLayer0={false}`:
+If you want to place the base layer yourself (to control exactly where layer 0 starts in the tree), opt out with `initLayer0={false}`:
 
 ```tsx
 import { RecursicaThemeProvider, Layer } from "@recursica/adapter-mantine-v8";
@@ -50,5 +50,5 @@ import { RecursicaThemeProvider, Layer } from "@recursica/adapter-mantine-v8";
 > [!IMPORTANT]
 >
 > - **Required for setup**: `RecursicaThemeProvider` must wrap your entire application, once, near the root. See [SETUP.md](../../../SETUP.md) for the full setup sequence.
-> - **`initLayer0` (default `true`)**: Automatically wraps `children` in a layer-0 [`Layer`](../Layer/USAGE.md). `RecursicaThemeProvider` itself only sets `data-recursica-theme` (`"light"` or `"dark"`, defaults to `"light"`) on `document.documentElement` — without a `Layer` in the tree (either the automatic one or one you add yourself with `initLayer0={false}`), none of Recursica's surface CSS variables resolve.
+> - **`initLayer0` (default `true`)**: Sets `data-recursica-layer="0"` on `document.body` and removes it on unmount. `RecursicaThemeProvider` also sets `data-recursica-theme` (`"light"` or `"dark"`, defaults to `"light"`) on `document.documentElement`. With `initLayer0={false}`, add a layer-0 [`Layer`](../Layer/USAGE.md) yourself, or none of Recursica's surface CSS variables resolve.
 > - **Runtime theme switching**: Changing the `theme` prop re-runs the effect and updates `data-recursica-theme` immediately, so you can drive light/dark switching from application state.

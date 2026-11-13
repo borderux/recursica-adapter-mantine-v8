@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useCallback } from "react";
 import {
   Drawer as MantineDrawer,
   type DrawerProps as MantineDrawerProps,
@@ -15,6 +15,7 @@ import {
   mergeClassNames,
   type RecursicaOverStyled,
 } from "../../utils/filterStylingProps";
+import { useTopmostEscape } from "../../utils/useTopmostEscape";
 import styles from "./Panel.module.css";
 
 // ============================================================
@@ -70,8 +71,8 @@ export type PanelProps = RecursicaOverStyled<RecursicaPanelProps>;
  * because then nothing guarantees the title or the Close button.
  *
  * Always non-modal, with no props to change it: the page behind stays usable
- * (no overlay, focus trap or scroll lock), focus returns to the opener on close,
- * Escape always closes, and outside clicks never do.
+ * (no overlay, focus trap or scroll lock, and no `aria-modal`), focus returns to the opener on close,
+ * Escape closes it when no Modal or later Panel is open above it, and outside clicks never do.
  *
  * Mantine Drawer sub-components available via dot-notation:
  * - `Panel.Header` — Top section with title and close button
@@ -97,6 +98,14 @@ const PanelBase = function Panel({
 }: PanelProps) {
   const sanitizedProps = filterStylingProps(rest, overStyled);
   const restRecord = sanitizedProps as Record<string, unknown>;
+
+  useTopmostEscape(rest.opened === true, onClose, true);
+
+  // Mantine's Drawer content hardcodes `aria-modal="true"` after spreading props, so it can't be
+  // overridden by a prop; a non-modal panel must not tell screen readers the page behind is inert.
+  const removeAriaModal = useCallback((node: HTMLElement | null) => {
+    node?.removeAttribute("aria-modal");
+  }, []);
 
   // Bind CSS module classes to Mantine's internal classNames API
   const mergedClassNames = mergeClassNames(
@@ -126,15 +135,16 @@ const PanelBase = function Panel({
       size="var(--recursica_ui-kit_components_panel_properties_max-width)"
       position={placement} /* Recursica default: right; Mantine default: left */
       keepMounted={keepMounted}
-      /* Always non-modal and overlay-less: the page behind stays usable, Escape always closes */
+      /* Always non-modal and overlay-less: the page behind stays usable. Escape is handled by
+         useTopmostEscape, so Mantine's own window-wide handler is off. */
       trapFocus={false}
       lockScroll={false}
       returnFocus
-      closeOnEscape
+      closeOnEscape={false}
       closeOnClickOutside={false}
       classNames={mergedClassNames}
     >
-      <MantineDrawer.Content>
+      <MantineDrawer.Content ref={removeAriaModal}>
         {header ?? (
           <MantineDrawer.Header>
             <MantineDrawer.Title>{title}</MantineDrawer.Title>

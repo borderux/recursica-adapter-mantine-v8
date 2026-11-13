@@ -49,6 +49,10 @@ All Recursica components in the `@recursica/adapter-mantine-v8` package adhere s
 
 The `header` prop replaces the whole default header. Avoid it: a custom header must supply its own title and Close button, and the adapter can no longer guarantee either.
 
+### Escape
+
+Escape closes only the topmost open Modal or Panel. A stacked confirmation Modal closes without closing the Modal or Panel beneath it, and an Escape that closes an open Dropdown or Menu list inside the Modal leaves the Modal open. With `closeOnEscape={false}`, the Modal stays open and Escape is not passed to anything beneath it.
+
 ## Architecture
 
 `Modal` wraps Mantine's `<Modal>` component. Native Mantine styling props (`size`, `radius`, `shadow`) are not used — appearance and sizing are fully controlled by the design system tokens instead.

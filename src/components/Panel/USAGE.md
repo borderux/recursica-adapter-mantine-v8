@@ -54,6 +54,10 @@ Use the `placement` prop (not `position`) to choose which edge the panel slides 
 
 The `header` prop replaces the whole default header. Avoid it: a custom header must supply its own title and Close button, and the adapter can no longer guarantee either.
 
+### Escape and non-modal behavior
+
+Panel is always non-modal: no overlay, focus trap or scroll lock, and it is not announced as `aria-modal`. Escape closes it only when it is the topmost overlay, so with a Modal open over the Panel, Escape closes the Modal and leaves the Panel open. An Escape that closes an open Dropdown or Menu list is not passed on.
+
 ### Panel.Footer
 
 A `Panel.Footer` sub-component is available for footer content and action buttons.
