@@ -1,5 +1,17 @@
 # @recursica/adapter-mantine-v8
 
+## 1.6.0
+
+### Minor Changes
+
+- 4e6ecb6: All components now style themselves from the scoped CSS stable root names and `data-recursica-*` attributes instead of variant-path variables; the theme files are refreshed to match. Disabled and error states of form controls now use the real token values, so some goldens (DatePicker, NumberInput and Tree disabled states) change. Chip, Tree, Tabs and Dropdown options now take their disabled opacity from the tokens, and Link's visited colour works again.
+
+### Patch Changes
+
+- 4e6ecb6: DatePicker's selected day now carries the Button contract's solid style and reads stable `button_properties_*` names, removing the last unstable variant-path read. No visual change.
+- bc22388: `RecursicaThemeProvider` now sets layer 0 on `document.body` instead of wrapping the app in a padded `<Layer layer={0}>`, matching adapter-common 1.5.0 and its docs.
+- bc22388: Escape now closes only the topmost Modal or Panel instead of every open one, and Panel is no longer announced as `aria-modal`.
+
 ## 1.5.0
 
 ### Minor Changes
