@@ -166,3 +166,10 @@
     --recursica_ui-kit_components_segmented-control-item_properties_border-radius
   );
 }
+
+/* hideLabels: the Tooltip target wrapping the icon, and the icon's aria-hidden wrapper. */
+.iconOnly {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
