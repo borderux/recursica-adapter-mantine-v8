@@ -1,5 +1,11 @@
 # @recursica/adapter-mantine-v8
 
+## 1.7.0
+
+### Minor Changes
+
+- 6a962f6: SegmentedControl adds `hideLabels` for icon-only segments: each label stays the radio's accessible name and shows as a tooltip on hover and keyboard focus. Item labels must now be non-empty strings, and an item without an icon throws when `hideLabels` is set.
+
 ## 1.6.0
 
 ### Minor Changes
