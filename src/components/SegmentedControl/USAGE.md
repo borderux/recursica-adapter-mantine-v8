@@ -34,6 +34,20 @@ Each `data` item may also be an object with an optional `icon`, rendered ahead o
 />
 ```
 
+Every object item's `label` is a required, non-empty string. It is always the item's accessible name.
+
+For icon-only segments, set `hideLabels`. Each segment then shows only its icon; its `label` stays the radio's accessible name (as visually hidden text) and shows as a tooltip on hover and keyboard focus. Every item must have an `icon`, otherwise the component throws.
+
+```tsx
+<SegmentedControl
+  hideLabels
+  data={[
+    { value: "light", label: "Light theme", icon: <SunIcon /> },
+    { value: "dark", label: "Dark theme", icon: <MoonIcon /> },
+  ]}
+/>
+```
+
 ---
 
 ## 3. Design System Integration

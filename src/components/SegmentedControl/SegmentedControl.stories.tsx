@@ -24,6 +24,9 @@ const meta: Meta<typeof SegmentedControl> = {
     disabled: {
       control: "boolean",
     },
+    hideLabels: {
+      control: "boolean",
+    },
     data: { table: { disable: true } },
     defaultChecked: { table: { disable: true } },
   },
@@ -93,6 +96,21 @@ const CheckIcon = () => (
 
 export const WithIcons: Story = {
   args: {
+    data: [
+      { value: "daily", label: "Daily", icon: <CheckIcon /> },
+      { value: "weekly", label: "Weekly", icon: <CheckIcon /> },
+      { value: "monthly", label: "Monthly", icon: <CheckIcon /> },
+    ],
+  },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+  render: ({ withLayer, layer, ...args }: any) => {
+    return <SegmentedControl {...args} />;
+  },
+};
+
+export const IconOnly: Story = {
+  args: {
+    hideLabels: true,
     data: [
       { value: "daily", label: "Daily", icon: <CheckIcon /> },
       { value: "weekly", label: "Weekly", icon: <CheckIcon /> },

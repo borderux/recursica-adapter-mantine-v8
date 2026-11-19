@@ -31,3 +31,13 @@ The moving active background element (`.indicator`) is decoupled from the actual
 - Each control contains Mantine's native radio input, so the export's `:has(input:checked)` match resolves the item's selection state: the label reads only the stable `segmented-control-item_properties_*` text names (font, colour) and border-radius, and they switch with selection. The indicator contains no input, so it names `selected` explicitly.
 - The label paints no background, border or elevation: the indicator paints the selected item's, and the unselected values are transparent, 0 and none.
 - No DOM mutation or value tracking is done in TSX.
+
+## 8. `label` and `hideLabels`
+
+`data[].label` is a required non-empty `string` (adapter-common); the component throws on an empty one. With `hideLabels`, one string drives the accessible name and the tooltip:
+
+- The label renders inside Mantine's own `<label for>` as `VisuallyHidden` text, so it names the radio input. Mantine exposes no per-item input props, so `aria-label` on the input is not possible; the visible-label route gives the same name. The icon is wrapped `aria-hidden`.
+- The tooltip is the Recursica `Tooltip`, controlled. Mantine's Tooltip only sees events on its own target, but keyboard focus lands on the sibling radio input. The root tracks hover (`mouseover`/`mouseleave`) and focus (`focus`/`blur`, only when `:focus-visible`, so a click does not pin the tooltip) and resolves the item from the event target's control. Consumer `onFocus`/`onBlur`/`onMouseOver`/`onMouseLeave` are still called.
+- An item with no `icon` (including a plain string item) throws, since it would render empty.
+
+Covered by `SegmentedControl.hideLabels.dom.test.tsx`.
